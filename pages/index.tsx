@@ -1,12 +1,7 @@
 import React from "react";
-import Aside from "./aside/aside";
 
 const index = () => {
-  return (
-    <div>
-      <Aside />
-    </div>
-  );
+  return <div>aside</div>;
 };
 
 export default index;
