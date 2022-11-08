@@ -1,8 +1,7 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import React from "react";
 
-export default function index() {
-  const { replace } = useRouter();
-  useEffect(() => { replace("/register") }, [])
-  return null;
-}
+const index = () => {
+  return <div>index</div>;
+};
+
+export default index;
