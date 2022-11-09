@@ -213,3 +213,33 @@
   font-display: swap;
   font-style: italic;
 }
+
+.active {
+  color: #e1891c;
+}
+img {
+  color: #e1891c;
+}
+.menuItem:hover {
+  cursor: pointer;
+}
+.mantine-Modal-title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #4a4c58;
+}
+.mantine-Modal-modal {
+  width: 40rem;
+  padding-inline: 2rem;
+}
+.mantine-Textarea-label {
+  font-size: 0.9rem;
+  padding-bottom: 4px;
+  color: #4a4c58;
+}
+.mantine-Select-label {
+  color: #4a4c58;
+}
+/* .mantine-Textarea-input {
+  border-color: none !important;
+} */
