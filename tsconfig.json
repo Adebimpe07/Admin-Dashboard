@@ -100,6 +100,11 @@
     "moduleResolution": "node",
     "resolveJsonModule": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/components/main/body"
+  ],
   "exclude": ["node_modules"]
 }
