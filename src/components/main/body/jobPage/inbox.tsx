@@ -1,22 +1,23 @@
 import { StaticImageData } from 'next/image'
 import React from 'react'
-import Edit from "../../../assets/edit.png";
-import Trash from "../../../assets/trash.png";
-import Brief from "../../../assets/briefcase.png";
-import Vector from "../../../assets/Vector.png"
+import Edit from "../../../../assets/edit.png";
+import Trash from "../../../../assets/trash.png";
+import Brief from "../../../../assets/briefcase.png";
+import Vector from "../../../../assets/Vector.png"
 
 
 
 type Props = {
     icon: StaticImageData,
-    title: string
+    title: string,
+    time: string
 }
 
-const Inbox = ({icon, title}: Props) => {
+const Inbox = ({icon, title, time}: Props) => {
   return (
-    <div className='flex justify-between p-6 bg-white m-6 border rounded-2xl'>
+    <div className='flex justify-between p-6 bg-white my-6 mx-12 border rounded-2xl'>
         <div className='flex gap-7'>
-            <img src={icon.src} alt="icon" className='w-20 border-0 rounded-2xl bg-[#38CB891A]' />
+            <img src={icon.src} alt="icon" className='w-16 border-0 rounded-2xl bg-[#38CB891A]' />
             <div>
                 <h3 className='text-[#252735] text-lg font-semibold'>{title}</h3>
                 <div className="flex gap-2 items-center">
@@ -32,7 +33,7 @@ const Inbox = ({icon, title}: Props) => {
             </div>
         </div>
         <div className="flex flex-col">
-            <button>Upload</button>
+            <button>{time}</button>
             <div className="flex items-center mt-2 gap-4 justify-end">
                 <img src={Edit.src} alt="icon" className='w-2.5' />
                 <img src={Trash.src} alt="icon" className='w-4' />

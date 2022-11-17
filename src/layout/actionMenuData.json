@@ -1,0 +1,5 @@
+[
+  ["View Details", "Shortlist Applicant", "Reject Applicant"],
+  ["Invite for Assesment", "Reject Applicant"],
+  ["Invite for Interview", "Hire Applicant", "Reject Applicant"]
+]

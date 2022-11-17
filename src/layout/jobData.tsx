@@ -10,24 +10,29 @@ import { StaticImageData } from "next/image";
 
 type JobDataType = Array<{
     icon: StaticImageData,
-    jobTitle: string
+    jobTitle: string,
+    date: string
 }> 
 
 export const jobData: JobDataType = [
     {
         icon: Html,
-        jobTitle: 'Front-end Developer'
+        jobTitle: 'Front-end Developer',
+        date: 'Uploaded 2days ago'
     },
     {
         icon: Java,
-        jobTitle: 'Back-end Developer'
+        jobTitle: 'Back-end Developer',
+        date: 'Uploaded 2days ago'
     },
     {
         icon: Java,
-        jobTitle: 'Product Designer'
+        jobTitle: 'Product Designer',
+        date: 'Uploaded 2days ago'
     },
     {
         icon: Java,
-        jobTitle: 'Product Manager'
+        jobTitle: 'Product Manager',
+        date: 'Uploaded 2days ago'
     },
 ]
