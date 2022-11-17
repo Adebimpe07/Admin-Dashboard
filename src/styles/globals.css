@@ -240,6 +240,17 @@ img {
 .mantine-Select-label {
   color: #4a4c58;
 }
-/* .mantine-Textarea-input {
-  border-color: none !important;
+.recharts-wrapper {
+  position: sticky !important;
+  top: 0;
+}
+/* .mantine-Menu-dropdown {
+  left: 15px !important;
+  display: flex;
 } */
+/* .mantine-RadioGroup-root {
+} */
+.mantine-InputWrapper-label {
+  padding-bottom: 0.5rem;
+  padding-top: 1rem;
+}

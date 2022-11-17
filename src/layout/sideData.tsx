@@ -1,10 +1,14 @@
+import { Icon } from "@iconify/react";
 import {
   Briefcase,
+  FolderOpen,
   Home3,
   Logout,
   Note1,
   Notepad2,
   People,
+  Teacher,
+  UserEdit,
 } from "iconsax-react";
 
 export const SideData = [
@@ -26,19 +30,19 @@ export const SideData = [
     heading: "Application",
   },
   {
-    icon: <Notepad2 size="17" variant="Outline" />,
+    icon: <FolderOpen size="17" variant="Outline" />,
     heading: "Content Management",
   },
   {
-    icon: <Notepad2 size="17" variant="Outline" />,
+    icon: <Teacher size="17" variant="Outline" />,
     heading: "Course",
   },
   {
-    icon: <Notepad2 size="17" variant="Outline" />,
+    icon: <People size="17" variant="Outline" />,
     heading: "Cohort",
   },
   {
-    icon: <Notepad2 size="17" variant="Outline" />,
+    icon: <UserEdit size="17" variant="Outline" />,
     heading: "Member Management",
   },
 ];
@@ -46,6 +50,10 @@ export const AdminData = [
   {
     icon: <People size="17" variant="Outline" />,
     heading: "Admin",
+  },
+  {
+    icon: <Icon icon="bi:people" color="" width="17" />,
+    heading: "Sub admin",
   },
   {
     icon: <Logout size="17" variant="Outline" />,
