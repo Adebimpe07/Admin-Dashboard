@@ -104,7 +104,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/main/body"
+    "src/components/main/body",
+    "pages/assessment"
   ],
   "exclude": ["node_modules"]
 }
