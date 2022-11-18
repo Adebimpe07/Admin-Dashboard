@@ -1,25 +1,16 @@
-import React from "react";
-
-const deleteAdmin = () => {
-  return <div>deleteAdmin</div>;
-};
-
-export default deleteAdmin;
-
-import { Button, FileInput, MultiSelect, TextInput } from "@mantine/core";
-import { IconUpload } from "@tabler/icons";
-
+import { Button } from "@mantine/core";
+import React, { useState } from "react";
 export const DeleteSubAdminModal = () => {
   return (
-    <form className="flex flex-col">
-      <div className="flex flex-wrap gap-4">
+    <div className="flex flex-col">
+      <div className="flex flex-wrap gap-4 text-center leading-8">
         You are about to delete the selected Admin. Kindly click the delete
         button below to confirm this action
       </div>
-      <div className="flex">
-        <span className="bg-[#38CB89] hover:bg-[#38CB89]">Cancel</span>
-        <span className="bg-[#38CB89] hover:bg-[#38CB89]">Delete</span>
+      <div className="flex justify-between py-6">
+        <Button className="bg-[#38CB89] hover:bg-[#38CB89]">Cancel</Button>
+        <Button className="bg-[red] hover:bg-[red]">Delete</Button>
       </div>
-    </form>
+    </div>
   );
 };
