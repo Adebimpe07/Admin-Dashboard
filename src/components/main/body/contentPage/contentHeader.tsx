@@ -2,7 +2,8 @@ import { ClassNames } from "@emotion/react";
 import React from "react";
 import { Notification } from "iconsax-react";
 import { StaticImageData } from "next/image";
-import ProfilePicture from "../../../assets/PM_Tosin.png";
+import ProfilePicture from "../../../../assets/PM_Tosin.png";
+import {SideData} from "../../../../layout/sideData";
 //  notification: <Notification size="32" color="#FF8A65" variant="Outline" />,
 type headerprops = {
   adminName: string;
@@ -16,13 +17,13 @@ const HeaderData: headerprops = {
   adminProfilePicture: ProfilePicture,
 };
 
-const HeaderJob = () => {
+const ContentHeader = () => {
   return (
-    <div className="p-6">
+    <div className="py-6 px-5">
       <div className="flex justify-between ">
         <div>
           <h1 className="text-2xl font-semibold text-[#4A4C58]">
-            Hello, {HeaderData.adminName}
+          Content Management
           </h1>
         </div>
         <div className="flex gap-2 items-center">
@@ -35,8 +36,7 @@ const HeaderJob = () => {
           <img width="40" src={HeaderData.adminProfilePicture.src} alt="" />
         </div>
       </div>
-      <p className="text-[#948E8E]">Take a look at today's activities</p>
     </div>
   );
 };
-export default HeaderJob;
+export default ContentHeader;

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Body from "../../src/components/main/body/body";
-import Header from "../../src/components/main/body/header";
-import HeaderJob from "../../src/components/main/body/headerJob";
-import All from "../../src/components/main/body/job";
+import Body from "../../src/components/main/body/jobPage/body";
+import Header from "../../src/components/main/body/jobPage/header";
+import HeaderJob from "../../src/components/main/body/jobPage/headerJob";
+import All from "../../src/components/main/body/jobPage/job";
 
 const index = () => {
   const [selected, setSelected] = useState(0);

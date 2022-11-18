@@ -1,12 +1,12 @@
 import React from 'react'
 import Inbox from './inbox'
-import { jobData } from "../../../layout/jobData";
+import { jobData } from "../../../../layout/jobData";
 
 const All = () => {
     return (
-        <div className="bg-[#E5E5E5]">
+        <div className="bg-[#E5E5E5] pb-8">
           {jobData.map((item, idx) => (
-            <Inbox icon={item.icon} title={item.jobTitle} key={idx} />
+            <Inbox icon={item.icon} title={item.jobTitle} time={item.date} key={idx} />
           ))}
         </div>
       );

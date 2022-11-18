@@ -7,10 +7,10 @@ type Data = Array<{
 
 export const jobhead : Data = [
     {
-        heading: "All Jobs"
+        heading: "Active Jobs"
     },
     {
-        heading:"Drafts"
+        heading:"Inactive Jobs"
     }
 ]
 
