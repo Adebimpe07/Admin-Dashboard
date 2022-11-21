@@ -81,7 +81,7 @@ const Header = () => {
   );
 
   return (
-    <div className="flex justify-between pb-9 px-5">
+    <div className="flex justify-between pb-7 pt-6 px-5">
       <div className="place-items-center">
         <p className="text-[#252735] text-base font-semibold">Total Cohorts()</p>
       </div>

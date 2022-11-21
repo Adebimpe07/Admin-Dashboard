@@ -1,6 +1,7 @@
 import {
   Button,
   FileInput,
+  Menu,
   Modal,
   MultiSelect,
   Text,
@@ -14,9 +15,13 @@ import Elipse from "../../../../assets/Ellipse 8.png";
 import Cloud from "../../../../assets/cloud.png";
 import { RichTextEditor } from "@mantine/rte";
 
-
-const ContentSubHeader = ({ selected, setSelected }) => {
-  const contentData = ["News", "Blog", "Gallery"];
+const MemberSubHeader = ({ selected, setSelected }) => {
+  const contentData = [
+    "ATS Member",
+    "Testimonial",
+    "Weekly Xperts",
+    "Attendance",
+  ];
 
   const [opened, setOpened] = useState(false);
 
@@ -27,9 +32,8 @@ const ContentSubHeader = ({ selected, setSelected }) => {
         onClose={() => setOpened(false)}
         title="Create News"
         size="xl"
-        
       >
-        <Text className="flex gap-6 " >
+        <Text className="flex gap-6 ">
           <div className="flex w-[85%] flex-col gap-4">
             <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
               News Details
@@ -78,55 +82,58 @@ const ContentSubHeader = ({ selected, setSelected }) => {
               </button>
             </div>
             <div className="mt-auto self-center">
-            <button className="bg-[#38CB89] text-[white] py-2 px-7 rounded-lg">Publish article</button>
+              <button className="bg-[#38CB89] text-[white] py-2 px-7 rounded-lg">
+                Publish article
+              </button>
             </div>
           </div>
         </Text>
       </Modal>
     ) : selected === 1 ? (
-        <Modal
-          opened={opened}
-          onClose={() => setOpened(false)}
-          title="Create Blog"
-          size="xl"
-          
-        >
-          <Text className="flex gap-6 " >
-            <div className="flex w-[85%] flex-col gap-4">
-              <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
-                Blog Details
-              </h1>
-              <TextInput
-                size="sm"
-                className="focus:border-inherit"
-                label="Title"
-              />
-              <p>Content</p>
-              <RichTextEditor
-                id="rte"
-                controls={[
-                  ["bold", "italic", "underline"],
-                  ["unorderedList", "h1", "h2"],
-                  ["sup", "sub"],
-                  ["alignLeft", "alignCenter", "alignRight"],
-                ]}
-              />
+      <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        title="Create Blog"
+        size="xl"
+      >
+        <Text className="flex gap-6 ">
+          <div className="flex w-[85%] flex-col gap-4">
+            <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
+              Blog Details
+            </h1>
+            <TextInput
+              size="sm"
+              className="focus:border-inherit"
+              label="Title"
+            />
+            <p>Content</p>
+            <RichTextEditor
+              id="rte"
+              controls={[
+                ["bold", "italic", "underline"],
+                ["unorderedList", "h1", "h2"],
+                ["sup", "sub"],
+                ["alignLeft", "alignCenter", "alignRight"],
+              ]}
+            />
+          </div>
+          <div className="flex flex-col  gap-4">
+            <p>Featured image</p>
+            <FileInput
+              placeholder="Browse and chose the files you want to upload from your computer"
+              icon={<img src={Cloud.src} className="w-6" />}
+              accept="image/png,image/jpeg"
+              className="bg-[#EBFAF3]"
+            />
+            <div className="mt-auto self-center">
+              <button className="bg-[#38CB89] text-[white] py-2 px-7 rounded-lg">
+                Publish article
+              </button>
             </div>
-            <div className="flex flex-col  gap-4">
-              <p>Featured image</p>
-              <FileInput
-                placeholder="Browse and chose the files you want to upload from your computer"
-                icon={<img src={Cloud.src} className="w-6" />}
-                accept="image/png,image/jpeg"
-                className="bg-[#EBFAF3]"
-              />
-              <div className="mt-auto self-center">
-              <button className="bg-[#38CB89] text-[white] py-2 px-7 rounded-lg">Publish article</button>
-              </div>
-            </div>
-          </Text>
-        </Modal>
-      ) : (
+          </div>
+        </Text>
+      </Modal>
+    ) : (
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
@@ -139,7 +146,6 @@ const ContentSubHeader = ({ selected, setSelected }) => {
 
           <div className="flex gap-4 text-[#4a4c58] w-full">
             <TextInput className="w-[50%]" label="Cohort Name" />
-            
           </div>
           <div className="flex gap-4">
             <Textarea
@@ -182,7 +188,7 @@ const ContentSubHeader = ({ selected, setSelected }) => {
     );
 
   return (
-    <div className="flex justify-between pb-9 pt-6 px-5">
+    <div className="flex justify-between pb-7 pt-6 px-5">
       <div className="flex gap-9">
         {contentData.map((item, idx) => (
           <div
@@ -209,37 +215,55 @@ const ContentSubHeader = ({ selected, setSelected }) => {
       <div className="flex gap-4">
         {selected === 0 ? (
           <TextInput
-            placeholder="Search News"
-            radius="md"
-            rightSection={<img src={Search.src} className="w-[14px]" />}
-          />
-        ) : selected === 1 ? (
-          <TextInput
-            placeholder="Search Blog"
+            className="w-[180px]"
+            placeholder="Search with Name"
             radius="md"
             rightSection={<img src={Search.src} className="w-[14px]" />}
           />
         ) : null}
 
-            {selected==0? <Button
-          className="bg-[#38CB89] hover:bg-[#38CB89] w-[141px] h-[34px] text-[13px]"
-          leftIcon={<img src={Cross.src} className="w-4" />}
-          onClick={() => setOpened(true)}
-        >
-            <p>Create News</p>
+        {selected == 0 ? (
+          <Menu
+            classNames={{
+              item: "!text-[#4A4C58]",
+            }}
+          >
+            <Menu.Target>
+              <button className="border-[1px] border-[#DBD9D9] rounded w-28 !text-[#4A4C58]">
+                Filter
+              </button>
+            </Menu.Target>
+            <Menu.Dropdown>
+              <Menu.Item>Backend Development</Menu.Item>
+              <Menu.Item>Frontend Development</Menu.Item>
+              <Menu.Item>MobileApp Development</Menu.Item>
+              <Menu.Item>Product Management</Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
+        )  : null}
+
+        {selected == 0 ? (
+          <Button
+            className="bg-[#38CB89] hover:bg-[#38CB89] w-[141px] h-[34px] text-[13px]"
+            leftIcon={<img src={Cross.src} className="w-4" />}
+            onClick={() => setOpened(true)}
+          >
+            <p>New ATS</p>
             <UploadJobModal selected={selected} />
-        </Button>: selected ===1 ? <Button
-          className="bg-[#38CB89] hover:bg-[#38CB89] w-[141px] h-[34px] text-[13px]"
-          leftIcon={<img src={Cross.src} className="w-4" />}
-          onClick={() => setOpened(true)}
-        >
-            <p>Create Blog</p>
+          </Button>
+        ) : selected === 1 ? (
+          <Button
+            className="bg-[#38CB89] hover:bg-[#38CB89] w-[141px] h-[34px] text-[13px]"
+            leftIcon={<img src={Cross.src} className="w-4" />}
+            onClick={() => setOpened(true)}
+          >
+            <p>Upload</p>
             <UploadJobModal selected={selected} />
-        </Button>: null
-        }
+          </Button>
+        ) : null}
       </div>
     </div>
   );
 };
 
-export default ContentSubHeader;
+export default MemberSubHeader;

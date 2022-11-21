@@ -252,7 +252,8 @@ export const blogColumn = [
   {
     Header: "Total Likes",
     accessor: "like",
-  },,
+  },
+  ,
   {
     Header: "Date posted",
     accessor: "date",
@@ -265,4 +266,85 @@ export const blogColumn = [
     Header: "",
     accessor: "delete",
   },
+];
+export const atsMemberColumn = [
+  {
+    Header: "",
+    accessor: "image",
+  },
+  {
+    Header: "Name",
+    accessor: "name",
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
+  {
+    Header: "Course",
+    accessor: "course",
+  },
+  {
+    Header: "Cohorts",
+    accessor: "cohort",
+  },
+  {
+    Header: "Email",
+    accessor: "email",
+  },
+  {
+    Header: "Phone No",
+    accessor: "phone_number",
+  },
+  {
+    Header: "",
+    accessor: "edit",
+  },
+  {
+    Header: "",
+    accessor: "delete",
+  },
+];
+export const atsTestimonialColumn = [
+  {
+    Header: "",
+    accessor: "image",
+  },
+  {
+    Header: "Name",
+    accessor: "name",
+  },
+  {
+    Header: "Course",
+    accessor: "course",
+  },
+  {
+    Header: "Cohorts",
+    accessor: "cohort",
+  },
+  {
+    Header: "",
+    accessor: "action",
+  },
+];
+export const atsAttendanceColumn = [
+  {
+    Header: "Name",
+    accessor: "name",
+  },
+  {
+    Header: "Email",
+    accessor: "email",
+  },
+  {
+    Header: "Check in time",
+    accessor: "intime",
+  },
+  {
+    Header: "Check out time",
+    accessor: "outtime",
+  },{
+    Header: "Date",
+    accessor: "date",
+  }
 ];

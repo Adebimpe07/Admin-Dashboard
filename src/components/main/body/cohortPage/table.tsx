@@ -50,12 +50,13 @@ const CohortTable = () => {
   const { pageIndex } = state;
 
   return (
-    <div>
+    <div className="overflow-auto grid grid-rows-[1fr_auto]">
+      <div className="overflow-auto">
       <table
         {...getTableProps()}
         className="bg-[white] text-sm font-normal text-[#514747] ml-6 w-[96%]"
       >
-        <thead className= " text-[#514747]  font-normal">
+        <thead className= " text-[#514747] sticky top-0  font-normal">
           {headerGroups.map((headerGroups) => (
             <tr {...headerGroups.getHeaderGroupProps()}>
               {headerGroups.headers.map((columns) => (
@@ -86,6 +87,7 @@ const CohortTable = () => {
           })}
         </tbody>
       </table>
+      </div>
       <div className="bg-[white] mx-6 mt-4 py-4 px-2 flex justify-between">
         <div>
           <span>

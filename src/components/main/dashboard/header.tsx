@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Filter, Notification } from "iconsax-react";
 import { StaticImageData } from "next/image";
-import ProfilePicture from "../../assets/PM_Tosin.png";
+import ProfilePicture from "../../../assets/PM_Tosin.png";
 import { Button, Radio } from "@mantine/core";
 import { Menu } from "@mantine/core";
 import Notifications from "./notifications";

@@ -12,7 +12,7 @@ import Downloads from "../../../../assets/import.png";
 
 const SubAppHeader = () => {
   return (
-    <div className="flex justify-between pt-2 px-5">
+    <div className="flex justify-between pb-7 pt-6 px-5">
       <div className="flex gap-4 place-items-center">
         <img src={Arr.src} className="w-2" />
         <p className="text-[#252735] text-sm font-semibold">Back to Jobs</p>
