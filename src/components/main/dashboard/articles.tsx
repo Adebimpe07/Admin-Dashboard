@@ -50,10 +50,10 @@ export const Article = () => {
     <div className="relative overflow-auto px-6 my-2 rounded-lg ml-6 bg-[#fff]">
       <div className="flex justify-between sticky top-0 z-20 text-[#18181B] text-base bg-[#fff] pt-3 p-2 overflow-auto">
         <h1 className="text-[#18181B] text-base font-semibold ">
-          Latest articles{" "}
+          Latest Updates{" "}
         </h1>
         <p className="flex text-[#E1891C] items-center text-xs">
-          View articles
+          View Updates
           <span>
             <ArrowRight2 size="17" color="#E1891C" variant="TwoTone" />
           </span>

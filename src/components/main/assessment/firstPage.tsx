@@ -1,21 +1,9 @@
 import React, { useState } from "react";
-import { Add, Filter, Folder, Notification } from "iconsax-react";
-import { StaticImageData } from "next/image";
-import ProfilePicture from "../../../assets/PM_Tosin.png";
-import { Button, Modal, TextInput } from "@mantine/core";
+import { Notification } from "iconsax-react";
 import { Menu } from "@mantine/core";
 import ListAssessment from "./listedAssessment";
 import Notifications from "../dashboard/notifications";
-
-type headerprops = {
-  notificationCount: string;
-  adminProfilePicture: StaticImageData;
-};
-
-const HeaderData: headerprops = {
-  notificationCount: "2",
-  adminProfilePicture: ProfilePicture,
-};
+import HeaderData from "../notification_ProfilePicture";
 
 export const NotificationDrop = () => {
   return (
@@ -38,7 +26,6 @@ export const NotificationDrop = () => {
 
 const HeaderMain = () => {
   const [selected, setSelected] = useState(0);
-  const [opened, setOpened] = useState(false);
 
   const Tabs = ["Categories", "List of Assessment"];
 

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { NotificationDrop } from "./assessmentPage";
+import { NotificationDrop } from "../firstPage";
 import ProfilePicture from "../../../assets/PM_Tosin.png";
 import { StaticImageData } from "next/image";
 import { ArrowLeft2 } from "iconsax-react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-// import Editor from "./editor";
-import Options from "./options";
+import Options from "../options";
 
-const Editor = dynamic(() => import("./editor"), { ssr: false });
+const Editor = dynamic(() => import("../editor"), { ssr: false });
 
 const createQuestions = () => {
   type headerprops = {
@@ -40,11 +39,8 @@ const createQuestions = () => {
           </Link>
         </div>
         <div className="flex h-screen mx-10 p-6 gap-9 bg-white">
-          <div className="flex flex-col gap-6 flex-1">
-            <p>Question</p>
-            <Editor />
-          </div>
-          <Options />
+          <p>Question</p>
+          <Editor />
         </div>
       </div>
     </>

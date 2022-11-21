@@ -1,34 +1,31 @@
 import React from "react";
-import { CoursesData } from "../../../layout/coursesData";
-import Courses from "./coursesCardStyle";
-import { Button } from "@mantine/core";
-import { Add } from "iconsax-react";
+import AssessmentCard from "../assessmentCard/assessmentCardStyle";
+import { AssessmentCardData } from "../../../../layout/assessmentCardData";
 
-const courses = () => {
+const AssessmentCards = () => {
   return (
     <>
       <main className="flex flex-col">
-        <div className="flex justify-between items-center px-4 gap-1 py-4">
+        <div className="items-center px-4 gap-1 py-4">
           <h3>Total Courses (9)</h3>
-          <Button
+          {/* <Button
             className="bg-[#38CB89] hover:bg-[#38CB89] w-[11rem] text-base"
             leftIcon={<Add size="17" variant="Outline" />}
             onClick={() => {}}
           >
             Create course
-          </Button>
+          </Button> */}
         </div>
         <div className="flex gap-4 m-4">
-          {CoursesData.map(
-            ({ picture, title, paragraph, timestamp, status }, index) => {
+          {AssessmentCardData.map(
+            ({ title, paragraph, timestamp, questions }, index) => {
               return (
-                <Courses
+                <AssessmentCard
                   key={index}
-                  picture={picture}
+                  questions={questions}
                   title={title}
                   paragraph={paragraph}
                   timestamp={timestamp}
-                  status={status}
                 />
               );
             }
@@ -39,4 +36,4 @@ const courses = () => {
   );
 };
 
-export default courses;
+export default AssessmentCards;

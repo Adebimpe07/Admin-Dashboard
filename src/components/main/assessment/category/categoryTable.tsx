@@ -1,21 +1,24 @@
 import React, { useMemo } from "react";
 import { useTable, useRowSelect, usePagination } from "react-table";
-import { cohortColumn } from "../../../../layout/tableData";
-import Cohort from "../../../../layout/cohortData.json";
-import ActionMenuCourses from "../actionButton/ActionMenuCourses";
-import ActionMenuEdit from "../actionButton/ActionMenuEdit";
-import ActionMenuDelete from "../actionButton/ActionMenuDelete";
+import { categoryColumn } from "../../../../layout/tableData";
+import CategoryListData from "../../../../layout/categoryListData.json";
+import DeleteIcon from "../../body/actionButton/delete_icon";
+import Link from "next/link";
+import { Edit2 } from "iconsax-react";
 
-const CohortTable = () => {
-  const CohortColumn = useMemo(() => cohortColumn, []);
+const CategoryTable = () => {
+  const CategoryColumn = useMemo(() => categoryColumn, []);
 
-  const cohortData = useMemo(
+  const CategoryData = useMemo(
     () =>
-      Cohort.map((cohort, idx) => ({
-        ...cohort,
-        courses: <ActionMenuCourses />,
-        edit: <ActionMenuEdit />,
-        delete: <ActionMenuDelete />,
+      CategoryListData.map((category, idx) => ({
+        ...category,
+        edit: (
+          <Link href="createCategory">
+            <Edit2 size="17" variant="Bulk" />
+          </Link>
+        ),
+        delete: <DeleteIcon />,
       })),
     []
   );
@@ -36,8 +39,8 @@ const CohortTable = () => {
     selectedFlatRows,
   } = useTable(
     {
-      columns: CohortColumn,
-      data: cohortData,
+      columns: CategoryColumn,
+      data: CategoryData,
     },
     usePagination,
     useRowSelect
@@ -146,4 +149,4 @@ const CohortTable = () => {
   );
 };
 
-export default CohortTable;
+export default CategoryTable;

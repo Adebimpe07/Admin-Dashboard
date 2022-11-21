@@ -1,26 +1,22 @@
-import Picture from "../assets/Rectangle.png";
-export const CoursesData = [
+export const AssessmentCardData = [
   {
-    picture: Picture,
     title: "SOFTWARE DEVELOPER",
     timestamp: "July 2, 2022",
-    status: "active",
+    questions: "30",
     paragraph:
       "DebugBear is a site speed testing and monitoring service. We help companies make their websites load faster and improve their Google Core Web Vitals metrics.",
   },
   {
-    picture: Picture,
-    title: "SOFTWARE DEVELOPER ",
+    title: "PRODUCT MANAGER ",
     timestamp: "July 2, 2022",
-    status: "active",
+    questions: "30",
     paragraph:
       "DebugBear is a site speed testing and monitoring service. We help companies make their websites load faster and improve their Google Core Web Vitals metrics.",
   },
   {
-    picture: Picture,
-    title: "SOFTWARE DEVELOPER ",
+    title: "DESIGNER",
     timestamp: "July 2, 2022",
-    status: "active",
+    questions: "30",
     paragraph:
       "DebugBear is a site speed testing and monitoring service. We help companies make their websites load faster and improve their Google Core Web Vitals metrics.",
   },

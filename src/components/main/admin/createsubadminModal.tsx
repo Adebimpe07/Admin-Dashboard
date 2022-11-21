@@ -12,12 +12,6 @@ type CreatesubadminModalprops = {
   setOpened: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-// function handleCreate() {
-//   setSubAdminModal({
-//     opened: true,
-//     component: <EditSubAdminModal />,
-//   });
-// }
 const CreatesubadminModal = ({
   opened,
   setOpened,

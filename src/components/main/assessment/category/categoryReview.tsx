@@ -1,33 +1,23 @@
 import { ArrowLeft2 } from "iconsax-react";
-import { StaticImageData } from "next/image";
 import React from "react";
 import {
   AssessmentBarData,
   SelectQuestionData,
-} from "../../../layout/assessmentData";
-import { NotificationDrop } from "./assessmentPage";
-import ProfilePicture from "../../../assets/PM_Tosin.png";
+} from "../../../../layout/assessmentData";
+import { NotificationDrop } from "../firstPage";
 import Link from "next/link";
+import HeaderData from "../../notification_ProfilePicture";
+import QuestionTable from "../questionList";
+import { Button } from "@mantine/core";
+// type createPageProp = {
+//   setActive: React.Dispatch<React.SetStateAction<number>>;
+// };
 
-type headerprops = {
-  notificationCount: string;
-  adminProfilePicture: StaticImageData;
-};
-
-const HeaderData: headerprops = {
-  notificationCount: "2",
-  adminProfilePicture: ProfilePicture,
-};
-
-type createPageProp = {
-  setActive: React.Dispatch<React.SetStateAction<number>>;
-};
-
-const createPage = ({ setActive }: createPageProp) => {
+const CategoryReview = () => {
   return (
-    <>
+    <div className="flex-1  bg-[#F9FAFB] flex flex-col">
       <header className="flex justify-between border-b border-[#DBD9D9] px-4">
-        <h1 className="text-2xl font-semibold text-[#4A4C58] pb-[1.41rem]">
+        <h1 className="text-2xl font-semibold text-[#4A4C58] py-[1.45rem]">
           Assessments
         </h1>
         <div className="flex gap-2 items-center">
@@ -61,9 +51,9 @@ const createPage = ({ setActive }: createPageProp) => {
             <div className="border border-[#ced4da] rounded-lg w-full py-1">
               <input type="text" className="p-1 focus:outline-none w-full" />
             </div>
-            <div className="mt-4">
+            <div className="mt-4 flex flex-col gap-3">
               <h1 className="py-2">Select Question</h1>
-              <div className="grid grid-cols-4 gap-2 items-center">
+              <div className="grid grid-cols-3 gap-2 items-center">
                 {SelectQuestionData.map(({ icon, title }, index) => {
                   return (
                     <div
@@ -78,12 +68,17 @@ const createPage = ({ setActive }: createPageProp) => {
                   );
                 })}
               </div>
+              <h3> Question List </h3>
+              <QuestionTable />
+              <Button className="bg-[#38CB89] hover:bg-[#38CB89] w-[11rem] text-base mx-auto">
+                Upload
+              </Button>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default createPage;
+export default CategoryReview;

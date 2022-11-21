@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Logo from "../../assets/Afex_logo.png";
 import { SideData } from "../../layout/sideData";
 import { AdminData } from "../../layout/sideData";
-import { Button, Text, Modal } from "@mantine/core";
+import { Button, Text, Modal, TextInput } from "@mantine/core";
 import { Add } from "iconsax-react";
 import { Select } from "@mantine/core";
 import { Textarea } from "@mantine/core";
@@ -22,15 +22,11 @@ const Sidebar = () => {
         </h1>
 
         <div className="flex gap-4 text-[#4a4c58] w-full">
-          <Select
-            className="w-[50%]"
+          <TextInput
+            placeholder="Job will be auto-generated"
             label="Job"
-            data={[
-              { value: "react", label: "React" },
-              { value: "ng", label: "Angular" },
-              { value: "svelte", label: "Svelte" },
-              { value: "vue", label: "Vue" },
-            ]}
+            className="w-[50%]"
+            disabled
           />
           <Select
             className="flex-1"
@@ -48,10 +44,10 @@ const Sidebar = () => {
           className="flex-1"
           label="Cohort"
           data={[
-            { value: "react", label: "React" },
-            { value: "ng", label: "Angular" },
-            { value: "svelte", label: "Svelte" },
-            { value: "vue", label: "Vue" },
+            { value: "ATS 1.0", label: "ATS 1.0" },
+            { value: "ATS 1.1", label: "ATS 1.1" },
+            { value: "ATS 2.0", label: "ATS 2.0" },
+            { value: "ATS 2.2", label: "ATS 2.2" },
           ]}
         />
 
