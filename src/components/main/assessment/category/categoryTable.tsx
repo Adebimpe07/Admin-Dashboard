@@ -1,21 +1,24 @@
 import React, { useMemo } from "react";
 import { useTable, useRowSelect, usePagination } from "react-table";
-import { cohortColumn } from "../../../../layout/tableData";
-import Cohort from "../../../../layout/cohortData.json";
-import ActionMenuCourses from "../actionButton/ActionMenuCourses";
-import ActionMenuEdit from "../actionButton/ActionMenuEdit";
-import ActionMenuDelete from "../actionButton/ActionMenuDelete";
+import { categoryColumn } from "../../../../layout/tableData";
+import CategoryListData from "../../../../layout/categoryListData.json";
+import DeleteIcon from "../../body/actionButton/delete_icon";
+import Link from "next/link";
+import { Edit2 } from "iconsax-react";
 
-const CohortTable = () => {
-  const CohortColumn = useMemo(() => cohortColumn, []);
+const CategoryTable = () => {
+  const CategoryColumn = useMemo(() => categoryColumn, []);
 
-  const cohortData = useMemo(
+  const CategoryData = useMemo(
     () =>
-      Cohort.map((cohort, idx) => ({
-        ...cohort,
-        courses: <ActionMenuCourses />,
-        edit: <ActionMenuEdit />,
-        delete: <ActionMenuDelete />,
+      CategoryListData.map((category, idx) => ({
+        ...category,
+        edit: (
+          <Link href="createCategory">
+            <Edit2 size="17" variant="Bulk" />
+          </Link>
+        ),
+        delete: <DeleteIcon />,
       })),
     []
   );
@@ -36,8 +39,8 @@ const CohortTable = () => {
     selectedFlatRows,
   } = useTable(
     {
-      columns: CohortColumn,
-      data: cohortData,
+      columns: CategoryColumn,
+      data: CategoryData,
     },
     usePagination,
     useRowSelect
@@ -46,13 +49,12 @@ const CohortTable = () => {
   const { pageIndex } = state;
 
   return (
-    <div className="overflow-auto grid grid-rows-[1fr_auto]">
-      <div className="overflow-auto">
+    <div>
       <table
         {...getTableProps()}
         className="bg-[white] text-sm font-normal text-[#514747] ml-6 w-[96%]"
       >
-        <thead className= " text-[#514747] sticky top-0  font-normal">
+        <thead className=" text-[#514747]  font-normal">
           {headerGroups.map((headerGroups) => (
             <tr {...headerGroups.getHeaderGroupProps()}>
               {headerGroups.headers.map((columns) => (
@@ -89,7 +91,6 @@ const CohortTable = () => {
           })}
         </tbody>
       </table>
-      </div>
       <div className="bg-[white] mx-6 mt-4 py-4 px-2 flex justify-between">
         <div>
           <span>
@@ -148,4 +149,4 @@ const CohortTable = () => {
   );
 };
 
-export default CohortTable;
+export default CategoryTable;

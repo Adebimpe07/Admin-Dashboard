@@ -14,14 +14,19 @@ export const EditSubAdminModal = () => {
 
   return (
     <form className="flex flex-col">
-      <div className="flex flex-wrap gap-4">
-        <TextInput placeholder="name" label="Name" />
-        <TextInput placeholder="password" label="Password" />
-        <TextInput placeholder="email" label="Email" />
+      <div className="flex flex-wrap justify-between">
+        <TextInput placeholder="name" label="Name" className="w-[17rem]" />
+        <TextInput
+          placeholder="password"
+          label="Password"
+          className="w-[17rem]"
+        />
+        <TextInput placeholder="email" label="Email" className="w-[17rem]" />
         <MultiSelect
           label="Permission Level"
           placeholder="Pick one"
           data={permissionLevel}
+          className="w-[17em]"
         />
       </div>
       <div className="flex items-center justify-center mt-8 mb-6">

@@ -14,7 +14,7 @@ const ActionMenuEdit = () => {
   const [opened, setOpened] = useState(false);
 
   const data = [
-    { value: "pm", label: "Product Mnanagement" },
+    { value: "pm", label: "Product Management" },
     { value: "ft", label: "Frontemd Development" },
     { value: "be", label: "Backend Development" },
     { value: "md", label: "Mobile App Development" },
@@ -22,11 +22,7 @@ const ActionMenuEdit = () => {
   ];
 
   const UploadJobModal = () => (
-    <Modal
-      opened={opened}
-      onClose={() => setOpened(false)}
-      title="Edit Cohort"
-    >
+    <Modal opened={opened} onClose={() => setOpened(false)} title="Edit Cohort">
       <Text className="flex flex-col gap-4 " size="sm">
         <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
           Edit Cohort Details
@@ -42,13 +38,14 @@ const ActionMenuEdit = () => {
           />
         </div>
         <div className="flex gap-4">
-          <Textarea size="sm"
+          <Textarea
+            size="sm"
             className="focus:border-inherit w-full"
             label="Cohort Start Date"
             autosize
             maxRows={4}
           />
-           <Textarea
+          <Textarea
             className="focus:border-inherit w-full"
             label="Cohort End Date"
             autosize
@@ -56,13 +53,14 @@ const ActionMenuEdit = () => {
           />
         </div>
         <div className="flex gap-4">
-          <Textarea size="sm"
+          <Textarea
+            size="sm"
             className="focus:border-inherit w-full"
             label="Application Start Date"
             autosize
             maxRows={4}
           />
-           <Textarea
+          <Textarea
             className="focus:border-inherit w-full"
             label="Application End Date"
             autosize
@@ -81,7 +79,10 @@ const ActionMenuEdit = () => {
 
   return (
     <div className="">
-      <button className=" text-sm text-[#514747]" onClick={() => setOpened(true)}>
+      <button
+        className=" text-sm text-[#514747]"
+        onClick={() => setOpened(true)}
+      >
         <p>Edit</p>
         <UploadJobModal />
       </button>

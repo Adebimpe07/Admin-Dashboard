@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NotificationDrop } from "../assessment/assessmentPage";
+import { NotificationDrop } from "../assessment/firstPage";
 import ProfilePicture from "../../../assets/Avatar.png";
 import AdminPic from "../../../assets/Admin.svg";
 import CreatesubadminModal from "./createsubadminModal";
@@ -9,8 +9,8 @@ import { ActionIcon, Button, Menu, Modal, TextInput } from "@mantine/core";
 import { Add, Edit2, SearchNormal1 } from "iconsax-react";
 import { SubAdminData } from "../../../layout/adminData";
 import { Icon } from "@iconify/react";
-import { IconUpload } from "@tabler/icons";
 import { EditSubAdminModal } from "./editAdminModal";
+import { DeleteSubAdminModal } from "./deleteAdmin";
 
 const MenuDrop = () => {
   const initialValues: { opened: boolean; component: React.ReactNode } = {
@@ -25,6 +25,13 @@ const MenuDrop = () => {
       component: <EditSubAdminModal />,
     });
   }
+  const [subAdminDelModal, setSubAdminDelModal] = useState(initialValues);
+  function handleDelete() {
+    setSubAdminDelModal({
+      opened: true,
+      component: <DeleteSubAdminModal />,
+    });
+  }
 
   return (
     <>
@@ -37,7 +44,7 @@ const MenuDrop = () => {
 
         <Menu.Dropdown className="">
           <Menu.Item onClick={handleEdit}>Edit</Menu.Item>
-          <Menu.Item>Delete</Menu.Item>
+          <Menu.Item onClick={handleDelete}>Delete</Menu.Item>
           <Menu.Divider />
         </Menu.Dropdown>
       </Menu>
@@ -46,6 +53,12 @@ const MenuDrop = () => {
         onClose={() => setSubAdminModal(initialValues)}
       >
         {subAdminModal.component}
+      </Modal>
+      <Modal
+        opened={subAdminDelModal.opened}
+        onClose={() => setSubAdminDelModal(initialValues)}
+      >
+        {subAdminDelModal.component}
       </Modal>
     </>
   );

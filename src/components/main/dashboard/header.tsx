@@ -25,15 +25,15 @@ const HeaderMain = () => {
         <Menu.Target>
           <button className="rounded py-1 gap-2 border flex border-[#948E8E] bg-[#e5e7eb] hover:bg-[#e5e5e5] px-3 my-1">
             <Filter size="17" color="#5B6871" variant="Bold" />
-            <p className="text-[#252C32] text-sm">Filter Cycle</p>
+            <p className="text-[#252C32] text-sm">Filter Cohort</p>
           </button>
         </Menu.Target>
 
         <Menu.Dropdown className="">
           <Radio.Group spacing="xs" className="py-1 pl-2">
-            <Radio value="Cohort 1" label="Cohort 1" />
-            <Radio value="Cohort 2" label="Cohort 2" />
-            <Radio value="Cohort 3" label="Cohort 3" />
+            <Radio value="Cohort 1" label="ATS 1.0" />
+            <Radio value="Cohort 2" label="ATS 1.1" />
+            <Radio value="Cohort 3" label="ATS 2.0" />
           </Radio.Group>
 
           {/* <Menu.Divider /> */}

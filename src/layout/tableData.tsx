@@ -295,6 +295,21 @@ export const atsMemberColumn = [
   {
     Header: "Phone No",
     accessor: "phone_number",
+  }
+]
+
+export const categoryColumn = [
+  {
+    Header: "Category Name",
+    accessor: "name",
+  },
+  {
+    Header: "Questions",
+    accessor: "question",
+  },
+  {
+    Header: "Time",
+    accessor: "time",
   },
   {
     Header: "",
@@ -304,7 +319,8 @@ export const atsMemberColumn = [
     Header: "",
     accessor: "delete",
   },
-];
+]
+
 export const atsTestimonialColumn = [
   {
     Header: "",
@@ -326,7 +342,8 @@ export const atsTestimonialColumn = [
     Header: "",
     accessor: "action",
   },
-];
+]
+
 export const atsAttendanceColumn = [
   {
     Header: "Name",
@@ -347,4 +364,27 @@ export const atsAttendanceColumn = [
     Header: "Date",
     accessor: "date",
   }
+]
+
+export const questionList = [
+  {
+    Header: "Type",
+    accessor: "type",
+  },
+  {
+    Header: "Questions",
+    accessor: "question",
+  },
+  {
+    Header: "Time",
+    accessor: "time",
+  },
+  {
+    Header: "",
+    accessor: "edit",
+  },
+  {
+    Header: "",
+    accessor: "delete",
+  },
 ];

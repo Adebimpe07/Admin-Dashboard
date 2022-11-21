@@ -12,12 +12,6 @@ type CreatesubadminModalprops = {
   setOpened: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-// function handleCreate() {
-//   setSubAdminModal({
-//     opened: true,
-//     component: <EditSubAdminModal />,
-//   });
-// }
 const CreatesubadminModal = ({
   opened,
   setOpened,
@@ -34,17 +28,20 @@ const CreatesubadminModal = ({
   return (
     <Modal opened={opened} onClose={() => setOpened(false)}>
       <form className="flex flex-col">
-        <div className="grid grid-cols-2 gap-4">
-          <TextInput placeholder="name" label="Name" />
-          <TextInput placeholder="password" label="Password" />
-          <TextInput placeholder="email" label="Email" />
+        <div className="flex flex-wrap justify-between">
+          <TextInput placeholder="name" label="Name" className="w-[17rem]" />
+          <TextInput
+            placeholder="password"
+            label="Password"
+            className="w-[17rem]"
+          />
+          <TextInput placeholder="email" label="Email" className="w-[17rem]" />
           <MultiSelect
             label="Permission Level"
             placeholder="Pick one"
             data={permissionLevel}
+            className="w-[17em]"
           />
-          {/* 
-                <p className="border-b border-[#e5e7eb] text-sm p-1 cursor-pointer"></p>  */}
         </div>
         <div className="flex items-center justify-center mt-8 mb-6">
           <FileInput
@@ -56,11 +53,8 @@ const CreatesubadminModal = ({
             }}
           />
         </div>
-        <Button
-          className="bg-[#38CB89] hover:bg-[#38CB89] h-10 text-base"
-          onClick={() => {}}
-        >
-          Create Sub admin
+        <Button py="sm" className="bg-[#38CB89] hover:bg-[#38CB89]">
+          Add Sub admin
         </Button>
       </form>
     </Modal>

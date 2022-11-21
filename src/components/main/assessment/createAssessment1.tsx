@@ -1,9 +1,7 @@
-import { Icon } from "@iconify/react";
-import { Checkbox } from "@mantine/core";
 import { createFormContext } from "@mantine/form";
 import React, { useState } from "react";
-import CreatePage from "./createPage";
-import CreateQuestions from "./createQuestions";
+import CreatePage from "./selectCategory";
+import CreateQuestions from "./questionTypes/multichoice";
 
 const [FormProvider, useFormContext, useForm] = createFormContext<{
   categoryName: string;
