@@ -5,7 +5,7 @@ import { Aside_main } from "./aside_main";
 import Activities from "./activities";
 import Charts from "./charts";
 import { Article } from "./articles";
-import Assessment from "../assessment/assessmentPage";
+import Assessment from "../assessment/firstPage";
 
 const body = () => {
   const [shouldAnimate, setShouldAnimate] = useState(false);

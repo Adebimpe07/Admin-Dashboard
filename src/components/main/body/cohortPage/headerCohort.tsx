@@ -1,21 +1,7 @@
 import { ClassNames } from "@emotion/react";
 import React from "react";
 import { Notification } from "iconsax-react";
-import { StaticImageData } from "next/image";
-import ProfilePicture from "../../../../assets/PM_Tosin.png";
-import {SideData} from "../../../../layout/sideData";
-//  notification: <Notification size="32" color="#FF8A65" variant="Outline" />,
-type headerprops = {
-  adminName: string;
-  notificationCount: string;
-  adminProfilePicture: StaticImageData;
-};
-
-const HeaderData: headerprops = {
-  adminName: "Alli",
-  notificationCount: "2",
-  adminProfilePicture: ProfilePicture,
-};
+import HeaderData from "../../notification_ProfilePicture";
 
 const HeaderCohort = () => {
   return (
@@ -23,7 +9,7 @@ const HeaderCohort = () => {
       <div className="flex justify-between ">
         <div>
           <h1 className="text-2xl font-semibold text-[#4A4C58]">
-          Cohort Management
+            Cohort Management
           </h1>
         </div>
         <div className="flex gap-2 items-center">

@@ -252,10 +252,57 @@ export const blogColumn = [
   {
     Header: "Total Likes",
     accessor: "like",
-  },,
+  },
+  ,
   {
     Header: "Date posted",
     accessor: "date",
+  },
+  {
+    Header: "",
+    accessor: "edit",
+  },
+  {
+    Header: "",
+    accessor: "delete",
+  },
+];
+
+export const categoryColumn = [
+  {
+    Header: "Category Name",
+    accessor: "name",
+  },
+  {
+    Header: "Questions",
+    accessor: "question",
+  },
+  {
+    Header: "Time",
+    accessor: "time",
+  },
+  {
+    Header: "",
+    accessor: "edit",
+  },
+  {
+    Header: "",
+    accessor: "delete",
+  },
+];
+
+export const questionList = [
+  {
+    Header: "Type",
+    accessor: "type",
+  },
+  {
+    Header: "Questions",
+    accessor: "question",
+  },
+  {
+    Header: "Time",
+    accessor: "time",
   },
   {
     Header: "",

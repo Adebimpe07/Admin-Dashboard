@@ -1,5 +1,5 @@
 import React from "react";
-import AssessmentPage from "../../src/components/main/assessment/assessmentPage";
+import AssessmentPage from "../../src/components/main/assessment/firstPage";
 
 const index = () => {
   return (
