@@ -267,6 +267,36 @@ export const blogColumn = [
     accessor: "delete",
   },
 ];
+export const atsMemberColumn = [
+  {
+    Header: "",
+    accessor: "image",
+  },
+  {
+    Header: "Name",
+    accessor: "name",
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
+  {
+    Header: "Course",
+    accessor: "course",
+  },
+  {
+    Header: "Cohorts",
+    accessor: "cohort",
+  },
+  {
+    Header: "Email",
+    accessor: "email",
+  },
+  {
+    Header: "Phone No",
+    accessor: "phone_number",
+  }
+]
 
 export const categoryColumn = [
   {
@@ -289,7 +319,52 @@ export const categoryColumn = [
     Header: "",
     accessor: "delete",
   },
-];
+]
+
+export const atsTestimonialColumn = [
+  {
+    Header: "",
+    accessor: "image",
+  },
+  {
+    Header: "Name",
+    accessor: "name",
+  },
+  {
+    Header: "Course",
+    accessor: "course",
+  },
+  {
+    Header: "Cohorts",
+    accessor: "cohort",
+  },
+  {
+    Header: "",
+    accessor: "action",
+  },
+]
+
+export const atsAttendanceColumn = [
+  {
+    Header: "Name",
+    accessor: "name",
+  },
+  {
+    Header: "Email",
+    accessor: "email",
+  },
+  {
+    Header: "Check in time",
+    accessor: "intime",
+  },
+  {
+    Header: "Check out time",
+    accessor: "outtime",
+  },{
+    Header: "Date",
+    accessor: "date",
+  }
+]
 
 export const questionList = [
   {

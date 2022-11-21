@@ -15,7 +15,7 @@ type Props = {
 
 const Inbox = ({icon, title, time}: Props) => {
   return (
-    <div className='flex justify-between p-6 bg-white my-6 mx-12 border rounded-2xl'>
+    <div className='flex justify-between p-6 bg-white my-5 mx-6 border rounded-2xl'>
         <div className='flex gap-7'>
             <img src={icon.src} alt="icon" className='w-16 border-0 rounded-2xl bg-[#38CB891A]' />
             <div>

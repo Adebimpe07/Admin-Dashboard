@@ -70,8 +70,8 @@ const Header = ({ selected, setSelected }: props) => {
   );
 
   return (
-    <div className="flex justify-between pt-2 px-16">
-      <div className="flex gap-9 text-[#252735] text-sm font-semibold">
+    <div className="flex justify-between pt-6  px-8 ">
+      <div className="flex gap-9 text-[#252735] text-sm font-semibold ">
         {jobhead.map((item, idx) => (
           <div
             key={idx}

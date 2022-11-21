@@ -157,18 +157,19 @@ const ApplicationPage = ({ selected }) => {
   const { pageIndex } = state;
 
   return (
-    <div>
+    <div className="overflow-auto grid grid-rows-[1fr_auto]">
+      <div className="overflow-auto">
       <table
         {...getTableProps()}
-        className="bg-[white] text-sm font-normal ml-6 w-[96%]"
+        className="bg-[white] text-sm font-normal text-[#514747] ml-6 w-[96%]"
       >
-        <thead className="text-left">
+        <thead className="sticky top-0 text-[#514747]  font-normal">
           {headerGroups.map((headerGroups) => (
             <tr {...headerGroups.getHeaderGroupProps()}>
               {headerGroups.headers.map((columns) => (
                 <th
                   {...columns.getHeaderProps()}
-                  className="py-4 bg-[#F5F5F5]"
+                  className="py-4 text-[#514747] pl-6 text-left font-normal bg-[#F5F5F5]"
                 >
                   {columns.render("Header")}
                 </th>
@@ -176,19 +177,19 @@ const ApplicationPage = ({ selected }) => {
             </tr>
           ))}
         </thead>
-        <tbody {...getTableBodyProps()}>
+        <tbody className="flex-1 overflow-auto" {...getTableBodyProps()}>
           {page.map((row) => {
             prepareRow(row);
             return (
               <tr
                 {...row.getRowProps()}
-                className=" border-y-[1px] border-y-[#F5F5F5] "
+                className=" border-y-[1px] border-y-[#F5F5F5] text-left"
               >
                 {row.cells.map((cell) => {
                   return (
                     <td
                       {...cell.getCellProps()}
-                      className="py-4"
+                      className="py-3 text-left pl-6"
                     >
                       {cell.render("Cell")}
                     </td>
@@ -199,6 +200,7 @@ const ApplicationPage = ({ selected }) => {
           })}
         </tbody>
       </table>
+      </div>
       <div className="bg-[white] mx-6 mt-4 py-4 px-2 flex justify-between">
         <div>
           <span>

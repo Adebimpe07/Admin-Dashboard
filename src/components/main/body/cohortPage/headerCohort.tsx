@@ -5,7 +5,7 @@ import HeaderData from "../../notification_ProfilePicture";
 
 const HeaderCohort = () => {
   return (
-    <div className="py-6 px-5">
+    <div className="py-[19.4px] px-5 border-b-[1px] border-b-[#DBD9D9]">
       <div className="flex justify-between ">
         <div>
           <h1 className="text-2xl font-semibold text-[#4A4C58]">

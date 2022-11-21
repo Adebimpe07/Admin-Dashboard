@@ -12,7 +12,7 @@ const TableHead = ({selected, setSelected}) => {
 
 
   return (
-    <div className="flex text-base font-medium gap-9 pl-[52px] pt-[48px] pb-8">
+    <div className="flex text-base font-medium gap-9 pl-[52px] pb-7">
       {ApplicationHeaderData.map((item, idx) => (
         <div>
           <p

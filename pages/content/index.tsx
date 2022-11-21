@@ -18,7 +18,7 @@ const Index = () => {
 
 
   return (
-    <div className='flex-1 bg-[#E5E5E5] pb-4'>
+    <div className="flex-1 bg-[#E5E5E5] flex flex-col overflow-auto pb-4 h-full">
         <ContentHeader />
         <ContentSubHeader selected={selected} setSelected={setSelected}  />
         {selected !== 2 ?

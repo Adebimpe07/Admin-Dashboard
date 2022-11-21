@@ -16,7 +16,7 @@ const Index = () => {
   const [selected, setSelected] = useState(0);
 
     return (
-      <div className="bg-[#E5E5E5] flex-1 pb-4">
+      <div className="flex-1 bg-[#E5E5E5] flex flex-col overflow-auto pb-4 h-full">
         <HeaderApp />
         <SubAppHeader/>
         <TableHead selected={selected} setSelected={setSelected} />
