@@ -1,34 +1,22 @@
 import { ArrowLeft2 } from "iconsax-react";
+import Header from "./header";
 import React from "react";
 import {
   AssessmentBarData,
   SelectQuestionData,
-} from "../../../layout/assessmentData";
-import { NotificationDrop } from "./firstPage";
+} from "../../../../layout/assessmentData";
 import Link from "next/link";
-import HeaderData from "../notification_ProfilePicture";
+import QuestionTypeCards from "../category/questionTypeCards";
 
-type createPageProp = {
-  setActive: React.Dispatch<React.SetStateAction<number>>;
-};
-
-const createPage = ({ setActive }: createPageProp) => {
+const createPage = () => {
   return (
-    <>
-      <header className="flex justify-between border-b border-[#DBD9D9] px-4">
-        <h1 className="text-2xl font-semibold text-[#4A4C58] pb-[1.41rem]">
-          Assessments
-        </h1>
-        <div className="flex gap-2 items-center">
-          <NotificationDrop />
-          <img width="40" src={HeaderData.adminProfilePicture.src} alt="" />
-        </div>
-      </header>
+    <div className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
+      <Header />
       <div className="flex-1 flex flex-col">
         <div className="flex flex-col">
           <div className="flex items-center pl-4 gap-1 py-4">
             <ArrowLeft2 size="17" color="#000" />
-            <Link href="/assessment">
+            <Link href="/assessments/categories">
               <h1 className="cursor-pointer">Back to Assessments</h1>
             </Link>
           </div>
@@ -50,28 +38,35 @@ const createPage = ({ setActive }: createPageProp) => {
             <div className="border border-[#ced4da] rounded-lg w-full py-1">
               <input type="text" className="p-1 focus:outline-none w-full" />
             </div>
+            <div className="flex gap-5">
+              <div className=" w-[50%] flex flex-col gap-4 mt-3">
+                <label>Number of Questions</label>
+                <div className="border border-[#ced4da] rounded-lg w-full py-1">
+                  <input
+                    type="text"
+                    className="p-1 focus:outline-none w-full"
+                  />
+                </div>
+              </div>
+
+              <div className=" w-[50%] flex flex-col gap-3 mt-3">
+                <label>Time</label>
+                <div className="border border-[#ced4da] rounded-lg w-full py-1">
+                  <input
+                    type="text"
+                    className="p-1 focus:outline-none w-full"
+                  />
+                </div>
+              </div>
+            </div>
             <div className="mt-4">
               <h1 className="py-2">Select Question</h1>
-              <div className="grid grid-cols-3 gap-2 items-center">
-                {SelectQuestionData.map(({ icon, title }, index) => {
-                  return (
-                    <div
-                      onClick={() => setActive(index + 1)}
-                      className="cursor-pointer"
-                    >
-                      <div className="bg-[#38CB891A] rounded-lg p-2 flex flex-col items-center">
-                        <span>{icon}</span>
-                        <span className="text-[#4A4C58]">{title}</span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <QuestionTypeCards />
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

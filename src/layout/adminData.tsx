@@ -51,7 +51,27 @@ export const AdminData = [
 export const SubAdminData = [
   {
     picture: PicPicture,
-    name: "Olivia Rhye",
+    name: "Adeoye Adebimpe",
+    title: "1st tier Admin",
+  },
+  {
+    picture: PicPicture,
+    name: "Ogunrinde Dotun",
+    title: "1st tier Admin",
+  },
+  {
+    picture: PicPicture,
+    name: "Oladejo Toyyib",
+    title: "1st tier Admin",
+  },
+  {
+    picture: PicPicture,
+    name: "Oladeji Damilola",
+    title: "1st tier Admin",
+  },
+  {
+    picture: PicPicture,
+    name: "Odebunmi Blessing",
     title: "1st tier Admin",
   },
   {
@@ -61,27 +81,7 @@ export const SubAdminData = [
   },
   {
     picture: PicPicture,
-    name: "Olivia Rhye",
-    title: "1st tier Admin",
-  },
-  {
-    picture: PicPicture,
-    name: "Olivia Rhye",
-    title: "1st tier Admin",
-  },
-  {
-    picture: PicPicture,
-    name: "Olivia Rhye",
-    title: "1st tier Admin",
-  },
-  {
-    picture: PicPicture,
-    name: "Olivia Rhye",
-    title: "1st tier Admin",
-  },
-  {
-    picture: PicPicture,
-    name: "Olivia Rhye",
+    name: "Adekunle Babatunde",
     title: "1st tier Admin",
   },
   {

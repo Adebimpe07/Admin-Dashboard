@@ -105,7 +105,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/components/main/body",
-    "pages/assessment"
+    "pages/assessments",
+    "src/components/main/assessment/categoryCreate/questionTabletsx"
   ],
   "exclude": ["node_modules"]
 }

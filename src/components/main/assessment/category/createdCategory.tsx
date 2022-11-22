@@ -1,9 +1,10 @@
 import React from "react";
-import { NotificationDrop } from "../firstPage";
+import { NotificationDrop } from "../../../../../pages/assessments/categories";
 import HeaderData from "../../notification_ProfilePicture";
-import { Add, ArrowLeft2, Link } from "iconsax-react";
+import { Add, ArrowLeft2 } from "iconsax-react";
 import { Button } from "@mantine/core";
 import CategoryTable from "./categoryTable";
+import Link from "next/link";
 
 const CreatedCategory = () => {
   return (
@@ -20,8 +21,9 @@ const CreatedCategory = () => {
       <div className="flex justify-between px-4 py-4">
         <div className="flex items-center  gap-1 ">
           <ArrowLeft2 size="17" color="#000" />
-
-          <h1 className="cursor-pointer">Back to Assessments</h1>
+          <Link href="/assessments/categories">
+            <h1 className="cursor-pointer">Back to Assessments</h1>
+          </Link>
         </div>
 
         <Button

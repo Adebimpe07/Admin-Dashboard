@@ -5,16 +5,6 @@
     "time": "10"
   },
   {
-    "type": "Essay",
-    "question": "30",
-    "time": "10"
-  },
-  {
-    "type": "Multichoice",
-    "question": "30",
-    "time": "10"
-  },
-  {
     "type": "Multichoice",
     "question": "30",
     "time": "10"
@@ -22,31 +12,6 @@
   {
     "type": "Code",
     "question": "30",
-    "time": "10"
-  },
-  {
-    "type": "Code",
-    "question": "30",
-    "time": "10"
-  },
-  {
-    "type": "Multichoice",
-    "question": "10",
-    "time": "10"
-  },
-  {
-    "type": "Multichoice",
-    "question": "10",
-    "time": "10"
-  },
-  {
-    "type": "Essay",
-    "question": "10",
-    "time": "10"
-  },
-  {
-    "type": "Essay",
-    "question": "15",
     "time": "10"
   }
 ]
