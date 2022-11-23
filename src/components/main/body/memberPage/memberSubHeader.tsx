@@ -4,6 +4,7 @@ import {
   Menu,
   Modal,
   MultiSelect,
+  Select,
   Text,
   Textarea,
   TextInput,
@@ -30,29 +31,56 @@ const MemberSubHeader = ({ selected, setSelected }) => {
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
-        title="Create News"
+        title="Add New Member"
         size="xl"
       >
-        <Text className="flex gap-6 ">
-          <div className="flex w-[85%] flex-col gap-4">
+        <Text className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
             <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
-              News Details
+              Member Details
             </h1>
+            
+            <div className="flex gap-4">
+            <Select
+                className="flex-1"
+                label="Cohort"
+                data={[
+                  { value: "ATS 1.0", label: "ATS 1.0" },
+                  { value: "ATS 1.1", label: "ATS 1.1" },
+                  { value: "ATS 2.0", label: "ATS 2.0" },
+                  { value: "ATS 2.2", label: "ATS 2.2" },
+                ]}
+              />
+              <Select
+                className="flex-1"
+                label="Course"
+                data={[
+                  { value: "fulltime", label: "Front-end Management" },
+                  { value: "remote", label: "Back-end Management" },
+                  { value: "hybrid", label: "Project Management" },
+                  { value: "mobile", label: "Mobile App Development" },
+                  { value: "ui", label: "UI/UX" },
+                ]}
+              />
+            </div>
             <TextInput
               size="sm"
               className="focus:border-inherit"
-              label="Title"
+              label="Name"
             />
-            <p>Content</p>
-            <RichTextEditor
-              id="rte"
-              controls={[
-                ["bold", "italic", "underline"],
-                ["unorderedList", "h1", "h2"],
-                ["sup", "sub"],
-                ["alignLeft", "alignCenter", "alignRight"],
-              ]}
+            <div className="flex gap-4">
+            <TextInput
+              size="sm"
+              className="focus:border-inherit flex-1"
+              label="Email"
+              
             />
+            <TextInput
+              size="sm"
+              className="focus:border-inherit flex-1"
+              label="Phone No"
+            />
+            </div>
           </div>
           <div className="flex flex-col  gap-4">
             <p>Featured image</p>
@@ -62,30 +90,10 @@ const MemberSubHeader = ({ selected, setSelected }) => {
               accept="image/png,image/jpeg"
               className="bg-[#EBFAF3]"
             />
-            <p>Add to category</p>
-            <div className="flex gap-[10px]">
-              <button className="bg-[#DCFCE7] px-2 text-[8px] font-medium text-[#14532D] flex gap-2 items-center py-2 rounded-3xl">
-                <img src={Elipse.src} className="w-1" />
-                NEWS
+              <button className="bg-[#38CB89] text-[white] w-full py-2 rounded">
+                Add
               </button>
-              <button className="bg-[#DCFCE7] px-2 text-[8px] font-medium text-[#14532D] flex gap-2 items-center py-2 rounded-3xl">
-                <img src={Elipse.src} className="w-1" />
-                GENERAL
-              </button>
-              <button className="bg-[#DCFCE7] px-2 text-[8px] font-medium text-[#14532D] flex gap-2 items-center py-2 rounded-3xl">
-                <img src={Elipse.src} className="w-1" />
-                POLITICS
-              </button>
-              <button className="bg-[#DCFCE7] px-2 text-[8px] font-medium text-[#14532D] flex gap-2 items-center py-2 rounded-3xl">
-                <img src={Elipse.src} className="w-1" />
-                TECH
-              </button>
-            </div>
-            <div className="mt-auto self-center">
-              <button className="bg-[#38CB89] text-[white] py-2 px-7 rounded-lg">
-                Publish article
-              </button>
-            </div>
+
           </div>
         </Text>
       </Modal>
@@ -93,19 +101,42 @@ const MemberSubHeader = ({ selected, setSelected }) => {
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
-        title="Create Blog"
+        title="Create Testimonial"
         size="xl"
       >
-        <Text className="flex gap-6 ">
-          <div className="flex w-[85%] flex-col gap-4">
+        <Text className="">
+          <div className="flex flex-col gap-4">
             <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
-              Blog Details
+              Testimonial Details
             </h1>
             <TextInput
               size="sm"
               className="focus:border-inherit"
-              label="Title"
+              label="Name"
             />
+            <div className="flex gap-4">
+              <Select
+                className="flex-1"
+                label="Cohort"
+                data={[
+                  { value: "ATS 1.0", label: "ATS 1.0" },
+                  { value: "ATS 1.1", label: "ATS 1.1" },
+                  { value: "ATS 2.0", label: "ATS 2.0" },
+                  { value: "ATS 2.2", label: "ATS 2.2" },
+                ]}
+              />
+              <Select
+                className="flex-1"
+                label="Course"
+                data={[
+                  { value: "fulltime", label: "Front-end Management" },
+                  { value: "remote", label: "Back-end Management" },
+                  { value: "hybrid", label: "Project Management" },
+                  { value: "mobile", label: "Mobile App Development" },
+                  { value: "ui", label: "UI/UX" },
+                ]}
+              />
+            </div>
             <p>Content</p>
             <RichTextEditor
               id="rte"
@@ -117,19 +148,11 @@ const MemberSubHeader = ({ selected, setSelected }) => {
               ]}
             />
           </div>
-          <div className="flex flex-col  gap-4">
-            <p>Featured image</p>
-            <FileInput
-              placeholder="Browse and chose the files you want to upload from your computer"
-              icon={<img src={Cloud.src} className="w-6" />}
-              accept="image/png,image/jpeg"
-              className="bg-[#EBFAF3]"
-            />
-            <div className="mt-auto self-center">
-              <button className="bg-[#38CB89] text-[white] py-2 px-7 rounded-lg">
-                Publish article
-              </button>
-            </div>
+
+          <div className="mt-4">
+            <button className="bg-[#38CB89] text-[white] py-2 w-full rounded">
+              Upload
+            </button>
           </div>
         </Text>
       </Modal>
@@ -240,7 +263,7 @@ const MemberSubHeader = ({ selected, setSelected }) => {
               <Menu.Item>Product Management</Menu.Item>
             </Menu.Dropdown>
           </Menu>
-        )  : null}
+        ) : null}
 
         {selected == 0 ? (
           <Button

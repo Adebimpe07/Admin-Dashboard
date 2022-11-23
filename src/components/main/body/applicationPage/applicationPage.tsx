@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useTable, useRowSelect, usePagination } from "react-table";
+import { useTable, useRowSelect, usePagination, useGlobalFilter } from "react-table";
 import {
   allApplicationColumn,
   ShortListColumn,
@@ -25,6 +25,9 @@ import ActionMenuPass from "../actionButton/ActionMenuPass";
 import failAssesment from "../../../../layout/failAssesmentData.json";
 import ActionMenuFail from "../actionButton/ActionMenuFail";
 import ActionMenuInterview from "../actionButton/ActionMenuInterview";
+import GlobalFilter from "./globalFilter";
+import PassedStatus from "./passedStatus";
+import FailedStatus from "./failedStatus";
 
 // const Action = ({ values }) => {
 
@@ -65,7 +68,7 @@ const ApplicationPage = ({ selected }) => {
   const passed = useMemo(
     () =>
       passAssesment.map((mock, idx) => ({
-        ...mock,
+        ...mock, status:<PassedStatus />,
         action: <ActionMenuPass />,
       })),
     []
@@ -73,7 +76,7 @@ const ApplicationPage = ({ selected }) => {
   const failed = useMemo(
     () =>
       failAssesment.map((mock, idx) => ({
-        ...mock,
+        ...mock, status:<FailedStatus />,
         action: <ActionMenuFail />,
       })),
     []
@@ -101,7 +104,7 @@ const ApplicationPage = ({ selected }) => {
     pageOptions,
     gotoPage,
     pageCount,
-    state,
+    state, setGlobalFilter,
     prepareRow,
     selectedFlatRows,
   } = useTable(
@@ -135,7 +138,7 @@ const ApplicationPage = ({ selected }) => {
           ? Hired
           : Rejected,
     },
-    usePagination,
+    useGlobalFilter, usePagination,
     useRowSelect,
     (hooks) => {
       hooks.visibleColumns.push((columns) => {
@@ -154,10 +157,12 @@ const ApplicationPage = ({ selected }) => {
     }
   );
 
-  const { pageIndex } = state;
+  const { pageIndex, globalFilter } = state;
 
   return (
     <div className="overflow-auto grid grid-rows-[1fr_auto]">
+            <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+
       <div className="overflow-auto">
       <table
         {...getTableProps()}

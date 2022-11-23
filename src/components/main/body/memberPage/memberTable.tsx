@@ -18,6 +18,8 @@ import ActionMenuEditBlogContent from "../actionButton/ActionMenuEditBlogContent
 import ActionMenuDeleteBlogContent from "../actionButton/ActionMenuDeleteBlogContent";
 import ActionMenuTestimonial from "../actionButton/ActionMenuTestimonial";
 import ActionMenuMemberImg from "../actionButton/ActionMenuMemberImg";
+import ActionMenuEditAtsMember from "../actionButton/ActionMenuEditAtsmember";
+import ActionMenuDeleteAtsMember from "../actionButton/ActionMenuDeleteAtsMember";
 
 const MemberTable = ({ selected }) => {
   const ATSColumn = useMemo(() => atsMemberColumn, []);
@@ -29,8 +31,8 @@ const MemberTable = ({ selected }) => {
       ATSMember.map((content, idx) => ({
         ...content,
         image: <ActionMenuMemberImg />,
-        edit: <ActionMenuEditContent />,
-        delete: <ActionMenuDeleteContent />,
+        edit: <ActionMenuEditAtsMember />,
+        delete: <ActionMenuDeleteAtsMember />
       })),
     []
   );

@@ -30,9 +30,12 @@ const ActionMenuEditBlogContent = () => {
       onClose={() => setOpened(false)}
       title="Edit Blog"
       size="xl"
+      classNames={{
+        modal:"!w-[50rem]"
+       }}
     >
       <Text className="flex gap-6 ">
-        <div className="flex w-[85%] flex-col gap-4">
+        <div className="flex w-[100%] flex-col gap-4">
           <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
             Blog Details
           </h1>

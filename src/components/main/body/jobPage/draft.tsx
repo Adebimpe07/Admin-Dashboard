@@ -1,9 +1,10 @@
 import { StaticImageData } from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import Edit from "../../../../assets/edit.png";
 import Trash from "../../../../assets/trash.png";
 import Brief from "../../../../assets/briefcase.png";
 import Vector from "../../../../assets/Vector.png"
+import { Button, Modal, Select, Text, Textarea, TextInput } from '@mantine/core';
 
 
 
@@ -14,6 +15,83 @@ type Props = {
 }
 
 const Job = ({icon, title, time}: Props) => {
+
+
+    const [opened, setOpened] = useState(false);
+
+    const PostJobModal = () => (
+      <Modal opened={opened} onClose={() => setOpened(false)} title="Edit Job">
+        <Text className="flex flex-col gap-4 " size="sm">
+          <p className="text-base text-[#948E8E] pb-2">
+            Enter the details of the job
+          </p>
+          <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
+            Job Description
+          </h1>
+  
+          <div className="flex gap-4 text-[#4a4c58] w-full">
+            <TextInput
+              className="w-[50%]"
+              label="Job"
+              disabled
+              placeholder="job will be auto-generated"
+            />
+            <Select
+              className="flex-1"
+              label="Course"
+              data={[
+                { value: "fulltime", label: "Front-end Management" },
+                { value: "remote", label: "Back-end Management" },
+                { value: "hybrid", label: "Project Management" },
+                { value: "mobile", label: "Mobile App Development" },
+                { value: "ui", label: "UI/UX" },
+              ]}
+            />
+          </div>
+          <div>
+            <TextInput label="Cohorts" />
+          </div>
+  
+          <Textarea
+            className="focus:border-inherit"
+            label="Job Requirements"
+            autosize
+            minRows={4}
+            maxRows={4}
+            size="xl"
+          />
+        </Text>
+        <Button
+          fullWidth
+          className="bg-[#38CB89] hover:bg-[#38CB89] h-10 m-auto text-lg my-4"
+        >
+          Save Changes
+        </Button>
+      </Modal>
+    );
+  
+    const [shift, setShift] = useState(false);
+  
+    const UploadJobModal = () => (
+      <Modal
+        className="text-[#4A4C58] text-base"
+        opened={shift}
+        onClose={() => setShift(false)}
+        title="Delete Job"
+      >
+        <p className="text-center text-sm">
+          You are about to delete the selected job, kindly click the button below
+          to confirm this acton.
+        </p>
+        <div className="flex justify-center">
+          <button className="bg-[#A83C3D] py-2 w-full text-[white] rounded mt-8 text-base font-bold">
+            Delete
+          </button>
+        </div>
+      </Modal>
+    );
+  
+
   return (
     <div className='flex justify-between p-6 bg-white my-6 mx-12 border rounded-2xl '>
         <div className='flex gap-7'>
@@ -35,8 +113,8 @@ const Job = ({icon, title, time}: Props) => {
         <div className="flex flex-col">
             <button>{time}</button>
             <div className="flex items-center mt-2 gap-4 justify-end">
-                <img src={Edit.src} alt="icon" className='w-2.5' />
-                <img src={Trash.src} alt="icon" className='w-4' />
+               <button onClick={() => setOpened(true)}> <img src={Edit.src} alt="icon" className='w-2.5' /><PostJobModal /></button>
+                <button onClick={() => setShift(true)}><img src={Trash.src} alt="icon" className='w-4' /><UploadJobModal /></button>
             </div>
         </div>
     </div>
