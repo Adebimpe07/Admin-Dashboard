@@ -1,5 +1,5 @@
 import React from "react";
-import { NotificationDrop } from "../../src/components/main/assessment/firstPage";
+import { NotificationDrop } from "../assessments/categories";
 import Courses from "../../src/components/main/courses/courses";
 import Courses_newPage from "../../src/components/main/courses/courses_newPage";
 import HeaderData from "../../src/components/main/notification_ProfilePicture";

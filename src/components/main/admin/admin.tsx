@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { NotificationDrop } from "../assessment/firstPage";
+import { NotificationDrop } from "../../../../pages/assessments/categories";
 import ProfilePicture from "../../../assets/Avatar.png";
 import AdminPic from "../../../assets/Admin.svg";
 import CreatesubadminModal from "./createsubadminModal";
 import { StaticImageData } from "next/image";
 import Admin from "../admin/adminActivities";
-import { ActionIcon, Button, Menu, Modal, TextInput } from "@mantine/core";
-import { Add, Edit2, SearchNormal1 } from "iconsax-react";
+import { ActionIcon, Menu, Modal, TextInput } from "@mantine/core";
+import { Edit2, SearchNormal1 } from "iconsax-react";
 import { SubAdminData } from "../../../layout/adminData";
 import { Icon } from "@iconify/react";
 import { EditSubAdminModal } from "./editAdminModal";
@@ -72,11 +72,11 @@ interface ISubAdminCard {
 
 function SubAdminCard({ picture, name, title }: ISubAdminCard) {
   return (
-    <div className="relative min-w-max flex-1 gap-1 p-4 bg-[#F9FAFB] flex flex-col justify-center items-center">
+    <div className="relative min-w-max gap-1 p-4 bg-[#F9FAFB] flex flex-col justify-center items-center">
       <img className="rounded-full" width="80" src={picture.src} alt="" />
       <div className="text-[#4A4C58]">
         <p className="text-sm">{name}</p>
-        <p className="text-xs">{title}</p>
+        <p className="text-xs text-center">{title}</p>
       </div>
       <ActionIcon className="absolute right-0 top-0 m-1">
         <MenuDrop />
@@ -96,7 +96,7 @@ const admin = () => {
     adminProfilePicture: ProfilePicture,
   };
 
-  const [opened, setOpened] = useState(false);
+  const [value, setValue] = useState("");
 
   return (
     <div className="pt-6 h-screen flex flex-col flex-1 bg-[#e5e5e5]">
@@ -129,29 +129,28 @@ const admin = () => {
           </div>
           <Admin />
         </div>
-        <div className="grid gap-4 overflow-auto">
+        <div className="flex flex-col gap-4 overflow-auto">
           <header className="flex justify-between items-center flex-wrap">
             <h1 className="text-[#4A4C58] font-bold text-lg">Sub admin</h1>
-            <Button
-              className="bg-[#38CB89] hover:bg-[#38CB89] w-[10rem] h-10 text-base"
-              leftIcon={<Add size="17" variant="Outline" />}
-              onClick={() => setOpened(true)}
-            >
-              Add Admin
-            </Button>
-            <CreatesubadminModal opened={opened} setOpened={setOpened} />
-            {/* TODO: CHANGE */}
+
+            <CreatesubadminModal />
           </header>
 
           <TextInput
             icon={<SearchNormal1 size="16" />}
             placeholder="Search admin by name"
+            value={value}
+            onChange={(event) => setValue(event.currentTarget.value)}
           />
 
-          <div className="overflow-auto flex flex-wrap gap-4">
-            {SubAdminData.map((props, idx) => (
-              <SubAdminCard key={idx} {...props} />
-            ))}
+          <div className="overflow-auto flex flex-wrap gap-2">
+            {SubAdminData.map((props, idx) =>
+              props.name
+                .toLocaleLowerCase()
+                .includes(value.toLocaleLowerCase()) ? (
+                <SubAdminCard key={idx} {...props} />
+              ) : null
+            )}
           </div>
         </div>
       </main>

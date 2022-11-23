@@ -1,9 +1,9 @@
 import React from "react";
+import { CategoryCardData } from "../../../../layout/assessmentCardData";
 import AssessmentCard from "../assessmentCard/assessmentCardStyle";
-import { AssessmentCardData } from "../../../../layout/assessmentCardData";
 import Header from "../categoryCreate/header";
 
-const AssessmentCards = () => {
+const CategoryCard = () => {
   return (
     <div className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
       <Header />
@@ -19,7 +19,7 @@ const AssessmentCards = () => {
           </Button> */}
         </div>
         <div className="flex gap-4 m-4">
-          {AssessmentCardData.map(
+          {CategoryCardData.map(
             ({ title, paragraph, timestamp, questions }, index) => {
               return (
                 <AssessmentCard
@@ -38,4 +38,4 @@ const AssessmentCards = () => {
   );
 };
 
-export default AssessmentCards;
+export default CategoryCard;

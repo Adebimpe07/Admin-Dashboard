@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import { useTable, useRowSelect, usePagination } from "react-table";
-import { questionList } from "../../../layout/tableData";
-import QuestionListData from "../../../layout/questionList.json";
-import DeleteIcon from "../body/actionButton/delete_icon";
+import { questionList } from "../../../../layout/tableData";
+import QuestionListData from "../../../../layout/questionList.json";
+import DeleteIcon from "../../body/actionButton/delete_icon";
 import Link from "next/link";
 import { Edit2 } from "iconsax-react";
 
@@ -22,31 +22,15 @@ const QuestionTable = () => {
       })),
     []
   );
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    pageOptions,
-    gotoPage,
-    pageCount,
-    state,
-    prepareRow,
-    selectedFlatRows,
-  } = useTable(
-    {
-      columns: QuestionColumn,
-      data: QuestionData,
-    },
-    usePagination,
-    useRowSelect
-  );
-
-  const { pageIndex } = state;
+  const { getTableProps, getTableBodyProps, headerGroups, page, prepareRow } =
+    useTable(
+      {
+        columns: QuestionColumn,
+        data: QuestionData,
+      },
+      usePagination,
+      useRowSelect
+    );
 
   return (
     <div>

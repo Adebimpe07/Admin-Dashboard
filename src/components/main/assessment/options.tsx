@@ -6,9 +6,9 @@ import {
   Stack,
   Text,
   TextInput,
-  Title,
 } from "@mantine/core";
-import { useFormContext } from "./createAssessment1";
+import { useContext } from "react";
+import FormContext from "../../../context/store";
 
 type OptionsProps = {
   enteries: number;
@@ -20,23 +20,23 @@ interface IOption {
 }
 
 function Option({ index }: IOption) {
-  const form = useFormContext();
+  const { optionsForm } = useContext(FormContext);
   return (
     <div className="flex gap-3 items-center">
       <Checkbox
-        {...form.getInputProps(`choices.${index}.isCorrect`, {
+        {...optionsForm.getInputProps(`choices.${index}.isCorrect`, {
           type: "checkbox",
         })}
       />
       <TextInput
         className="flex-1 focus:outline-none  placeholder:text-[#4A4C58] placeholder:text-sm font-light"
         placeholder="Enter Option"
-        {...form.getInputProps(`choices.${index}.text`)}
+        {...optionsForm.getInputProps(`choices.${index}.text`)}
       />
 
       <ActionIcon
         onClick={() => {
-          form.removeListItem("choices", index);
+          optionsForm.removeListItem("choices", index);
         }}
       >
         <Icon icon="ph:x" color="#d0d5dd" width="32" />
@@ -46,13 +46,13 @@ function Option({ index }: IOption) {
 }
 
 function Options() {
-  const form = useFormContext();
+  const { optionsForm } = useContext(FormContext);
 
   return (
     <div className="flex flex-col gap-5 w-[350px]">
       <Text>Select the right answer</Text>
       <Stack spacing="lg">
-        {form.values.choices.map((_, idx) => (
+        {optionsForm.values.choices.map((_, idx) => (
           <Option key={idx} index={idx} />
         ))}
       </Stack>
@@ -60,7 +60,7 @@ function Options() {
         unstyled
         className="self-start"
         onClick={() => {
-          form.insertListItem("choices", { text: "", isCorrect: false });
+          optionsForm.insertListItem("choices", { text: "", isCorrect: false });
         }}
       >
         Add option

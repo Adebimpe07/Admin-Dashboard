@@ -8,7 +8,7 @@ function editor() {
   return (
     <RichTextEditor
       classNames={{
-        root: "h-[70%] !border-[#D0D5DD]",
+        root: "h-[90%] !border-[#D0D5DD]",
         toolbarControl: "!border-none",
       }}
       value={value}

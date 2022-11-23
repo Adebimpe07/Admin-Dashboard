@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { Notification } from "iconsax-react";
 import { Menu } from "@mantine/core";
-import ListAssessment from "./listedAssessment";
-import Notifications from "../dashboard/notifications";
-import HeaderData from "../notification_ProfilePicture";
+import Link from "next/link";
+import HeaderData from "../../../src/components/main/notification_ProfilePicture";
+import Notifications from "../../../src/components/main/dashboard/notifications";
+import Tabs from "../../../src/layout/assessmentTabs";
+import ListAssessment from "../../../src/components/main/assessment/listedAssessment";
+import { AssessmentCardData } from "../../../src/layout/assessmentCardData";
+import AssessmentCards from "../../../src/components/main/assessment/assessmentCard/assessmentCards";
 
 export const NotificationDrop = () => {
   return (
@@ -25,12 +29,10 @@ export const NotificationDrop = () => {
 };
 
 const HeaderMain = () => {
-  const [selected, setSelected] = useState(0);
-
-  const Tabs = ["Categories", "List of Assessment"];
-
-  return (
-    <div className="py-6 h-screen flex flex-col  bg-[#e5e5e5]">
+  return AssessmentCardData.length > 0 ? (
+    <AssessmentCards />
+  ) : (
+    <div className="py-6 h-screen flex-1 flex flex-col  bg-[#e5e5e5]">
       <div className="flex justify-between border-b border-[#DBD9D9] px-4">
         <h1 className="text-2xl font-semibold text-[#4A4C58] pb-[1.41rem]">
           Assessments
@@ -43,30 +45,26 @@ const HeaderMain = () => {
       <div className="flex-1 flex flex-col">
         <div className="flex gap-2 px-4 pt-4 font-semibold">
           {Tabs.map((item, index) => (
-            <div
-              key={index}
-              onClick={() => {
-                setSelected(index);
-              }}
-            >
-              <div className="flex flex-col gap-1 cursor-pointer">
-                <p>{item}</p>
-                <span
-                  className={
-                    selected === index
-                      ? "w-8 bg-[#30AD74] px-1 h-1 self-center rounded-lg"
-                      : "bg-[#fff] self-center"
-                  }
-                ></span>
-              </div>
+            <div key={index}>
+              <Link href={item.href}>
+                <div className="flex flex-col gap-1 cursor-pointer">
+                  <p>{item.name}</p>
+                  <span
+                    className={
+                      item.name === "Assessments"
+                        ? "w-8 bg-[#30AD74] px-1 h-1 self-center rounded-lg"
+                        : "bg-[#fff] self-center"
+                    }
+                  ></span>
+                </div>
+              </Link>
             </div>
           ))}
         </div>
-        {selected === 0 ? (
-          <ListAssessment link="/createCategory" text="Create Category" />
-        ) : (
-          <ListAssessment link="/createAssessment" text="Create Assessment" />
-        )}
+        <ListAssessment
+          link="/assessments/assessment/create_assessment"
+          text="Create Assessment"
+        />
       </div>
     </div>
   );
