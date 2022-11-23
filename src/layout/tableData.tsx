@@ -410,6 +410,34 @@ export const emailColumn = [
   {
     Header: "Date Modified",
     accessor: "modified",
+  }
+]
+
+export const viewAssessmentColumn = [
+  {
+    Header: "Name",
+    accessor: "name",
+  },
+  {
+    Header: "Applicant ID",
+    accessor: "applicant_id",
+  },
+  {
+    Header: "Program",
+    accessor: "program",
+  },
+
+  {
+    Header: "Email Address",
+    accessor: "email",
+  },
+  {
+    Header: "Applicant Result",
+    accessor: "applicant_result",
+  },
+  {
+    Header: "Status",
+    accessor: "status",
   },
   {
     Header: "",

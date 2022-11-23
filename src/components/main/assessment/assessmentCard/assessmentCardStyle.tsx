@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
-import { Edit2, Trash } from "iconsax-react";
+import { Button } from "@mantine/core";
+import { Edit2, Eye, Timer1, Trash } from "iconsax-react";
 import React from "react";
 
 type assessmentCardsprops = {
@@ -26,14 +27,17 @@ const AssessmentCard = ({
               <Trash size="17" color="red" />
             </div>
           </div>
-          <div className="flex justify-between items-center">
-            <div className="text-xs bg-[#DCFCE7] flex items-center px-1 rounded-lg">
-              <Icon icon="bi:dot" color="#22c55e" width="19" height="19" />
-              <p className="bg-[#DCFCE7] text-[#14532D] ">{status}</p>
-            </div>
-            <p className="text-xs">Created {timestamp}</p>
-          </div>
           <p>{paragraph}</p>
+          <div className="flex gap-2 items-center">
+            <Timer1 size="17" />
+            <p>{timestamp} Mins</p>
+            <span>.</span>
+            <p>{questions} Questions</p>
+          </div>
+          <Button className="flex bg-[#4A4C58] text-[fff] items-center">
+            <p>View Categories</p>
+            <Eye size="17" color="" />
+          </Button>
         </div>
       </div>
     </div>

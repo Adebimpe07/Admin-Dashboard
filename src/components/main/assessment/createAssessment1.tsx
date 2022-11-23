@@ -1,41 +1,25 @@
-import { createFormContext } from "@mantine/form";
 import React, { useState } from "react";
-import CreatePage from "./selectCategory";
-import CreateQuestions from "./questionTypes/multichoice";
-
-const [FormProvider, useFormContext, useForm] = createFormContext<{
-  categoryName: string;
-  questionTitle: string;
-  questionSummary: string;
-  choices: Array<{ text: string; isCorrect: boolean }>;
-}>();
+import CreatePage from "./categoryCreate/selectCategory";
+import CreateMultiChoice from "./questionTypes/multichoice";
+import CreateEssay from "./questionTypes/essay";
+import CreateCode from "./questionTypes/code";
 
 const index = () => {
-  const [active, setActive] = useState(1);
-
-  const form = useForm({
-    initialValues: {
-      categoryName: "",
-      questionTitle: "",
-      questionSummary: "",
-      choices: Array(4).fill({
-        text: "",
-        isCorrect: true,
-      }),
-    },
-  });
+  const [active, setActive] = useState(0);
 
   return (
-    <FormProvider form={form}>
-      <form className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
-        {active === 0 ? (
-          <CreatePage setActive={setActive} />
-        ) : (
-          <CreateQuestions />
-        )}
-      </form>
-    </FormProvider>
+    <form className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
+      {active === 0 ? (
+        <CreatePage />
+      ) : active === 1 ? (
+        <CreateEssay />
+      ) : active === 2 ? (
+        <CreateMultiChoice />
+      ) : active === 3 ? (
+        <CreateCode />
+      ) : null}
+    </form>
   );
 };
 
-export { useFormContext, index as default };
+export default index;

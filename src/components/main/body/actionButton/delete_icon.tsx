@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Button, Modal } from "@mantine/core";
+import { Trash } from "iconsax-react";
 
 const DeleteIcon = () => {
   const [opened, setOpened] = useState(false);
@@ -23,7 +24,7 @@ const DeleteIcon = () => {
         className=" text-sm text-[#514747]"
         onClick={() => setOpened(true)}
       >
-        <p>del</p>
+        <Trash size="17" color="red" />
         <DeleteModal />
       </button>
     </div>

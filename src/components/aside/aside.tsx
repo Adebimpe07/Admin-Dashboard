@@ -6,10 +6,13 @@ import { Button, Text, Modal, TextInput } from "@mantine/core";
 import { Add } from "iconsax-react";
 import { Select } from "@mantine/core";
 import { Textarea } from "@mantine/core";
+import Link from "next/link";
 
 const Sidebar = () => {
   const [selected, setSelected] = useState("Dashboard");
+  const [selectedSub, setSelectedSub] = useState(null);
   const [opened, setOpened] = useState(false);
+  const [collapse, setCollapse] = useState(false);
 
   const UploadJobModal = () => (
     <Modal opened={opened} onClose={() => setOpened(false)} title="Upload Job">
@@ -86,18 +89,51 @@ const Sidebar = () => {
         <div className="flex flex-col gap-4">
           {SideData.map((item, index) => {
             return (
+              // item.heading !== "Content Management" && ( TODO:
               <div
-                key={index}
-                className={
-                  selected === item.heading
-                    ? "menuItem active flex items-center gap-2"
-                    : "menuItem flex items-center gap-2"
-                }
-                onClick={() => setSelected(item.heading)}
+                className={collapse && item.sub_menu && "flex flex-col gap-2"}
               >
-                {item.icon}
-                <span>{item.heading}</span>
+                <Link href={item.href}>
+                  <div
+                    key={index}
+                    className={
+                      selected === item.heading
+                        ? "menuItem active flex items-center gap-2"
+                        : "menuItem flex items-center gap-2"
+                    }
+                    onClick={() => {
+                      !item.sub_menu && setCollapse(false);
+                      !item.sub_menu && setSelectedSub(null);
+                      setSelected(item.heading);
+                      item.sub_menu ? setCollapse((val) => !val) : null;
+                    }}
+                  >
+                    {item.icon}
+                    <span>{item.heading}</span>
+                  </div>
+                </Link>
+                <div className="flex flex-col gap-2">
+                  {item.sub_menu && collapse
+                    ? item.sub_menu.map((el, id) => (
+                        <Link href={el.href}>
+                          <div
+                            key={id}
+                            className={
+                              selectedSub === el.heading
+                                ? "menuItem active flex items-center gap-2 ml-4"
+                                : "menuItem flex items-center gap-2 ml-4"
+                            }
+                            onClick={() => setSelectedSub(el.heading)}
+                          >
+                            {el.icon}
+                            <span>{el.heading}</span>
+                          </div>
+                        </Link>
+                      ))
+                    : null}
+                </div>
               </div>
+              // )
             );
           })}
         </div>
@@ -117,7 +153,9 @@ const Sidebar = () => {
                   onClick={() => setSelected(item.heading)}
                 >
                   {item.icon}
-                  <span>{item.heading}</span>
+                  <Link href={item.href}>
+                    <span>{item.heading}</span>
+                  </Link>
                 </div>
               );
             })}

@@ -4,14 +4,15 @@ import {
   AssessmentBarData,
   SelectQuestionData,
 } from "../../../../layout/assessmentData";
-import { NotificationDrop } from "../firstPage";
+import { NotificationDrop } from "../../../../../pages/assessments/categories";
 import Link from "next/link";
 import HeaderData from "../../notification_ProfilePicture";
-import QuestionTable from "../questionList";
+import QuestionTable from "../categoryCreate/questionTable";
 import { Button } from "@mantine/core";
-// type createPageProp = {
-//   setActive: React.Dispatch<React.SetStateAction<number>>;
-// };
+import QuestionTypeCards from "./questionTypeCards";
+type createPageProp = {
+  setActive: React.Dispatch<React.SetStateAction<number>>;
+};
 
 const CategoryReview = () => {
   return (
@@ -29,8 +30,8 @@ const CategoryReview = () => {
         <div className="flex flex-col">
           <div className="flex items-center pl-4 gap-1 py-4">
             <ArrowLeft2 size="17" color="#000" />
-            <Link href="/assessment">
-              <h1 className="cursor-pointer">Back to Assessments</h1>
+            <Link href="/assessments/categories/create_essay">
+              <h1 className="cursor-pointer">Back</h1>
             </Link>
           </div>
           <div className="grid grid-cols-3 px-4 gap-3">
@@ -53,21 +54,7 @@ const CategoryReview = () => {
             </div>
             <div className="mt-4 flex flex-col gap-3">
               <h1 className="py-2">Select Question</h1>
-              <div className="grid grid-cols-3 gap-2 items-center">
-                {SelectQuestionData.map(({ icon, title }, index) => {
-                  return (
-                    <div
-                      onClick={() => setActive(index + 1)}
-                      className="cursor-pointer"
-                    >
-                      <div className="bg-[#38CB891A] rounded-lg p-2 flex flex-col items-center">
-                        <span>{icon}</span>
-                        <span className="text-[#4A4C58]">{title}</span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <QuestionTypeCards />
               <h3> Question List </h3>
               <QuestionTable />
               <Button className="bg-[#38CB89] hover:bg-[#38CB89] w-[11rem] text-base mx-auto">

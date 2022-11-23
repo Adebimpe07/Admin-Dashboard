@@ -1,49 +1,42 @@
 import React, { useState } from "react";
-import { NotificationDrop } from "../firstPage";
-import ProfilePicture from "../../../assets/PM_Tosin.png";
-import { StaticImageData } from "next/image";
 import { ArrowLeft2 } from "iconsax-react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import Options from "../options";
+import Header from "./header";
+import { Button } from "@mantine/core";
 
 const Editor = dynamic(() => import("../editor"), { ssr: false });
 
 const createQuestions = () => {
-  type headerprops = {
-    notificationCount: string;
-    adminProfilePicture: StaticImageData;
-  };
-
-  const HeaderData: headerprops = {
-    notificationCount: "2",
-    adminProfilePicture: ProfilePicture,
-  };
-
   return (
-    <>
-      <header className="flex justify-between border-b border-[#DBD9D9] px-4">
-        <h1 className="text-2xl font-semibold text-[#4A4C58] pb-[1.41rem]">
-          Assessments
-        </h1>
-        <div className="flex gap-2 items-center">
-          <NotificationDrop />
-          <img width="40" src={HeaderData.adminProfilePicture.src} alt="" />
-        </div>
-      </header>
+    <div className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
+      <Header />
       <div className="flex-1 flex flex-col">
-        <div className="flex items-center pl-4 gap-1 py-4">
-          <ArrowLeft2 size="17" color="#000" />
-          <Link href="/assessment">
-            <h1 className="cursor-pointer">Back to Assessments</h1>
-          </Link>
+        <div className="flex justify-between items-center px-4">
+          {" "}
+          <div className="flex items-center gap-1 py-4">
+            <ArrowLeft2 size="17" color="#000" />
+            <Link href="/assessments/categories/create_category">
+              <h1 className="cursor-pointer">Back</h1>
+            </Link>
+          </div>
+          <div className="self-end flex gap-3">
+            <Button className="hover:bg-[#fff] w-[10rem] text-base bg-[#fff] text-[#000]">
+              Add question
+            </Button>
+            <Link href="/assessments/categories/review_upload">
+              <Button className="bg-[#38CB89] hover:bg-[#38CB89] w-[10rem] text-base">
+                Finish
+              </Button>
+            </Link>
+          </div>
         </div>
-        <div className="flex h-screen mx-10 p-6 gap-9 bg-white">
+        <div className="flex flex-col h-[80%] mt-4 mx-[5rem] p-6 gap-2 bg-white">
           <p>Question</p>
           <Editor />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
