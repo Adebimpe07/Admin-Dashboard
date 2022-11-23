@@ -15,10 +15,10 @@ import { RichTextEditor } from "@mantine/rte";
 import Elipse from "../../../../assets/Ellipse 8.png";
 import Cloud from "../../../../assets/cloud.png";
 
-const ContentGallery = ({ selected, setSelected }) => {
+const ContentGallery = () => {
   const [opened, setOpened] = useState(false);
 
-  const UploadJobModal = ({ selected }) => (
+  const UploadJobModal = () => (
     <Modal
       opened={opened}
       onClose={() => setOpened(false)}
@@ -45,8 +45,8 @@ const ContentGallery = ({ selected, setSelected }) => {
   );
 
   return (
-    <div className="">
-      <div className="flex flex-col gap-3 justify-center items-center">
+    <div className="h-full">
+      <div className="flex flex-col gap-3 justify-center h-full items-center">
         <img src={Group.src} className="w-[75px]" />
         <h3 className="text-[#948E8E] text-2xl font-medium">Create Album</h3>
         <p className="text-[#948E8E] w-[400px] text-center ">
@@ -59,7 +59,7 @@ const ContentGallery = ({ selected, setSelected }) => {
           onClick={() => setOpened(true)}
         >
           <p>Create Album</p>
-          <UploadJobModal selected={selected} />
+          <UploadJobModal />
         </Button>
       </div>
     </div>

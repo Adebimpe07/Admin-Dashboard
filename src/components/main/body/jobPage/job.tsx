@@ -4,7 +4,7 @@ import { jobData } from "../../../../layout/jobData";
 
 const All = () => {
     return (
-        <div className="bg-[#E5E5E5] pb-8 overflow-auto">
+        <div className="bg-[#E5E5E5]  overflow-auto">
           {jobData.map((item, idx) => (
             <Inbox icon={item.icon} title={item.jobTitle} time={item.date} key={idx} />
           ))}

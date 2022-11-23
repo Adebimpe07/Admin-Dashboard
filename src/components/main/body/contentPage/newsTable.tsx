@@ -8,9 +8,8 @@ import ActionMenuDeleteContent from "../actionButton/ActionMenuDeleteContent";
 import ActionMenuEditBlogContent from "../actionButton/ActionMenuEditBlogContent";
 import ActionMenuDeleteBlogContent from "../actionButton/ActionMenuDeleteBlogContent";
 
-const ContentTable = ({ selected }) => {
+const NewsTable = () => {
   const ContentColumn = useMemo(() => contentColumn, []);
-  const BlogColumn = useMemo(() => blogColumn, []);
 
   const contentData = useMemo(
     () =>
@@ -22,15 +21,6 @@ const ContentTable = ({ selected }) => {
     []
   );
 
-  const blogData = useMemo(
-    () =>
-      ContentBlog.map((blog, idx) => ({
-        ...blog,
-        edit: <ActionMenuEditBlogContent />,
-        delete: <ActionMenuDeleteBlogContent />,
-      })),
-    []
-  );
 
   const {
     getTableProps,
@@ -49,13 +39,9 @@ const ContentTable = ({ selected }) => {
     selectedFlatRows,
   } = useTable(
     {
-      columns:
-        selected === 0
-          ? ContentColumn
-          : selected === 1
-          ? BlogColumn
-          : BlogColumn,
-      data: selected === 0 ? contentData : selected === 1 ? blogData : blogData,
+      columns: ContentColumn,
+          
+      data: contentData 
     },
     usePagination,
     useRowSelect
@@ -166,4 +152,4 @@ const ContentTable = ({ selected }) => {
   );
 };
 
-export default ContentTable;
+export default NewsTable;

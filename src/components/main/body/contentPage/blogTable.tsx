@@ -8,19 +8,8 @@ import ActionMenuDeleteContent from "../actionButton/ActionMenuDeleteContent";
 import ActionMenuEditBlogContent from "../actionButton/ActionMenuEditBlogContent";
 import ActionMenuDeleteBlogContent from "../actionButton/ActionMenuDeleteBlogContent";
 
-const ContentTable = ({ selected }) => {
-  const ContentColumn = useMemo(() => contentColumn, []);
+const BlogTable = () => {
   const BlogColumn = useMemo(() => blogColumn, []);
-
-  const contentData = useMemo(
-    () =>
-      Content.map((content, idx) => ({
-        ...content,
-        edit: <ActionMenuEditContent />,
-        delete: <ActionMenuDeleteContent />,
-      })),
-    []
-  );
 
   const blogData = useMemo(
     () =>
@@ -49,13 +38,8 @@ const ContentTable = ({ selected }) => {
     selectedFlatRows,
   } = useTable(
     {
-      columns:
-        selected === 0
-          ? ContentColumn
-          : selected === 1
-          ? BlogColumn
-          : BlogColumn,
-      data: selected === 0 ? contentData : selected === 1 ? blogData : blogData,
+      columns: BlogColumn,
+      data:  blogData 
     },
     usePagination,
     useRowSelect
@@ -64,7 +48,7 @@ const ContentTable = ({ selected }) => {
   const { pageIndex } = state;
 
   return (
-    <div className="overflow-auto grid  grid-rows-[1fr_auto]">
+    <div className="`overflow-auto` grid  grid-rows-[1fr_auto]">
       <div className="overflow-auto">
       <table
         {...getTableProps()}
@@ -166,4 +150,4 @@ const ContentTable = ({ selected }) => {
   );
 };
 
-export default ContentTable;
+export default BlogTable;
