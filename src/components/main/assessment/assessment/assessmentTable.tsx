@@ -2,9 +2,6 @@ import React, { useMemo } from "react";
 import { useTable, useRowSelect, usePagination } from "react-table";
 import { categoryColumn } from "../../../../layout/tableData";
 import CategoryListData from "../../../../layout/categoryListData.json";
-import DeleteIcon from "../../body/actionButton/delete_icon";
-import Link from "next/link";
-import { Edit2 } from "iconsax-react";
 import { Checkbox } from "./checkbox";
 
 const AssessmentCategoryTable = () => {

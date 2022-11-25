@@ -7,7 +7,7 @@ const ApplicationPage = () => {
   const formData = useContext(FormContext)  ;
 
   return (
-    formData !== null &&
+    formData !== null ?
     <div className="overflow-auto grid grid-rows-[1fr_auto]">
       <div className="overflow-auto">
         <table
@@ -107,6 +107,7 @@ const ApplicationPage = () => {
         </div>
       </div>
     </div>
+    : null
   );
 };
 

@@ -1,8 +1,11 @@
 import { Icon } from "@iconify/react";
+import { Modal } from "@mantine/core";
 import { Edit2, Trash } from "iconsax-react";
 import { StaticImageData } from "next/image";
-import React from "react";
+import Link from "next/link";
+import React, { useState } from "react";
 import { CoursesData } from "../../../layout/coursesData";
+import { DeleteCourse } from "./deleteCourse";
 
 type coursesprops = {
   picture: StaticImageData;
@@ -19,6 +22,18 @@ const Courses = ({
   timestamp,
   status,
 }: coursesprops) => {
+  const initialValues: { opened: boolean; component: React.ReactNode } = {
+    opened: false,
+    component: null,
+  };
+  const [DelModal, setDelModal] = useState(initialValues);
+  function handleDelete() {
+    setDelModal({
+      opened: true,
+      component: <DeleteCourse />,
+    });
+  }
+
   return (
     <div>
       <div className="flex flex-col gap-2 bg-[#fff] rounded-lg">
@@ -27,8 +42,17 @@ const Courses = ({
           <div className="flex justify-between">
             <h1 className="font-semibold">{title}</h1>
             <div className="flex gap-3">
-              <Edit2 size="17" color="#38CB89" variant="Bulk" />
-              <Trash size="17" color="red" />
+              <Link href="/courses/createCourses">
+                <Edit2 size="17" color="#38CB89" variant="Bulk" />
+              </Link>
+
+              <Trash onClick={handleDelete} size="17" color="red" />
+              <Modal
+                opened={DelModal.opened}
+                onClose={() => setDelModal(initialValues)}
+              >
+                {DelModal.component}
+              </Modal>
             </div>
           </div>
           <div className="flex justify-between items-center">

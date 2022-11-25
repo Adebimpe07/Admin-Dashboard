@@ -25,24 +25,9 @@ import FailedStatus from "../components/main/body/applicationPage/failedStatus";
 import ActionMenuFail from "../components/main/body/actionButton/ActionMenuFail";
 import ActionMenuInterview from "../components/main/body/actionButton/ActionMenuInterview";
 import failAssesment from '../layout/failAssesmentData.json'
+import { useSessionStorage } from "@mantine/hooks";
 
 type formDataProp = {
-  optionsForm: UseFormReturnType<{
-    categoryName: string;
-    questionTitle: string;
-    questionSummary: string;
-    choices: any[];
-}, (values: {
-    categoryName: string;
-    questionTitle: string;
-    questionSummary: string;
-    choices: any[];
-}) => {
-    categoryName: string;
-    questionTitle: string;
-    questionSummary: string;
-    choices: any[];
-}>,
   selected : number,
   setSelected: React.Dispatch<React.SetStateAction<number>>,
   pageIndex: any,
@@ -196,22 +181,41 @@ export const FormProvider = ({ children }:any) => {
 
   const { pageIndex, globalFilter }:any = state;
 
-  const optionsForm = useForm({
+  const categoryForm = useForm({
     initialValues: {
-      categoryName: "",
-      questionTitle: "",
-      questionSummary: "",
+      name: "",
+      category_info: "",
+      test_duration: "",
+      num_of_questions: 0,
+    },
+  });
+
+  const questionsForm = useForm({
+    initialValues: {
+      question_text: "",
+      question_type: "",
+      question_category: "Real",
+      question_hint: "face your book",
       choices: Array(4).fill({
-        text: "",
-        isCorrect: true,
+        choice_text: "",
+        is_correct: false,
       }),
     },
   });
+  const [questionType, setQuestionType] = useSessionStorage({
+    key: "questionType",
+    defaultValue: "",
+  });
+
+  const [categoryID, setCategoryID] = useSessionStorage({
+    key: "categoryID",
+    defaultValue: "",
+  });
+  const [value, onChange] = useState("");
 
   
 
   let formData = {
-    optionsForm,
     selected,
     setSelected,
     pageIndex,
@@ -229,10 +233,32 @@ export const FormProvider = ({ children }:any) => {
     pageCount, 
     setGlobalFilter,
     prepareRow,
-    selectedFlatRows
+    selectedFlatRows,
+    questionsForm,
+    categoryID,
+    categoryForm,
+    questionType,
+    setQuestionType,
+    setCategoryID,
+    value,
+    onChange,
   };
 
   return (
     <FormContext.Provider value={formData}>{children}</FormContext.Provider>
   );
 };
+
+// "question_text": "Question 14?",
+//     "question_type": "Multi-choice",
+//     "question_category": "Real",
+//     "choices": [
+//         {
+//             "choice_text": "A",
+//             "is_correct": true
+//         },
+//         {
+//             "choice_text": "B"
+//         }
+//     ]
+// }
