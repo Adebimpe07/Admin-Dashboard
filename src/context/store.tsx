@@ -1,6 +1,15 @@
 import { createContext, useState, useEffect, useMemo } from "react";
 import { useForm, UseFormReturnType } from "@mantine/form";
-import { useTable, useRowSelect, usePagination, useGlobalFilter, TableInstance, UsePaginationInstanceProps, UseSortByInstanceProps, UsePaginationState } from "react-table";
+import {
+  useTable,
+  useRowSelect,
+  usePagination,
+  useGlobalFilter,
+  TableInstance,
+  UsePaginationInstanceProps,
+  UseSortByInstanceProps,
+  UsePaginationState,
+} from "react-table";
 import {
   allApplicationColumn,
   ShortListColumn,
@@ -11,12 +20,12 @@ import {
   rejectedColumn,
 } from "../layout/tableData";
 import { Checkbox } from "../components/main/body/applicationPage/checkBox";
-import MOCK_DATA from '../layout/MOCK_DATA.json'
+import MOCK_DATA from "../layout/MOCK_DATA.json";
 import SHORTLISTED_DATA from "../layout/SHORTLISTED_DATA.json";
-import passAssesment from "../layout/passAssesmentData.json"
-import interview from "../layout/interviewData.json"
-import hired from "../layout/hiredData.json"
-import rejected from '../layout/rejectedData.json'
+import passAssesment from "../layout/passAssesmentData.json";
+import interview from "../layout/interviewData.json";
+import hired from "../layout/hiredData.json";
+import rejected from "../layout/rejectedData.json";
 import ActionMenuApplication from "../components/main/body/actionButton/ActionMenuApplication";
 import ActionMenuShortlist from "../components/main/body/actionButton/ActionMenuShortlist";
 import PassedStatus from "../components/main/body/applicationPage/passedStatus";
@@ -24,42 +33,86 @@ import ActionMenuPass from "../components/main/body/actionButton/ActionMenuPass"
 import FailedStatus from "../components/main/body/applicationPage/failedStatus";
 import ActionMenuFail from "../components/main/body/actionButton/ActionMenuFail";
 import ActionMenuInterview from "../components/main/body/actionButton/ActionMenuInterview";
-import failAssesment from '../layout/failAssesmentData.json'
+import failAssesment from "../layout/failAssesmentData.json";
 import { useSessionStorage } from "@mantine/hooks";
 
 type formDataProp = {
-  selected : number,
-  setSelected: React.Dispatch<React.SetStateAction<number>>,
-  pageIndex: any,
-  globalFilter: any,
-  getTableProps: any,
-  getTableBodyProps: any,
-  headerGroups: any,
-  page: any,
-  nextPage: any,
-  previousPage: any,
-  canNextPage: any,
-  canPreviousPage: any,
-  pageOptions: any,
-  gotoPage: any,
-  pageCount: any, 
-  setGlobalFilter: any,
-  prepareRow: any,
-  selectedFlatRows: any
-}
-
-export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
-UsePaginationInstanceProps<T> &
-UseSortByInstanceProps<T> & {
-  state: UsePaginationState<T>;
+  selected: number;
+  setSelected: React.Dispatch<React.SetStateAction<number>>;
+  pageIndex: any;
+  globalFilter: any;
+  getTableProps: any;
+  getTableBodyProps: any;
+  headerGroups: any;
+  page: any;
+  nextPage: any;
+  previousPage: any;
+  canNextPage: any;
+  canPreviousPage: any;
+  pageOptions: any;
+  gotoPage: any;
+  pageCount: any;
+  setGlobalFilter: any;
+  prepareRow: any;
+  selectedFlatRows: any;
+  questionsForm: UseFormReturnType<
+    {
+      question_text: string;
+      question_type: string;
+      question_category: string;
+      question_hint: string;
+      choices: any[];
+    },
+    (values: {
+      question_text: string;
+      question_type: string;
+      question_category: string;
+      question_hint: string;
+      choices: any[];
+    }) => {
+      question_text: string;
+      question_type: string;
+      question_category: string;
+      question_hint: string;
+      choices: any[];
+    }
+  >;
+  categoryID: string;
+  categoryForm: UseFormReturnType<
+    {
+      name: string;
+      category_info: string;
+      test_duration: string;
+      num_of_questions: number;
+    },
+    (values: {
+      name: string;
+      category_info: string;
+      test_duration: string;
+      num_of_questions: number;
+    }) => {
+      name: string;
+      category_info: string;
+      test_duration: string;
+      num_of_questions: number;
+    }
+  >;
+  questionType: string;
+  setQuestionType: (val: string | ((prevState: string) => string)) => void;
+  setCategoryID: (val: string | ((prevState: string) => string)) => void;
+  value: string;
+  onChange: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const FormContext = createContext<formDataProp | null>(null)
+export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
+  UsePaginationInstanceProps<T> &
+  UseSortByInstanceProps<T> & {
+    state: UsePaginationState<T>;
+  };
+
+const FormContext = createContext<formDataProp | null>(null);
 export default FormContext;
-export const FormProvider = ({ children }:any) => {
-
-
-  
+export const FormProvider = ({ children }: any) => {
   const [selected, setSelected] = useState(0);
 
   const AllapplicationColumns = useMemo(() => allApplicationColumn, []);
@@ -88,7 +141,8 @@ export const FormProvider = ({ children }:any) => {
   const passed = useMemo(
     () =>
       passAssesment.map((mock, idx) => ({
-        ...mock, status:<PassedStatus />,
+        ...mock,
+        status: <PassedStatus />,
         action: <ActionMenuPass />,
       })),
     []
@@ -96,7 +150,8 @@ export const FormProvider = ({ children }:any) => {
   const failed = useMemo(
     () =>
       failAssesment.map((mock, idx) => ({
-        ...mock, status:<FailedStatus />,
+        ...mock,
+        status: <FailedStatus />,
         action: <ActionMenuFail />,
       })),
     []
@@ -124,14 +179,13 @@ export const FormProvider = ({ children }:any) => {
     pageOptions,
     gotoPage,
     pageCount,
-    state, 
+    state,
     setGlobalFilter,
     prepareRow,
     selectedFlatRows,
-    
   } = useTable(
     {
-      columns :
+      columns:
         selected === 0
           ? AllapplicationColumns
           : selected === 1
@@ -144,7 +198,7 @@ export const FormProvider = ({ children }:any) => {
           ? InterviewColumn
           : selected === 5
           ? HiredColumn
-          : RejectedColumn as any,
+          : (RejectedColumn as any),
       data:
         selected === 0
           ? data
@@ -158,18 +212,19 @@ export const FormProvider = ({ children }:any) => {
           ? Interview
           : selected === 5
           ? Hired
-          : Rejected as any,
-    } ,
-    useGlobalFilter, usePagination,
+          : (Rejected as any),
+    },
+    useGlobalFilter,
+    usePagination,
     useRowSelect,
     (hooks) => {
       hooks.visibleColumns.push((columns): any => {
         return [
           {
-            Header: ({ getToggleAllRowsSelectedProps }:any) => (
-              <Checkbox  {...getToggleAllRowsSelectedProps()} />
+            Header: ({ getToggleAllRowsSelectedProps }: any) => (
+              <Checkbox {...getToggleAllRowsSelectedProps()} />
             ),
-            Cell: ({ row }:any) => (
+            Cell: ({ row }: any) => (
               <Checkbox {...row.getToggleRowSelectedProps()} />
             ),
           },
@@ -177,9 +232,9 @@ export const FormProvider = ({ children }:any) => {
         ];
       });
     }
-  )as TableInstanceWithHooks<object>;
+  ) as TableInstanceWithHooks<object>;
 
-  const { pageIndex, globalFilter }:any = state;
+  const { pageIndex, globalFilter }: any = state;
 
   const categoryForm = useForm({
     initialValues: {
@@ -213,8 +268,6 @@ export const FormProvider = ({ children }:any) => {
   });
   const [value, onChange] = useState("");
 
-  
-
   let formData = {
     selected,
     setSelected,
@@ -230,7 +283,7 @@ export const FormProvider = ({ children }:any) => {
     canPreviousPage,
     pageOptions,
     gotoPage,
-    pageCount, 
+    pageCount,
     setGlobalFilter,
     prepareRow,
     selectedFlatRows,

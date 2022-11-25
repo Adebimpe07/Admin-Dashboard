@@ -2,12 +2,10 @@ import React, { useContext, useMemo } from "react";
 import FormContext from "../../../../context/store";
 import { TableInstanceWithHooks } from "../../../../context/store";
 
-
 const ApplicationPage = () => {
-  const formData = useContext(FormContext)  ;
+  const formData = useContext(FormContext);
 
-  return (
-    formData !== null ?
+  return formData !== null ? (
     <div className="overflow-auto grid grid-rows-[1fr_auto]">
       <div className="overflow-auto">
         <table
@@ -15,7 +13,7 @@ const ApplicationPage = () => {
           className="bg-[white] text-sm font-normal text-[#514747] ml-6 w-[96%]"
         >
           <thead className="sticky top-0 text-[#514747]  font-normal">
-            {formData.headerGroups.map((headerGroup:any) => (
+            {formData.headerGroups.map((headerGroup: any) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((columns: any) => (
                   <th
@@ -28,7 +26,10 @@ const ApplicationPage = () => {
               </tr>
             ))}
           </thead>
-          <tbody className="flex-1 overflow-auto" {...formData.getTableBodyProps()}>
+          <tbody
+            className="flex-1 overflow-auto"
+            {...formData.getTableBodyProps()}
+          >
             {formData.page.map((row: any) => {
               formData.prepareRow(row);
               return (
@@ -107,8 +108,7 @@ const ApplicationPage = () => {
         </div>
       </div>
     </div>
-    : null
-  );
+  ) : null;
 };
 
 export default ApplicationPage;

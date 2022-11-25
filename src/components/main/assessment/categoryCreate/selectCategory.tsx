@@ -25,7 +25,7 @@ const createPage = () => {
           <div className="grid grid-cols-3 px-4 gap-3">
             {AssessmentBarData.map((item, index) => {
               return (
-                <div className=" flex flex-col gap-2">
+                <div key={index} className=" flex flex-col gap-2">
                   <div className="bg-[#30AD74] h-1 rounded-lg"></div>
                   <span className="pl-2">{item}</span>
                 </div>

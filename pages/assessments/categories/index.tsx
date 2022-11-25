@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Notification } from "iconsax-react";
 import { Menu } from "@mantine/core";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import Tabs from "../../../src/layout/assessmentTabs";
 import ListAssessment from "../../../src/components/main/assessment/listedAssessment";
 import { CategoryCardData } from "../../../src/layout/assessmentCardData";
 import CategoryCard from "../../../src/components/main/assessment/assessment/categoryCard/categoryCard";
+import axios from "axios";
 
 export const NotificationDrop = () => {
   return (
@@ -29,8 +30,23 @@ export const NotificationDrop = () => {
 };
 
 const HeaderMain = () => {
-  return CategoryCardData.length > 0 ? (
-    <CategoryCard />
+  const [categoryCard, setCategoryCard] = useState(null);
+
+  const fetchCategories = () => {
+    axios("http://assessbk.afexats.com/api/categories/")
+      .then(function (response) {
+        setCategoryCard(response.data.data.results);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+  return categoryCard?.length > 0 ? (
+    <CategoryCard categoryCard={categoryCard} />
   ) : (
     <div className="py-6 h-screen flex-1 flex flex-col  bg-[#e5e5e5]">
       <div className="flex justify-between border-b border-[#DBD9D9] px-4">

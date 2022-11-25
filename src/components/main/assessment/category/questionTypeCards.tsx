@@ -22,7 +22,7 @@ const QuestionTypeCards = () => {
           <div key={index}>
             <div
               onClick={() => {
-                var postBody = JSON.stringify(questionsForm.values);
+                var postBody = JSON.stringify(categoryForm.values);
 
                 var config = {
                   method: "post",
@@ -44,6 +44,7 @@ const QuestionTypeCards = () => {
                       setQuestionType("Multi-choice");
                       questionsForm.values.question_type = "Multi-choice";
                     }
+                    router.push(href);
                   })
                   .catch(function (error) {
                     console.log(error);
