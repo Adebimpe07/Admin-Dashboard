@@ -7,7 +7,7 @@ import Notifications from "../../../src/components/main/dashboard/notifications"
 import Tabs from "../../../src/layout/assessmentTabs";
 import ListAssessment from "../../../src/components/main/assessment/listedAssessment";
 import { CategoryCardData } from "../../../src/layout/assessmentCardData";
-import CategoryCard from "../../../src/components/main/assessment/categoryCard/categoryCard";
+import CategoryCard from "../../../src/components/main/assessment/assessment/categoryCard/categoryCard";
 
 export const NotificationDrop = () => {
   return (
