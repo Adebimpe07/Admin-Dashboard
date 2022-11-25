@@ -6,13 +6,13 @@ import { CategoryCardData } from "../../../../../layout/assessmentCardData";
 import Header from "../../categoryCreate/header";
 import CategoryCardStyle from "./categoryCardStyle";
 
-const CategoryCard = () => {
+const CategoryCard = ({ categoryCard }) => {
   return (
     <div className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
       <Header />
-      <main className="flex flex-col">
+      <main className="flex flex-col overflow-auto">
         <div className="items-center px-4 gap-1 py-4 flex justify-between">
-          <h3>Total Categories (9)</h3>
+          <h3>Total Categories ({categoryCard.length})</h3>
           <Link href="/assessments/categories/create_category">
             <Button
               className="bg-[#38CB89] hover:bg-[#38CB89] w-[14rem] text-base"
@@ -24,16 +24,19 @@ const CategoryCard = () => {
             </Button>
           </Link>
         </div>
-        <div className="flex gap-4 m-4">
-          {CategoryCardData.map(
-            ({ title, paragraph, timestamp, questions }, index) => {
+        <div className="gap-4 flex-1 overflow-auto m-4 grid grid-cols-3">
+          {categoryCard.map(
+            (
+              { name, category_info, test_duration, num_of_questions },
+              index
+            ) => {
               return (
                 <CategoryCardStyle
                   key={index}
-                  questions={questions}
-                  title={title}
-                  paragraph={paragraph}
-                  timestamp={timestamp}
+                  questions={num_of_questions}
+                  title={name}
+                  paragraph={category_info}
+                  timestamp={test_duration.split(":")[1]}
                 />
               );
             }

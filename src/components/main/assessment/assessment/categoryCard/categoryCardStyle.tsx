@@ -32,10 +32,10 @@ const CategoryCardStyle = ({
 
   return (
     <div>
-      <div className="flex flex-col gap-2 bg-[#fff] rounded-lg">
-        <div className="p-4 flex flex-col gap-3">
+      <div className="flex h-full flex-col bg-[#fff] rounded-lg">
+        <div className="p-4 flex h-full justify-between gap-5 flex-col">
           <div className="flex justify-between">
-            <h1 className="font-semibold">{title}</h1>
+            <h1 className="font-semibold whitespace-nowrap">{title}</h1>
             <div className="flex gap-3">
               <Link href="/assessments/assessment/edit_assessment">
                 <Edit2 size="17" color="#38CB89" variant="Bulk" />
