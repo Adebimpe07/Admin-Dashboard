@@ -114,6 +114,9 @@ const FormContext = createContext<formDataProp | null>(null);
 export default FormContext;
 export const FormProvider = ({ children }: any) => {
   const [selected, setSelected] = useState(0);
+  const [allApplicants, setAllApplicants] = useState(MOCK_DATA)
+  const [shortApplicants, setshortApplicants] = useState(SHORTLISTED_DATA)
+  const [passApplicants, setPassApplicants] = useState(passAssesment)
 
   const AllapplicationColumns = useMemo(() => allApplicationColumn, []);
   const ShortlistedColumn = useMemo(() => ShortListColumn, []);
@@ -124,7 +127,7 @@ export const FormProvider = ({ children }: any) => {
   const RejectedColumn = useMemo(() => rejectedColumn, []);
   const data = useMemo(
     () =>
-      MOCK_DATA.map((mock, idx) => ({
+      allApplicants.map((mock, idx) => ({
         ...mock,
         action: <ActionMenuApplication />,
       })),
@@ -132,7 +135,7 @@ export const FormProvider = ({ children }: any) => {
   );
   const shortListed = useMemo(
     () =>
-      SHORTLISTED_DATA.map((mock, idx) => ({
+    shortApplicants.map((mock, idx) => ({
         ...mock,
         action: <ActionMenuShortlist />,
       })),
@@ -140,7 +143,7 @@ export const FormProvider = ({ children }: any) => {
   );
   const passed = useMemo(
     () =>
-      passAssesment.map((mock, idx) => ({
+    passApplicants.map((mock, idx) => ({
         ...mock,
         status: <PassedStatus />,
         action: <ActionMenuPass />,
@@ -295,6 +298,9 @@ export const FormProvider = ({ children }: any) => {
     setCategoryID,
     value,
     onChange,
+    setAllApplicants,
+    setPassApplicants,
+    setshortApplicants
   };
 
   return (
