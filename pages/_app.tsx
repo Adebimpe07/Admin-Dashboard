@@ -5,20 +5,32 @@ import { MantineProvider } from "@mantine/core";
 import HeaderMain from "../src/components/main/dashboard/header";
 import Aside from "../src/components/aside/aside";
 import { FormProvider } from "../src/context/store";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient();
+import axios from "axios";
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+axios.defaults.headers.common["API-KEY"] = process.env.APP_API_KEY;
+axios.defaults.headers.common["HASH-KEY"] = process.env.HASH_KEY;
+axios.defaults.headers.common["REQUEST-TS"] = process.env.REQUEST_TS;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="flex overflow-auto h-screen">
-      <FormProvider>
-        <MantineProvider>
-          <ModalsProvider>
-            {/* <HeaderMain /> */}
-            <Aside />
-            <Component {...pageProps} />
-          </ModalsProvider>
-        </MantineProvider>
-      </FormProvider>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="flex overflow-auto h-screen">
+        <FormProvider>
+          <MantineProvider>
+            <ModalsProvider>
+              {/* <HeaderMain /> */}
+              <Aside />
+              <Component {...pageProps} />
+            </ModalsProvider>
+          </MantineProvider>
+        </FormProvider>
+      </div>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 export default MyApp;

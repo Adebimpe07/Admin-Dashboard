@@ -9,9 +9,8 @@ const viewAssessment = () => {
   return (
     <div className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
       <Header />
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col overflow-auto">
         <div className="flex justify-between items-center p-4">
-          {" "}
           <div className="flex items-center gap-1 ">
             <ArrowLeft2 size="17" color="#000" />
             <Link href="/assessments/categories/create_category">

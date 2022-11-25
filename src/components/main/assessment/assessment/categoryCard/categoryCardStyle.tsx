@@ -3,22 +3,21 @@ import { Button, Modal } from "@mantine/core";
 import { Edit2, Eye, Timer1, Trash } from "iconsax-react";
 import Link from "next/link";
 import React, { useState } from "react";
-import { DeleteCategory } from "../assessment/categoryCard/deleteCategory";
-import { DeleteAssessment } from "./deleteAssessment";
+import { DeleteCategory } from "../../assessment/categoryCard/deleteCategory";
 
-type assessmentCardsprops = {
+type categoryCardsprops = {
   questions: string;
   title: string;
   paragraph: string;
   timestamp: string;
 };
 
-const AssessmentCard = ({
+const CategoryCardStyle = ({
   title,
   paragraph,
   timestamp,
   questions,
-}: assessmentCardsprops) => {
+}: categoryCardsprops) => {
   const initialValues: { opened: boolean; component: React.ReactNode } = {
     opened: false,
     component: null,
@@ -27,7 +26,7 @@ const AssessmentCard = ({
   function handleDelete() {
     setDelModal({
       opened: true,
-      component: <DeleteAssessment />,
+      component: <DeleteCategory />,
     });
   }
 
@@ -71,4 +70,4 @@ const AssessmentCard = ({
   );
 };
 
-export default AssessmentCard;
+export default CategoryCardStyle;

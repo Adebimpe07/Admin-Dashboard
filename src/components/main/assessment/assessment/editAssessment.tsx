@@ -4,8 +4,10 @@ import { ArrowLeft2 } from "iconsax-react";
 import Link from "next/link";
 import { Button, Select, Textarea } from "@mantine/core";
 import Header from "../categoryCreate/header";
+import { useRouter } from "next/router";
 
-const CreateAssessmentPage = () => {
+const EditAssessmentPage = () => {
+  const router = useRouter();
   return (
     <main className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
       <Header />
@@ -67,16 +69,16 @@ const CreateAssessmentPage = () => {
             minRows={2}
             maxRows={4}
           />
-
-          <Link href="/assessments/assessment/all_categories">
-            <Button className="bg-[#38CB89] hover:bg-[#38CB89] w-full mx-auto text-base mt-6">
-              Create
-            </Button>
-          </Link>
+          <Button
+            onClick={() => router.push("/assessments/assessment")}
+            className="bg-[#38CB89] hover:bg-[#38CB89] w-full mx-auto text-base mt-6"
+          >
+            Save Changes
+          </Button>
         </div>
       </div>
     </main>
   );
 };
 
-export default CreateAssessmentPage;
+export default EditAssessmentPage;

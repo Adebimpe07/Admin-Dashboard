@@ -5,16 +5,14 @@ const ActionMenuPass = () => {
   return (
     <Menu
       classNames={{
-        item: "!text-[black]",
+        item: "!text-[black] !p-0",
       }}
     >
       <Menu.Target>
         <button className="">Actions</button>
       </Menu.Target>
       <Menu.Dropdown>
-        <Menu.Item>Invite for Interview</Menu.Item>
-        <Menu.Item>Hire Applicant</Menu.Item>
-        <Menu.Item>Reject Applicant</Menu.Item>
+        <Menu.Item>result details</Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );

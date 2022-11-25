@@ -1,14 +1,16 @@
 import { ArrowLeft2 } from "iconsax-react";
 import Header from "./header";
 import React from "react";
-import {
-  AssessmentBarData,
-  SelectQuestionData,
-} from "../../../../layout/assessmentData";
+import { AssessmentBarData } from "../../../../layout/assessmentData";
 import Link from "next/link";
 import QuestionTypeCards from "../category/questionTypeCards";
+import { NumberInput, Textarea, TextInput } from "@mantine/core";
+import { useContext } from "react";
+import FormContext from "../../../../context/store";
 
 const createPage = () => {
+  const { categoryForm } = useContext(FormContext);
+
   return (
     <div className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
       <Header />
@@ -31,34 +33,32 @@ const createPage = () => {
             })}
           </div>
         </div>
-        <div className="flex flex-col items-center flex-1 mt-16">
+        <div className="flex flex-col items-center flex-1 mt-8">
           <div className="bg-[#fff] p-10 rounded-lg flex flex-col gap-1">
-            <h1 className="font-semibold text-lg pb-4">Add Questions</h1>
-            <label className="pb-4">Category Name</label>
-            <div className="border border-[#ced4da] rounded-lg w-full py-1">
-              <input type="text" className="p-1 focus:outline-none w-full" />
-            </div>
-            <div className="flex gap-5">
-              <div className=" w-[50%] flex flex-col gap-4 mt-3">
-                <label>Number of Questions</label>
-                <div className="border border-[#ced4da] rounded-lg w-full py-1">
-                  <input
-                    type="text"
-                    className="p-1 focus:outline-none w-full"
-                  />
-                </div>
-              </div>
+            <h1 className="font-semibold text-lg pb-2">Add Questions</h1>
 
-              <div className=" w-[50%] flex flex-col gap-3 mt-3">
-                <label>Time</label>
-                <div className="border border-[#ced4da] rounded-lg w-full py-1">
-                  <input
-                    type="text"
-                    className="p-1 focus:outline-none w-full"
-                  />
-                </div>
-              </div>
+            <TextInput
+              label="Category Name"
+              {...categoryForm.getInputProps(`name`)}
+            />
+            <div className="flex gap-5">
+              <NumberInput
+                {...categoryForm.getInputProps(`num_of_questions`)}
+                label="Number of Questions"
+              />
+              <TextInput
+                {...categoryForm.getInputProps(`test_duration`)}
+                label="Time"
+              />
             </div>
+            <Textarea
+              {...categoryForm.getInputProps(`category_info`)}
+              label="Description"
+              placeholder="Category Description"
+              autosize
+              minRows={2}
+              maxRows={4}
+            />
             <div className="mt-4">
               <h1 className="py-2">Select Question</h1>
               <QuestionTypeCards />

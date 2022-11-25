@@ -46,11 +46,6 @@ export const SideData = [
     href: "/allapplications",
   },
   {
-    icon: <Icon icon="material-symbols:outgoing-mail-outline" width="19" />,
-    heading: "Email Template",
-    href: "/allapplications",
-  },
-  {
     icon: <FolderOpen size="17" variant="Outline" />,
     heading: "Content Management",
     href: "/content",
@@ -69,6 +64,11 @@ export const SideData = [
     icon: <UserEdit size="17" variant="Outline" />,
     heading: "Member Management",
     href: "/memberManagement",
+  },
+  {
+    icon: <Icon icon="material-symbols:outgoing-mail-outline" width="19" />,
+    heading: "Email Template",
+    href: "/email",
   },
 ];
 export const AdminData = [
