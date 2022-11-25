@@ -94,15 +94,6 @@ const Header = () => {
           <p>Create Cohorts</p>
           <UploadJobModal />
         </Button>
-        <Button
-          className="text-[#514747] hover:bg-[#E5E5E5] text-[13px] font-bold"
-          leftIcon={<img src={Downloads.src} className="w-[18px]" />}
-          classNames={{
-            root: "border-[#DBD9D9] rounded-lg py-[9px] px-[70px]",
-          }}
-        >
-          Export
-        </Button>
       </div>
     </div>
   );

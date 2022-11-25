@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
+import FormContext from "../../../../context/store";
 import { ApplicationHeaderData } from "../../../../layout/applicationHeaderData";
 
 type props = {
@@ -8,7 +9,8 @@ type props = {
   setSelected: Function;
 };
 
-const TableHead = ({selected, setSelected}) => {
+const TableHead = () => {
+  const {selected, setSelected} = useContext(FormContext)
 
 
   return (

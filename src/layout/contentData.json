@@ -1,67 +1,67 @@
 [
     {
       "title": "How to choose the right customer for your photo business?",
-      "tag": "News",
+      "categories": "News",
       "post":"Admin",
       "date":"Today"
     },
     {
         "title": "How does writing influence your personal brand?",
-        "tag": "General",
+        "categories": "General",
         "post":"Admin",
         "date":"2d ago"
     },
     {
         "title": "Travelling as a way of self-discovery and progress",
-        "tag": "News",
+        "categories": "News",
         "post":"Admin",
         "date":"4d ago"
     },
     {
         "title": "How to design your site footer like we did",
-        "tag": "Tech",
+        "categories": "Tech",
         "post":"Admin",
         "date":"2wks ago"
     },
     {
         "title": "Why choose a theme that looks good with WooCommerce",
-        "tag": "Agric",
+        "categories": "Agric",
         "post":"Admin",
         "date":"2wks ago"
     },
     {
         "title": "How to write content about your photographs",
-        "tag": "Tech",
+        "categories": "Tech",
         "post":"Admin",
         "date":"3wks ago"
     },
     {
         "title": "How to build a loyal community online and offline",
-        "tag": "Tech",
+        "categories": "Tech",
         "post":"Admin",
         "date":"3wks ago"
     },
     {
         "title": "Helping a local business reinvent itself",
-        "tag": "Agric",
+        "categories": "Agric",
         "post":"Admin",
         "date":"6wks ago"
     },
     {
         "title": "Where to grow your business as a photographer: site or social media?",
-        "tag": "News",
+        "categories": "News",
         "post":"Admin",
         "date":"8wks ago"
     },
     {
         "title": "How to choose the right colors when creating a website?",
-        "tag": "Tech",
+        "categories": "Tech",
         "post":"Admin",
         "date":"8wks ago"
     },
     {
         "title": "Caring is the new marketing",
-        "tag": "General",
+        "categories": "General",
         "post":"Admin",
         "date":"8wks ago"
     }

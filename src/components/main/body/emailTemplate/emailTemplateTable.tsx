@@ -68,7 +68,7 @@ const EmailTemplateTable = () => {
         {...getTableProps()}
         className="bg-[white] text-sm font-normal text-[#514747] ml-6 w-[96%]"
       >
-        <thead className="sticky top-0 text-[#514747]  font-normal">
+        <thead className="sticky top-0 text-[black]  font-bold text-sm">
           {headerGroups.map((headerGroups) => (
             <tr {...headerGroups.getHeaderGroupProps()}>
               {headerGroups.headers.map((columns) => (

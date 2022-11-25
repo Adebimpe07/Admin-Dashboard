@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useTable, useRowSelect, usePagination } from "react-table";
+import { useTable, useRowSelect, usePagination, Column } from "react-table";
 import { contentColumn, blogColumn } from "../../../../layout/tableData";
 import Content from "../../../../layout/contentData.json";
 import ContentBlog from "../../../../layout/contentBlogData.json";
@@ -7,6 +7,10 @@ import ActionMenuEditContent from "../actionButton/ActionMenuEditContent";
 import ActionMenuDeleteContent from "../actionButton/ActionMenuDeleteContent";
 import ActionMenuEditBlogContent from "../actionButton/ActionMenuEditBlogContent";
 import ActionMenuDeleteBlogContent from "../actionButton/ActionMenuDeleteBlogContent";
+import { TableInstanceWithHooks } from "./newsTable";
+
+
+
 
 const BlogTable = () => {
   const BlogColumn = useMemo(() => blogColumn, []);
@@ -35,15 +39,14 @@ const BlogTable = () => {
     pageCount,
     state,
     prepareRow,
-    selectedFlatRows,
   } = useTable(
     {
-      columns: BlogColumn,
-      data:  blogData 
+      columns: BlogColumn as any,
+      data:  blogData as any
     },
     usePagination,
     useRowSelect
-  );
+  ) as TableInstanceWithHooks<object>;
 
   const { pageIndex } = state;
 

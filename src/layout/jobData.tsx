@@ -34,5 +34,9 @@ export const jobData: JobDataType = [
         icon: Java,
         jobTitle: 'Product Manager',
         date: 'Uploaded 2days ago'
+    },{
+        icon: Java,
+        jobTitle: 'Product Manager',
+        date: 'Uploaded 2days ago'
     },
 ]

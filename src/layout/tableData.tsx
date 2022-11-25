@@ -68,8 +68,8 @@ export const passedColumn = [
     accessor: "email",
   },
   {
-    Header: "Status",
-    accessor: "status",
+    Header: "Phone No",
+    accessor: "phone_number",
   },
   {
     Header: "",
@@ -94,8 +94,8 @@ export const failedColumn = [
     accessor: "email",
   },
   {
-    Header: "Status",
-    accessor: "status",
+    Header: "Phone No",
+    accessor: "phone_number",
   },
   {
     Header: "",
@@ -120,7 +120,7 @@ export const interviewColumn = [
     accessor: "email",
   },
   {
-    Header: "Phone Number",
+    Header: "Phone No",
     accessor: "phone_number",
   },
   {
@@ -146,7 +146,7 @@ export const hiredColumn = [
     accessor: "email",
   },
   {
-    Header: "Phone Number",
+    Header: "Phone No",
     accessor: "phone_number",
   },
 ];
@@ -168,7 +168,7 @@ export const rejectedColumn = [
     accessor: "email",
   },
   {
-    Header: "Phone Number",
+    Header: "Phone No",
     accessor: "phone_number",
   },
 ];
@@ -212,11 +212,11 @@ export const contentColumn = [
     accessor: "title",
   },
   {
-    Header: "Tags",
-    accessor: "tag",
+    Header: "Categories",
+    accessor: "categories",
   },
   {
-    Header: "Posted by",
+    Header: "Author",
     accessor: "post",
   },
   {
@@ -238,7 +238,7 @@ export const blogColumn = [
     accessor: "title",
   },
   {
-    Header: "Posted by",
+    Header: "Author",
     accessor: "post",
   },
   {
@@ -298,11 +298,7 @@ export const atsMemberColumn = [
   },
   {
     Header: "",
-    accessor: "edit",
-  },
-  {
-    Header: "",
-    accessor: "delete",
+    accessor: "action",
   },
 ];
 
@@ -366,6 +362,10 @@ export const atsAttendanceColumn = [
     accessor: "intime",
   },
   {
+    Header: "Status",
+    accessor: "status",
+  },
+  {
     Header: "Check out time",
     accessor: "outtime",
   },
@@ -404,14 +404,18 @@ export const emailColumn = [
     accessor: "type",
   },
   {
-    Header: "Date Created",
+    Header: "Created on",
     accessor: "created",
   },
   {
-    Header: "Date Modified",
+    Header: "Last Modified",
     accessor: "modified",
-  }
-]
+  },
+  {
+    Header: "",
+    accessor: "action",
+  },
+];
 
 export const viewAssessmentColumn = [
   {

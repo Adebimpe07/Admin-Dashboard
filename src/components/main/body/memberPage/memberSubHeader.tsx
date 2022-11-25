@@ -20,8 +20,7 @@ const MemberSubHeader = ({ selected, setSelected }) => {
   const contentData = [
     "ATS Member",
     "Testimonial",
-    "Weekly Xperts",
-    "Attendance",
+    "Attendance"
   ];
 
   const [opened, setOpened] = useState(false);
@@ -31,7 +30,7 @@ const MemberSubHeader = ({ selected, setSelected }) => {
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
-        title="Add New Member"
+        title="Create New Tech Star"
         size="xl"
       >
         <Text className="flex flex-col gap-4">
@@ -109,11 +108,7 @@ const MemberSubHeader = ({ selected, setSelected }) => {
             <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
               Testimonial Details
             </h1>
-            <TextInput
-              size="sm"
-              className="focus:border-inherit"
-              label="Name"
-            />
+            
             <div className="flex gap-4">
               <Select
                 className="flex-1"
@@ -137,6 +132,11 @@ const MemberSubHeader = ({ selected, setSelected }) => {
                 ]}
               />
             </div>
+            <TextInput
+              size="sm"
+              className="focus:border-inherit"
+              label="ATS Member"
+            />
             <p>Content</p>
             <RichTextEditor
               id="rte"
@@ -211,7 +211,7 @@ const MemberSubHeader = ({ selected, setSelected }) => {
     );
 
   return (
-    <div className="flex justify-between pb-7 pt-6 px-5">
+    <div className="flex justify-between  px-5">
       <div className="flex gap-9">
         {contentData.map((item, idx) => (
           <div
@@ -243,26 +243,6 @@ const MemberSubHeader = ({ selected, setSelected }) => {
             radius="md"
             rightSection={<img src={Search.src} className="w-[14px]" />}
           />
-        ) : null}
-
-        {selected == 0 ? (
-          <Menu
-            classNames={{
-              item: "!text-[#4A4C58]",
-            }}
-          >
-            <Menu.Target>
-              <button className="border-[1px] border-[#DBD9D9] rounded w-28 !text-[#4A4C58]">
-                Filter
-              </button>
-            </Menu.Target>
-            <Menu.Dropdown>
-              <Menu.Item>Backend Development</Menu.Item>
-              <Menu.Item>Frontend Development</Menu.Item>
-              <Menu.Item>MobileApp Development</Menu.Item>
-              <Menu.Item>Product Management</Menu.Item>
-            </Menu.Dropdown>
-          </Menu>
         ) : null}
 
         {selected == 0 ? (

@@ -1,5 +1,9 @@
 import React, { useMemo } from "react";
-import { useTable, useRowSelect, usePagination } from "react-table";
+import { useTable, useRowSelect, usePagination,TableInstance,
+  UsePaginationInstanceProps,
+  UsePaginationState,
+  UseSortByInstanceProps,
+  Column, } from "react-table";
 import { contentColumn, blogColumn } from "../../../../layout/tableData";
 import Content from "../../../../layout/contentData.json";
 import ContentBlog from "../../../../layout/contentBlogData.json";
@@ -7,6 +11,13 @@ import ActionMenuEditContent from "../actionButton/ActionMenuEditContent";
 import ActionMenuDeleteContent from "../actionButton/ActionMenuDeleteContent";
 import ActionMenuEditBlogContent from "../actionButton/ActionMenuEditBlogContent";
 import ActionMenuDeleteBlogContent from "../actionButton/ActionMenuDeleteBlogContent";
+
+
+export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
+UsePaginationInstanceProps<T> &
+UseSortByInstanceProps<T> & {
+  state: UsePaginationState<T>;
+};
 
 const NewsTable = () => {
   const ContentColumn = useMemo(() => contentColumn, []);
@@ -36,16 +47,15 @@ const NewsTable = () => {
     pageCount,
     state,
     prepareRow,
-    selectedFlatRows,
   } = useTable(
     {
-      columns: ContentColumn,
+      columns: ContentColumn as any,
           
       data: contentData 
     },
     usePagination,
     useRowSelect
-  );
+  )as TableInstanceWithHooks<object>;
 
   const { pageIndex } = state;
 
