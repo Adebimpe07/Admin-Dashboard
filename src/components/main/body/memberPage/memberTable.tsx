@@ -20,6 +20,7 @@ import ActionMenuTestimonial from "../actionButton/ActionMenuTestimonial";
 import ActionMenuMemberImg from "../actionButton/ActionMenuMemberImg";
 import ActionMenuEditAtsMember from "../actionButton/ActionMenuEditAtsmember";
 import ActionMenuDeleteAtsMember from "../actionButton/ActionMenuDeleteAtsMember";
+import ActionMenuMember from "../actionButton/ActionMenuMember";
 
 const MemberTable = ({ selected }) => {
   const ATSColumn = useMemo(() => atsMemberColumn, []);
@@ -32,7 +33,7 @@ const MemberTable = ({ selected }) => {
         ...content,
         image: <ActionMenuMemberImg />,
         edit: <ActionMenuEditAtsMember />,
-        delete: <ActionMenuDeleteAtsMember />
+        delete: <ActionMenuDeleteAtsMember />,action: <ActionMenuMember />
       })),
     []
   );
@@ -131,7 +132,7 @@ const MemberTable = ({ selected }) => {
           </tbody>
         </table>
       </div>
-        <div className="bg-[white] mx-6 mt-4 py-4 px-2 flex justify-between">
+        <div className="bg-[white] mx-6 mt-4 py-4 px-2 flex w-[96%] justify-between">
           <div>
             <span>
               Page{" "}

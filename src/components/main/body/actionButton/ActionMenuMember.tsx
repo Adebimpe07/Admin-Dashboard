@@ -1,11 +1,13 @@
 import { Menu, Modal } from "@mantine/core";
 import React, { useState } from "react";
+import { DeleteMemberModal } from "../memberPage/deleteMemberModal";
 import { DeleteModal } from "../memberPage/deleteModal";
+import { EditMemberModal } from "../memberPage/editMemberModal";
 import { EditModal } from "../memberPage/editModal";
 import { XpertModal } from "../memberPage/xpertModal";
 
 
-const ActionMenuTestimonial = () => {
+const ActionMenuMember = () => {
 
   const [opened, setOpened] = useState(false);
 
@@ -18,14 +20,14 @@ const ActionMenuTestimonial = () => {
   function handleEdit() {
     setSubAdminModal({
       opened: true,
-      component: <EditModal />,
+      component: <EditMemberModal />,
     });
   }
   const [subAdminDelModal, setSubAdminDelModal] = useState(initialValues);
   function handleDelete() {
     setSubAdminDelModal({
       opened: true,
-      component: <DeleteModal />,
+      component: <DeleteMemberModal />,
     });
   }
 
@@ -51,9 +53,9 @@ const ActionMenuTestimonial = () => {
         </button>
       </Menu.Target>
       <Menu.Dropdown >
-        <Menu.Item className="text-center">View Testimonial</Menu.Item>
         <Menu.Item className="text-center" onClick={handleEdit}>Edit</Menu.Item>
         <Menu.Item className="text-center" onClick={handleDelete}>delete</Menu.Item>
+        <Menu.Item className="text-center" onClick={handleXpert}>Make Xpert of the week</Menu.Item>
       </Menu.Dropdown>
     </Menu>
     <Modal
@@ -78,4 +80,4 @@ const ActionMenuTestimonial = () => {
   );
 };
 
-export default ActionMenuTestimonial;
+export default ActionMenuMember;

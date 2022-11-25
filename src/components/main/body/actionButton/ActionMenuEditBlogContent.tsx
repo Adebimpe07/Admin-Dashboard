@@ -59,6 +59,13 @@ const ActionMenuEditBlogContent = () => {
             accept="image/png,image/jpeg"
             className="bg-[#EBFAF3]"
           />
+          <Select
+              label="Author"
+              data={[
+                { value: "single", label: "Single" },
+                { value: "married", label: "Married" },
+              ]}
+            />
           <div className="mt-auto self-center">
             <button className="bg-[#38CB89] text-[white] py-2 px-7 rounded-lg">
             Save Changes

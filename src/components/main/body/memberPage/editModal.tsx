@@ -14,11 +14,6 @@ export const EditModal = () => {
             <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
               Edit Testimonial 
             </h1>
-            <TextInput
-              size="sm"
-              className="focus:border-inherit"
-              label="Name"
-            />
             <div className="flex gap-4">
               <Select
                 className="flex-1"
@@ -42,6 +37,11 @@ export const EditModal = () => {
                 ]}
               />
             </div>
+            <TextInput
+              size="sm"
+              className="focus:border-inherit"
+              label="ATS Member"
+            />
             <p>Content</p>
             <RichTextEditor
               id="rte"

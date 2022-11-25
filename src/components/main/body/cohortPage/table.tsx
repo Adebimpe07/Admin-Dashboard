@@ -90,7 +90,7 @@ const CohortTable = () => {
         </tbody>
       </table>
       </div>
-      <div className="bg-[white] mx-6 mt-4 py-4 px-2 flex justify-between">
+      <div className="bg-[white] mx-6 mt-4 py-4 px-2 flex w-[96%] justify-between">
         <div>
           <span>
             Page{" "}

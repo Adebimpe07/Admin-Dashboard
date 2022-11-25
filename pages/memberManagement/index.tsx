@@ -19,24 +19,20 @@ const MemberTable = dynamic(
 );
 
 const Xpert = dynamic(
-    () => import("../../src/components/main/body/memberPage/xpert"),
-    {
-      ssr: false,
-    }
-  );
+  () => import("../../src/components/main/body/memberPage/xpert"),
+  {
+    ssr: false,
+  }
+);
 
 const Index = () => {
   const [selected, setSelected] = useState(0);
 
   return (
-    <div className="flex-1 bg-[#E5E5E5] flex flex-col overflow-auto pb-4 h-full">
+    <div className="flex-1 bg-[#E5E5E5] flex flex-col overflow-auto  gap-8 pb-4 h-full">
       <MemberHeader />
       <MemberSubHeader selected={selected} setSelected={setSelected} />
-      {selected === 2 ? (
-        <Xpert />
-      ) : (
-        <MemberTable selected={selected} />
-      )}
+      <MemberTable selected={selected} />
     </div>
   );
 };
