@@ -7,31 +7,17 @@ import {
     atsTestimonialColumn,
     atsAttendanceColumn,
 } from "../../../../layout/tableData";
-import Content from "../../../../layout/contentData.json";
-import ContentBlog from "../../../../layout/contentBlogData.json";
-import ATSMember from "../../../../layout/atsMemberData.json";
-import Testimonial from "../../../../layout/atsTestimonialData.json";
-import Attendance from "../../../../layout/atsAttendanceData.json";
-import ActionMenuEditContent from "../actionButton/ActionMenuEditContent";
-import ActionMenuDeleteContent from "../actionButton/ActionMenuDeleteContent";
-import ActionMenuEditBlogContent from "../actionButton/ActionMenuEditBlogContent";
-import ActionMenuDeleteBlogContent from "../actionButton/ActionMenuDeleteBlogContent";
-import ActionMenuTestimonial from "../actionButton/ActionMenuTestimonial";
-import ActionMenuMemberImg from "../actionButton/ActionMenuMemberImg";
-import ActionMenuEditAtsMember from "../actionButton/ActionMenuEditAtsmember";
-import ActionMenuDeleteAtsMember from "../actionButton/ActionMenuDeleteAtsMember";
-import ActionMenuMember from "../actionButton/ActionMenuMember";
 import axios from "axios";
 
-const MemberTable = () => {
-    const [ATSMember, setATSMember] = useState([]);
+const AttendanceTable = () => {
+    const [Attendance, setAttendance] = useState([]);
 
     const fetchAllAts = () => {
         axios(
             "http://atsbk.afexats.com/api/v1/tech-stars/tech-star-list-create/"
         )
             .then(function (response) {
-                setATSMember(response.data.data.results);
+                console.log(response.data.data.results);
             })
             .catch(function (error) {
                 console.log(error);
@@ -42,23 +28,9 @@ const MemberTable = () => {
         fetchAllAts();
     }, []);
 
-    const ATSColumn = useMemo(() => atsMemberColumn, [atsMemberColumn]);
+    const AttendanceColumn = useMemo(() => atsAttendanceColumn, []);
 
-    const atsData = useMemo(
-        () =>
-            ATSMember.map((content, idx) => ({
-                ...content,
-                image: (
-                    <ActionMenuMemberImg
-                        profilePicture={content.profile_picture}
-                    />
-                ),
-                edit: <ActionMenuEditAtsMember />,
-                delete: <ActionMenuDeleteAtsMember />,
-                action: <ActionMenuMember />,
-            })),
-        [ATSMember]
-    );
+    const attendanceData = useMemo(() => Attendance, [Attendance]);
 
     const {
         getTableProps,
@@ -77,8 +49,8 @@ const MemberTable = () => {
         selectedFlatRows,
     } = useTable(
         {
-            columns: ATSColumn,
-            data: atsData,
+            columns: AttendanceColumn,
+            data: attendanceData,
         },
         usePagination,
         useRowSelect
@@ -183,4 +155,4 @@ const MemberTable = () => {
     );
 };
 
-export default MemberTable;
+export default AttendanceTable;
