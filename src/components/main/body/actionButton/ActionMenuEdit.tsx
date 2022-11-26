@@ -70,7 +70,7 @@ const ActionMenuEdit = () => {
       </Text>
       <Button
         fullWidth
-        className="bg-[#38CB89] hover:bg-[#38CB89] h-10 m-auto text-lg my-4"
+        className="bg-greenButton hover:bg-greenButton h-10 m-auto text-lg my-4"
       >
         Save Changes
       </Button>

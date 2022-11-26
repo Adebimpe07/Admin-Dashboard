@@ -10,7 +10,6 @@ import { Textarea } from "@mantine/core";
 import Downloads from "../../../../assets/import.png";
 import { MultiSelect } from "@mantine/core";
 
-
 const Header = () => {
   const [opened, setOpened] = useState(false);
 
@@ -43,13 +42,14 @@ const Header = () => {
           />
         </div>
         <div className="flex gap-4">
-          <Textarea size="sm"
+          <Textarea
+            size="sm"
             className="focus:border-inherit w-full"
             label="Cohort Start Date"
             autosize
             maxRows={4}
           />
-           <Textarea
+          <Textarea
             className="focus:border-inherit w-full"
             label="Cohort End Date"
             autosize
@@ -57,13 +57,14 @@ const Header = () => {
           />
         </div>
         <div className="flex gap-4">
-          <Textarea size="sm"
+          <Textarea
+            size="sm"
             className="focus:border-inherit w-full"
             label="Application Start Date"
             autosize
             maxRows={4}
           />
-           <Textarea
+          <Textarea
             className="focus:border-inherit w-full"
             label="Application End Date"
             autosize
@@ -73,7 +74,7 @@ const Header = () => {
       </Text>
       <Button
         fullWidth
-        className="bg-[#38CB89] hover:bg-[#38CB89] h-10 m-auto text-lg my-4"
+        className="bg-greenButton hover:bg-greenButton h-10 m-auto text-lg my-4"
       >
         Create
       </Button>
@@ -83,11 +84,13 @@ const Header = () => {
   return (
     <div className="flex justify-between pb-7 pt-6 px-5">
       <div className="place-items-center">
-        <p className="text-[#252735] text-base font-semibold">Total Cohorts()</p>
+        <p className="text-[#252735] text-base font-semibold">
+          Total Cohorts()
+        </p>
       </div>
       <div className="flex gap-8">
         <Button
-          className="bg-[#38CB89] hover:bg-[#38CB89] w-[12rem] h-9 m-auto text-lg"
+          className="bg-greenButton hover:bg-greenButton w-[12rem] h-9 m-auto text-lg"
           leftIcon={<img src={Cross.src} className="w-4" />}
           onClick={() => setOpened(true)}
         >

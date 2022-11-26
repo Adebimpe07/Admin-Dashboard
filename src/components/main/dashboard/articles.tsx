@@ -47,8 +47,8 @@ const ArticleStyle = ({
 
 export const Article = () => {
   return (
-    <div className="relative overflow-auto px-6 my-2 rounded-lg ml-6 bg-[#fff]">
-      <div className="flex justify-between sticky top-0 z-20 text-[#18181B] text-base bg-[#fff] pt-3 p-2 overflow-auto">
+    <div className="relative overflow-auto px-6 my-2 rounded-lg ml-6 bg-white">
+      <div className="flex justify-between sticky top-0 z-20 text-[#18181B] text-base bg-white pt-3 p-2 overflow-auto">
         <h1 className="text-[#18181B] text-base font-semibold ">
           Latest Updates{" "}
         </h1>

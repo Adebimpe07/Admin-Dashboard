@@ -1,7 +1,6 @@
 import { Menu } from "@mantine/core";
 import React from "react";
 
-
 const ActionMenuCourses = () => {
   return (
     <Menu
@@ -10,9 +9,7 @@ const ActionMenuCourses = () => {
       }}
     >
       <Menu.Target>
-        <button className=" bg-[#38CB89] ml-10 px-2 rounded-md">
-          4
-        </button>
+        <button className=" bg-greenButton ml-10 px-2 rounded-md">4</button>
       </Menu.Target>
       <Menu.Dropdown>
         <Menu.Item>Backend Developer</Menu.Item>

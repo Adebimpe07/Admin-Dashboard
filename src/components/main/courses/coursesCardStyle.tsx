@@ -36,7 +36,7 @@ const Courses = ({
 
   return (
     <div>
-      <div className="flex flex-col gap-2 bg-[#fff] rounded-lg">
+      <div className="flex flex-col gap-2 bg-white rounded-lg">
         <img width="360" src={picture.src} alt="" />
         <div className="px-3 pb-2 flex flex-col gap-3">
           <div className="flex justify-between">

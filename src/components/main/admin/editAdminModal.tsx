@@ -39,7 +39,7 @@ export const EditSubAdminModal = () => {
           }}
         />
       </div>
-      <Button py="sm" className="bg-[#38CB89] hover:bg-[#38CB89]">
+      <Button py="sm" className="bg-greenButton hover:bg-greenButton">
         Edit Sub admin
       </Button>
     </form>

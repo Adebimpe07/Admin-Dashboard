@@ -32,7 +32,7 @@ const CategoryCardStyle = ({
 
   return (
     <div>
-      <div className="flex h-full flex-col bg-[#fff] rounded-lg">
+      <div className="flex h-full flex-col bg-white rounded-lg">
         <div className="p-4 flex h-full justify-between gap-5 flex-col">
           <div className="flex justify-between">
             <h1 className="font-semibold whitespace-nowrap">{title}</h1>

@@ -78,7 +78,7 @@ export const EditMemberModal = () => {
         </div>
 
         <div className="mt-4">
-          <button className="bg-[#38CB89] text-[white] py-2 w-full rounded">
+          <button className="bg-greenButton text-[white] py-2 w-full rounded">
             Save Changes
           </button>
         </div>

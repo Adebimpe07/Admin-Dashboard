@@ -11,7 +11,7 @@ type cardprops = {
 const CardBar = ({ title, value, valueCount }: cardprops) => {
   return (
     <div className="flex">
-      <div className="flex w-full flex-col gap-4 border border-[#E4E4E7] bg-[#fff] rounded-lg px-6 py-2">
+      <div className="flex w-full flex-col gap-4 border border-[#E4E4E7] bg-white rounded-lg px-6 py-2">
         <h1 className="text-[#948E8E] text-xs">{title}</h1>
         <div className="flex justify-between">
           <p className="font-semibold text-[#514747] ">{value}</p>

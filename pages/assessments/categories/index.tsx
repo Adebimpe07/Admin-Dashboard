@@ -16,7 +16,7 @@ export const NotificationDrop = () => {
       <Menu.Target>
         <button className="relative">
           <Notification size="17" variant="Outline" />
-          <span className="absolute top-[-3px] left-2 text-[8px] px-[2px] text-[#fff] rounded-full bg-[#65110D]">
+          <span className="absolute top-[-3px] left-2 text-[8px] px-[2px] text-white rounded-full bg-[#65110D]">
             {HeaderData.notificationCount}
           </span>
         </button>
@@ -48,7 +48,7 @@ const HeaderMain = () => {
   return categoryCard?.length > 0 ? (
     <CategoryCard categoryCard={categoryCard} />
   ) : (
-    <div className="py-6 h-screen flex-1 flex flex-col  bg-[#e5e5e5]">
+    <div className="py-6 h-screen flex-1 flex flex-col  bg-mainBg">
       <div className="flex justify-between border-b border-[#DBD9D9] px-4">
         <h1 className="text-2xl font-semibold text-[#4A4C58] pb-[1.41rem]">
           Assessments
@@ -69,7 +69,7 @@ const HeaderMain = () => {
                     className={
                       item.name === "Categories"
                         ? "w-8 bg-[#30AD74] px-1 h-1 self-center rounded-lg"
-                        : "bg-[#fff] self-center"
+                        : "bg-white self-center"
                     }
                   ></span>
                 </div>

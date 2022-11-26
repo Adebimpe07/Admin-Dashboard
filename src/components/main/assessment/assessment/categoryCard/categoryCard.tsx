@@ -8,14 +8,14 @@ import CategoryCardStyle from "./categoryCardStyle";
 
 const CategoryCard = ({ categoryCard }) => {
   return (
-    <div className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
+    <div className="h-screen flex-1 py-6 flex flex-col  bg-mainBg">
       <Header />
       <main className="flex flex-col overflow-auto">
         <div className="items-center px-4 gap-1 py-4 flex justify-between">
           <h3>Total Categories ({categoryCard.length})</h3>
           <Link href="/assessments/categories/create_category">
             <Button
-              className="bg-[#38CB89] hover:bg-[#38CB89] w-[14rem] text-base"
+              className="bg-greenButton hover:bg-greenButton w-[14rem] text-base"
               leftIcon={<Add size="17" variant="Outline" />}
               onClick={() => {}}
             >

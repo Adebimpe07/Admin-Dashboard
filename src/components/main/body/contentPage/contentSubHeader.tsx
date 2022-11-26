@@ -108,7 +108,7 @@ const ContentSubHeader = ({ route }: Props) => {
               ]}
             />
             <div className="mt-auto self-center">
-              <button className="bg-[#38CB89] text-[white] py-2 px-7 rounded-lg">
+              <button className="bg-greenButton text-[white] py-2 px-7 rounded-lg">
                 Publish article
               </button>
             </div>
@@ -162,7 +162,7 @@ const ContentSubHeader = ({ route }: Props) => {
               ]}
             />
             <div className="mt-auto self-center">
-              <button className="bg-[#38CB89] text-[white] py-2 px-7 rounded-lg">
+              <button className="bg-greenButton text-[white] py-2 px-7 rounded-lg">
                 Publish article
               </button>
             </div>
@@ -216,7 +216,7 @@ const ContentSubHeader = ({ route }: Props) => {
         </Text>
         <Button
           fullWidth
-          className="bg-[#38CB89] hover:bg-[#38CB89] h-10 m-auto text-lg my-4"
+          className="bg-greenButton hover:bg-greenButton h-10 m-auto text-lg my-4"
         >
           Create
         </Button>
@@ -266,7 +266,7 @@ const ContentSubHeader = ({ route }: Props) => {
 
         {route == "news" ? (
           <Button
-            className="bg-[#38CB89] hover:bg-[#38CB89] w-[141px] h-[34px] text-[13px]"
+            className="bg-greenButton hover:bg-greenButton w-[141px] h-[34px] text-[13px]"
             leftIcon={<img src={Cross.src} className="w-4" />}
             onClick={() => setOpened(true)}
           >
@@ -275,7 +275,7 @@ const ContentSubHeader = ({ route }: Props) => {
           </Button>
         ) : route === "blog" ? (
           <Button
-            className="bg-[#38CB89] hover:bg-[#38CB89] w-[141px] h-[34px] text-[13px]"
+            className="bg-greenButton hover:bg-greenButton w-[141px] h-[34px] text-[13px]"
             leftIcon={<img src={Cross.src} className="w-4" />}
             onClick={() => setOpened(true)}
           >
