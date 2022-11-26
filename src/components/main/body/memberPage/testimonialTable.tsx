@@ -23,15 +23,15 @@ import ActionMenuDeleteAtsMember from "../actionButton/ActionMenuDeleteAtsMember
 import ActionMenuMember from "../actionButton/ActionMenuMember";
 import axios from "axios";
 
-const MemberTable = () => {
-    const [ATSMember, setATSMember] = useState([]);
+const TestimonialTable = () => {
+    const [Testimonial, setTestimonial] = useState([]);
 
-    const fetchAllAts = () => {
+    const fetchAllTestimonial = () => {
         axios(
-            "http://atsbk.afexats.com/api/v1/tech-stars/tech-star-list-create/"
+            "http://atsbk.afexats.com/api/v1/tech-stars/testimonial-list-create/"
         )
             .then(function (response) {
-                setATSMember(response.data.data.results);
+                console.log(response.data.data.results);
             })
             .catch(function (error) {
                 console.log(error);
@@ -39,25 +39,23 @@ const MemberTable = () => {
     };
 
     useEffect(() => {
-        fetchAllAts();
+        fetchAllTestimonial();
     }, []);
 
-    const ATSColumn = useMemo(() => atsMemberColumn, [atsMemberColumn]);
+    const TestimonialColumn = useMemo(() => atsTestimonialColumn, []);
 
-    const atsData = useMemo(
+    const testimonialData = useMemo(
         () =>
-            ATSMember.map((content, idx) => ({
-                ...content,
+            Testimonial.map((item, idx) => ({
+                ...item,
                 image: (
                     <ActionMenuMemberImg
-                        profilePicture={content.profile_picture}
+                        profilePicture={item.profile_picture}
                     />
                 ),
-                edit: <ActionMenuEditAtsMember />,
-                delete: <ActionMenuDeleteAtsMember />,
-                action: <ActionMenuMember />,
+                action: <ActionMenuTestimonial />,
             })),
-        [ATSMember]
+        [Testimonial]
     );
 
     const {
@@ -77,8 +75,8 @@ const MemberTable = () => {
         selectedFlatRows,
     } = useTable(
         {
-            columns: ATSColumn,
-            data: atsData,
+            columns: TestimonialColumn,
+            data: testimonialData,
         },
         usePagination,
         useRowSelect
@@ -183,4 +181,4 @@ const MemberTable = () => {
     );
 };
 
-export default MemberTable;
+export default TestimonialTable;

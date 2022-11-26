@@ -39,7 +39,9 @@ const AssessmentCards = ({ AssessmentCardData }) => {
                                     key={index}
                                     questions={"00"}
                                     title={name}
-                                    paragraph={assessment_info}
+                                    paragraph={assessment_info
+                                        ?.split("")
+                                        .map((item, idx) => idx < 60 && item)}
                                     timestamp={total_duration}
                                 />
                             );
