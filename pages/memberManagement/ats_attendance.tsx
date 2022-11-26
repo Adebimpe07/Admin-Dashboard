@@ -1,9 +1,6 @@
 import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import MemberHeader from "../../src/components/main/body/memberPage/memberHeader";
-import ContentGallery from "../../src/components/main/body/contentPage/contentGallery";
-import ContentHeader from "../../src/components/main/body/contentPage/contentHeader";
-import ContentTable from "../../src/components/main/body/contentPage/contentTable";
 
 const AttendanceSubHeader = dynamic(
     () =>
@@ -14,13 +11,6 @@ const AttendanceSubHeader = dynamic(
 );
 const AttendanceTable = dynamic(
     () => import("../../src/components/main/body/memberPage/attendanceTable"),
-    {
-        ssr: false,
-    }
-);
-
-const Xpert = dynamic(
-    () => import("../../src/components/main/body/memberPage/xpert"),
     {
         ssr: false,
     }
