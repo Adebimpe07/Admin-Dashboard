@@ -11,6 +11,7 @@ import { SubAdminData } from "../../../layout/adminData";
 import { Icon } from "@iconify/react";
 import { EditSubAdminModal } from "./editAdminModal";
 import { DeleteSubAdminModal } from "./deleteAdmin";
+import profile from "../notification_ProfilePicture";
 
 const MenuDrop = () => {
     const initialValues: { opened: boolean; component: React.ReactNode } = {

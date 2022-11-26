@@ -38,26 +38,22 @@ const CategoryReview = () => {
             {AssessmentBarData.map((item, index) => {
               return (
                 <div className=" flex flex-col gap-2">
-                  <div className="bg-[#30AD74] h-1 rounded-lg"></div>
+                  <div className="bg-greenButton h-1 rounded-lg"></div>
                   <span className="pl-2">{item}</span>
                 </div>
               );
             })}
           </div>
         </div>
-        <div className="flex flex-col items-center flex-1 mt-16">
-          <div className="bg-[#fff] p-10 rounded-lg flex flex-col gap-1">
-            <h1 className="font-semibold text-lg pb-4">Add Questions</h1>
-            <label className="pb-4">Category Name</label>
-            <div className="border border-[#ced4da] rounded-lg w-full py-1">
-              <input type="text" className="p-1 focus:outline-none w-full" />
-            </div>
+        <div className="flex flex-col items-center flex-1 mt-8">
+          <div className="bg-white px-10 py-6 rounded-lg flex flex-col gap-1">
+            <h1 className="font-semibold text-lg">Review Questions</h1>
             <div className="mt-4 flex flex-col gap-3">
               <h1 className="py-2">Select Question</h1>
               <QuestionTypeCards />
-              <h3> Question List </h3>
+              <h3 className="pt-4"> Question List </h3>
               <QuestionTable />
-              <Button className="bg-[#38CB89] hover:bg-[#38CB89] w-[11rem] text-base mx-auto">
+              <Button className="bg-greenButton hover:bg-greenButton w-[11rem] text-base mx-auto">
                 Upload
               </Button>
             </div>

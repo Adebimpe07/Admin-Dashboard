@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 const EditAssessmentPage = () => {
   const router = useRouter();
   return (
-    <main className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
+    <main className="h-screen flex-1 py-6 flex flex-col  bg-mainBg">
       <Header />
       <div className="flex flex-col">
         <div className="flex items-center pl-4 gap-1 py-4">
@@ -20,7 +20,7 @@ const EditAssessmentPage = () => {
         </div>
       </div>
       <div className="flex flex-col items-center flex-1 mt-8">
-        <div className="bg-[#fff] p-10 rounded-lg flex flex-col gap-1 w-[40rem]">
+        <div className="bg-white p-10 rounded-lg flex flex-col gap-1 w-[40rem]">
           <h1 className="font-semibold text-2x text-2xl pb-2">
             Create New Assessment
           </h1>
@@ -71,7 +71,7 @@ const EditAssessmentPage = () => {
           />
           <Button
             onClick={() => router.push("/assessments/assessment")}
-            className="bg-[#38CB89] hover:bg-[#38CB89] w-full mx-auto text-base mt-6"
+            className="bg-greenButton hover:bg-greenButton w-full mx-auto text-base mt-6"
           >
             Save Changes
           </Button>

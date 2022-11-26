@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 const createdAssessmentList = () => {
   const router = useRouter();
   return (
-    <div className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
+    <div className="h-screen flex-1 py-6 flex flex-col  bg-mainBg">
       <Header />
       <div className="flex justify-between p-4 ">
         <div className="flex items-center gap-1">
@@ -22,7 +22,7 @@ const createdAssessmentList = () => {
           onClick={() => {
             router.push("/assessments/assessment");
           }}
-          className="bg-[#38CB89] hover:bg-[#38CB89] text-base"
+          className="bg-greenButton hover:bg-greenButton text-base"
         >
           Submit
         </Button>

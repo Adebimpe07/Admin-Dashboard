@@ -16,7 +16,7 @@ const createQuestions = () => {
     useContext(FormContext);
 
   return (
-    <div className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
+    <div className="h-screen flex-1 py-6 flex flex-col  bg-mainBg">
       <Header />
       <div className="flex-1 flex flex-col">
         <div className="flex justify-between items-center px-4">
@@ -51,12 +51,12 @@ const createQuestions = () => {
                     onChange("");
                   });
               }}
-              className="hover:bg-[#fff] w-[10rem] text-base bg-[#fff] text-[#000]"
+              className="hover:bg-white w-[10rem] text-base bg-white text-[#000]"
             >
               Add question
             </Button>
             <Link href="/assessments/categories/review_upload">
-              <Button className="bg-[#38CB89] hover:bg-[#38CB89] w-[10rem] text-base">
+              <Button className="bg-greenButton hover:bg-greenButton w-[10rem] text-base">
                 Finish
               </Button>
             </Link>

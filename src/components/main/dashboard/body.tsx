@@ -13,8 +13,8 @@ const body = () => {
     setShouldAnimate(true);
   }, []);
   return (
-    <div className="flex-1 flex flex-col bg-[#e5e5e5] h-screen overflow-auto">
-      <div className="sticky top-0 z-10  bg-[#e5e5e5]">
+    <div className="flex-1 flex flex-col bg-mainBg h-screen overflow-auto">
+      <div className="sticky top-0 z-10  bg-mainBg">
         <HeaderMain />
         <Cards />
       </div>

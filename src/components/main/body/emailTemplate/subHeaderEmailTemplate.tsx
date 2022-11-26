@@ -48,7 +48,7 @@ const SubHeaderEmailTemplate = () => {
       </Text>
       <Button
         fullWidth
-        className="bg-[#38CB89] hover:bg-[#38CB89] h-10 mx-auto text-lg my-4"
+        className="bg-greenButton hover:bg-greenButton h-10 mx-auto text-lg my-4"
       >
         Create
       </Button>
@@ -58,7 +58,7 @@ const SubHeaderEmailTemplate = () => {
   return (
     <div className="flex flex-col justify-end items-end my-5 mr-5">
       <Button
-        className="bg-[#38CB89] hover:bg-[#38CB89] w-[141px] h-[34px] text-[13px]"
+        className="bg-greenButton hover:bg-greenButton w-[141px] h-[34px] text-[13px]"
         leftIcon={<img src={Cross.src} className="w-4" />}
         onClick={() => setOpened(true)}
       >

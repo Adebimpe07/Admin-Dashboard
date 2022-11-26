@@ -11,10 +11,8 @@ import Downloads from "../../../../assets/import.png";
 import GlobalFilter from "./globalFilter";
 import FormContext from "../../../../context/store";
 
-
 const SubAppHeader = () => {
-
-  const {globalFilter, setGlobalFilter} = useContext(FormContext)
+  const { globalFilter, setGlobalFilter } = useContext(FormContext);
 
   return (
     <div className="flex justify-between pb-7 pt-6 px-5">
@@ -23,9 +21,9 @@ const SubAppHeader = () => {
         <p className="text-[#252735] text-sm font-semibold">Back to Jobs</p>
       </div>
       <div className="flex gap-8">
-      <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
         <Button
-          className="text-[#514747] hover:bg-[#E5E5E5] text-[13px] font-bold"
+          className="text-[#514747] hover:bg-mainBg text-[13px] font-bold"
           leftIcon={<img src={Downloads.src} className="w-[18px]" />}
           classNames={{
             root: "border-[#DBD9D9] rounded-lg py-[9px] px-[70px]",

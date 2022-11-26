@@ -67,7 +67,7 @@ const Header = ({ selected, setSelected }: props) => {
       </Text>
       <Button
         fullWidth
-        className="bg-[#38CB89] hover:bg-[#38CB89] h-10 m-auto text-lg my-4"
+        className="bg-greenButton hover:bg-greenButton h-10 m-auto text-lg my-4"
       >
         Upload
       </Button>
@@ -96,7 +96,7 @@ const Header = ({ selected, setSelected }: props) => {
       </div>
       <div>
         <Button
-          className="bg-[#38CB89] hover:bg-[#38CB89] rounded-lg h-10 m-auto text-lg"
+          className="bg-greenButton hover:bg-greenButton rounded-lg h-10 m-auto text-lg"
           leftIcon={<img src={Cross.src} className="w-3 h-3" />}
           onClick={() => setOpened(true)}
         >
@@ -105,7 +105,7 @@ const Header = ({ selected, setSelected }: props) => {
         </Button>
       </div>
 
-      {/* <div className="text-[#F9FAFB] bg-[#38CB89] py-2.5 border rounded-lg flex gap-4 items-center px-7">
+      {/* <div className="text-[#F9FAFB] bg-greenButton py-2.5 border rounded-lg flex gap-4 items-center px-7">
             <img src={Cross.src} className="w-3 h-3"/>
             <p className="text-[#F9FAFB]">Post a job</p>
         </div> */}

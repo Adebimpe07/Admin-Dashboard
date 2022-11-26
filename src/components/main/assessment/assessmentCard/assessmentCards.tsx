@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const AssessmentCards = ({ AssessmentCardData }) => {
     return (
-        <div className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
+        <div className="h-screen flex-1 py-6 flex flex-col  bg-mainBg">
             <Header />
             <main className="flex flex-col">
                 <div className="items-center px-4 gap-1 py-4 flex justify-between">
@@ -16,7 +16,7 @@ const AssessmentCards = ({ AssessmentCardData }) => {
 
                     <Link href="/assessments/assessment/create_assessment">
                         <Button
-                            className="bg-[#38CB89] hover:bg-[#38CB89] w-[14rem] text-base"
+                            className="bg-greenButton hover:bg-greenButton w-[14rem] text-base"
                             leftIcon={<Add size="17" variant="Outline" />}
                             onClick={() => {}}>
                             Create Assessment

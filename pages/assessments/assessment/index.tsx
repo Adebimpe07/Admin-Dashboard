@@ -11,82 +11,79 @@ import AssessmentCards from "../../../src/components/main/assessment/assessmentC
 import axios from "axios";
 
 export const NotificationDrop = () => {
-    return (
-        <Menu shadow="md" width={250}>
-            <Menu.Target>
-                <button className="relative">
-                    <Notification size="17" variant="Outline" />
-                    <span className="absolute top-[-3px] left-2 text-[8px] px-[2px] text-[#fff] rounded-full bg-[#65110D]">
-                        {HeaderData.notificationCount}
-                    </span>
-                </button>
-            </Menu.Target>
+  return (
+    <Menu shadow="md" width={250}>
+      <Menu.Target>
+        <button className="relative">
+          <Notification size="17" variant="Outline" />
+          <span className="absolute top-[-3px] left-2 text-[8px] px-[2px] text-[#fff] rounded-full bg-[#65110D]">
+            {HeaderData.notificationCount}
+          </span>
+        </button>
+      </Menu.Target>
 
-            <Menu.Dropdown className="">
-                <Notifications />
-            </Menu.Dropdown>
-        </Menu>
-    );
+      <Menu.Dropdown className="">
+        <Notifications />
+      </Menu.Dropdown>
+    </Menu>
+  );
 };
 
 const HeaderMain = () => {
-    const [AssessmentCardData, setAssessmentCardData] = useState(null);
+  const [AssessmentCardData, setAssessmentCardData] = useState(null);
 
-    const fetchAllAssessment = () => {
-        axios("http://assessbk.afexats.com/api/assessment")
-            .then(function (response) {
-                setAssessmentCardData(response.data.data.results);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
+  const fetchAllAssessment = () => {
+    axios("http://assessbk.afexats.com/api/assessment")
+      .then(function (response) {
+        setAssessmentCardData(response.data.data.results);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
-    useEffect(() => {
-        fetchAllAssessment();
-    }, []);
+  useEffect(() => {
+    fetchAllAssessment();
+  }, []);
 
-    return AssessmentCardData?.length > 0 ? (
-        <AssessmentCards AssessmentCardData={AssessmentCardData} />
-    ) : (
-        <div className="py-6 h-screen flex-1 flex flex-col  bg-[#e5e5e5]">
-            <div className="flex justify-between border-b border-[#DBD9D9] px-4">
-                <h1 className="text-2xl font-semibold text-[#4A4C58] pb-[1.41rem]">
-                    Assessments
-                </h1>
-                <div className="flex gap-2 items-center">
-                    <NotificationDrop />
-                    <img
-                        width="40"
-                        src={HeaderData.adminProfilePicture.src}
-                        alt=""
-                    />
-                </div>
-            </div>
-            <div className="flex-1 flex flex-col">
-                <div className="flex gap-2 px-4 pt-4 font-semibold">
-                    {Tabs.map((item, index) => (
-                        <div key={index}>
-                            <Link href={item.href}>
-                                <div className="flex flex-col gap-1 cursor-pointer">
-                                    <p>{item.name}</p>
-                                    <span
-                                        className={
-                                            item.name === "Assessments"
-                                                ? "w-8 bg-[#30AD74] px-1 h-1 self-center rounded-lg"
-                                                : "bg-[#fff] self-center"
-                                        }></span>
-                                </div>
-                            </Link>
-                        </div>
-                    ))}
-                </div>
-                <ListAssessment
-                    link="/assessments/assessment/create_assessment"
-                    text="Create Assessment"
-                />
-            </div>
+  return AssessmentCardData?.length > 0 ? (
+    <AssessmentCards AssessmentCardData={AssessmentCardData} />
+  ) : (
+    <div className="py-6 h-screen flex-1 flex flex-col  bg-mainBg">
+      <div className="flex justify-between border-b border-[#DBD9D9] px-4">
+        <h1 className="text-2xl font-semibold text-[#4A4C58] pb-[1.41rem]">
+          Assessments
+        </h1>
+        <div className="flex gap-2 items-center">
+          <NotificationDrop />
+          <img width="40" src={HeaderData.adminProfilePicture.src} alt="" />
         </div>
-    );
+      </div>
+      <div className="flex-1 flex flex-col">
+        <div className="flex gap-2 px-4 pt-4 font-semibold">
+          {Tabs.map((item, index) => (
+            <div key={index}>
+              <Link href={item.href}>
+                <div className="flex flex-col gap-1 cursor-pointer">
+                  <p>{item.name}</p>
+                  <span
+                    className={
+                      item.name === "Assessments"
+                        ? "w-8 bg-[#30AD74] px-1 h-1 self-center rounded-lg"
+                        : "bg-[#fff] self-center"
+                    }
+                  ></span>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+        <ListAssessment
+          link="/assessments/assessment/create_assessment"
+          text="Create Assessment"
+        />
+      </div>
+    </div>
+  );
 };
 export default HeaderMain;

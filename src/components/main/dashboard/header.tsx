@@ -23,7 +23,7 @@ const HeaderMain = () => {
     return (
       <Menu shadow="md" width={150}>
         <Menu.Target>
-          <button className="rounded py-1 gap-2 border flex border-[#948E8E] bg-[#e5e7eb] hover:bg-[#e5e5e5] px-3 my-1">
+          <button className="rounded py-1 gap-2 border flex border-[#948E8E] bg-[#e5e7eb] hover:bg-mainBg px-3 my-1">
             <Filter size="17" color="#5B6871" variant="Bold" />
             <p className="text-[#252C32] text-sm">Filter Cohort</p>
           </button>

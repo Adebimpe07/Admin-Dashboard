@@ -49,7 +49,7 @@ const AdminStyles = ({
 
 const Admin = () => {
   return (
-    <div className="flex flex-col px-12 pt-2 border-b border-[#DADADD] rounded-t-lg  bg-[#fff] overflow-auto">
+    <div className="flex flex-col px-12 pt-2 border-b border-[#DADADD] rounded-t-lg  bg-white overflow-auto">
       <div className="">
         <h1 className="text-[#18181B] font-semibold text-base pb-2">
           Admin Activities

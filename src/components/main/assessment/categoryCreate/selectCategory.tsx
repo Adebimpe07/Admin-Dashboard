@@ -12,13 +12,13 @@ const createPage = () => {
   const { categoryForm } = useContext(FormContext);
 
   return (
-    <div className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
+    <div className="h-screen flex-1 py-6 flex flex-col  bg-mainBg">
       <Header />
       <div className="flex-1 flex flex-col">
         <div className="flex flex-col">
           <div className="flex items-center pl-4 gap-1 py-4">
-            <ArrowLeft2 size="17" color="#000" />
             <Link href="/assessments/categories">
+              <ArrowLeft2 size="17" color="#000" />
               <h1 className="cursor-pointer">Back to Assessments</h1>
             </Link>
           </div>
@@ -34,7 +34,7 @@ const createPage = () => {
           </div>
         </div>
         <div className="flex flex-col items-center flex-1 mt-8">
-          <div className="bg-[#fff] p-10 rounded-lg flex flex-col gap-1">
+          <form className="bg-white p-10 rounded-lg flex flex-col gap-1">
             <h1 className="font-semibold text-lg pb-2">Add Questions</h1>
 
             <TextInput
@@ -45,10 +45,16 @@ const createPage = () => {
               <NumberInput
                 {...categoryForm.getInputProps(`num_of_questions`)}
                 label="Number of Questions"
+                classNames={{
+                  root: "w-[50%]",
+                }}
               />
               <TextInput
                 {...categoryForm.getInputProps(`test_duration`)}
                 label="Time"
+                classNames={{
+                  root: "w-[50%]",
+                }}
               />
             </div>
             <Textarea
@@ -63,7 +69,7 @@ const createPage = () => {
               <h1 className="py-2">Select Question</h1>
               <QuestionTypeCards />
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

@@ -15,7 +15,7 @@ const QuestionTable = () => {
         ...category,
         edit: (
           <Link href="createCategory">
-            <Edit2 size="17" variant="Bulk" />
+            <Edit2 size="17" color="#30AD74" variant="Bulk" />
           </Link>
         ),
         delete: <DeleteIcon />,
@@ -36,7 +36,7 @@ const QuestionTable = () => {
     <div>
       <table
         {...getTableProps()}
-        className="bg-[white] text-sm font-normal text-[#514747] ml-6 w-[96%]"
+        className="bg-white text-sm font-normal text-[#514747] w-full"
       >
         <thead className=" text-[#514747]  font-normal overflow-auto">
           {headerGroups.map((headerGroups) => (

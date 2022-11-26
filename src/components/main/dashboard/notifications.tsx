@@ -49,7 +49,7 @@ const Nofication = ({
 
 const Notifications = () => {
   return (
-    <div className="px-6 pt-6 border-b border-[#DADADD] rounded-t-lg  bg-[#fff]">
+    <div className="px-6 pt-6 border-b border-[#DADADD] rounded-t-lg  bg-white">
       <h1 className="text-[#18181B] font-semibold text-base">Notifications</h1>
       {NotificationData.map(
         ({ title, subtitle, timestamp, icon, name }, index) => {
