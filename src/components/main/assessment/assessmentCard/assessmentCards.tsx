@@ -6,7 +6,7 @@ import { Button } from "@mantine/core";
 import { Add } from "iconsax-react";
 import Link from "next/link";
 
-const AssessmentCards = () => {
+const AssessmentCards = ({ AssessmentCardData }) => {
   return (
     <div className="h-screen flex-1 py-6 flex flex-col  bg-mainBg">
       <Header />
@@ -24,16 +24,16 @@ const AssessmentCards = () => {
             </Button>
           </Link>
         </div>
-        <div className="flex gap-4 m-4">
+        <div className="grid grid-cols-3 gap-4 m-4">
           {AssessmentCardData.map(
-            ({ title, paragraph, timestamp, questions }, index) => {
+            ({ name, assessment_info, total_duration, questions }, index) => {
               return (
                 <AssessmentCard
                   key={index}
-                  questions={questions}
-                  title={title}
-                  paragraph={paragraph}
-                  timestamp={timestamp}
+                  questions={"00"}
+                  title={name}
+                  paragraph={assessment_info}
+                  timestamp={total_duration}
                 />
               );
             }

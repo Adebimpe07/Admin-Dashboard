@@ -35,10 +35,22 @@ const Sidebar = () => {
             className="flex-1"
             label="Course"
             data={[
-              { value: "FrontEnd Development", label: "FrontEnd Development" },
-              { value: "Backend Development", label: "Backend Development" },
-              { value: "Product Management", label: "Product Management" },
-              { value: "Mobile Development", label: "Mobile Development" },
+              {
+                value: "FrontEnd Development",
+                label: "FrontEnd Development",
+              },
+              {
+                value: "Backend Development",
+                label: "Backend Development",
+              },
+              {
+                value: "Product Management",
+                label: "Product Management",
+              },
+              {
+                value: "Mobile Development",
+                label: "Mobile Development",
+              },
               { value: "UI/UX Design", label: "UI/UX Design" },
             ]}
           />
