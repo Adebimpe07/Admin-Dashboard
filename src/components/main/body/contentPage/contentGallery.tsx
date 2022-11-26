@@ -24,7 +24,7 @@ const ContentGallery = () => {
       onClose={() => setOpened(false)}
       title="Create Album"
     >
-      <Text >
+      <Text>
         <div className="flex w-full flex-col gap-4">
           <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
             Enter Album Details
@@ -35,10 +35,16 @@ const ContentGallery = () => {
             label="Album Name"
           />
           <Textarea label="Album Description" />
-          <FileInput label="Add Images" placeholder="Select images" accept="image/png,image/jpeg" icon={<img src={Gallery.src} className="w-4" />} multiple />
-            <button className="bg-[#38CB89] text-[white] py-2  rounded">
-              Create Album
-            </button>
+          <FileInput
+            label="Add Images"
+            placeholder="Select images"
+            accept="image/png,image/jpeg"
+            icon={<img src={Gallery.src} className="w-4" />}
+            multiple
+          />
+          <button className="bg-greenButton text-[white] py-2  rounded">
+            Create Album
+          </button>
         </div>
       </Text>
     </Modal>
@@ -54,7 +60,7 @@ const ContentGallery = () => {
           your gallery
         </p>
         <Button
-          className="bg-[#38CB89] hover:bg-[#38CB89] w-[141px] h-[34px] text-[13px]"
+          className="bg-greenButton hover:bg-greenButton w-[141px] h-[34px] text-[13px]"
           leftIcon={<img src={Cross.src} className="w-4" />}
           onClick={() => setOpened(true)}
         >

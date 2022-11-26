@@ -31,8 +31,8 @@ const ActionMenuEditBlogContent = () => {
       title="Edit Blog"
       size="xl"
       classNames={{
-        modal:"!w-[50rem]"
-       }}
+        modal: "!w-[50rem]",
+      }}
     >
       <Text className="flex gap-6 ">
         <div className="flex w-[100%] flex-col gap-4">
@@ -60,15 +60,15 @@ const ActionMenuEditBlogContent = () => {
             className="bg-[#EBFAF3]"
           />
           <Select
-              label="Author"
-              data={[
-                { value: "single", label: "Single" },
-                { value: "married", label: "Married" },
-              ]}
-            />
+            label="Author"
+            data={[
+              { value: "single", label: "Single" },
+              { value: "married", label: "Married" },
+            ]}
+          />
           <div className="mt-auto self-center">
-            <button className="bg-[#38CB89] text-[white] py-2 px-7 rounded-lg">
-            Save Changes
+            <button className="bg-greenButton text-[white] py-2 px-7 rounded-lg">
+              Save Changes
             </button>
           </div>
         </div>

@@ -66,7 +66,7 @@ const Inbox = ({ icon, title, time }: Props) => {
       </Text>
       <Button
         fullWidth
-        className="bg-[#38CB89] hover:bg-[#38CB89] h-10 m-auto text-lg my-4"
+        className="bg-greenButton hover:bg-greenButton h-10 m-auto text-lg my-4"
       >
         Save Changes
       </Button>
@@ -124,12 +124,7 @@ const Inbox = ({ icon, title, time }: Props) => {
         <button>{time}</button>
         <div className="flex items-center mt-2 gap-4 justify-end">
           <button onClick={() => setOpened(true)}>
-            <img
-              src={Edit.src}
-              alt="icon"
-              className="w-2.5"
-              
-            />
+            <img src={Edit.src} alt="icon" className="w-2.5" />
             <PostJobModal />
           </button>
           <button onClick={() => setShift(true)}>

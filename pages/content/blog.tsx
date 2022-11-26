@@ -13,7 +13,7 @@ const BlogSubHeader = dynamic(
 
 const blog = () => {
   return (
-    <div className="flex-1 bg-[#E5E5E5] flex flex-col overflow-auto  h-full">
+    <div className="flex-1 bg-mainBg flex flex-col overflow-auto  h-full">
       <ContentHeader />
       <BlogSubHeader />
       <BlogTable />

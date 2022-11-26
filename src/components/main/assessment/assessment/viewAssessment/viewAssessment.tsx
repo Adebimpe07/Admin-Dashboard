@@ -7,7 +7,7 @@ import ViewAssessmentTable from "./viewAssessmentTable";
 
 const viewAssessment = () => {
   return (
-    <div className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
+    <div className="h-screen flex-1 py-6 flex flex-col  bg-mainBg">
       <Header />
       <div className="flex-1 flex flex-col overflow-auto">
         <div className="flex justify-between items-center p-4">
@@ -18,7 +18,7 @@ const viewAssessment = () => {
             </Link>
           </div>
           <div className="">
-            <Button className="bg-[#38CB89] hover:bg-[#38CB89] w-[12rem] text-base">
+            <Button className="bg-greenButton hover:bg-greenButton w-[12rem] text-base">
               Invite for interview
             </Button>
           </div>

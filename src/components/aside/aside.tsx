@@ -20,7 +20,7 @@ const Sidebar = () => {
         <p className="text-base text-[#948E8E] pb-2">
           Enter the details of the job
         </p>
-        <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
+        <h1 className="text-base text-greenButton border-b border-[#DBD9D9] pb-2">
           Job Description
         </h1>
 
@@ -65,7 +65,7 @@ const Sidebar = () => {
       </Text>
       <Button
         fullWidth
-        className="bg-[#38CB89] hover:bg-[#38CB89] h-10 mx-auto text-lg my-4"
+        className="bg-greenButton hover:bg-greenButton h-10 mx-auto text-lg my-4"
       >
         Upload
       </Button>
@@ -78,7 +78,7 @@ const Sidebar = () => {
         <img width="120" src={Logo.src} alt="" />
       </div>
       <Button
-        className="bg-[#38CB89] hover:bg-[#38CB89] w-[15rem] h-10 mx-auto text-lg"
+        className="bg-greenButton hover:bg-greenButton w-[15rem] h-10 mx-auto text-lg"
         leftIcon={<Add size="17" variant="Outline" />}
         onClick={() => setOpened(true)}
       >

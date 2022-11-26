@@ -12,7 +12,7 @@ const DeleteIcon = () => {
         button below to confirm this action
       </div>
       <div className="flex justify-between py-6">
-        <Button className="bg-[#38CB89] hover:bg-[#38CB89]">Cancel</Button>
+        <Button className="bg-greenButton hover:bg-greenButton">Cancel</Button>
         <Button className="bg-[red] hover:bg-[red]">Delete</Button>
       </div>
     </Modal>

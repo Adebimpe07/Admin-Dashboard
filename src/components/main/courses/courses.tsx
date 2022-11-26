@@ -14,7 +14,7 @@ const courses = () => {
           <h3>Total Courses (9)</h3>
           <Link href="/courses/createCourses">
             <Button
-              className="bg-[#38CB89] hover:bg-[#38CB89] w-[11rem] text-base"
+              className="bg-greenButton hover:bg-greenButton w-[11rem] text-base"
               leftIcon={<Add size="17" variant="Outline" />}
               onClick={() => {}}
             >

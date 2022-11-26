@@ -33,7 +33,7 @@ const AssessmentCard = ({
 
   return (
     <div>
-      <div className="flex flex-col gap-2 bg-[#fff] rounded-lg">
+      <div className="flex flex-col gap-2 bg-white rounded-lg">
         <div className="p-4 flex flex-col gap-3">
           <div className="flex justify-between">
             <h1 className="font-semibold">{title}</h1>

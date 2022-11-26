@@ -7,7 +7,7 @@ import { IconUpload } from "@tabler/icons";
 
 const CreateCourses = () => {
   return (
-    <div className="h-screen flex-1 py-6 flex flex-col bg-[#e5e5e5]">
+    <div className="h-screen flex-1 py-6 flex flex-col bg-mainBg">
       <Header />
       <div className="flex-1 flex flex-col">
         <div className="flex flex-col">
@@ -17,7 +17,7 @@ const CreateCourses = () => {
           </div>
         </div>
         <div className="flex flex-col items-center flex-1 mt-8">
-          <div className="bg-[#fff] p-10 rounded-lg flex flex-col gap-1 w-[40rem]">
+          <div className="bg-white p-10 rounded-lg flex flex-col gap-1 w-[40rem]">
             <h1 className="font-semibold text-2x text-2xl pb-2">
               Create New Courses
             </h1>
@@ -56,7 +56,7 @@ const CreateCourses = () => {
             </div>
 
             <Link href="/courses">
-              <Button className="bg-[#38CB89] hover:bg-[#38CB89] w-full mx-auto text-base mt-6">
+              <Button className="bg-greenButton hover:bg-greenButton w-full mx-auto text-base mt-6">
                 Create
               </Button>
             </Link>

@@ -24,7 +24,7 @@ const CreatesubadminModal = () => {
   return (
     <>
       <Button
-        className="bg-[#38CB89] hover:bg-[#38CB89] w-[10rem] h-10 text-base"
+        className="bg-greenButton hover:bg-greenButton w-[10rem] h-10 text-base"
         leftIcon={<Add size="17" variant="Outline" />}
         onClick={() => setOpened(true)}
       >
@@ -61,7 +61,7 @@ const CreatesubadminModal = () => {
               }}
             />
           </div>
-          <Button py="sm" className="bg-[#38CB89] hover:bg-[#38CB89]">
+          <Button py="sm" className="bg-greenButton hover:bg-greenButton">
             Add Sub admin
           </Button>
         </form>

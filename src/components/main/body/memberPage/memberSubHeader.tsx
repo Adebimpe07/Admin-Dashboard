@@ -17,11 +17,7 @@ import Cloud from "../../../../assets/cloud.png";
 import { RichTextEditor } from "@mantine/rte";
 
 const MemberSubHeader = ({ selected, setSelected }) => {
-  const contentData = [
-    "ATS Member",
-    "Testimonial",
-    "Attendance"
-  ];
+  const contentData = ["ATS Member", "Testimonial", "Attendance"];
 
   const [opened, setOpened] = useState(false);
 
@@ -38,9 +34,9 @@ const MemberSubHeader = ({ selected, setSelected }) => {
             <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
               Member Details
             </h1>
-            
+
             <div className="flex gap-4">
-            <Select
+              <Select
                 className="flex-1"
                 label="Cohort"
                 data={[
@@ -68,17 +64,16 @@ const MemberSubHeader = ({ selected, setSelected }) => {
               label="Name"
             />
             <div className="flex gap-4">
-            <TextInput
-              size="sm"
-              className="focus:border-inherit flex-1"
-              label="Email"
-              
-            />
-            <TextInput
-              size="sm"
-              className="focus:border-inherit flex-1"
-              label="Phone No"
-            />
+              <TextInput
+                size="sm"
+                className="focus:border-inherit flex-1"
+                label="Email"
+              />
+              <TextInput
+                size="sm"
+                className="focus:border-inherit flex-1"
+                label="Phone No"
+              />
             </div>
           </div>
           <div className="flex flex-col  gap-4">
@@ -89,10 +84,9 @@ const MemberSubHeader = ({ selected, setSelected }) => {
               accept="image/png,image/jpeg"
               className="bg-[#EBFAF3]"
             />
-              <button className="bg-[#38CB89] text-[white] w-full py-2 rounded">
-                Add
-              </button>
-
+            <button className="bg-greenButton text-[white] w-full py-2 rounded">
+              Add
+            </button>
           </div>
         </Text>
       </Modal>
@@ -108,7 +102,7 @@ const MemberSubHeader = ({ selected, setSelected }) => {
             <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
               Testimonial Details
             </h1>
-            
+
             <div className="flex gap-4">
               <Select
                 className="flex-1"
@@ -150,7 +144,7 @@ const MemberSubHeader = ({ selected, setSelected }) => {
           </div>
 
           <div className="mt-4">
-            <button className="bg-[#38CB89] text-[white] py-2 w-full rounded">
+            <button className="bg-greenButton text-[white] py-2 w-full rounded">
               Upload
             </button>
           </div>
@@ -203,7 +197,7 @@ const MemberSubHeader = ({ selected, setSelected }) => {
         </Text>
         <Button
           fullWidth
-          className="bg-[#38CB89] hover:bg-[#38CB89] h-10 m-auto text-lg my-4"
+          className="bg-greenButton hover:bg-greenButton h-10 m-auto text-lg my-4"
         >
           Create
         </Button>
@@ -247,7 +241,7 @@ const MemberSubHeader = ({ selected, setSelected }) => {
 
         {selected == 0 ? (
           <Button
-            className="bg-[#38CB89] hover:bg-[#38CB89] w-[141px] h-[34px] text-[13px]"
+            className="bg-greenButton hover:bg-greenButton w-[141px] h-[34px] text-[13px]"
             leftIcon={<img src={Cross.src} className="w-4" />}
             onClick={() => setOpened(true)}
           >
@@ -256,7 +250,7 @@ const MemberSubHeader = ({ selected, setSelected }) => {
           </Button>
         ) : selected === 1 ? (
           <Button
-            className="bg-[#38CB89] hover:bg-[#38CB89] w-[141px] h-[34px] text-[13px]"
+            className="bg-greenButton hover:bg-greenButton w-[141px] h-[34px] text-[13px]"
             leftIcon={<img src={Cross.src} className="w-4" />}
             onClick={() => setOpened(true)}
           >

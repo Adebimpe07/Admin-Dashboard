@@ -8,7 +8,7 @@ const index = () => {
   const [active, setActive] = useState(0);
 
   return (
-    <form className="h-screen flex-1 py-6 flex flex-col  bg-[#e5e5e5]">
+    <form className="h-screen flex-1 py-6 flex flex-col  bg-mainBg">
       {active === 0 ? (
         <CreatePage />
       ) : active === 1 ? (

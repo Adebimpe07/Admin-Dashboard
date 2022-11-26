@@ -63,8 +63,8 @@ const AsideBar = ({ title, subtitle, views, timestamp }: asideprops) => {
 
 export const Aside_main = () => {
   return (
-    <div className="relative overflow-auto px-6 my-2 rounded-lg w-[376px] mx-5  bg-[#fff]">
-      <div className="sticky top-0 bg-[#fff]">
+    <div className="relative overflow-auto px-6 my-2 rounded-lg w-[376px] mx-5  bg-white">
+      <div className="sticky top-0 bg-white">
         <h1 className="text-[#18181B] text-base font-semibold pt-2">Jobs</h1>
         <p className="text-[#71717A] font-medium text-sm py-2">
           List of all job entries in the past days

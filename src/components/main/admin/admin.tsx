@@ -11,6 +11,7 @@ import { SubAdminData } from "../../../layout/adminData";
 import { Icon } from "@iconify/react";
 import { EditSubAdminModal } from "./editAdminModal";
 import { DeleteSubAdminModal } from "./deleteAdmin";
+import profile from "../notification_ProfilePicture";
 
 const MenuDrop = () => {
   const initialValues: { opened: boolean; component: React.ReactNode } = {
@@ -99,7 +100,7 @@ const admin = () => {
   const [value, setValue] = useState("");
 
   return (
-    <div className="pt-6 h-screen flex flex-col flex-1 bg-[#e5e5e5]">
+    <div className="pt-6 h-screen flex flex-col flex-1 bg-mainBg">
       <header className="flex justify-between border-b border-[#DBD9D9] px-4">
         <h1 className="text-2xl font-semibold text-[#4A4C58] pb-[1.41rem]">
           Admin
@@ -109,9 +110,9 @@ const admin = () => {
           <img width="40" src={AdminPic.src} alt="" />
         </div>
       </header>
-      <main className="bg-[#fff] mx-10 my-4 rounded-lg px-6 pt-6 grid grid-cols-2 gap-8 overflow-auto">
+      <main className="bg-white mx-10 my-4 rounded-lg px-6 pt-6 grid grid-cols-2 gap-8 overflow-auto">
         <div className="px-6 flex flex-col overflow-auto">
-          <div className="flex flex-col items-center bg-[#fff]">
+          <div className="flex flex-col items-center bg-white">
             <div className="relative">
               <img
                 width="250"
@@ -119,13 +120,13 @@ const admin = () => {
                 src={AdminPic.src}
                 alt=""
               />
-              <span className="p-[0.125rem] bg-[#38CB89] right-2 bottom-2 rounded-full absolute border-b border-[#fff]">
+              <span className="p-[0.125rem] bg-greenButton right-2 bottom-2 rounded-full absolute border-b border-white">
                 <Edit2 size="17" color="#FFF" variant="Bulk" />
               </span>
             </div>
 
             <h1 className="self-center">Avatar Cheese</h1>
-            <p className="text-[#38CB89] self-center">Admin</p>
+            <p className="text-greenButton self-center">Admin</p>
           </div>
           <Admin />
         </div>

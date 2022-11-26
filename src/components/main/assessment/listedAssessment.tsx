@@ -14,7 +14,7 @@ const ListAssessment = ({ text, link }: listAssessmentprops) => {
         <Folder size="80" color="#948E8E" />
         <h1 className="text-[#8F9198] font-semibold text-2xl">{text}</h1>
         <p>You will need to first create a log of categories</p>
-        <button className="items-center justify-center rounded-lg text-[#fff] font-semibold flex bg-[#38CB89] hover:bg-[#38CB89] w-[15rem] h-10 m-auto">
+        <button className="items-center justify-center rounded-lg text-[#fff] font-semibold flex bg-greenButton hover:bg-greenButton w-[15rem] h-10 m-auto">
           {<Add size="17" variant="Outline" />}
           <Link href={link}>
             {" "}

@@ -27,7 +27,7 @@ export const ShortlistModal = () => {
         size="xs"
       />
 
-      <button className="bg-[#38CB89] py-2 rounded text-white hover:bg-[#38CB89]">
+      <button className="bg-greenButton py-2 rounded text-white hover:bg-greenButton">
         Confirm
       </button>
     </form>
