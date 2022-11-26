@@ -24,7 +24,7 @@ const CategoryCard = ({ categoryCard }) => {
             </Button>
           </Link>
         </div>
-        <div className="gap-4 flex-1 overflow-auto m-4 grid grid-cols-3">
+        <div className="gap-4 flex-1 overflow-auto mx-4 mb-2 grid grid-cols-3">
           {categoryCard.map(
             (
               { name, category_info, test_duration, num_of_questions },
