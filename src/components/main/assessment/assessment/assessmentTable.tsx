@@ -5,7 +5,7 @@ import { categoryColumn } from "../../../../layout/tableData";
 import CategoryListData from "../../../../layout/categoryListData.json";
 import { Checkbox } from "./checkbox";
 
-const AssessmentCategoryTable = () => {
+const AssessmentCategoryTable = ({ setSelectedCategory }) => {
     const CategoryColumn = useMemo(() => categoryColumn, []);
     const [CategoryListData, setCategoryListData] = useState([]);
 
@@ -16,11 +16,16 @@ const AssessmentCategoryTable = () => {
                     response.data.data.results.reduce(
                         (
                             acc,
-                            { name, test_duration: time, questions: question }
+                            {
+                                name,
+                                test_duration: time,
+                                questions: question,
+                                id,
+                            }
                         ) => {
                             time = time.split(":")[1][1];
                             question = question.length;
-                            acc.push({ name, question, time });
+                            acc.push({ name, question, time, id });
                             return acc;
                         },
                         []
@@ -49,6 +54,7 @@ const AssessmentCategoryTable = () => {
             })),
         [CategoryListData]
     );
+
     const {
         getTableProps,
         getTableBodyProps,
@@ -75,6 +81,7 @@ const AssessmentCategoryTable = () => {
             hooks.visibleColumns.push((columns) => {
                 return [
                     {
+                        id: "selection",
                         Header: ({ getToggleAllRowsSelectedProps }) => (
                             <Checkbox {...getToggleAllRowsSelectedProps()} />
                         ),
@@ -87,6 +94,10 @@ const AssessmentCategoryTable = () => {
             });
         }
     );
+
+    useEffect(() => {
+        setSelectedCategory(selectedFlatRows.map((row) => row.original));
+    }, [selectedFlatRows]);
 
     const { pageIndex } = state;
 

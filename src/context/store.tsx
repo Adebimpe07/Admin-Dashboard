@@ -285,7 +285,7 @@ export const FormProvider = ({ children }: any) => {
             name: "",
             assessment_info: "",
             total_duration: null,
-            application_type: 8,
+            application_type: 6,
             benchmark: null,
         },
     });
