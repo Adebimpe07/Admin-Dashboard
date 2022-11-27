@@ -48,13 +48,12 @@ const AssessmentCard = ({
               >
                 {DelModal.component}
               </Modal>
-              ;
             </div>
           </div>
           <p>{paragraph}</p>
           <div className="flex gap-2 items-center">
             <Timer1 size="17" />
-            <p>{timestamp} Mins</p>
+            <p>{timestamp} Hrs</p>
             <span>.</span>
             <p>{questions} Questions</p>
           </div>

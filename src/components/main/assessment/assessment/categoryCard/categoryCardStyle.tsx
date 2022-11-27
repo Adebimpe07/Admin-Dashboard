@@ -47,7 +47,6 @@ const CategoryCardStyle = ({
               >
                 {DelModal.component}
               </Modal>
-              ;
             </div>
           </div>
           <p>{paragraph}</p>
