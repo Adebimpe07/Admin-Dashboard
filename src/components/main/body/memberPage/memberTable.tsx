@@ -7,16 +7,6 @@ import {
     atsTestimonialColumn,
     atsAttendanceColumn,
 } from "../../../../layout/tableData";
-import Content from "../../../../layout/contentData.json";
-import ContentBlog from "../../../../layout/contentBlogData.json";
-import ATSMember from "../../../../layout/atsMemberData.json";
-import Testimonial from "../../../../layout/atsTestimonialData.json";
-import Attendance from "../../../../layout/atsAttendanceData.json";
-import ActionMenuEditContent from "../actionButton/ActionMenuEditContent";
-import ActionMenuDeleteContent from "../actionButton/ActionMenuDeleteContent";
-import ActionMenuEditBlogContent from "../actionButton/ActionMenuEditBlogContent";
-import ActionMenuDeleteBlogContent from "../actionButton/ActionMenuDeleteBlogContent";
-import ActionMenuTestimonial from "../actionButton/ActionMenuTestimonial";
 import ActionMenuMemberImg from "../actionButton/ActionMenuMemberImg";
 import ActionMenuEditAtsMember from "../actionButton/ActionMenuEditAtsmember";
 import ActionMenuDeleteAtsMember from "../actionButton/ActionMenuDeleteAtsMember";
