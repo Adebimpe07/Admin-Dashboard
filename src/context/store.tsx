@@ -102,6 +102,7 @@ type formDataProp = {
   setCategoryID: (val: string | ((prevState: string) => string)) => void;
   value: string;
   onChange: React.Dispatch<React.SetStateAction<string>>;
+
 };
 
 export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
@@ -260,6 +261,10 @@ export const FormProvider = ({ children }: any) => {
       }),
     },
   });
+
+
+
+
   const [questionType, setQuestionType] = useSessionStorage({
     key: "questionType",
     defaultValue: "",
@@ -300,24 +305,10 @@ export const FormProvider = ({ children }: any) => {
     onChange,
     setAllApplicants,
     setPassApplicants,
-    setshortApplicants
+    setshortApplicants,
   };
 
   return (
     <FormContext.Provider value={formData}>{children}</FormContext.Provider>
   );
 };
-
-// "question_text": "Question 14?",
-//     "question_type": "Multi-choice",
-//     "question_category": "Real",
-//     "choices": [
-//         {
-//             "choice_text": "A",
-//             "is_correct": true
-//         },
-//         {
-//             "choice_text": "B"
-//         }
-//     ]
-// }
