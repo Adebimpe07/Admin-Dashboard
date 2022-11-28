@@ -37,93 +37,72 @@ import failAssesment from "../layout/failAssesmentData.json";
 import { useSessionStorage } from "@mantine/hooks";
 
 type formDataProp = {
-    selected: number;
-    setSelected: React.Dispatch<React.SetStateAction<number>>;
-    pageIndex: any;
-    globalFilter: any;
-    getTableProps: any;
-    getTableBodyProps: any;
-    headerGroups: any;
-    page: any;
-    nextPage: any;
-    previousPage: any;
-    canNextPage: any;
-    canPreviousPage: any;
-    pageOptions: any;
-    gotoPage: any;
-    pageCount: any;
-    setGlobalFilter: any;
-    prepareRow: any;
-    selectedFlatRows: any;
-    questionsForm: UseFormReturnType<
-        {
-            question_text: string;
-            question_type: string;
-            question_category: string;
-            question_hint: string;
-            choices: any[];
-        },
-        (values: {
-            question_text: string;
-            question_type: string;
-            question_category: string;
-            question_hint: string;
-            choices: any[];
-        }) => {
-            question_text: string;
-            question_type: string;
-            question_category: string;
-            question_hint: string;
-            choices: any[];
-        }
-    >;
-    categoryID: string;
-    categoryForm: UseFormReturnType<
-        {
-            name: string;
-            category_info: string;
-            test_duration: string;
-            num_of_questions: number;
-        },
-        (values: {
-            name: string;
-            category_info: string;
-            test_duration: string;
-            num_of_questions: number;
-        }) => {
-            name: string;
-            category_info: string;
-            test_duration: string;
-            num_of_questions: number;
-        }
-    >;
-    questionType: string;
-    setQuestionType: (val: string | ((prevState: string) => string)) => void;
-    setCategoryID: (val: string | ((prevState: string) => string)) => void;
-    value: string;
-    onChange: React.Dispatch<React.SetStateAction<string>>;
-    assessmentForm: UseFormReturnType<
-        {
-            name: string;
-            assessment_info: string;
-            total_duration: number;
-            application_type: number;
-            benchmark: number;
-        },
-        (values: {
-            name: string;
-            assessment_info: string;
-            total_duration: number;
-            application_type: number;
-            benchmark: number;
-        }) => {
-            name: string;
-            assessment_info: string;
-            total_duration: number;
-            application_type: number;
-            benchmark: number;
-        }
-    >;
+  selected: number;
+  setSelected: React.Dispatch<React.SetStateAction<number>>;
+  pageIndex: any;
+  globalFilter: any;
+  getTableProps: any;
+  getTableBodyProps: any;
+  headerGroups: any;
+  page: any;
+  nextPage: any;
+  previousPage: any;
+  canNextPage: any;
+  canPreviousPage: any;
+  pageOptions: any;
+  gotoPage: any;
+  pageCount: any;
+  setGlobalFilter: any;
+  prepareRow: any;
+  selectedFlatRows: any;
+  questionsForm: UseFormReturnType<
+    {
+      question_text: string;
+      question_type: string;
+      question_category: string;
+      question_hint: string;
+      choices: any[];
+    },
+    (values: {
+      question_text: string;
+      question_type: string;
+      question_category: string;
+      question_hint: string;
+      choices: any[];
+    }) => {
+      question_text: string;
+      question_type: string;
+      question_category: string;
+      question_hint: string;
+      choices: any[];
+    }
+  >;
+  categoryID: string;
+  categoryForm: UseFormReturnType<
+    {
+      name: string;
+      category_info: string;
+      test_duration: string;
+      num_of_questions: number;
+    },
+    (values: {
+      name: string;
+      category_info: string;
+      test_duration: string;
+      num_of_questions: number;
+    }) => {
+      name: string;
+      category_info: string;
+      test_duration: string;
+      num_of_questions: number;
+    }
+  >;
+  questionType: string;
+  setQuestionType: (val: string | ((prevState: string) => string)) => void;
+  setCategoryID: (val: string | ((prevState: string) => string)) => void;
+  value: string;
+  onChange: React.Dispatch<React.SetStateAction<string>>;
+
 };
 
 export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
@@ -135,59 +114,62 @@ export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
 const FormContext = createContext<formDataProp | null>(null);
 export default FormContext;
 export const FormProvider = ({ children }: any) => {
-    const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(0);
+  const [allApplicants, setAllApplicants] = useState(MOCK_DATA)
+  const [shortApplicants, setshortApplicants] = useState(SHORTLISTED_DATA)
+  const [passApplicants, setPassApplicants] = useState(passAssesment)
 
-    const AllapplicationColumns = useMemo(() => allApplicationColumn, []);
-    const ShortlistedColumn = useMemo(() => ShortListColumn, []);
-    const PassedColumn = useMemo(() => passedColumn, []);
-    const FailedColumn = useMemo(() => failedColumn, []);
-    const InterviewColumn = useMemo(() => interviewColumn, []);
-    const HiredColumn = useMemo(() => hiredColumn, []);
-    const RejectedColumn = useMemo(() => rejectedColumn, []);
-    const data = useMemo(
-        () =>
-            MOCK_DATA.map((mock, idx) => ({
-                ...mock,
-                action: <ActionMenuApplication />,
-            })),
-        []
-    );
-    const shortListed = useMemo(
-        () =>
-            SHORTLISTED_DATA.map((mock, idx) => ({
-                ...mock,
-                action: <ActionMenuShortlist />,
-            })),
-        []
-    );
-    const passed = useMemo(
-        () =>
-            passAssesment.map((mock, idx) => ({
-                ...mock,
-                status: <PassedStatus />,
-                action: <ActionMenuPass />,
-            })),
-        []
-    );
-    const failed = useMemo(
-        () =>
-            failAssesment.map((mock, idx) => ({
-                ...mock,
-                status: <FailedStatus />,
-                action: <ActionMenuFail />,
-            })),
-        []
-    );
-    const Interview = useMemo(
-        () =>
-            interview.map((mock, idx) => ({
-                ...mock,
-                action: <ActionMenuInterview />,
-            })),
-        []
-    );
-    const Hired = useMemo(() => hired, []);
-    const Rejected = useMemo(() => rejected, []);
+  const AllapplicationColumns = useMemo(() => allApplicationColumn, []);
+  const ShortlistedColumn = useMemo(() => ShortListColumn, []);
+  const PassedColumn = useMemo(() => passedColumn, []);
+  const FailedColumn = useMemo(() => failedColumn, []);
+  const InterviewColumn = useMemo(() => interviewColumn, []);
+  const HiredColumn = useMemo(() => hiredColumn, []);
+  const RejectedColumn = useMemo(() => rejectedColumn, []);
+  const data = useMemo(
+    () =>
+      allApplicants.map((mock, idx) => ({
+        ...mock,
+        action: <ActionMenuApplication />,
+      })),
+    []
+  );
+  const shortListed = useMemo(
+    () =>
+    shortApplicants.map((mock, idx) => ({
+        ...mock,
+        action: <ActionMenuShortlist />,
+      })),
+    []
+  );
+  const passed = useMemo(
+    () =>
+    passApplicants.map((mock, idx) => ({
+        ...mock,
+        status: <PassedStatus />,
+        action: <ActionMenuPass />,
+      })),
+    []
+  );
+  const failed = useMemo(
+    () =>
+      failAssesment.map((mock, idx) => ({
+        ...mock,
+        status: <FailedStatus />,
+        action: <ActionMenuFail />,
+      })),
+    []
+  );
+  const Interview = useMemo(
+    () =>
+      interview.map((mock, idx) => ({
+        ...mock,
+        action: <ActionMenuInterview />,
+      })),
+    []
+  );
+  const Hired = useMemo(() => hired, []);
+  const Rejected = useMemo(() => rejected, []);
 
     const {
         getTableProps,
@@ -280,19 +262,26 @@ export const FormProvider = ({ children }: any) => {
         },
     });
 
-    const assessmentForm = useForm({
-        initialValues: {
-            name: "",
-            assessment_info: "",
-            total_duration: null,
-            application_type: 6,
-            benchmark: null,
-        },
-    });
-    const [questionType, setQuestionType] = useSessionStorage({
-        key: "questionType",
-        defaultValue: "",
-    });
+  const questionsForm = useForm({
+    initialValues: {
+      question_text: "",
+      question_type: "",
+      question_category: "Real",
+      question_hint: "face your book",
+      choices: Array(4).fill({
+        choice_text: "",
+        is_correct: false,
+      }),
+    },
+  });
+
+
+
+
+  const [questionType, setQuestionType] = useSessionStorage({
+    key: "questionType",
+    defaultValue: "",
+  });
 
     const [categoryID, setCategoryID] = useSessionStorage({
         key: "categoryID",
@@ -300,51 +289,39 @@ export const FormProvider = ({ children }: any) => {
     });
     const [value, onChange] = useState("");
 
-    let formData = {
-        selected,
-        setSelected,
-        pageIndex,
-        globalFilter,
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        page,
-        nextPage,
-        previousPage,
-        canNextPage,
-        canPreviousPage,
-        pageOptions,
-        gotoPage,
-        pageCount,
-        setGlobalFilter,
-        prepareRow,
-        selectedFlatRows,
-        questionsForm,
-        categoryID,
-        categoryForm,
-        questionType,
-        setQuestionType,
-        setCategoryID,
-        value,
-        onChange,
-        assessmentForm,
-    };
+  let formData = {
+    selected,
+    setSelected,
+    pageIndex,
+    globalFilter,
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    gotoPage,
+    pageCount,
+    setGlobalFilter,
+    prepareRow,
+    selectedFlatRows,
+    questionsForm,
+    categoryID,
+    categoryForm,
+    questionType,
+    setQuestionType,
+    setCategoryID,
+    value,
+    onChange,
+    setAllApplicants,
+    setPassApplicants,
+    setshortApplicants,
+  };
 
     return (
         <FormContext.Provider value={formData}>{children}</FormContext.Provider>
     );
 };
-
-// "question_text": "Question 14?",
-//     "question_type": "Multi-choice",
-//     "question_category": "Real",
-//     "choices": [
-//         {
-//             "choice_text": "A",
-//             "is_correct": true
-//         },
-//         {
-//             "choice_text": "B"
-//         }
-//     ]
-// }
