@@ -1,23 +1,23 @@
 import { createContext, useState, useEffect, useMemo } from "react";
 import { useForm, UseFormReturnType } from "@mantine/form";
 import {
-    useTable,
-    useRowSelect,
-    usePagination,
-    useGlobalFilter,
-    TableInstance,
-    UsePaginationInstanceProps,
-    UseSortByInstanceProps,
-    UsePaginationState,
+  useTable,
+  useRowSelect,
+  usePagination,
+  useGlobalFilter,
+  TableInstance,
+  UsePaginationInstanceProps,
+  UseSortByInstanceProps,
+  UsePaginationState,
 } from "react-table";
 import {
-    allApplicationColumn,
-    ShortListColumn,
-    passedColumn,
-    failedColumn,
-    interviewColumn,
-    hiredColumn,
-    rejectedColumn,
+  allApplicationColumn,
+  ShortListColumn,
+  passedColumn,
+  failedColumn,
+  interviewColumn,
+  hiredColumn,
+  rejectedColumn,
 } from "../layout/tableData";
 import { Checkbox } from "../components/main/body/applicationPage/checkBox";
 import MOCK_DATA from "../layout/MOCK_DATA.json";
@@ -103,21 +103,68 @@ type formDataProp = {
   value: string;
   onChange: React.Dispatch<React.SetStateAction<string>>;
 
+  assessmentForm: UseFormReturnType<
+    {
+      name: string;
+      assessment_info: string;
+      total_duration: number;
+      application_type: number;
+      benchmark: number;
+    },
+    (values: {
+      name: string;
+      assessment_info: string;
+      total_duration: number;
+      application_type: number;
+      benchmark: number;
+    }) => {
+      name: string;
+      assessment_info: string;
+      total_duration: number;
+      application_type: number;
+      benchmark: number;
+    }
+  >;
+  subadminForm: UseFormReturnType<
+    {
+      first_name: string;
+      username: string;
+      gender: string;
+      last_name: string;
+      email: string;
+      password: string;
+      confirm_password: string;
+    },
+    (values: {
+      first_name: string;
+      username: string;
+      gender: string;
+      last_name: string;
+      email: string;
+      password: string;
+      confirm_password: string;
+    }) => {
+      first_name: string;
+      username: string;
+      gender: string;
+      last_name: string;
+      email: string;
+      password: string;
+      confirm_password: string;
+    }
+  >;
 };
 
 export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
-    UsePaginationInstanceProps<T> &
-    UseSortByInstanceProps<T> & {
-        state: UsePaginationState<T>;
-    };
+  UsePaginationInstanceProps<T> &
+  UseSortByInstanceProps<T> & {
+    state: UsePaginationState<T>;
+  };
 
 const FormContext = createContext<formDataProp | null>(null);
 export default FormContext;
 export const FormProvider = ({ children }: any) => {
   const [selected, setSelected] = useState(0);
-  const [allApplicants, setAllApplicants] = useState(MOCK_DATA)
-  const [shortApplicants, setshortApplicants] = useState(SHORTLISTED_DATA)
-  const [passApplicants, setPassApplicants] = useState(passAssesment)
 
   const AllapplicationColumns = useMemo(() => allApplicationColumn, []);
   const ShortlistedColumn = useMemo(() => ShortListColumn, []);
@@ -128,7 +175,7 @@ export const FormProvider = ({ children }: any) => {
   const RejectedColumn = useMemo(() => rejectedColumn, []);
   const data = useMemo(
     () =>
-      allApplicants.map((mock, idx) => ({
+      MOCK_DATA.map((mock, idx) => ({
         ...mock,
         action: <ActionMenuApplication />,
       })),
@@ -136,7 +183,7 @@ export const FormProvider = ({ children }: any) => {
   );
   const shortListed = useMemo(
     () =>
-    shortApplicants.map((mock, idx) => ({
+      SHORTLISTED_DATA.map((mock, idx) => ({
         ...mock,
         action: <ActionMenuShortlist />,
       })),
@@ -144,7 +191,7 @@ export const FormProvider = ({ children }: any) => {
   );
   const passed = useMemo(
     () =>
-    passApplicants.map((mock, idx) => ({
+      passAssesment.map((mock, idx) => ({
         ...mock,
         status: <PassedStatus />,
         action: <ActionMenuPass />,
@@ -171,96 +218,83 @@ export const FormProvider = ({ children }: any) => {
   const Hired = useMemo(() => hired, []);
   const Rejected = useMemo(() => rejected, []);
 
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        page,
-        nextPage,
-        previousPage,
-        canNextPage,
-        canPreviousPage,
-        pageOptions,
-        gotoPage,
-        pageCount,
-        state,
-        setGlobalFilter,
-        prepareRow,
-        selectedFlatRows,
-    } = useTable(
-        {
-            columns:
-                selected === 0
-                    ? AllapplicationColumns
-                    : selected === 1
-                    ? ShortlistedColumn
-                    : selected === 2
-                    ? PassedColumn
-                    : selected === 3
-                    ? FailedColumn
-                    : selected === 4
-                    ? InterviewColumn
-                    : selected === 5
-                    ? HiredColumn
-                    : (RejectedColumn as any),
-            data:
-                selected === 0
-                    ? data
-                    : selected === 1
-                    ? shortListed
-                    : selected === 2
-                    ? passed
-                    : selected === 3
-                    ? failed
-                    : selected === 4
-                    ? Interview
-                    : selected === 5
-                    ? Hired
-                    : (Rejected as any),
-        },
-        useGlobalFilter,
-        usePagination,
-        useRowSelect,
-        (hooks) => {
-            hooks.visibleColumns.push((columns): any => {
-                return [
-                    {
-                        Header: ({ getToggleAllRowsSelectedProps }: any) => (
-                            <Checkbox {...getToggleAllRowsSelectedProps()} />
-                        ),
-                        Cell: ({ row }: any) => (
-                            <Checkbox {...row.getToggleRowSelectedProps()} />
-                        ),
-                    },
-                    ...columns,
-                ];
-            });
-        }
-    ) as TableInstanceWithHooks<object>;
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    gotoPage,
+    pageCount,
+    state,
+    setGlobalFilter,
+    prepareRow,
+    selectedFlatRows,
+  } = useTable(
+    {
+      columns:
+        selected === 0
+          ? AllapplicationColumns
+          : selected === 1
+          ? ShortlistedColumn
+          : selected === 2
+          ? PassedColumn
+          : selected === 3
+          ? FailedColumn
+          : selected === 4
+          ? InterviewColumn
+          : selected === 5
+          ? HiredColumn
+          : (RejectedColumn as any),
+      data:
+        selected === 0
+          ? data
+          : selected === 1
+          ? shortListed
+          : selected === 2
+          ? passed
+          : selected === 3
+          ? failed
+          : selected === 4
+          ? Interview
+          : selected === 5
+          ? Hired
+          : (Rejected as any),
+    },
+    useGlobalFilter,
+    usePagination,
+    useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((columns): any => {
+        return [
+          {
+            Header: ({ getToggleAllRowsSelectedProps }: any) => (
+              <Checkbox {...getToggleAllRowsSelectedProps()} />
+            ),
+            Cell: ({ row }: any) => (
+              <Checkbox {...row.getToggleRowSelectedProps()} />
+            ),
+          },
+          ...columns,
+        ];
+      });
+    }
+  ) as TableInstanceWithHooks<object>;
 
-    const { pageIndex, globalFilter }: any = state;
+  const { pageIndex, globalFilter }: any = state;
 
-    const categoryForm = useForm({
-        initialValues: {
-            name: "",
-            category_info: "",
-            test_duration: "",
-            num_of_questions: 0,
-        },
-    });
-
-    const questionsForm = useForm({
-        initialValues: {
-            question_text: "",
-            question_type: "",
-            question_category: "Real",
-            question_hint: "face your book",
-            choices: Array(4).fill({
-                choice_text: "",
-                is_correct: false,
-            }),
-        },
-    });
+  const categoryForm = useForm({
+    initialValues: {
+      name: "",
+      category_info: "",
+      test_duration: "",
+      num_of_questions: 0,
+    },
+  });
 
   const questionsForm = useForm({
     initialValues: {
@@ -275,19 +309,38 @@ export const FormProvider = ({ children }: any) => {
     },
   });
 
-
-
+  const assessmentForm = useForm({
+    initialValues: {
+      name: "",
+      assessment_info: "",
+      total_duration: null,
+      application_type: 6,
+      benchmark: null,
+    },
+  });
+  const subadminForm = useForm({
+    initialValues: {
+      first_name: "",
+      username: "",
+      gender: "",
+      last_name: "",
+      email: "",
+      password: "",
+      confirm_password: "",
+    },
+  });
 
   const [questionType, setQuestionType] = useSessionStorage({
     key: "questionType",
     defaultValue: "",
   });
 
-    const [categoryID, setCategoryID] = useSessionStorage({
-        key: "categoryID",
-        defaultValue: "",
-    });
-    const [value, onChange] = useState("");
+  const [categoryID, setCategoryID] = useSessionStorage({
+    key: "categoryID",
+    defaultValue: "",
+  });
+
+  const [value, onChange] = useState("");
 
   let formData = {
     selected,
@@ -316,12 +369,11 @@ export const FormProvider = ({ children }: any) => {
     setCategoryID,
     value,
     onChange,
-    setAllApplicants,
-    setPassApplicants,
-    setshortApplicants,
+    assessmentForm,
+    subadminForm,
   };
 
-    return (
-        <FormContext.Provider value={formData}>{children}</FormContext.Provider>
-    );
+  return (
+    <FormContext.Provider value={formData}>{children}</FormContext.Provider>
+  );
 };
