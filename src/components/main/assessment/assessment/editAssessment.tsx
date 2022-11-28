@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 const EditAssessmentPage = ({ id }) => {
-  console.log(id);
+  // console.log(id);
   const editAssessment = (id) =>
     axios({
       method: "put",

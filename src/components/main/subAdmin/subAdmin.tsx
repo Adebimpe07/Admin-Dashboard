@@ -1,6 +1,8 @@
-import { Button, Modal } from "@mantine/core";
+import { Button, Modal, PasswordInput, Stack } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import { StaticImageData } from "next/image";
 import React, { useState } from "react";
+
 import { SubAdminData } from "../../../layout/subAdminData";
 
 type subadminprops = {
@@ -11,6 +13,9 @@ type subadminprops = {
 };
 
 const subAdmin = () => {
+  const [opened, setOpened] = useState(false);
+  const [visible, { toggle }] = useDisclosure(false);
+
   const { profile_picture, admin_name, admin_email, access_level } =
     SubAdminData;
   return (
@@ -42,9 +47,9 @@ const subAdmin = () => {
               <h1 className="font-semibold">Profile Information</h1>
               <Button
                 className="bg-[#1e1f1f] hover:bg-[#1e1f1f] w-[10rem] h-8 text-sm"
-                onClick={() => {}}
+                onClick={() => setOpened(true)}
               >
-                Password Reset
+                Change password
               </Button>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -70,6 +75,39 @@ const subAdmin = () => {
           </div>
         </div>
       </main>
+      <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        classNames={{
+          root: "w-[30rem] m-auto",
+        }}
+        centered
+      >
+        <Stack sx={{ maxWidth: 380 }} mx="auto">
+          <PasswordInput
+            label="Old Password"
+            visible={visible}
+            onVisibilityChange={toggle}
+          />
+          <PasswordInput
+            label="New Password"
+            visible={visible}
+            onVisibilityChange={toggle}
+          />
+          <PasswordInput
+            label="Confirm password"
+            visible={visible}
+            onVisibilityChange={toggle}
+          />
+          <Button
+            className="bg-greenButton hover:bg-greenButton w-[10rem] h-8 text-sm mx-auto"
+            onClick={() => {}}
+          >
+            Save password
+          </Button>
+        </Stack>
+      </Modal>
+      ;
     </div>
   );
 };

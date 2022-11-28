@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import { useTable, useRowSelect, usePagination } from "react-table";
-import { viewAssessmentColumn } from "../../../../../layout/tableData";
-import ViewAssessmentData from "../../../../../layout/viewAssessmentData";
-import { Checkbox } from "../checkbox";
-import ActionMenuPass from "../../../body/actionButton/actionViewAsess";
+import { viewAssessmentColumn } from "../../../../layout/tableData";
+import ViewAssessmentData from "../../../../layout/viewAssessmentData";
+import { Checkbox } from "../assessment/checkbox";
+import ActionMenuPass from "../../body/actionButton/actionViewAsess";
 
 const ViewAssessmentTable = () => {
   const AssessmentColumn = useMemo(() => viewAssessmentColumn, []);
@@ -16,6 +16,7 @@ const ViewAssessmentTable = () => {
       })),
     []
   );
+
   const {
     getTableProps,
     getTableBodyProps,

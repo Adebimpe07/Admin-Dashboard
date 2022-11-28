@@ -3,7 +3,7 @@ import { Button, Modal } from "@mantine/core";
 import { Edit2, Eye, Timer1, Trash } from "iconsax-react";
 import Link from "next/link";
 import React, { useState } from "react";
-import { DeleteCategory } from "../assessment/categoryCard/deleteCategory";
+import { DeleteCategory } from "../categoryCard/deleteCategory";
 import { DeleteAssessment } from "./deleteAssessment";
 
 type assessmentCardsprops = {

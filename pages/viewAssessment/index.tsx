@@ -1,5 +1,5 @@
 import React from "react";
-import ViewAssessment from "../../src/components/main/assessment/assessment/viewAssessment/viewAssessment";
+import ViewAssessment from "../../src/components/main/assessment/assessmentTable/viewAssessment";
 
 const index = () => {
   return <ViewAssessment />;

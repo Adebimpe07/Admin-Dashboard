@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useTable, useRowSelect, usePagination } from "react-table";
 import { categoryColumn } from "../../../../layout/tableData";
 import CategoryListData from "../../../../layout/categoryListData.json";
-import { Checkbox } from "./checkbox";
+import { Checkbox } from "../assessment/checkbox";
 
 const AssessmentCategoryTable = ({ setSelectedCategory }) => {
   const CategoryColumn = useMemo(() => categoryColumn, []);
@@ -37,12 +37,6 @@ const AssessmentCategoryTable = ({ setSelectedCategory }) => {
     () =>
       CategoryListData.map((category, idx) => ({
         ...category,
-        // edit: (
-        //   <Link href="createCategory">
-        //     <Edit2 size="17" variant="Bulk" />
-        //   </Link>
-        // ),
-        // delete: <DeleteIcon />,
       })),
     [CategoryListData]
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import AssessmentCard from "../assessmentCard/assessmentCardStyle";
+import AssessmentCard from "./assessmentCardStyle";
 import { AssessmentCardData } from "../../../../layout/assessmentCardData";
 import Header from "../categoryCreate/header";
 import { Button } from "@mantine/core";

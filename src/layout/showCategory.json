@@ -1,0 +1,23 @@
+[
+  {
+    "type": "Personality",
+    "question": "30",
+    "time": "10"
+  },
+  {
+    "type": "statistics",
+    "question": "30",
+    "time": "10"
+  },
+  {
+    "type": "Aptitude",
+    "question": "30",
+    "time": "10"
+  }
+   {
+    "type": "Aptitude",
+    "question": "30",
+    "time": "10"
+  }
+ 
+]

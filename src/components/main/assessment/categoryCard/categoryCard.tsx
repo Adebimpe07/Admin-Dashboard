@@ -2,8 +2,8 @@ import { Button } from "@mantine/core";
 import { Add } from "iconsax-react";
 import Link from "next/link";
 import React from "react";
-import { CategoryCardData } from "../../../../../layout/assessmentCardData";
-import Header from "../../categoryCreate/header";
+import { CategoryCardData } from "../../../../layout/assessmentCardData";
+import Header from "../categoryCreate/header";
 import CategoryCardStyle from "./categoryCardStyle";
 
 const CategoryCard = ({ categoryCard }) => {
