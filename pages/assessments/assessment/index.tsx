@@ -33,7 +33,7 @@ const HeaderMain = () => {
   const [AssessmentCardData, setAssessmentCardData] = useState(null);
 
   const fetchAllAssessment = () => {
-    axios("http://assessbk.afexats.com/api/assessment/create-list-assessment")
+    axios("https://assessbk.afexats.com/api/assessment/create-list-assessment")
       .then(function (response) {
         setAssessmentCardData(response.data.data.results);
       })
