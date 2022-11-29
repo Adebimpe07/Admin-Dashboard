@@ -48,7 +48,7 @@ export const SideData = [
   {
     icon: <FolderOpen size="17" variant="Outline" />,
     heading: "Content Management",
-    href: "/content",
+    href: "/content/news",
   },
   {
     icon: <Teacher size="17" variant="Outline" />,
@@ -63,12 +63,12 @@ export const SideData = [
   {
     icon: <UserEdit size="17" variant="Outline" />,
     heading: "Member Management",
-    href: "/memberManagement",
+    href: "/memberManagement/ats_members",
   },
   {
     icon: <Icon icon="material-symbols:outgoing-mail-outline" width="19" />,
     heading: "Email Template",
-    href: "/email",
+    href: "/emailTemplate",
   },
 ];
 export const AdminData = [

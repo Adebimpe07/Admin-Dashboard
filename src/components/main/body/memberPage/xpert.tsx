@@ -45,7 +45,11 @@ const Xpert = () => {
               { value: "md", label: "MobileApp Development" },
             ]}
           />
-          <FileInput label="Xpert Picture" placeholder="Upload image" accept="image/png,image/jpeg" />
+          <FileInput
+            label="Xpert Picture"
+            placeholder="Upload image"
+            accept="image/png,image/jpeg"
+          />
         </div>
         <p className="py-4">Xpert Views</p>
         <RichTextEditor
@@ -61,7 +65,7 @@ const Xpert = () => {
           <button className="text-[#4A4C58] px-8 border-[1px] rounded">
             Cancel
           </button>
-          <button className="bg-[#38CB89] text-white px-8 rounded py-1">
+          <button className="bg-greenButton text-white px-8 rounded py-1">
             Upload
           </button>
         </div>

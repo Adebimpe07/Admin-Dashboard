@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Notification } from "iconsax-react";
 import { Menu } from "@mantine/core";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import Tabs from "../../../src/layout/assessmentTabs";
 import ListAssessment from "../../../src/components/main/assessment/listedAssessment";
 import { AssessmentCardData } from "../../../src/layout/assessmentCardData";
 import AssessmentCards from "../../../src/components/main/assessment/assessmentCard/assessmentCards";
+import axios from "axios";
 
 export const NotificationDrop = () => {
   return (
@@ -29,10 +30,26 @@ export const NotificationDrop = () => {
 };
 
 const HeaderMain = () => {
-  return AssessmentCardData.length > 0 ? (
-    <AssessmentCards />
+  const [AssessmentCardData, setAssessmentCardData] = useState(null);
+
+  const fetchAllAssessment = () => {
+    axios("http://assessbk.afexats.com/api/assessment/create-list-assessment")
+      .then(function (response) {
+        setAssessmentCardData(response.data.data.results);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchAllAssessment();
+  }, []);
+
+  return AssessmentCardData?.length > 0 ? (
+    <AssessmentCards AssessmentCardData={AssessmentCardData} />
   ) : (
-    <div className="py-6 h-screen flex-1 flex flex-col  bg-[#e5e5e5]">
+    <div className="py-6 h-screen flex-1 flex flex-col  bg-mainBg">
       <div className="flex justify-between border-b border-[#DBD9D9] px-4">
         <h1 className="text-2xl font-semibold text-[#4A4C58] pb-[1.41rem]">
           Assessments

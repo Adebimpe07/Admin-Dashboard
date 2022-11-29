@@ -274,7 +274,7 @@ export const atsMemberColumn = [
   },
   {
     Header: "Name",
-    accessor: "name",
+    accessor: "full_name",
   },
   {
     Header: "Status",
@@ -290,7 +290,7 @@ export const atsMemberColumn = [
   },
   {
     Header: "Email",
-    accessor: "email",
+    accessor: "official_email",
   },
   {
     Header: "Phone No",
@@ -396,6 +396,28 @@ export const questionList = [
     Header: "",
     accessor: "delete",
   },
+];
+export const showCategoryList = [
+  {
+    Header: "Type",
+    accessor: "type",
+  },
+  {
+    Header: "Questions",
+    accessor: "question",
+  },
+  {
+    Header: "Time",
+    accessor: "time",
+  },
+  //   {
+  //     Header: "",
+  //     accessor: "edit",
+  //   },
+  //   {
+  //     Header: "",
+  //     accessor: "delete",
+  //   },
 ];
 
 export const emailColumn = [

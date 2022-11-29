@@ -23,7 +23,7 @@ const Header = ({ setSelected, selected }) => {
           </div>
         ))}
       </div>
-      <div className="text-[#F9FAFB] bg-[#38CB89] py-2.5 border rounded-lg flex gap-4 items-center px-7">
+      <div className="text-[#F9FAFB] bg-greenButton py-2.5 border rounded-lg flex gap-4 items-center px-7">
         <img src={Cross.src} className="w-3 h-3" />
         <p className="text-[#F9FAFB]">Post a job</p>
       </div>

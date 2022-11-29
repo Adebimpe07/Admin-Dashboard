@@ -3,7 +3,7 @@ import { Button, Modal } from "@mantine/core";
 import { Edit2, Eye, Timer1, Trash } from "iconsax-react";
 import Link from "next/link";
 import React, { useState } from "react";
-import { DeleteCategory } from "../../assessment/categoryCard/deleteCategory";
+import { DeleteCategory } from "./deleteCategory";
 
 type categoryCardsprops = {
   questions: string;
@@ -32,7 +32,7 @@ const CategoryCardStyle = ({
 
   return (
     <div>
-      <div className="flex h-full flex-col bg-[#fff] rounded-lg">
+      <div className="flex h-full flex-col bg-white rounded-lg">
         <div className="p-4 flex h-full justify-between gap-5 flex-col">
           <div className="flex justify-between">
             <h1 className="font-semibold whitespace-nowrap">{title}</h1>
@@ -47,7 +47,6 @@ const CategoryCardStyle = ({
               >
                 {DelModal.component}
               </Modal>
-              ;
             </div>
           </div>
           <p>{paragraph}</p>
@@ -61,7 +60,7 @@ const CategoryCardStyle = ({
             <span className="flex items-center gap-2 ">
               {" "}
               <Eye size="17" color="#fff" />
-              <p>View Categories</p>
+              <p>View Questions</p>
             </span>
           </Button>
         </div>

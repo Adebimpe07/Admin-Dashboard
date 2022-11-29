@@ -1,25 +1,46 @@
-import React, { useMemo } from "react";
+import axios from "axios";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTable, useRowSelect, usePagination } from "react-table";
 import { categoryColumn } from "../../../../layout/tableData";
 import CategoryListData from "../../../../layout/categoryListData.json";
-import { Checkbox } from "./checkbox";
+import { Checkbox } from "../assessment/checkbox";
 
-const AssessmentCategoryTable = () => {
+const AssessmentCategoryTable = ({ setSelectedCategory }) => {
   const CategoryColumn = useMemo(() => categoryColumn, []);
+  const [CategoryListData, setCategoryListData] = useState([]);
+
+  const fetchAllCategories = () => {
+    axios("http://assessbk.afexats.com/api/categories/")
+      .then(function (response) {
+        setCategoryListData(
+          response.data.data.results.reduce(
+            (acc, { name, test_duration: time, questions: question, id }) => {
+              time = time.split(":")[1][1];
+              question = question.length;
+              acc.push({ name, question, time, id });
+              return acc;
+            },
+            []
+          )
+        );
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchAllCategories();
+  }, []);
 
   const CategoryData = useMemo(
     () =>
       CategoryListData.map((category, idx) => ({
         ...category,
-        // edit: (
-        //   <Link href="createCategory">
-        //     <Edit2 size="17" variant="Bulk" />
-        //   </Link>
-        // ),
-        // delete: <DeleteIcon />,
       })),
-    []
+    [CategoryListData]
   );
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -46,6 +67,7 @@ const AssessmentCategoryTable = () => {
       hooks.visibleColumns.push((columns) => {
         return [
           {
+            id: "selection",
             Header: ({ getToggleAllRowsSelectedProps }) => (
               <Checkbox {...getToggleAllRowsSelectedProps()} />
             ),
@@ -59,6 +81,10 @@ const AssessmentCategoryTable = () => {
     }
   );
 
+  useEffect(() => {
+    setSelectedCategory(selectedFlatRows.map((row) => row.original));
+  }, [selectedFlatRows]);
+
   const { pageIndex } = state;
 
   return (
@@ -70,8 +96,9 @@ const AssessmentCategoryTable = () => {
         <thead className=" text-[#514747]  font-normal">
           {headerGroups.map((headerGroups) => (
             <tr {...headerGroups.getHeaderGroupProps()}>
-              {headerGroups.headers.map((columns) => (
+              {headerGroups.headers.map((columns, index) => (
                 <th
+                  key={index}
                   {...columns.getHeaderProps()}
                   className="py-4 text-[#514747] pl-8 text-left font-normal bg-[#F5F5F5]"
                 >

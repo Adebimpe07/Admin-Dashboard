@@ -7,7 +7,7 @@ import All from "../../src/components/main/body/jobPage/job";
 const index = () => {
   const [selected, setSelected] = useState(0);
   return (
-    <div className="flex-1 bg-[#E5E5E5] flex flex-col overflow-auto pb-4 h-full">
+    <div className="flex-1 bg-mainBg flex flex-col overflow-auto pb-4 h-full">
       <HeaderJob />
       <Header selected={selected} setSelected={setSelected} />
       {selected === 0 ? <All /> : <Body />}

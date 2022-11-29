@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NotificationDrop } from "../../../../pages/assessments/categories";
 import ProfilePicture from "../../../assets/Avatar.png";
 import AdminPic from "../../../assets/Admin.svg";
@@ -11,6 +11,10 @@ import { SubAdminData } from "../../../layout/adminData";
 import { Icon } from "@iconify/react";
 import { EditSubAdminModal } from "./editAdminModal";
 import { DeleteSubAdminModal } from "./deleteAdmin";
+import profile from "../notification_ProfilePicture";
+import axios from "axios";
+import FormContext from "../../../context/store";
+import { useRouter } from "next/router";
 
 const MenuDrop = () => {
   const initialValues: { opened: boolean; component: React.ReactNode } = {
@@ -71,6 +75,20 @@ interface ISubAdminCard {
 }
 
 function SubAdminCard({ picture, name, title }: ISubAdminCard) {
+  var config = {
+    method: "get",
+    url: "http://1atsbk.afexats.com/api/v1/account/all",
+    headers: {},
+  };
+
+  axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
   return (
     <div className="relative min-w-max gap-1 p-4 bg-[#F9FAFB] flex flex-col justify-center items-center">
       <img className="rounded-full" width="80" src={picture.src} alt="" />
@@ -143,7 +161,7 @@ const admin = () => {
             onChange={(event) => setValue(event.currentTarget.value)}
           />
 
-          <div className="overflow-auto flex flex-wrap gap-2">
+          <div className="overflow-auto grid grid-cols-2 gap-2">
             {SubAdminData.map((props, idx) =>
               props.name
                 .toLocaleLowerCase()
