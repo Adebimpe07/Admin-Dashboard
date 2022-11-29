@@ -7,7 +7,7 @@ import Notifications from "../../../src/components/main/dashboard/notifications"
 import Tabs from "../../../src/layout/assessmentTabs";
 import ListAssessment from "../../../src/components/main/assessment/listedAssessment";
 import { CategoryCardData } from "../../../src/layout/assessmentCardData";
-import CategoryCard from "../../../src/components/main/assessment/assessment/categoryCard/categoryCard";
+import CategoryCard from "../../../src/components/main/assessment/categoryCard/categoryCard";
 import axios from "axios";
 
 export const NotificationDrop = () => {
@@ -33,7 +33,7 @@ const HeaderMain = () => {
   const [categoryCard, setCategoryCard] = useState(null);
 
   const fetchCategories = () => {
-    axios("http://assessbk.afexats.com/api/categories/")
+    axios("http://assessbk.afexats.com/api/categories/create-list-category")
       .then(function (response) {
         setCategoryCard(response.data.data.results);
       })

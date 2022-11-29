@@ -2,7 +2,7 @@ import { Button } from "@mantine/core";
 import { ArrowLeft2 } from "iconsax-react";
 import Link from "next/link";
 import React from "react";
-import Header from "../../categoryCreate/header";
+import Header from "../categoryCreate/header";
 import ViewAssessmentTable from "./viewAssessmentTable";
 
 const viewAssessment = () => {

@@ -3,7 +3,7 @@ import { Button, Modal } from "@mantine/core";
 import { Edit2, Eye, Timer1, Trash } from "iconsax-react";
 import Link from "next/link";
 import React, { useState } from "react";
-import { DeleteCategory } from "../assessment/categoryCard/deleteCategory";
+import { DeleteCategory } from "../categoryCard/deleteCategory";
 import { DeleteAssessment } from "./deleteAssessment";
 
 type assessmentCardsprops = {
@@ -11,6 +11,7 @@ type assessmentCardsprops = {
   title: string;
   paragraph: string;
   timestamp: string;
+  id: number;
 };
 
 const AssessmentCard = ({
@@ -18,16 +19,17 @@ const AssessmentCard = ({
   paragraph,
   timestamp,
   questions,
+  id,
 }: assessmentCardsprops) => {
   const initialValues: { opened: boolean; component: React.ReactNode } = {
     opened: false,
     component: null,
   };
   const [DelModal, setDelModal] = useState(initialValues);
-  function handleDelete() {
+  function handleDelete(id) {
     setDelModal({
       opened: true,
-      component: <DeleteAssessment />,
+      component: <DeleteAssessment id={id} />,
     });
   }
 
@@ -38,10 +40,11 @@ const AssessmentCard = ({
           <div className="flex justify-between">
             <h1 className="font-semibold">{title}</h1>
             <div className="flex gap-3">
-              <Link href="/assessments/assessment/edit_assessment">
+              <Link href={`/assessments/assessment/edit_assessment/${id}`}>
                 <Edit2 size="17" color="#38CB89" variant="Bulk" />
               </Link>
-              <Trash onClick={handleDelete} size="17" color="red" />
+
+              <Trash onClick={() => handleDelete(id)} size="17" color="red" />
               <Modal
                 opened={DelModal.opened}
                 onClose={() => setDelModal(initialValues)}
