@@ -25,7 +25,7 @@ const Result = () => {
                 const request = await axios(config)
                 setResult(request.data)
             } catch (error) {
-                console.log("request_error=> ", error.response.data)
+                console.log("request_error=> ", error?.response?.data)
                 return error.message
             }
         }
