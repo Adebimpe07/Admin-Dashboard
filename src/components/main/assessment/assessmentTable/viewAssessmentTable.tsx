@@ -1,12 +1,32 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { useTable, useRowSelect, usePagination } from "react-table";
 import { viewAssessmentColumn } from "../../../../layout/tableData";
 import ViewAssessmentData from "../../../../layout/viewAssessmentData";
 import { Checkbox } from "../assessment/checkbox";
 import ActionMenuPass from "../../body/actionButton/actionViewAsess";
+import axios from "axios";
 
 const ViewAssessmentTable = () => {
   const AssessmentColumn = useMemo(() => viewAssessmentColumn, []);
+  const [data, setData] = useState([])
+
+  var config = {
+    method: "get",
+    url: "http://localhost:8000/api/result/all",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const fetchResult = async (): Promise<[]> => {
+    try {
+      const request = await axios(config)
+      return request.data
+    } catch (error) {
+      console.log("request_error=> ", error.response.data)
+      return error.message
+    }
+  }
 
   const AssessmentData = useMemo(
     () =>
@@ -14,6 +34,7 @@ const ViewAssessmentTable = () => {
         ...assessment,
         action: <ActionMenuPass />,
       })),
+
     []
   );
 

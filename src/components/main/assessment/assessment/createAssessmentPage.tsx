@@ -21,7 +21,7 @@ const CreateAssessmentPage = () => {
     };
 
     axios({
-      url: "http://assessbk.afexats.com/api/assessment/application-type/",
+      url: "https://assessbk.afexats.com/api/assessment/application-type/",
       method: "post",
       headers: {
         "Content-Type": "application/json",
