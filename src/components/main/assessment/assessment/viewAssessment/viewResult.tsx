@@ -9,8 +9,6 @@ import Feedback from "./viewResult/feedback";
 import CategoryInformation from "./viewResult/categoryInformation";
 
 const viewResult = ({ result }) => {
-
-
   return (
 
     <div className="h-screen flex-1 py-6 flex flex-col  bg-mainBg">
@@ -26,13 +24,14 @@ const viewResult = ({ result }) => {
 
         </div>
 
-        <ApplicantDetails result={result} />
-        <div className="flex w-full">
-          <div className="flex flex-col w-1/2 mr-4">
+
+        <div className="flex w-full relative">
+          <div className=" flex flex-col w-1/2 mr-4 ">
+            <ApplicantDetails result={result} />
             <AssessmentInformation result={result} />
             <Feedback />
           </div>
-          <div className="w-1/2">
+          <div className="w-1/2 ">
             <CategoryInformation result={result} />
           </div>
         </div>
