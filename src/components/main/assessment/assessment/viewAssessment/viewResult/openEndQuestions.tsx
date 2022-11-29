@@ -1,10 +1,10 @@
 import { Button, Modal, Textarea } from "@mantine/core";
 import React, { useState } from "react";
 
-const openEndQuestions = () => {
+const openEndQuestions = ({ color }) => {
   const [opened, setOpened] = useState(false);
   return (
-    <p onClick={() => setOpened(true)} className="text-greenButton">
+    <p onClick={() => setOpened(true)} className={` ${color}  font-semibold `}>
       <Modal opened={opened} onClose={() => setOpened(false)} fullScreen>
         <div className="flex">
           {" "}
