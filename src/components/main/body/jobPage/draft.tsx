@@ -12,6 +12,12 @@ import {
   Textarea,
   TextInput,
 } from "@mantine/core";
+import Java from '../../../../assets/Java.png'
+import moment from 'moment'
+
+
+
+
 
 type Props = {
   icon: StaticImageData;
@@ -51,7 +57,7 @@ const Job = ({ icon, title, time }: Props) => {
             ]}
           />
         </div>
-        <div>
+<div>
           <TextInput label="Cohorts" />
         </div>
 
@@ -93,48 +99,33 @@ const Job = ({ icon, title, time }: Props) => {
       </div>
     </Modal>
   );
-
+    
   return (
-    <div className="flex justify-between p-6 bg-white my-6 mx-12 border rounded-2xl ">
-      <div className="flex gap-7">
-        <img
-          src={icon.src}
-          alt="icon"
-          className="w-16 border-0 rounded-2xl bg-[#38CB891A]"
-        />
-        <div>
-          <h3 className="text-[#252735] text-lg font-semibold">{title}</h3>
-          <div className="flex gap-2 items-center">
-            <img src={Vector.src} alt="icon" className="w-3" />
-            <p>Remote - Ibadan, Lagos Only</p>
-            <img src={Brief.src} alt="icon" className="w-3.5" />
-            <p>Full Time</p>
-          </div>
-          <div className="flex gap-4 pt-2">
-            <p className="text-[#38CB89] text-xs font-normal underline">
-              View Application
-            </p>
-            <p className="text-[#38CB89] text-xs font-normal underline">
-              View Assesment
-            </p>
-          </div>
+    <div className='flex justify-between p-6 bg-white my-6 mx-12 border rounded-2xl '>
+        <div className='flex gap-7'>
+            <img src={Java.src} alt="icon" className='w-16 border-0 rounded-2xl bg-[#38CB891A]' />
+            <div>
+                <h3 className='text-[#252735] text-lg font-semibold'>{title}</h3>
+                <div className="flex gap-2 items-center">
+                    <img src={Vector.src} alt="icon" className='w-3' />
+                    <p>Remote - Ibadan, Lagos Only</p>
+                    <img src={Brief.src} alt="icon" className='w-3.5' />
+                    <p>Full Time</p>
+                </div>
+                <div className='flex gap-4 pt-2'>
+                    <p className='text-[#38CB89] text-xs font-normal underline'>View Application</p>
+                    <p className='text-[#38CB89] text-xs font-normal underline'>View Assesment</p>
+                </div>
+            </div>
+        </div>
+        <div className="flex flex-col">
+            <button>Uploaded {moment(time).fromNow()}</button>
+            <div className="flex items-center mt-2 gap-4 justify-end">
+               <button onClick={() => setOpened(true)}> <img src={Edit.src} alt="icon" className='w-2.5' /><PostJobModal /></button>
+                <button onClick={() => setShift(true)}><img src={Trash.src} alt="icon" className='w-4' /><UploadJobModal /></button>
+            </div>
         </div>
       </div>
-      <div className="flex flex-col">
-        <button>{time}</button>
-        <div className="flex items-center mt-2 gap-4 justify-end">
-          <button onClick={() => setOpened(true)}>
-            {" "}
-            <img src={Edit.src} alt="icon" className="w-2.5" />
-            <PostJobModal />
-          </button>
-          <button onClick={() => setShift(true)}>
-            <img src={Trash.src} alt="icon" className="w-4" />
-            <UploadJobModal />
-          </button>
-        </div>
-      </div>
-    </div>
   );
 };
 

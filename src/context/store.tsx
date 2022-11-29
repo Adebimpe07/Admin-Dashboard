@@ -298,18 +298,19 @@ export const FormProvider = ({ children }: any) => {
         },
     });
 
-    const questionsForm = useForm({
-        initialValues: {
-            question_text: "",
-            question_type: "",
-            question_category: "Real",
-            question_hint: "face your book",
-            choices: Array(4).fill({
-                choice_text: "",
-                is_correct: false,
-            }),
-        },
-    });
+  const questionsForm = useForm({
+    initialValues: {
+      question_text: "",
+      question_type: "",
+      question_category: "Real",
+      question_hint: "face your book",
+      choices: Array(4).fill({
+        choice_text: "",
+        is_correct: false,
+      }),
+    },
+  });
+
 
     const assessmentForm = useForm({
         initialValues: {
@@ -389,17 +390,3 @@ export const FormProvider = ({ children }: any) => {
         <FormContext.Provider value={formData}>{children}</FormContext.Provider>
     );
 };
-
-// "question_text": "Question 14?",
-//     "question_type": "Multi-choice",
-//     "question_category": "Real",
-//     "choices": [
-//         {
-//             "choice_text": "A",
-//             "is_correct": true
-//         },
-//         {
-//             "choice_text": "B"
-//         }
-//     ]
-// }
