@@ -33,7 +33,7 @@ const HeaderMain = () => {
   const [categoryCard, setCategoryCard] = useState(null);
 
   const fetchCategories = () => {
-    axios("http://assessbk.afexats.com/api/categories/create-list-category")
+    axios("https://assessbk.afexats.com/api/categories/create-list-category")
       .then(function (response) {
         setCategoryCard(response.data.data.results);
       })

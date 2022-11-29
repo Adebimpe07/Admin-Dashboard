@@ -10,7 +10,7 @@ const AssessmentCategoryTable = ({ setSelectedCategory }) => {
   const [CategoryListData, setCategoryListData] = useState([]);
 
   const fetchAllCategories = () => {
-    axios("http://assessbk.afexats.com/api/categories/")
+    axios("https://assessbk.afexats.com/api/categories/")
       .then(function (response) {
         setCategoryListData(
           response.data.data.results.reduce(
