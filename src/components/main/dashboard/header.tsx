@@ -5,6 +5,8 @@ import ProfilePicture from "../../../assets/PM_Tosin.png";
 import { Button, Radio } from "@mantine/core";
 import { Menu } from "@mantine/core";
 import Notifications from "./notifications";
+import { useStore } from "../../../store";
+
 //  notification: <Notification size="32" color="#FF8A65" variant="Outline" />,
 type headerprops = {
   adminName: string;
@@ -59,18 +61,19 @@ const HeaderMain = () => {
       </Menu>
     );
   };
+  const [admin, setAdmin] = useStore.admin();
 
   return (
     <div className="px-6 pt-6 pb-4">
       <div className="flex justify-between ">
         <div>
           <h1 className="text-2xl font-semibold text-[#4A4C58]">
-            Hello, {HeaderData.adminName}
+            Hello, {admin?.username}
           </h1>
         </div>
         <div className="flex gap-2 items-center">
           <NotificationDrop />
-          <img width="40" src={HeaderData.adminProfilePicture.src} alt="" />
+          <img width="40" src={admin?.profile_picture} alt="" />
         </div>
       </div>
       <p className="text-[#948E8E]">Take a look at today's activities</p>

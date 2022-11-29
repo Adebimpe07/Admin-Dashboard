@@ -6,6 +6,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { CoursesData } from "../../../layout/coursesData";
 import { DeleteCourse } from "./deleteCourse";
+import EditCourse from "./editCourse";
 
 type coursesprops = {
   picture: StaticImageData;
@@ -42,9 +43,7 @@ const Courses = ({
           <div className="flex justify-between">
             <h1 className="font-semibold">{title}</h1>
             <div className="flex gap-3">
-              <Link href="/courses/createCourses">
-                <Edit2 size="17" color="#38CB89" variant="Bulk" />
-              </Link>
+              <EditCourse />
 
               <Trash onClick={handleDelete} size="17" color="red" />
               <Modal

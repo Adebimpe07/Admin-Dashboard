@@ -6,6 +6,7 @@ import { Button, FileInput, Select, Textarea } from "@mantine/core";
 import { IconUpload } from "@tabler/icons";
 
 const CreateCourses = () => {
+  // const CreateCourse =()
   return (
     <div className="h-screen flex-1 py-6 flex flex-col bg-mainBg">
       <Header />

@@ -328,6 +328,13 @@ export const FormProvider = ({ children }: any) => {
       confirm_password: "",
     },
   });
+  const coursesForm = useForm({
+    initialValues: {
+      title: "",
+      image: "",
+      description: "",
+    },
+  });
 
   const [questionType, setQuestionType] = useSessionStorage({
     key: "questionType",
