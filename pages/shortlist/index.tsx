@@ -7,6 +7,7 @@ import TableHead from "../../src/components/main/body/applicationPage/tableHead"
 import ApplicationPage from "../../src/components/main/body/applicationPage/applicationPage";
 import { ShortList } from "../../src/components/main/body/applicationPage/shortList";
 
+
 const Index = () => {
   const [selected, setSelected] = useState(0);
 
@@ -14,7 +15,7 @@ const Index = () => {
     <div className="bg-mainBg flex-1 pb-4">
       <HeaderApp />
       <SubAppHeader />
-      <TableHead selected={selected} setSelected={setSelected} />
+      <TableHead  />
       <ShortList />
     </div>
   );

@@ -15,13 +15,15 @@ type Props = {
     time: string
 }
 
-const Job = ({ title, time}: Props) => {
 
-const Job = ({ icon, title, time }: Props) => {
+
+const Job = ({ title, time }: Props) => {
   const [opened, setOpened] = useState(false);
+  const [shift, setShift] = useState(false)
 
-  const PostJobModal = () => (
-    <Modal opened={opened} onClose={() => setOpened(false)} title="Edit Job">
+  const PostJobModal = () => {
+
+   return <Modal opened={opened} onClose={() => setOpened(false)} title="Edit Job">
       <Text className="flex flex-col gap-4 " size="sm">
         <p className="text-base text-[#948E8E] pb-2">
           Enter the details of the job
@@ -49,8 +51,9 @@ const Job = ({ icon, title, time }: Props) => {
             ]}
           />
         </div>
+        </Text>
       </Modal>
-    );
+    };
   
     // {moment(items.created_at).format("LL")
     
@@ -80,7 +83,6 @@ const Job = ({ icon, title, time }: Props) => {
             </div>
         </div>
       </div>
-    </div>
   );
 };
 

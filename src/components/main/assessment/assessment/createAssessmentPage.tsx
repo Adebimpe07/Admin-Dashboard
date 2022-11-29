@@ -14,14 +14,14 @@ const CreateAssessmentPage = () => {
   const createAssessment = async () => {
     var config = {
       method: "post",
-      url: "http://assessbk.afexats.com/api/assessment/",
+      url: "https://assessbk.afexats.com/api/assessment/",
       headers: {
         "Content-Type": "application/json",
       },
     };
 
     axios({
-      url: "http://assessbk.afexats.com/api/assessment/application-type/",
+      url: "https://assessbk.afexats.com/api/assessment/application-type/",
       method: "post",
       headers: {
         "Content-Type": "application/json",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { jobhead } from "../../../../layout/jobHead";
 import Cross from "../../../../assets/Icon.png";
 import Arr from "../../../../assets/La.png";
@@ -9,9 +9,37 @@ import { Select } from "@mantine/core";
 import { Textarea } from "@mantine/core";
 import Downloads from "../../../../assets/import.png";
 import { MultiSelect } from "@mantine/core";
+import axios from "axios";
 
 const Header = () => {
   const [opened, setOpened] = useState(false);
+
+  const [CohortData, setCohortData] = useState([]);
+
+  const fetchAllCohorts = () => {
+axios({
+  method: 'get',
+      url: "https://aptbk.afexats.com/api/jobs/cohorts",
+      headers: {
+        "api-key":
+          "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
+        "request-ts": "1667549939702",
+        "hash-key":
+          "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        setCohortData(response.data.data.results.length)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchAllCohorts()
+  }, [])
 
   const data = [
     { value: "pm", label: "Product Mnanagement" },
@@ -85,7 +113,7 @@ const Header = () => {
     <div className="flex justify-between pb-7 pt-6 px-5">
       <div className="place-items-center">
         <p className="text-[#252735] text-base font-semibold">
-          Total Cohorts()
+          Total Cohorts ({CohortData})
         </p>
       </div>
       <div className="flex gap-8">

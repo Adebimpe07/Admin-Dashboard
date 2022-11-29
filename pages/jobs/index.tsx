@@ -13,7 +13,7 @@ const index = () => {
   const jobList = () => {
     var config = {
       method: "get",
-      url: "http://aptbk.afexats.com/api/jobs",
+      url: "https://aptbk.afexats.com/api/jobs",
       headers: {
         "api-key":
           "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",

@@ -1,23 +1,50 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTable, useRowSelect, usePagination } from "react-table";
 import { cohortColumn } from "../../../../layout/tableData";
-import Cohort from "../../../../layout/cohortData.json";
+// import Cohort from "../../../../layout/cohortData.json";
 import ActionMenuCourses from "../actionButton/ActionMenuCourses";
 import ActionMenuEdit from "../actionButton/ActionMenuEdit";
 import ActionMenuDelete from "../actionButton/ActionMenuDelete";
+import axios from "axios";
 
 const CohortTable = () => {
   const CohortColumn = useMemo(() => cohortColumn, []);
+  const [CohortData, setCohortData] = useState([]);
+
+  const fetchAllCohorts = () => {
+axios({
+  method: 'get',
+      url: "https://aptbk.afexats.com/api/jobs/cohorts",
+      headers: {
+        "api-key":
+          "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
+        "request-ts": "1667549939702",
+        "hash-key":
+          "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        setCohortData(response.data.data.results)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchAllCohorts()
+  }, [])
 
   const cohortData = useMemo(
     () =>
-      Cohort.map((cohort, idx) => ({
+    CohortData.map((cohort, idx) => ({
         ...cohort,
-        courses: <ActionMenuCourses />,
+        number_of_courses: <ActionMenuCourses number_of_courses={cohort.number_of_courses}/>,
         edit: <ActionMenuEdit />,
         delete: <ActionMenuDelete />,
       })),
-    []
+    [CohortData]
   );
   const {
     getTableProps,
@@ -48,47 +75,47 @@ const CohortTable = () => {
   return (
     <div className="overflow-auto grid grid-rows-[1fr_auto]">
       <div className="overflow-auto">
-      <table
-        {...getTableProps()}
-        className="bg-[white] text-sm font-normal text-[#514747] ml-6 w-[96%]"
-      >
-        <thead className= " text-[#514747] sticky top-0  font-normal">
-          {headerGroups.map((headerGroups) => (
-            <tr {...headerGroups.getHeaderGroupProps()}>
-              {headerGroups.headers.map((columns) => (
-                <th
-                  {...columns.getHeaderProps()}
-                  className="py-4 text-[#514747] pl-8 text-left font-normal bg-[#F5F5F5]"
-                >
-                  {columns.render("Header")}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <tr
-                {...row.getRowProps()}
-                className=" border-y-[1px] border-y-[#F5F5F5] text-left"
-              >
-                {row.cells.map((cell) => {
-                  return (
-                    <td
-                      {...cell.getCellProps()}
-                      className="py-3 text-left pl-8"
-                    >
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
+        <table
+          {...getTableProps()}
+          className="bg-[white] text-sm font-normal text-[#514747] ml-6 w-[96%]"
+        >
+          <thead className=" text-[#514747] sticky top-0  font-normal">
+            {headerGroups.map((headerGroups) => (
+              <tr {...headerGroups.getHeaderGroupProps()}>
+                {headerGroups.headers.map((columns) => (
+                  <th
+                    {...columns.getHeaderProps()}
+                    className="py-4 text-[#514747] pl-8 text-left font-normal bg-[#F5F5F5]"
+                  >
+                    {columns.render("Header")}
+                  </th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map((row) => {
+              prepareRow(row);
+              return (
+                <tr
+                  {...row.getRowProps()}
+                  className=" border-y-[1px] border-y-[#F5F5F5] text-left"
+                >
+                  {row.cells.map((cell) => {
+                    return (
+                      <td
+                        {...cell.getCellProps()}
+                        className="py-3 text-left pl-8"
+                      >
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
       <div className="bg-[white] mx-6 mt-4 py-4 px-2 flex w-[96%] justify-between">
         <div>

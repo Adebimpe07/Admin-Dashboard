@@ -17,7 +17,7 @@ const TableHead = () => {
   const fetchApplicantsData = () => {
     var config = {
       method: 'get',
-      url: 'http://aptbk.afexats.com/api/applications',
+      url: 'https://aptbk.afexats.com/api/applications',
       headers: { 
         'API_KEY': 'qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW', 
         'REQUEST-TS': '1669397556',

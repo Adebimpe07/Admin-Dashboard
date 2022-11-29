@@ -28,7 +28,7 @@ const PostJobModal = ({ jobForm, opened, setOpened, fetchJob }: any) => {
   const [courseList, setCourseList] = useState([]);
   const fetchCohorts = () => {
     axios({
-      url: "http://aptbk.afexats.com/api/jobs/cohort-options",
+      url: "https://aptbk.afexats.com/api/jobs/cohort-options",
       headers: {
         "api-key":
           "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
@@ -59,7 +59,7 @@ const PostJobModal = ({ jobForm, opened, setOpened, fetchJob }: any) => {
     //
     if (jobForm.values.cohort) {
       axios({
-        url: `http://aptbk.afexats.com/api/jobs/cohort/${jobForm.values.cohort}/course-options`,
+        url: `https://aptbk.afexats.com/api/jobs/cohort/${jobForm.values.cohort}/course-options`,
         headers: {
           "api-key":
             "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
@@ -89,7 +89,7 @@ const PostJobModal = ({ jobForm, opened, setOpened, fetchJob }: any) => {
 
     var config = {
       method: "post",
-      url: "http://aptbk.afexats.com/api/jobs/",
+      url: "https://aptbk.afexats.com/api/jobs/",
       headers: {
         "api-key":
           "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",

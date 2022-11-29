@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { ReactNode, useEffect, useMemo, useState } from "react";
 import { useTable, useRowSelect, usePagination } from "react-table";
 import { categoryColumn } from "../../../../layout/tableData";
 import CategoryListData from "../../../../layout/categoryListData.json";
@@ -10,7 +10,7 @@ const AssessmentCategoryTable = ({ setSelectedCategory }) => {
   const [CategoryListData, setCategoryListData] = useState([]);
 
   const fetchAllCategories = () => {
-    axios("http://assessbk.afexats.com/api/categories/")
+    axios("https://assessbk.afexats.com/api/categories/create-list-category")
       .then(function (response) {
         setCategoryListData(
           response.data.data.results.reduce(
@@ -28,6 +28,8 @@ const AssessmentCategoryTable = ({ setSelectedCategory }) => {
         console.log(error);
       });
   };
+
+  console.log(CategoryListData)
 
   useEffect(() => {
     fetchAllCategories();
@@ -56,10 +58,17 @@ const AssessmentCategoryTable = ({ setSelectedCategory }) => {
     state,
     prepareRow,
     selectedFlatRows,
-  } = useTable(
+  } = useTable<{
+      "name": string;
+      "question": number;
+      "time": string;
+      "id": number;
+    "edit": ReactNode;
+    "delete": ReactNode;
+}>(
     {
       columns: CategoryColumn,
-      data: CategoryData,
+      data: CategoryData ?? [],
     },
     usePagination,
     useRowSelect,

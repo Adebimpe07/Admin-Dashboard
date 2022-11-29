@@ -25,14 +25,5 @@ const Index = () => {
   );
 };
 
-    return (
-      <div className="flex-1 bg-[#E5E5E5] flex flex-col overflow-auto pb-4 h-full">
-        <HeaderApp />
-        <SubAppHeader/>
-        <TableHead/>
-        <ApplicationPage/>
-      </div>
-    );
-}
 
 export default Index

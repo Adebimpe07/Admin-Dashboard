@@ -1,3 +1,6 @@
+import { ReactNode } from "react";
+import { Column } from "react-table";
+
 export const allApplicationColumn = [
   {
     Header: "Name",
@@ -172,6 +175,32 @@ export const rejectedColumn = [
     accessor: "phone_number",
   },
 ];
+
+// application_end_date
+// : 
+// "2022-12-21T12:53:23+01:00"
+// application_start_date
+// : 
+// "2022-11-28T12:53:23+01:00"
+// courses
+// : 
+// (2) [{…}, {…}]
+// end_date
+// : 
+// "2023-06-30"
+// name
+// : 
+// "ATS 2.0"
+// number_of_courses
+// : 
+// 2
+// start_date
+// : 
+// "2023-01-05"
+// url
+// : 
+// "https://aptbk.afexats.com/api/jobs/cohort/1"
+
 export const cohortColumn = [
   {
     Header: "Cohort Name",
@@ -179,23 +208,23 @@ export const cohortColumn = [
   },
   {
     Header: "Available Courses",
-    accessor: "courses",
+    accessor: "number_of_courses",
   },
   {
     Header: "Cohort Start Date",
-    accessor: "cohort_start_date",
+    accessor: "start_date",
   },
   {
     Header: "Cohort End Date",
-    accessor: "cohort_end_date",
+    accessor: "end_date",
   },
   {
     Header: "Application Start Date",
-    accessor: "app_start_date",
+    accessor: "application_start_date",
   },
   {
     Header: "Application End Date",
-    accessor: "app_end_date",
+    accessor: "application_end_date",
   },
   {
     Header: "",
@@ -302,7 +331,14 @@ export const atsMemberColumn = [
   },
 ];
 
-export const categoryColumn = [
+export const categoryColumn: Array<Column<{
+  "name": string;
+  "question": number;
+  "time": string;
+  "id": number;
+"edit": ReactNode;
+"delete": ReactNode;
+}>> = [
   {
     Header: "Category Name",
     accessor: "name",

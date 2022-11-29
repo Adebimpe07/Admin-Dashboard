@@ -13,7 +13,7 @@ const CreatedAssessSubHeader = ({ selectedCategory }) => {
         selectedCategory.map((item) => {
             axios({
                 method: "patch",
-                url: `http://assessbk.afexats.com/api/assessment/2/category/${item.id}`,
+                url: `https://assessbk.afexats.com/api/assessment/2/category/${item.id}`,
             })
                 .then(function (response) {
                     console.log(response.data);

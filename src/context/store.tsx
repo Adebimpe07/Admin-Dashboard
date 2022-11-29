@@ -340,6 +340,32 @@ export const FormProvider = ({ children }: any) => {
     defaultValue: "",
   });
 
+  const fetchData = () => {
+    var axios = require("axios");
+    var data = "";
+
+    var config = {
+      method: "get",
+      url: "aptbk.afexats.com/api/applications",
+      headers: {
+        "api-key":
+          "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
+        "request-ts": "1667549939702",
+        "hash-key":
+          "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   const [value, onChange] = useState("");
 
   let formData = {
