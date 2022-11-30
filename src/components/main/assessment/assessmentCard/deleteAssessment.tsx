@@ -7,7 +7,7 @@ export const DeleteAssessment = ({ id }) => {
   const deleteAssessment = (id) =>
     axios({
       method: "delete",
-      url: `http://assessbk.afexats.com/api/assessment/${id}/`,
+      url: `https://assessbk.afexats.com/api/assessment/${id}/`,
     }).then((response) => {
       console.log(response.data);
       router.reload();
