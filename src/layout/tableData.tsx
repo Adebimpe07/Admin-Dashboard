@@ -463,11 +463,11 @@ export const emailColumn = [
   },
   {
     Header: "Created on",
-    accessor: "created",
+    accessor: "created_on",
   },
   {
     Header: "Last Modified",
-    accessor: "modified",
+    accessor: "last_modified",
   },
   {
     Header: "",

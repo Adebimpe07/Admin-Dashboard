@@ -54,6 +54,24 @@ const Job = ({ title, time }: Props) => {
         </Text>
       </Modal>
     };
+    const UploadJobModal = ({ shift, setShift }: any) => (
+      <Modal
+        className="text-[#4A4C58] text-base"
+        opened={shift}
+        onClose={() => setShift(false)}
+        title="Delete Job"
+      >
+        <p className="text-center text-sm">
+          You are about to delete the selected job, kindly click the button below to
+          confirm this acton.
+        </p>
+        <div className="flex justify-center">
+          <button className="bg-[#A83C3D] py-2 w-full text-[white] rounded mt-8 text-base font-bold">
+            Delete
+          </button>
+        </div>
+      </Modal>
+    );
   
     // {moment(items.created_at).format("LL")
     

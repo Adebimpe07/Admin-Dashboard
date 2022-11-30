@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTable, useRowSelect, usePagination} from "react-table";
 import {
   emailColumn
@@ -6,6 +6,7 @@ import {
 import ActionMenuInterview from "../actionButton/ActionMenuInterview";
 import emailTemplate from "../../../../layout/emailTemplateData.json"
 import ActionMenuEmail from "../actionButton/ActionMenuEmail";
+import axios from "axios";
 
 // const Action = ({ values }) => {
 
@@ -20,16 +21,43 @@ import ActionMenuEmail from "../actionButton/ActionMenuEmail";
 // };
 
 const EmailTemplateTable = () => {
+
+  const [emailData, setEmailData] = useState([]);
+
+  const fetchAllCohorts = () => {
+axios({
+  method: 'get',
+      url: "https://aptbk.afexats.com/api/applications/email-templates",
+      headers: {
+        "api-key":
+          "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
+        "request-ts": "1667549939702",
+        "hash-key":
+          "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        setEmailData(response.data.data.results)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchAllCohorts()
+  }, [])
   
   const EmailColumn = useMemo(() => emailColumn, []);
   
   const Email = useMemo(
     () =>
-    emailTemplate.map((mock, idx) => ({
+    emailData.map((mock, idx) => ({
         ...mock,
         action: <ActionMenuEmail />,
       })),
-    []
+    [emailData]
   );
 
   const {

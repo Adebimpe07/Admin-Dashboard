@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 import FormContext from "../../src/context/store";
 
 const ApplicationPage = dynamic(
-  () =>
+  
     import("../../src/components/main/body/applicationPage/applicationPage"),
   { ssr: false }
 );
