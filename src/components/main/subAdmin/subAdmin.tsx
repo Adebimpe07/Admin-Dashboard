@@ -2,6 +2,7 @@ import { Button, Modal, PasswordInput, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { StaticImageData } from "next/image";
 import React, { useState } from "react";
+import ChangePassword from "./changePassword";
 
 import { SubAdminData } from "../../../layout/subAdminData";
 
@@ -14,7 +15,6 @@ type subadminprops = {
 
 const subAdmin = () => {
   const [opened, setOpened] = useState(false);
-  const [visible, { toggle }] = useDisclosure(false);
 
   const { profile_picture, admin_name, admin_email, access_level } =
     SubAdminData;
@@ -45,12 +45,13 @@ const subAdmin = () => {
           <div className="flex-1">
             <div className="flex justify-between">
               <h1 className="font-semibold">Profile Information</h1>
-              <Button
+              <ChangePassword />
+              {/* <Button
                 className="bg-[#1e1f1f] hover:bg-[#1e1f1f] w-[10rem] h-8 text-sm"
                 onClick={() => setOpened(true)}
               >
                 Change password
-              </Button>
+              </Button> */}
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -61,7 +62,7 @@ const subAdmin = () => {
               </div>
               <div>
                 <h2 className="py-2">Admin Email</h2>
-                <span className="border border-[#DBD9D9] rounded-lg p-2 inline-block w-full bg-mainBg">
+                <span className="border border-[#DBD9D9] rounded-lg p-2 inline-block w-fit bg-mainBg">
                   {admin_email}
                 </span>
               </div>
@@ -75,39 +76,6 @@ const subAdmin = () => {
           </div>
         </div>
       </main>
-      <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        classNames={{
-          root: "w-[30rem] m-auto",
-        }}
-        centered
-      >
-        <Stack sx={{ maxWidth: 380 }} mx="auto">
-          <PasswordInput
-            label="Old Password"
-            visible={visible}
-            onVisibilityChange={toggle}
-          />
-          <PasswordInput
-            label="New Password"
-            visible={visible}
-            onVisibilityChange={toggle}
-          />
-          <PasswordInput
-            label="Confirm password"
-            visible={visible}
-            onVisibilityChange={toggle}
-          />
-          <Button
-            className="bg-greenButton hover:bg-greenButton w-[10rem] h-8 text-sm mx-auto"
-            onClick={() => {}}
-          >
-            Save password
-          </Button>
-        </Stack>
-      </Modal>
-      ;
     </div>
   );
 };
