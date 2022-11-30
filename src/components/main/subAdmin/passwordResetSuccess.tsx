@@ -14,7 +14,7 @@ const passwordResetSuccess = ({ oopened, setOopened, setOpened }) => {
         opened={oopened}
         onClose={() => setOopened(false)}
         classNames={{
-          root: "m-auto w-[30rem] ",
+          root: "m-auto ",
           header: "!mb-0",
         }}
         centered
