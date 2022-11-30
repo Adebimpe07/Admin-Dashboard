@@ -7,6 +7,7 @@ import { Add } from "iconsax-react";
 import { Select } from "@mantine/core";
 import { Textarea } from "@mantine/core";
 import Link from "next/link";
+import { useStore } from "../../store";
 
 const Sidebar = () => {
   const [selected, setSelected] = useState("Dashboard");
@@ -84,6 +85,8 @@ const Sidebar = () => {
     </Modal>
   );
 
+  const [admin, setAdmin] = useStore.admin();
+
   return (
     <div className="pt-4 flex flex-col gap-4 w-[20rem]  overflow-auto h-full">
       <div className="border-b border-[#DBD9D9] pl-10 pb-4">
@@ -103,6 +106,7 @@ const Sidebar = () => {
             return (
               // item.heading !== "Content Management" && ( TODO:
               <div
+                key={index}
                 className={collapse && item.sub_menu && "flex flex-col gap-2"}
               >
                 <Link href={item.href}>
@@ -165,9 +169,19 @@ const Sidebar = () => {
                   onClick={() => setSelected(item.heading)}
                 >
                   {item.icon}
-                  <Link href={item.href}>
-                    <span>{item.heading}</span>
-                  </Link>
+                  {item.heading === "Logout" ? (
+                    <span
+                      onClick={() => {
+                        setAdmin(null);
+                      }}
+                    >
+                      {item.heading}
+                    </span>
+                  ) : (
+                    <Link href={item.href}>
+                      <span>{item.heading}</span>
+                    </Link>
+                  )}
                 </div>
               );
             })}

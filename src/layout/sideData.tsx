@@ -66,9 +66,14 @@ export const SideData = [
     href: "/memberManagement/ats_members",
   },
   {
-    icon: <Icon icon="material-symbols:outgoing-mail-outline" width="19" />,
+    icon: <Icon icon="mdi-light:email" width="19" />,
     heading: "Email Template",
     href: "/emailTemplate",
+  },
+  {
+    icon: <Icon icon="healthicons:contact-support-outline" width="19" />,
+    heading: "Support",
+    href: "/support",
   },
 ];
 export const AdminData = [
