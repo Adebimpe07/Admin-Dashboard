@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from "react";
 
-const ApplicationPage = ({formData}) => {
+const InterviewTable = ({formData}) => {
 
   return (
     <div className="overflow-auto grid grid-rows-[1fr_auto]">
@@ -108,4 +108,4 @@ const ApplicationPage = ({formData}) => {
   )
 };
 
-export default ApplicationPage;
+export default InterviewTable;

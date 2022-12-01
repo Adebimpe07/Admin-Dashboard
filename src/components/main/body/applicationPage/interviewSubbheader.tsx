@@ -11,7 +11,7 @@ import Downloads from "../../../../assets/import.png";
 import GlobalFilter from "./globalFilter";
 import FormContext from "../../../../context/store";
 
-const SubAppHeader = ({globalFilter, setGlobalFilter}) => {
+const InterviewSubheader = ({globalFilter, setGlobalFilter}) => {
   // const { globalFilter, setGlobalFilter } = useContext(FormContext);
 
   return (
@@ -36,4 +36,4 @@ const SubAppHeader = ({globalFilter, setGlobalFilter}) => {
   );
 };
 
-export default SubAppHeader;
+export default InterviewSubheader;
