@@ -28,6 +28,7 @@ const courses = ({ coursesCard }) => {
         {coursesCard.map((item, idx) => (
           <Courses
             key={idx}
+            url={item.url}
             uid={item.uid}
             course_status={item?.course_status}
             title={item.title}
