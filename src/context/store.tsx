@@ -201,6 +201,7 @@ export const FormProvider = ({ children }: any) => {
 
         axios(config)
             .then(function (response) {
+                console.log(response.data);
                 setter(response.data.data.results);
             })
             .catch(function (error) {
