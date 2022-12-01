@@ -26,6 +26,9 @@ const NewsLetterTable = () => {
     var config = {
     method: 'get',
     url: 'https://atsbk.afexats.com/api/v1/newsletter',
+    headers: {
+      
+    }
   };
 
   axios(config)

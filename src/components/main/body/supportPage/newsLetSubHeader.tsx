@@ -16,6 +16,7 @@ import Cloud from "../../../../assets/cloud.png";
 import { RichTextEditor } from "@mantine/rte";
 import Link from "next/link";
 import FormContext from "../../../../context/store";
+import axios from "axios";
 
 const NewsLetSubHeader = () => {
     const newsLetterData = [
@@ -34,44 +35,68 @@ const NewsLetSubHeader = () => {
     ];
 
     const [opened, setOpened] = useState(false);
+    const {token} = useContext(FormContext)
 
-    const UploadJobModal = () => (
-        <Modal
-            opened={opened}
-            onClose={() => setOpened(false)}
-            title="Create newsletter"
-            size="xl"
-            classNames={{
-                modal: "!w-[50rem]",
-            }}>
-            <Text className="flex gap-8 ">
-                <div className="flex  flex-col w-[100%] gap-4">
-                    <h1 className="text-base text-[#948E8E] pb-2">
-                        Create newsletter to send to subscribers
-                    </h1>
-                    <TextInput
-                        size="sm"
-                        className="focus:border-inherit placeholder:text-[#4A4C58]"
-                        label="Subject"
-                    />
-                    <p >Message</p>
-                    <RichTextEditor
-                        id="rte"
-                        className="h-[20rem]"
-                        controls={[
-                            ["bold", "italic", "underline"],
-                            ["unorderedList", "h1", "h2"],
-                            ["sup", "sub"],
-                            ["alignLeft", "alignCenter", "alignRight"],
-                        ]}
-                    />
-                    <button className="bg-greenButton text-[white] py-2 px-7 rounded-lg">
-                        Create
-                    </button>
-                </div>       
-            </Text>
-        </Modal>
-    );
+    const UploadJobModal = () => {
+
+        const createNewsLetter = () => {
+            var config = {
+                method: 'post',
+                url: 'https://atsbk.afexats.com/api/v1/newsletter',
+                headers: {
+                    "API-KEY": "7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ",
+                    "HASH-KEY": "091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a",
+                    "REQUEST-TS": "1669397556",
+                    "Authorization": `Bearer ${token.access}`
+                }
+            };
+
+            axios(config)
+                .then(function (response) {
+                    console.log((response.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+        return (
+            <Modal
+                opened={opened}
+                onClose={() => setOpened(false)}
+                title="Create newsletter"
+                size="xl"
+                classNames={{
+                    modal: "!w-[50rem]",
+                }}>
+                <Text className="flex gap-8 ">
+                    <div className="flex  flex-col w-[100%] gap-4">
+                        <h1 className="text-base text-[#948E8E] pb-2">
+                            Create newsletter to send to subscribers
+                        </h1>
+                        <TextInput
+                            size="sm"
+                            className="focus:border-inherit placeholder:text-[#4A4C58]"
+                            label="Subject"
+                        />
+                        <p >Message</p>
+                        <RichTextEditor
+                            id="rte"
+                            className="h-[20rem]"
+                            controls={[
+                                ["bold", "italic", "underline"],
+                                ["unorderedList", "h1", "h2"],
+                                ["sup", "sub"],
+                                ["alignLeft", "alignCenter", "alignRight"],
+                            ]}
+                        />
+                        <button onClick={createNewsLetter} className="bg-greenButton text-[white] py-2 px-7 rounded-lg">
+                            Create
+                        </button>
+                    </div>
+                </Text>
+            </Modal>
+        )
+    }
 
     return (
         <div className="flex justify-between pt-6 mb-6 px-5">

@@ -1,10 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useTable, useRowSelect, usePagination,TableInstance,
+import {
+  useTable, useRowSelect, usePagination, TableInstance,
   UsePaginationInstanceProps,
   UsePaginationState,
   UseSortByInstanceProps,
-  Column, } from "react-table";
-import {  dejiColumn, } from "../../../../layout/tableData";
+  Column,
+} from "react-table";
+import { dejiColumn, } from "../../../../layout/tableData";
 import Content from "../../../../layout/dejiData.json";
 import dejiData from "../../../../layout/dejiData.json";
 import ActionMenuEditContent from "../actionButton/ActionMenuEditContent";
@@ -17,33 +19,59 @@ import TruncateContents from "../actionButton/TruncateContents";
 import axios from "axios";
 
 export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
-UsePaginationInstanceProps<T> &
-UseSortByInstanceProps<T> & {
-  state: UsePaginationState<T>;
-};
+  UsePaginationInstanceProps<T> &
+  UseSortByInstanceProps<T> & {
+    state: UsePaginationState<T>;
+  };
 
 const DejiTable = () => {
   const [Content, setContent] = useState([])
 
-  const fetchDejiSupport = () => {
-    var config = {
-    method: 'get',
-    url: 'https://atsbk.afexats.com/api/v1/support/FAQ-list-create/',
-  };
+  // const fetchDejiSupport = () => {
+  //   console.log('helloooo')
+  // var config = {
+  //   method: 'get',
+  //   url: 'https://atsbk.afexats.com/api/v1/support/contact-us-list-create/',
+  //   headers: {
+  //     "API=KEY": "7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ",
+  //     "HASH-KEY": "091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a",
+  //     "REQUEST-TS": "1669397556"
+  //   }
+  // };
 
-  axios(config)
-  .then(function (response) {
-    console.log(response.data)
-    // console.log(response.data.data.result)
-    setContent(response.data.data.results);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+  // axios(config)
+  //   .then(function (response) {
+  //     console.log(response.data)
+  //     setContent(response.data.data.results);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // }
+
+  const fetchSupp = () => {
+    var config = {
+      method: 'get',
+      url: 'https://atsbk.afexats.com/api/v1/support/contact-us-list-create/',
+      headers: {
+        "API-KEY": "7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ",
+        "HASH-KEY": "091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a",
+        "REQUEST-TS": "1669397556"
+      }
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data)
+        setContent(response.data.data.results);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   useEffect(() => {
-    fetchDejiSupport()
+    fetchSupp()
   }, [])
 
   const DejiColumn = useMemo(() => dejiColumn, []);
@@ -76,59 +104,59 @@ const DejiTable = () => {
   } = useTable(
     {
       columns: DejiColumn as any,
-          
-      data: dejiData 
+
+      data: dejiData
     },
     usePagination,
     useRowSelect
-  )as TableInstanceWithHooks<object>;
+  ) as TableInstanceWithHooks<object>;
 
   const { pageIndex } = state;
 
   return (
     <div className="overflow-auto grid  grid-rows-[1fr_auto]">
       <div className="overflow-auto">
-      <table
-        {...getTableProps()}
-        className="bg-[white] text-sm font-normal text-[#514747] ml-6 w-[96%]"
-      >
-        <thead className=" text-[#514747] sticky top-0  font-normal">
-          {headerGroups.map((headerGroups) => (
-            <tr {...headerGroups.getHeaderGroupProps()}>
-              {headerGroups.headers.map((columns) => (
-                <th
-                  {...columns.getHeaderProps()}
-                  className="py-4 text-[#514747] pl-6 text-left font-normal bg-[#F5F5F5]"
-                >
-                  {columns.render("Header")}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody className="flex-1 overflow-auto" {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <tr
-                {...row.getRowProps()}
-                className=" border-y-[1px] whitespace-nowrap border-y-[#F5F5F5]"
-              >
-                {row.cells.map((cell) => {
-                  return (
-                    <td
-                      {...cell.getCellProps()}
-                      className="py-3 text-left pl-8"
-                    >
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
+        <table
+          {...getTableProps()}
+          className="bg-[white] text-sm font-normal text-[#514747] ml-6 w-[96%]"
+        >
+          <thead className=" text-[#514747] sticky top-0  font-normal">
+            {headerGroups.map((headerGroups) => (
+              <tr {...headerGroups.getHeaderGroupProps()}>
+                {headerGroups.headers.map((columns) => (
+                  <th
+                    {...columns.getHeaderProps()}
+                    className="py-4 text-[#514747] pl-6 text-left font-normal bg-[#F5F5F5]"
+                  >
+                    {columns.render("Header")}
+                  </th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody className="flex-1 overflow-auto" {...getTableBodyProps()}>
+            {page.map((row) => {
+              prepareRow(row);
+              return (
+                <tr
+                  {...row.getRowProps()}
+                  className=" border-y-[1px] whitespace-nowrap border-y-[#F5F5F5]"
+                >
+                  {row.cells.map((cell) => {
+                    return (
+                      <td
+                        {...cell.getCellProps()}
+                        className="py-3 text-left pl-8"
+                      >
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
       <div className="bg-[white] mx-6 mt-4 py-4 px-2 flex justify-between">
         <div>

@@ -12,41 +12,59 @@ const FaqsSubHeader = dynamic(
 );
 
 const Faqs = () => {
-const form = useForm({
-  initialValues: {
-    faqs: [
-      {question: '', answer: ''},
-      {question: '', answer: ''},
-      {question: '', answer: ''}
-    ]
-  }
-})
+  const form = useForm({
+    initialValues: {
+      faqs: [
+        { question: '', answer: '' },
+        { question: '', answer: '' },
+        { question: '', answer: '' }
+      ]
+    }
+  })
   const [questions, setQuestions] = useState([])
 
   const fetchFaqs = () => {
     var config = {
-  method: 'get',
-  url: 'https://atsbk.afexats.com/api/v1/support/FAQ-list-create/',
-};
-axios(config)
-.then((response) => {
-  console.log((response.data));
-  // setQuestions(response.data.data.results)
-  for(let i = 0; i < response.data.data.results.length; i++) {
-    form.values.faqs[i].question = response.data.data.results[i].question
-    form.values.faqs[i].answer = response.data.data.results[i].answer
+      method: 'get',
+      url: 'https://atsbk.afexats.com/api/v1/support/FAQ-list-create/',
+    };
+    axios(config)
+      .then((response) => {
+        console.log((response.data));
+        // setQuestions(response.data.data.results)
+        for (let i = 0; i < response.data.data.results.length; i++) {
+          form.values.faqs[i].question = response.data.data.results[i].question
+          form.values.faqs[i].answer = response.data.data.results[i].answer
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
   }
-})
-.catch((error) => {
-  console.log(error);
-});
 
-}
+  useEffect(() => {
+    fetchFaqs()
+  }, [])
 
-useEffect(() => {
-   fetchFaqs()
- }, [])
- 
+  const saveFaqs = () => {
+    var config = {
+      method: 'post',
+      url: 'https://atsbk.afexats.com/api/v1/support/FAQ-list-create/',
+      headers: {
+      
+      }
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log((response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
   return (
     <div className="flex-1 bg-mainBg flex flex-col overflow-auto  gap-8 h-full">
       <SupportHeader />
@@ -58,46 +76,46 @@ useEffect(() => {
         <article className="flex justify-between items-center">
           <div className="flex flex-col gap-2">
             <h3>FAQ 1</h3>
-            <Textarea cols={50} {...form.getInputProps(`faqs.0.question`)} classNames={{  
-            input: "border rounded-xl border-[#D0D5DD]"
+            <Textarea cols={50} {...form.getInputProps(`faqs.0.question`)} classNames={{
+              input: "border rounded-xl border-[#D0D5DD]"
             }} />
           </div>
           <div>
             <h3>Answer</h3>
-            <Textarea cols={50} {...form.getInputProps(`faqs.0.answer`)}  classNames={{  
-            input: "border rounded-xl border-[#D0D5DD]"
+            <Textarea cols={50} {...form.getInputProps(`faqs.0.answer`)} classNames={{
+              input: "border rounded-xl border-[#D0D5DD]"
             }} />
           </div>
         </article>
-        <article   className="flex justify-between items-center">
+        <article className="flex justify-between items-center">
           <div className="flex flex-col gap-2">
             <h3>FAQ 2</h3>
-            <Textarea cols={50} {...form.getInputProps(`faqs.1.question`)} classNames={{  
-            input: "border rounded-xl border-[#D0D5DD]"
+            <Textarea cols={50} {...form.getInputProps(`faqs.1.question`)} classNames={{
+              input: "border rounded-xl border-[#D0D5DD]"
             }} />
           </div>
           <div>
             <h3>Answer</h3>
-            <Textarea cols={50} {...form.getInputProps(`faqs.1.answer`)}  classNames={{  
-            input: "border rounded-xl border-[#D0D5DD]"
+            <Textarea cols={50} {...form.getInputProps(`faqs.1.answer`)} classNames={{
+              input: "border rounded-xl border-[#D0D5DD]"
             }} />
           </div>
         </article>
         <article className="flex justify-between items-center">
           <div className="flex flex-col gap-2">
             <h3>FAQ 3</h3>
-            <Textarea cols={50} {...form.getInputProps(`faqs.2.question`)} classNames={{  
-            input: "border rounded-xl border-[#D0D5DD]"
+            <Textarea cols={50} {...form.getInputProps(`faqs.2.question`)} classNames={{
+              input: "border rounded-xl border-[#D0D5DD]"
             }} />
           </div>
           <div>
             <h3>Answer</h3>
-            <Textarea cols={50} {...form.getInputProps(`faqs.2.answer`)}  classNames={{  
-            input: "border rounded-xl border-[#D0D5DD]"
+            <Textarea cols={50} {...form.getInputProps(`faqs.2.answer`)} classNames={{
+              input: "border rounded-xl border-[#D0D5DD]"
             }} />
           </div>
         </article>
-        <button className="w-full align-middle bg-green-400 border rounded-xl text-white py-3">save</button>
+        <button onClick={saveFaqs} className="w-full align-middle bg-green-400 border rounded-xl text-white py-3">save</button>
       </section>
     </div>
   );
