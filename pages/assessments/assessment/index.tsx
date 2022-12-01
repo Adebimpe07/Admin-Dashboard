@@ -9,6 +9,7 @@ import ListAssessment from "../../../src/components/main/assessment/listedAssess
 import { AssessmentCardData } from "../../../src/layout/assessmentCardData";
 import AssessmentCards from "../../../src/components/main/assessment/assessmentCard/assessmentCards";
 import axios from "axios";
+import Loading from "../../../src/components/loading";
 
 export const NotificationDrop = () => {
   return (
@@ -31,14 +32,18 @@ export const NotificationDrop = () => {
 
 const HeaderMain = () => {
   const [AssessmentCardData, setAssessmentCardData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const fetchAllAssessment = () => {
+    setLoading(true);
     axios("https://assessbk.afexats.com/api/assessment/create-list-assessment")
       .then(function (response) {
         setAssessmentCardData(response.data.data.results);
+        setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -82,6 +87,7 @@ const HeaderMain = () => {
           link="/assessments/assessment/create_assessment"
           text="Create Assessment"
         />
+        <Loading loading={loading} />
       </div>
     </div>
   );

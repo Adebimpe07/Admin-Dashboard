@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 const CreateAssessmentPage = () => {
   const { assessmentForm } = useContext(FormContext);
   const router = useRouter();
-
   const createAssessment = async () => {
     var config = {
       method: "post",

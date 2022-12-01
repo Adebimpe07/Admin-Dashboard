@@ -6,7 +6,7 @@ import Link from "next/link";
 const Courses_newPage = () => {
   return (
     <div className="h-screen flex-1 py-6 flex flex-col  bg-mainBg">
-      <Header />
+      {/* <Header /> */}
       <div className=" text-[#8F9198] flex-1 flex-col flex items-center justify-center">
         <div className="flex flex-col items-center gap-6 justify-center">
           <Folder size="80" color="#948E8E" />

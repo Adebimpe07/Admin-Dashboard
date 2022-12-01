@@ -1,15 +1,15 @@
 import React from "react";
 import { Button, Modal, PasswordInput, Stack, TextInput } from "@mantine/core";
 
-const passwordResetSuccess = ({ oopened, setOopened, setOpened }) => {
+const PasswordResetSuccess = ({ oopened, setOopened, setOpened }) => {
   return (
     <div className="self-center">
-      <Button
+      {/* <Button
         className="bg-greenButton hover:bg-greenButton w-[10rem] text-sm mx-auto"
         onClick={() => setOopened(true)}
       >
         Save password
-      </Button>
+      </Button> */}
       <Modal
         opened={oopened}
         onClose={() => setOopened(false)}
@@ -36,4 +36,4 @@ const passwordResetSuccess = ({ oopened, setOopened, setOpened }) => {
   );
 };
 
-export default passwordResetSuccess;
+export default PasswordResetSuccess;

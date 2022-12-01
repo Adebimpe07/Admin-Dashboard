@@ -7,21 +7,24 @@ import React, { useState } from "react";
 import { CoursesData } from "../../../layout/coursesData";
 import { DeleteCourse } from "./deleteCourse";
 import EditCourse from "./editCourse";
+// import
 
 type coursesprops = {
-  picture: StaticImageData;
+  uid: string;
+  image: string;
   title: string;
-  paragraph: string;
+  description: string;
   timestamp: string;
-  status: string;
+  course_status: string;
 };
 
 const Courses = ({
-  picture,
+  uid,
   title,
-  paragraph,
+  description,
+  image,
   timestamp,
-  status,
+  course_status,
 }: coursesprops) => {
   const initialValues: { opened: boolean; component: React.ReactNode } = {
     opened: false,
@@ -29,40 +32,46 @@ const Courses = ({
   };
   const [DelModal, setDelModal] = useState(initialValues);
   function handleDelete() {
-    setDelModal({
-      opened: true,
-      component: <DeleteCourse />,
-    });
+    if (uid) {
+      setDelModal({
+        opened: true,
+        component: <DeleteCourse uid={uid} />,
+      });
+    } else alert("Profile cannot be deleted");
   }
 
   return (
-    <div>
-      <div className="flex flex-col gap-2 bg-white rounded-lg">
-        <img width="360" src={picture.src} alt="" />
-        <div className="px-3 pb-2 flex flex-col gap-3">
-          <div className="flex justify-between">
-            <h1 className="font-semibold">{title}</h1>
-            <div className="flex gap-3">
-              <EditCourse />
+    <div className="flex flex-col gap-2 bg-white rounded-lg">
+      <img
+        width="300"
+        height="200"
+        className="w-full h-full"
+        src={image}
+        alt=""
+      />
+      <div className="px-3 pb-2 flex flex-col gap-3">
+        <div className="flex justify-between">
+          <h1 className="font-semibold">{title}</h1>
+          <div className="flex gap-3">
+            <EditCourse uid={uid} />
 
-              <Trash onClick={handleDelete} size="17" color="red" />
-              <Modal
-                opened={DelModal.opened}
-                onClose={() => setDelModal(initialValues)}
-              >
-                {DelModal.component}
-              </Modal>
-            </div>
+            <Trash onClick={handleDelete} size="17" color="red" />
+            <Modal
+              opened={DelModal.opened}
+              onClose={() => setDelModal(initialValues)}
+            >
+              {DelModal.component}
+            </Modal>
           </div>
-          <div className="flex justify-between items-center">
-            <div className="text-xs bg-[#DCFCE7] flex items-center px-1 rounded-lg">
-              <Icon icon="bi:dot" color="#22c55e" width="19" height="19" />
-              <p className="bg-[#DCFCE7] text-[#14532D] ">{status}</p>
-            </div>
-            <p className="text-xs">Created {timestamp}</p>
-          </div>
-          <p>{paragraph}</p>
         </div>
+        <div className="flex justify-between items-center">
+          <div className="text-xs bg-[#DCFCE7] flex items-center px-1 rounded-lg">
+            <Icon icon="bi:dot" color="#22c55e" width="19" height="19" />
+            <p className="bg-[#DCFCE7] text-[#14532D] ">{course_status}</p>
+          </div>
+          <p className="text-xs">Created {timestamp}</p>
+        </div>
+        <p>{description}</p>
       </div>
     </div>
   );

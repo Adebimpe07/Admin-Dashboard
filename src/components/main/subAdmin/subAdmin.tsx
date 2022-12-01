@@ -12,51 +12,13 @@ type subadminprops = {
   profile_picture?: StaticImageData;
   admin_name: string;
   admin_email: string;
-  access_level: string;
+  position: string;
 };
 
 const subAdmin = () => {
-  const [opened, setOpened] = useState(false);
-  const [visible, { toggle }] = useDisclosure(false);
   const { admin, token } = useContext(FormContext);
-  const [err, setErr] = useState("");
 
-  const resetPasswordForm = useForm({
-    initialValues: {
-      new_password: "",
-      confirm_password: "",
-      old_password: "",
-    },
-  });
-
-  const resetPassword = (e) => {
-    if (
-      resetPasswordForm.values.new_password ===
-      resetPasswordForm.values.confirm_password
-    ) {
-      var data = resetPasswordForm.values;
-
-      var config = {
-        method: "patch",
-        url: `https://atsbk.afexats.com/api/v1/account/change-password/${admin.user_id}/`,
-        headers: {
-          Authorization: `Bearer ${token.access}`,
-        },
-        data: data,
-      };
-
-      axios(config)
-        .then(function (response) {
-          console.log(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } else setErr("Passwords don't match");
-  };
-
-  const { profile_picture, admin_name, admin_email, access_level } =
-    SubAdminData;
+  const { profile_picture, admin_name, admin_email, position } = SubAdminData;
   return (
     <div className="pt-6 h-screen flex flex-col flex-1 bg-mainBg">
       <header className="items-center flex justify-end border-b border-[#DBD9D9] px-4 gap-2 pb-[1.02rem]">
@@ -84,12 +46,7 @@ const subAdmin = () => {
           <div className="flex-1">
             <div className="flex justify-between">
               <h1 className="font-semibold">Profile Information</h1>
-              <Button
-                className="bg-[#1e1f1f] hover:bg-[#1e1f1f] w-[10rem] h-8 text-sm"
-                onClick={() => setOpened(true)}
-              >
-                Change password
-              </Button>
+              <ChangePassword />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -100,57 +57,20 @@ const subAdmin = () => {
               </div>
               <div>
                 <h2 className="py-2">Admin Email</h2>
-                <span className="border border-[#DBD9D9] rounded-lg p-2 inline-block w-full bg-mainBg">
+                <span className="w-fit border border-[#DBD9D9] rounded-lg p-2 inline-block w-full bg-mainBg">
                   {admin.email}
                 </span>
               </div>
               <div>
                 <h2 className="py-2">Access Level</h2>
                 <span className="border border-[#DBD9D9] rounded-lg p-2 inline-block w-full bg-mainBg">
-                  {access_level}
+                  {position}
                 </span>
               </div>
             </div>
           </div>
         </div>
       </main>
-      <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        classNames={{
-          root: "w-[30rem] m-auto",
-        }}
-        centered
-      >
-        <Stack sx={{ maxWidth: 380 }} mx="auto">
-          <PasswordInput
-            label="Old Password"
-            visible={visible}
-            onVisibilityChange={toggle}
-            {...resetPasswordForm.getInputProps("old_password")}
-          />
-          <PasswordInput
-            label="New Password"
-            visible={visible}
-            onVisibilityChange={toggle}
-            {...resetPasswordForm.getInputProps("new_password")}
-          />
-          <PasswordInput
-            label="Confirm password"
-            visible={visible}
-            onVisibilityChange={toggle}
-            {...resetPasswordForm.getInputProps("confirm_password")}
-          />
-          <Button
-            className="bg-greenButton hover:bg-greenButton w-[10rem] h-8 text-sm mx-auto"
-            onClick={(e) => resetPassword(e)}
-          >
-            Save password
-          </Button>
-          <span className="text-red ">{err}</span>
-        </Stack>
-      </Modal>
-      ;
     </div>
   );
 };

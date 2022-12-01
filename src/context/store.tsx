@@ -1,23 +1,23 @@
 import { createContext, useState, useEffect, useMemo } from "react";
 import { useForm, UseFormReturnType } from "@mantine/form";
 import {
-    useTable,
-    useRowSelect,
-    usePagination,
-    useGlobalFilter,
-    TableInstance,
-    UsePaginationInstanceProps,
-    UseSortByInstanceProps,
-    UsePaginationState,
+  useTable,
+  useRowSelect,
+  usePagination,
+  useGlobalFilter,
+  TableInstance,
+  UsePaginationInstanceProps,
+  UseSortByInstanceProps,
+  UsePaginationState,
 } from "react-table";
 import {
-    allApplicationColumn,
-    ShortListColumn,
-    passedColumn,
-    failedColumn,
-    interviewColumn,
-    hiredColumn,
-    rejectedColumn,
+  allApplicationColumn,
+  ShortListColumn,
+  passedColumn,
+  failedColumn,
+  interviewColumn,
+  hiredColumn,
+  rejectedColumn,
 } from "../layout/tableData";
 import { Checkbox } from "../components/main/body/applicationPage/checkBox";
 import MOCK_DATA from "../layout/MOCK_DATA.json";
@@ -38,112 +38,102 @@ import { useSessionStorage } from "@mantine/hooks";
 import axios from "axios";
 
 type formDataProp = {
-    selected: number;
-    setSelected: React.Dispatch<React.SetStateAction<number>>;
-    questionsForm: UseFormReturnType<
-        {
-            question_text: string;
-            question_type: string;
-            question_category: string;
-            question_hint: string;
-            choices: any[];
-        },
-        (values: {
-            question_text: string;
-            question_type: string;
-            question_category: string;
-            question_hint: string;
-            choices: any[];
-        }) => {
-            question_text: string;
-            question_type: string;
-            question_category: string;
-            question_hint: string;
-            choices: any[];
-        }
-    >;
-    categoryID: string;
-    categoryForm: UseFormReturnType<
-        {
-            name: string;
-            category_info: string;
-            test_duration: string;
-            num_of_questions: number;
-        },
-        (values: {
-            name: string;
-            category_info: string;
-            test_duration: string;
-            num_of_questions: number;
-        }) => {
-            name: string;
-            category_info: string;
-            test_duration: string;
-            num_of_questions: number;
-        }
-    >;
-    questionType: string;
-    setQuestionType: (val: string | ((prevState: string) => string)) => void;
-    setCategoryID: (val: string | ((prevState: string) => string)) => void;
-    value: string;
-    onChange: React.Dispatch<React.SetStateAction<string>>;
-    assessmentForm: UseFormReturnType<
-        {
-            name: string;
-            assessment_info: string;
-            total_duration: number;
-            application_type: number;
-            benchmark: number;
-        },
-        (values: {
-            name: string;
-            assessment_info: string;
-            total_duration: number;
-            application_type: number;
-            benchmark: number;
-        }) => {
-            name: string;
-            assessment_info: string;
-            total_duration: number;
-            application_type: number;
-            benchmark: number;
-        }
-    >;
-    subadminForm: UseFormReturnType<
-        {
-            first_name: string;
-            username: string;
-            gender: string;
-            last_name: string;
-            email: string;
-            password: string;
-            confirm_password: string;
-        },
-        (values: {
-            first_name: string;
-            username: string;
-            gender: string;
-            last_name: string;
-            email: string;
-            password: string;
-            confirm_password: string;
-        }) => {
-            first_name: string;
-            username: string;
-            gender: string;
-            last_name: string;
-            email: string;
-            password: string;
-            confirm_password: string;
-        }
-    >;
-    admin: any;
-    setAdmin: (val: string | ((prevState: string) => string)) => void;
-    token: any;
-    setToken: (val: string | ((prevState: string) => string)) => void;
+  selected: number;
+  setSelected: React.Dispatch<React.SetStateAction<number>>;
+  questionsForm: UseFormReturnType<
+    {
+      question_text: string;
+      question_type: string;
+      question_category: string;
+      question_hint: string;
+      choices: any[];
+    },
+    (values: {
+      question_text: string;
+      question_type: string;
+      question_category: string;
+      question_hint: string;
+      choices: any[];
+    }) => {
+      question_text: string;
+      question_type: string;
+      question_category: string;
+      question_hint: string;
+      choices: any[];
+    }
+  >;
+  categoryID: string;
+  categoryForm: UseFormReturnType<
+    {
+      name: string;
+      category_info: string;
+      test_duration: string;
+      num_of_questions: number;
+    },
+    (values: {
+      name: string;
+      category_info: string;
+      test_duration: string;
+      num_of_questions: number;
+    }) => {
+      name: string;
+      category_info: string;
+      test_duration: string;
+      num_of_questions: number;
+    }
+  >;
+  questionType: string;
+  setQuestionType: (val: string | ((prevState: string) => string)) => void;
+  setCategoryID: (val: string | ((prevState: string) => string)) => void;
+  value: string;
+  onChange: React.Dispatch<React.SetStateAction<string>>;
+  assessmentForm: UseFormReturnType<
+    {
+      name: string;
+      assessment_info: string;
+      total_duration: number;
+      application_type: number;
+      benchmark: number;
+    },
+    (values: {
+      name: string;
+      assessment_info: string;
+      total_duration: number;
+      application_type: number;
+      benchmark: number;
+    }) => {
+      name: string;
+      assessment_info: string;
+      total_duration: number;
+      application_type: number;
+      benchmark: number;
+    }
+  >;
+  coursesForm: UseFormReturnType<
+    {
+      title: string;
+      image: string;
+      description: string;
+    },
+    (values: { title: string; image: string; description: string }) => {
+      title: string;
+      image: string;
+      description: string;
+    }
+  >;
+  admin: any;
+  setAdmin: (val: string | ((prevState: string) => string)) => void;
+  token: any;
+  setToken: (val: string | ((prevState: string) => string)) => void;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoading: boolean
 };
 
-
+export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
+  UsePaginationInstanceProps<T> &
+  UseSortByInstanceProps<T> & {
+    state: UsePaginationState<T>;
+  };
 
 const FormContext = createContext<formDataProp | null>(null);
 export default FormContext;
@@ -319,96 +309,90 @@ export const FormProvider = ({ children }: any) => {
 
     // const { pageIndex, globalFilter }: any = state;
 
-    const categoryForm = useForm({
-        initialValues: {
-            name: "",
-            category_info: "",
-            test_duration: "",
-            num_of_questions: 0,
-        },
-    });
+  // const { pageIndex, globalFilter }: any = state;
 
-    const questionsForm = useForm({
-        initialValues: {
-            question_text: "",
-            question_type: "",
-            question_category: "Real",
-            question_hint: "face your book",
-            choices: Array(4).fill({
-                choice_text: "",
-                is_correct: false,
-            }),
-        },
-    });
+  const categoryForm = useForm({
+    initialValues: {
+      name: "",
+      category_info: "",
+      test_duration: "",
+      num_of_questions: 0,
+    },
+  });
 
-    const assessmentForm = useForm({
-        initialValues: {
-            name: "",
-            assessment_info: "",
-            total_duration: null,
-            application_type: 6,
-            benchmark: null,
-        },
-    });
-    const subadminForm = useForm({
-        initialValues: {
-            first_name: "",
-            username: "",
-            gender: "",
-            last_name: "",
-            email: "",
-            password: "",
-            confirm_password: "",
-        },
-    });
-    const coursesForm = useForm({
-        initialValues: {
-            title: "",
-            image: "",
-            description: "",
-        },
-    });
+  const questionsForm = useForm({
+    initialValues: {
+      question_text: "",
+      question_type: "",
+      question_category: "Real",
+      question_hint: "face your book",
+      choices: Array(4).fill({
+        choice_text: "",
+        is_correct: false,
+      }),
+    },
+  });
 
-    const [questionType, setQuestionType] = useSessionStorage({
-        key: "questionType",
-        defaultValue: "",
-    });
+  const assessmentForm = useForm({
+    initialValues: {
+      name: "",
+      assessment_info: "",
+      total_duration: null,
+      application_type: 6,
+      benchmark: null,
+    },
+  });
+  const coursesForm = useForm({
+    initialValues: {
+      title: "",
+      image: "",
+      description: "",
+    },
+  });
 
-    const [categoryID, setCategoryID] = useSessionStorage({
-        key: "categoryID",
-        defaultValue: "",
-    });
-    const [admin, setAdmin] = useSessionStorage({
-        key: "admin",
-        defaultValue: "",
-    });
-    const [token, setToken] = useSessionStorage({
-        key: "token",
-        defaultValue: "",
-    });
+  const [questionType, setQuestionType] = useSessionStorage({
+    key: "questionType",
+    defaultValue: "",
+  });
 
-    const [value, onChange] = useState("");
+  const [categoryID, setCategoryID] = useSessionStorage({
+    key: "categoryID",
+    defaultValue: "",
+  });
+  const [admin, setAdmin] = useSessionStorage({
+    key: "admin",
+    defaultValue: "",
+  });
+  const [token, setToken] = useSessionStorage({
+    key: "token",
+    defaultValue: "",
+  });
 
-    let formData = {
-        admin,
-        setAdmin,
-        token,
-        setToken,
-        selected,
-        setSelected,
-        questionsForm,
-        categoryID,
-        categoryForm,
-        questionType,
-        setQuestionType,
-        setCategoryID,
-        value,
-        onChange,
-        assessmentForm,
-        subadminForm,
-    };
+  const [value, onChange] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-    return (
-        <FormContext.Provider value={formData}>{children}</FormContext.Provider>
-    );
+  let formData = {
+    isLoading,
+    setIsLoading,
+    admin,
+    setAdmin,
+    token,
+    setToken,
+    selected,
+    setSelected,
+    questionsForm,
+    categoryID,
+    categoryForm,
+    questionType,
+    setQuestionType,
+    setCategoryID,
+    value,
+    onChange,
+    assessmentForm,
+    coursesForm,
+  };
+
+  return (
+    <FormContext.Provider value={formData}>{children}</FormContext.Provider>
+  );
 };

@@ -40,7 +40,7 @@ const ViewAssessmentTable = () => {
     usePagination,
     useRowSelect,
     (hooks) => {
-      hooks.visibleColumns.push((columns) => {
+      hooks.visibleColumns.push((columns): any => {
         return [
           {
             Header: ({ getToggleAllRowsSelectedProps }) => (
