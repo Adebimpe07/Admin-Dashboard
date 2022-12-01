@@ -59,6 +59,26 @@ const editCourse = ({ uid }) => {
         onClick={() => {
           if (uid) {
             setOpened(true);
+
+            var config = {
+              method: "get",
+              url: "127.0.0.1:9200/api/jobs/courses/1",
+              headers: {
+                "api-key":
+                  "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
+                "request-ts": "1667549939702",
+                "hash-key":
+                  "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+              },
+            };
+
+            axios(config)
+              .then(function (response) {
+                console.log(JSON.stringify(response.data));
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
           } else alert("Profile cannot be edited");
         }}
       />
