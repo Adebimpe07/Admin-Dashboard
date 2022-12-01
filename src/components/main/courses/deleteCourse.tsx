@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import CoursesCardStyle from "./coursesCardStyle";
 export const DeleteCourse = ({ uid }) => {
-  const handleDelete = ({ DelModal, setDelModal }) => {
+  const handleDelete = () => {
     var config = {
       method: "post",
       url: `https://aptbk.afexats.com/api/jobs/courses/${uid}/delete`,
@@ -40,7 +40,9 @@ export const DeleteCourse = ({ uid }) => {
         >
           Cancel
         </Button>
-        <Button className="bg-[red] hover:bg-[red]">Delete</Button>
+        <Button onClick={handleDelete} className="bg-[red] hover:bg-[red]">
+          Delete
+        </Button>
       </div>
     </div>
   );

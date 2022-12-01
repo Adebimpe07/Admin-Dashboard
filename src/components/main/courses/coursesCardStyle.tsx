@@ -10,6 +10,7 @@ import EditCourse from "./editCourse";
 // import
 
 type coursesprops = {
+  url: string;
   uid: string;
   image: string;
   title: string;
@@ -19,6 +20,7 @@ type coursesprops = {
 };
 
 const Courses = ({
+  url,
   uid,
   title,
   description,
@@ -53,7 +55,7 @@ const Courses = ({
         <div className="flex justify-between">
           <h1 className="font-semibold">{title}</h1>
           <div className="flex gap-3">
-            <EditCourse uid={uid} />
+            <EditCourse uid={uid} url={url} />
 
             <Trash onClick={handleDelete} size="17" color="red" />
             <Modal
