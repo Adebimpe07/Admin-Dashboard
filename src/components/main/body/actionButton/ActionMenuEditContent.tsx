@@ -34,7 +34,7 @@ const ActionMenuEdit = () => {
         modal: "!w-[50rem]",
       }}
     >
-      <Text className="flex gap-6 w-[100%]">
+      <Text className="flex gap-6 w-full">
         <div className="flex w-[85%] flex-col gap-4">
           <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
             News Details

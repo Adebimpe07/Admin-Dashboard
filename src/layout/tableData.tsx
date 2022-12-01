@@ -470,3 +470,46 @@ export const viewAssessmentColumn = [
         accessor: "action",
     },
 ];
+
+export const dejiColumn = [
+  {
+    Header: "Name",
+    accessor: "full_name"
+  },
+  {
+     Header: "Email address",
+    accessor: "email"
+  },
+  {
+     Header: "Subject",
+    accessor: "subject"
+  },
+  {
+     Header: "Message",
+    accessor: "short_message"
+  },
+  {
+     Header: "",
+    accessor: "view"
+  },
+];
+
+export const newsLetterColumn = [
+  {
+    Header: "Subject",
+    accessor: "subject"
+    
+  },
+   {
+    Header: "Message",
+    accessor: "trunc_content"
+  },
+   {
+    Header: "Action",
+    accessor: "popmodal"
+  },
+   {
+    Header: "",
+    accessor: "send"
+  },
+]

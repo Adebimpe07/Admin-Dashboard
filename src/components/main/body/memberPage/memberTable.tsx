@@ -18,7 +18,7 @@ const MemberTable = () => {
 
     const fetchAllAts = () => {
         axios(
-            "http://atsbk.afexats.com/api/v1/tech-stars/tech-star-list-create/"
+            "https://atsbk.afexats.com/api/v1/tech-stars/tech-star-list-create/"
         )
             .then(function (response) {
                 setATSMember(response.data.data.results);

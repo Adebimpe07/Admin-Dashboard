@@ -70,6 +70,11 @@ export const SideData = [
     heading: "Email Template",
     href: "/emailTemplate",
   },
+  {
+    icon: <Icon icon="healthicons:contact-support-outline" width="19" />,
+    heading: "Support",
+    href: "/allsupport/askDeji",
+  },
 ];
 export const AdminData = [
   {

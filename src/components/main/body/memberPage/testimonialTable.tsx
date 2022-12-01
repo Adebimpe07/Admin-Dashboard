@@ -7,20 +7,9 @@ import {
     atsTestimonialColumn,
     atsAttendanceColumn,
 } from "../../../../layout/tableData";
-import Content from "../../../../layout/contentData.json";
-import ContentBlog from "../../../../layout/contentBlogData.json";
-import ATSMember from "../../../../layout/atsMemberData.json";
-import Testimonial from "../../../../layout/atsTestimonialData.json";
-import Attendance from "../../../../layout/atsAttendanceData.json";
-import ActionMenuEditContent from "../actionButton/ActionMenuEditContent";
-import ActionMenuDeleteContent from "../actionButton/ActionMenuDeleteContent";
-import ActionMenuEditBlogContent from "../actionButton/ActionMenuEditBlogContent";
-import ActionMenuDeleteBlogContent from "../actionButton/ActionMenuDeleteBlogContent";
+
 import ActionMenuTestimonial from "../actionButton/ActionMenuTestimonial";
 import ActionMenuMemberImg from "../actionButton/ActionMenuMemberImg";
-import ActionMenuEditAtsMember from "../actionButton/ActionMenuEditAtsmember";
-import ActionMenuDeleteAtsMember from "../actionButton/ActionMenuDeleteAtsMember";
-import ActionMenuMember from "../actionButton/ActionMenuMember";
 import axios from "axios";
 
 const TestimonialTable = () => {
@@ -28,10 +17,10 @@ const TestimonialTable = () => {
 
     const fetchAllTestimonial = () => {
         axios(
-            "http://atsbk.afexats.com/api/v1/tech-stars/testimonial-list-create/"
+            "https://atsbk.afexats.com/api/v1/tech-stars/testimonial-list-create/"
         )
             .then(function (response) {
-                console.log(response.data.data.results);
+                setTestimonial(response.data.data.results);
             })
             .catch(function (error) {
                 console.log(error);
@@ -57,7 +46,7 @@ const TestimonialTable = () => {
             })),
         [Testimonial]
     );
-
+22
     const {
         getTableProps,
         getTableBodyProps,
