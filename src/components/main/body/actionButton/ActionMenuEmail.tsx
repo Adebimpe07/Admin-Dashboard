@@ -7,9 +7,11 @@ import { DeleteModal } from "../emailTemplate/deleteModal";
 import { EditModal } from "../emailTemplate/editModal";
 
 
-const ActionMenuEmail = () => {
+const ActionMenuEmail = ({row}) => {
 
-
+  const logRows = () => {
+    console.log(row.original)
+  }
   const [opened, setOpened] = useState(false);
 
   const initialValues: { opened: boolean; component: React.ReactNode } = {
@@ -20,14 +22,14 @@ const ActionMenuEmail = () => {
   function handleDelete() {
     setSubAdminDelModal({
       opened: true,
-      component: <DeleteModal />,
+      component: <DeleteModal setSubAdminDelModal={setSubAdminDelModal} rowdetail={row.original} />,
     });
   }
-  const [subAdminHireModal, setSubAdminHireModal] = useState(initialValues);
-  function handleHire() {
-    setSubAdminHireModal({
+  const [subAdminEditModal, setSubAdminEditModal] = useState(initialValues);
+  function handleEdit() {
+    setSubAdminEditModal({
       opened: true,
-      component: <EditModal />,
+      component: <EditModal setSubAdminEditModal={setSubAdminEditModal} rowdetail={row.original} />,
     });
   }
 
@@ -46,7 +48,7 @@ const ActionMenuEmail = () => {
       </Menu.Target>
       <Menu.Dropdown>
         <Menu.Item>View Detail</Menu.Item>
-        <Menu.Item onClick={handleHire}>Edit</Menu.Item>
+        <Menu.Item onClick={handleEdit}>Edit</Menu.Item>
         <Menu.Item onClick={handleDelete}>Delete</Menu.Item>
       </Menu.Dropdown>
     </Menu>
@@ -57,10 +59,10 @@ const ActionMenuEmail = () => {
         {subAdminDelModal.component}
       </Modal>
       <Modal
-        opened={subAdminHireModal.opened}
-        onClose={() => setSubAdminHireModal(initialValues)}
+        opened={subAdminEditModal.opened}
+        onClose={() => setSubAdminEditModal(initialValues)}
       >
-        {subAdminHireModal.component}
+        {subAdminEditModal.component}
       </Modal>
     </div>
   );

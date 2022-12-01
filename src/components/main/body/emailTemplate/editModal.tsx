@@ -8,11 +8,40 @@ import {
 } from "@mantine/core";
 import RichTextEditor from "@mantine/rte";
 import { IconUpload } from "@tabler/icons";
+import axios from "axios";
 import { useState } from "react";
 
-export const EditModal = () => {
+export const EditModal = ({rowdetail, setSubAdminEditModal}) => {
+  const [checked, setChecked] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+      var config = {
+        method: 'post',
+        url: `${rowdetail.url}/set-rejected`,
+        headers: { 
+          "api-key":
+          "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
+        "request-ts": "1667549939702",
+        "hash-key":
+          "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+        },
+      };
+      
+      axios(config)
+      .then(function (response) {
+        alert(response.data.data.application_status);
+        setSubAdminEditModal.opened = false
+      })
+      .catch(function (error) {
+        alert(error.response.data.error);
+      });
+   
+
+  }
+
   return (
-    <div className="flex flex-col gap-4 ">
+    <form onSubmit={(e) => handleSubmit(e)}  className="flex flex-col gap-4 ">
       <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
         Mail Description
       </h1>
@@ -44,6 +73,6 @@ export const EditModal = () => {
       >
         Save Changes
       </Button>
-    </div>
+    </form>
   );
 };
