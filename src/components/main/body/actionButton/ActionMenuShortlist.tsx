@@ -5,9 +5,11 @@ import { ShortlistModal } from "../applicationPage/shortlistModal";
 import { AssesmentInvitationModal } from "../applicationPage/assesmentInvitationModal";
 
 
-const ActionMenuShortlist = () => {
+const ActionMenuShortlist = ({row}) => {
 
-
+  const logRows = () => {
+    console.log(row.original)
+  }
 
   const [opened, setOpened] = useState(false);
 
@@ -20,14 +22,14 @@ const ActionMenuShortlist = () => {
     function handleEdit() {
       setSubAdminModal({
         opened: true,
-        component: <AssesmentInvitationModal />,
+        component: <AssesmentInvitationModal setSubAdminModal={setSubAdminModal} rowdetail={row.original} />,
       });
     }
     const [subAdminDelModal, setSubAdminDelModal] = useState(initialValues);
     function handleDelete() {
       setSubAdminDelModal({
         opened: true,
-        component: <RejectModal />,
+        component: <RejectModal setSubAdminDelModal={setSubAdminDelModal} rowdetail={row.original} />,
       });
     }
 

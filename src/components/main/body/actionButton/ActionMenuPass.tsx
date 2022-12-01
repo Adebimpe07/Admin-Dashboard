@@ -5,9 +5,11 @@ import { InterviewInvitationModal } from "../applicationPage/interviewInvitation
 import { HireInvitationModal } from "../applicationPage/hireInvitationModal";
 
 
-const ActionMenuPass = () => {
+const ActionMenuPass = ({row}) => {
 
-
+  const logRows = () => {
+    console.log(row.original)
+  }
   const [opened, setOpened] = useState(false);
 
   const initialValues: { opened: boolean; component: React.ReactNode } = {
@@ -19,21 +21,21 @@ const ActionMenuPass = () => {
   function handleEdit() {
     setSubAdminModal({
       opened: true,
-      component: <InterviewInvitationModal />,
+      component: <InterviewInvitationModal setSubAdminModal={setSubAdminModal} rowdetail={row.original} />,
     });
   }
   const [subAdminDelModal, setSubAdminDelModal] = useState(initialValues);
   function handleDelete() {
     setSubAdminDelModal({
       opened: true,
-      component: <RejectModal />,
+      component: <RejectModal setSubAdminDelModal={setSubAdminDelModal} rowdetail={row.original} />,
     });
   }
   const [subAdminHireModal, setSubAdminHireModal] = useState(initialValues);
   function handleHire() {
     setSubAdminHireModal({
       opened: true,
-      component: <HireInvitationModal />,
+      component: <HireInvitationModal setSubAdminHireModal={setSubAdminHireModal} rowdetail={row.original} />,
     });
   }
 
@@ -45,14 +47,12 @@ const ActionMenuPass = () => {
       }}
     >
       <Menu.Target>
-        <button className="">
+        <button onClick={logRows} className="">
           Actions
         </button>
       </Menu.Target>
       <Menu.Dropdown>
         <Menu.Item onClick={handleEdit}>Invite for Interview</Menu.Item>
-        <Menu.Item onClick={handleHire}>Hire Applicant</Menu.Item>
-        <Menu.Item onClick={handleDelete}>Reject Applicant</Menu.Item>
       </Menu.Dropdown>
     </Menu>
     <Modal

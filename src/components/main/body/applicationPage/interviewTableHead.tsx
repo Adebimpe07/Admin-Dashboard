@@ -10,7 +10,7 @@ type props = {
   setSelected: Function;
 };
 
-const TableHead = () => {
+const InterviewTableHead = () => {
 
 
   const fetchApplicantsData = () => {
@@ -47,7 +47,7 @@ const TableHead = () => {
           <p
             key={idx}
             className={
-              item.name === 'All Applications'
+              item.name === 'Invited for Interview'
                 ? " text-[#4A4C58] cursor-pointer"
                 : "text-[#948E8E] cursor-pointer"
             }
@@ -56,7 +56,7 @@ const TableHead = () => {
           </p>
           <div
             className={
-              item.name === 'All Applications'
+              item.name === 'Invited for Interview'
                 ? "bg-[#30AD74] text-[#4A4C58] w-7 h-1 mx-auto border rounded-md mt-2.5"
                 : "w-7 h-1 mx-auto border rounded-md mt-2.5"
             }
@@ -68,4 +68,4 @@ const TableHead = () => {
   );
 };
 
-export default TableHead;
+export default InterviewTableHead;

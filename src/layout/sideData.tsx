@@ -43,7 +43,7 @@ export const SideData = [
   {
     icon: <Note1 size="17" variant="Outline" />,
     heading: "Application",
-    href: "/allapplications",
+    href: "/applications/all-applications",
   },
   {
     icon: <FolderOpen size="17" variant="Outline" />,

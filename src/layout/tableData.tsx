@@ -30,23 +30,23 @@ export const allApplicationColumn = [
 export const ShortListColumn = [
     {
         Header: "Name",
-        accessor: "name",
+        accessor: "applicant_name",
     },
     {
         Header: "Applicant ID",
-        accessor: "applicant_id",
+        accessor: "application_id",
     },
     {
         Header: "Program",
-        accessor: "program",
+        accessor: "course",
     },
     {
         Header: "Email Address",
-        accessor: "email",
+        accessor: "applicant_email",
     },
     {
         Header: "Phone No",
-        accessor: "phone_number",
+        accessor: "applicant_phone",
     },
     {
         Header: "",
@@ -56,23 +56,23 @@ export const ShortListColumn = [
 export const passedColumn = [
     {
         Header: "Name",
-        accessor: "name",
+        accessor: "applicant_name",
     },
     {
         Header: "Applicant ID",
-        accessor: "applicant_id",
+        accessor: "application_id",
     },
     {
         Header: "Program",
-        accessor: "program",
+        accessor: "course",
     },
     {
         Header: "Email Address",
-        accessor: "email",
+        accessor: "applicant_email",
     },
     {
         Header: "Phone No",
-        accessor: "phone_number",
+        accessor: "applicant_phone",
     },
     {
         Header: "",
@@ -82,23 +82,23 @@ export const passedColumn = [
 export const failedColumn = [
     {
         Header: "Name",
-        accessor: "name",
+        accessor: "applicant_name",
     },
     {
         Header: "Applicant ID",
-        accessor: "applicant_id",
+        accessor: "application_id",
     },
     {
         Header: "Program",
-        accessor: "program",
+        accessor: "course",
     },
     {
         Header: "Email Address",
-        accessor: "email",
+        accessor: "applicant_email",
     },
     {
         Header: "Phone No",
-        accessor: "phone_number",
+        accessor: "applicant_phone",
     },
     {
         Header: "",
@@ -108,23 +108,23 @@ export const failedColumn = [
 export const interviewColumn = [
     {
         Header: "Name",
-        accessor: "name",
+        accessor: "applicant_name",
     },
     {
         Header: "Applicant ID",
-        accessor: "applicant_id",
+        accessor: "application_id",
     },
     {
         Header: "Program",
-        accessor: "program",
+        accessor: "course",
     },
     {
         Header: "Email Address",
-        accessor: "email",
+        accessor: "applicant_email",
     },
     {
         Header: "Phone No",
-        accessor: "phone_number",
+        accessor: "applicant_phone",
     },
     {
         Header: "",
@@ -134,45 +134,45 @@ export const interviewColumn = [
 export const hiredColumn = [
     {
         Header: "Name",
-        accessor: "name",
+        accessor: "applicant_name",
     },
     {
         Header: "Applicant ID",
-        accessor: "applicant_id",
+        accessor: "application_id",
     },
     {
         Header: "Program",
-        accessor: "program",
+        accessor: "course",
     },
     {
         Header: "Email Address",
-        accessor: "email",
+        accessor: "applicant_email",
     },
     {
         Header: "Phone No",
-        accessor: "phone_number",
+        accessor: "applicant_phone",
     },
 ];
 export const rejectedColumn = [
     {
         Header: "Name",
-        accessor: "name",
+        accessor: "applicant_name",
     },
     {
         Header: "Applicant ID",
-        accessor: "applicant_id",
+        accessor: "application_id",
     },
     {
         Header: "Program",
-        accessor: "program",
+        accessor: "course",
     },
     {
         Header: "Email Address",
-        accessor: "email",
+        accessor: "applicant_email",
     },
     {
         Header: "Phone No",
-        accessor: "phone_number",
+        accessor: "applicant_phone",
     },
 ];
 

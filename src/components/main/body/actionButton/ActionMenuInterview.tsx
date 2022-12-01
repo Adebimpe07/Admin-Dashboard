@@ -5,7 +5,7 @@ import { InterviewInvitationModal } from "../applicationPage/interviewInvitation
 import { RejectModal } from "../applicationPage/rejectModal";
 
 
-const ActionMenuInterview = () => {
+const ActionMenuInterview = ({row}) => {
 
 
   const [opened, setOpened] = useState(false);
@@ -18,14 +18,14 @@ const ActionMenuInterview = () => {
   function handleDelete() {
     setSubAdminDelModal({
       opened: true,
-      component: <RejectModal />,
+      component: <RejectModal setSubAdminDelModal={setSubAdminDelModal} rowdetail={row.original} />,
     });
   }
   const [subAdminHireModal, setSubAdminHireModal] = useState(initialValues);
   function handleHire() {
     setSubAdminHireModal({
       opened: true,
-      component: <HireInvitationModal />,
+      component: <HireInvitationModal setSubAdminHireModal={setSubAdminHireModal} rowdetail={row.original} />,
     });
   }
 
