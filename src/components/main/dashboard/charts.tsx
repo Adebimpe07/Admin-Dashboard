@@ -11,65 +11,65 @@ import { Chart } from "../../../layout/main";
 import { DocumentDownload } from "iconsax-react";
 const data = [
   {
-    name: "Jan",
-    visited: 4000,
-    applied: 2400,
+    name: "Sun",
+    applied: 4000,
+    assessment: 2400,
   },
   {
-    name: "Feb",
-    visited: 3000,
-    applied: 1398,
+    name: "Mon",
+    applied: 3000,
+    assessment: 1398,
   },
   {
-    name: "Mar",
-    visited: 2000,
-    applied: 9800,
+    name: "Tue",
+    applied: 2000,
+    assessment: 9800,
   },
   {
-    name: "Apr",
-    visited: 2780,
-    applied: 3908,
+    name: "Wed",
+    applied: 2780,
+    assessment: 3908,
   },
   {
-    name: "May",
-    visited: 1890,
-    applied: 800,
+    name: "Thur",
+    applied: 1890,
+    assessment: 800,
   },
   {
-    name: "Jun",
-    visited: 3390,
-    applied: 2800,
+    name: "Fri",
+    applied: 3390,
+    assessment: 2800,
   },
   {
-    name: "Jul",
-    visited: 3490,
-    applied: 1300,
+    name: "Sat",
+    applied: 3490,
+    assessment: 1300,
   },
-  {
-    name: "Aug",
-    visited: 3490,
-    applied: 300,
-  },
-  {
-    name: "Sep",
-    visited: 3490,
-    applied: 1300,
-  },
-  {
-    name: "Oct",
-    visited: 3490,
-    applied: 300,
-  },
-  {
-    name: "Nov",
-    visited: 3490,
-    applied: 4300,
-  },
-  {
-    name: "Dec",
-    visited: 3490,
-    applied: 300,
-  },
+  // {
+  //   name: "Aug",
+  //   applied: 3490,
+  //   assessment: 300,
+  // },
+  // {
+  //   name: "Sep",
+  //   applied: 3490,
+  //   assessment: 1300,
+  // },
+  // {
+  //   name: "Oct",
+  //   applied: 3490,
+  //   assessment: 300,
+  // },
+  // {
+  //   name: "Nov",
+  //   applied: 3490,
+  //   assessment: 4300,
+  // },
+  // {
+  //   name: "Dec",
+  //   applied: 3490,
+  //   assessment: 300,
+  // },
 ];
 
 const charts = () => {
@@ -79,7 +79,7 @@ const charts = () => {
     return (
       <div className="flex items-center justify-between px-6">
         <h1>Applications</h1>
-        <div className="flex gap-6 text-[#18181B] text-xs my-4">
+        <div className="flex gap-2 text-[#18181B] text-sm my-4">
           {Chart.map((item, index) => {
             return (
               <div
@@ -96,10 +96,10 @@ const charts = () => {
             );
           })}
         </div>
-        <button className="flex items-center gap-1 rounded border border-[#A1A1AA] p-1 px-2">
+        {/* <button className="flex items-center gap-1 rounded border border-[#A1A1AA] p-1 px-2">
           <DocumentDownload size="15" />
           <p className="text-xs">Export PDF</p>
-        </button>
+        </button> */}
       </div>
     );
   };
@@ -130,7 +130,7 @@ const charts = () => {
         <Tooltip />
         <Area
           type="monotone"
-          dataKey="visited"
+          dataKey="applied"
           stroke="#8884d8"
           strokeWidth={2}
           fillOpacity={1}
@@ -138,7 +138,7 @@ const charts = () => {
         />
         <Area
           type="monotone"
-          dataKey="applied"
+          dataKey="assessment"
           stroke="#82ca9d"
           strokeWidth={2}
           fillOpacity={1}

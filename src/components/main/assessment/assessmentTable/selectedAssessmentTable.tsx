@@ -3,6 +3,7 @@ import React, { ReactNode, useEffect, useMemo, useState } from "react";
 import { useTable, useRowSelect, usePagination } from "react-table";
 import { categoryColumn } from "../../../../layout/tableData";
 import CategoryListData from "../../../../layout/categoryListData.json";
+
 import { Checkbox } from "../assessment/checkbox";
 
 const AssessmentCategoryTable = ({ setSelectedCategory }) => {
@@ -29,7 +30,7 @@ const AssessmentCategoryTable = ({ setSelectedCategory }) => {
       });
   };
 
-  console.log(CategoryListData)
+  console.log(CategoryListData);
 
   useEffect(() => {
     fetchAllCategories();
@@ -59,15 +60,15 @@ const AssessmentCategoryTable = ({ setSelectedCategory }) => {
     prepareRow,
     selectedFlatRows,
   } = useTable<{
-      "name": string;
-      "question": number;
-      "time": string;
-      "id": number;
-    "edit": ReactNode;
-    "delete": ReactNode;
-}>(
+    name: string;
+    question: number;
+    time: string;
+    id: number;
+    edit: ReactNode;
+    delete: ReactNode;
+  }>(
     {
-      columns: CategoryColumn,
+      columns: CategoryColumn as any,
       data: CategoryData ?? [],
     },
     usePagination,
