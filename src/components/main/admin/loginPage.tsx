@@ -1,5 +1,5 @@
 import { Button, Checkbox, PasswordInput, TextInput } from "@mantine/core";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import Logo from "../../../assets/Afex_logo.png";
 import EnterEmail from "./enterEmail";
@@ -8,9 +8,11 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import FormContext from "../../../context/store";
 import { useRouter } from "next/router";
+import Loading from "../../loading";
 const loginPage = () => {
   const { setToken, setAdmin } = useContext(FormContext);
   const [visible, { toggle }] = useDisclosure(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const form = useForm({
     initialValues: {
@@ -19,6 +21,7 @@ const loginPage = () => {
     },
   });
   const handleSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
     var config = {
       method: "post",
@@ -33,10 +36,12 @@ const loginPage = () => {
         setToken(response.data.data);
         console.log(jwtDecode(response.data.data.access));
         setAdmin(jwtDecode(response.data.data.access));
+        setLoading(false);
         router.push("/");
       })
       .catch(function (error) {
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -69,6 +74,7 @@ const loginPage = () => {
         </Button>
         <EnterEmail />
       </div>
+      <Loading loading={loading} />
     </form>
   );
 };
