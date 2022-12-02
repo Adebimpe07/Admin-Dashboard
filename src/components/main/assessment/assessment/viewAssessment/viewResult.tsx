@@ -7,6 +7,7 @@ import { Button } from "@mantine/core";
 import AssessmentInformation from "./viewResult/assessmentInformation";
 import Feedback from "./viewResult/feedback";
 import CategoryInformation from "./viewResult/categoryInformation";
+import Images from './viewResult/resultimages'
 
 const viewResult = ({ result }) => {
   return (
@@ -25,11 +26,12 @@ const viewResult = ({ result }) => {
         </div>
 
 
-        <div className="flex w-full relative">
+        <div className="flex w-full relative h-screen">
           <div className=" flex flex-col w-1/2 mr-4 ">
             <ApplicantDetails result={result} />
             <AssessmentInformation result={result} />
             <Feedback />
+            {/* <Images /> */}
           </div>
           <div className="w-1/2 ">
             <CategoryInformation result={result} />
