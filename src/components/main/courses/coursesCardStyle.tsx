@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import { Modal } from "@mantine/core";
 import { Edit2, Trash } from "iconsax-react";
+import moment from "moment";
 import { StaticImageData } from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -8,7 +9,6 @@ import { CoursesData } from "../../../layout/coursesData";
 import { DeleteCourse } from "./deleteCourse";
 import EditCourse from "./editCourse";
 // import
-
 type coursesprops = {
   url: string;
   uid: string;
@@ -39,7 +39,7 @@ const Courses = ({
         opened: true,
         component: <DeleteCourse uid={uid} />,
       });
-    } else alert("Profile cannot be deleted");
+    } else alert("Course cannot be deleted");
   }
 
   return (
@@ -71,9 +71,11 @@ const Courses = ({
             <Icon icon="bi:dot" color="#22c55e" width="19" height="19" />
             <p className="bg-[#DCFCE7] text-[#14532D] ">{course_status}</p>
           </div>
-          <p className="text-xs">Created {timestamp}</p>
+          <p className="text-xs">
+            Created {moment(timestamp).format("MMM DD, YYYY")}
+          </p>
         </div>
-        <p>{description}</p>
+        <p>{description.split("").splice(0, 100).join("") + " ..."}</p>
       </div>
     </div>
   );

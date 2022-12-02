@@ -38,6 +38,7 @@ const HeaderMain = () => {
     setLoading(true);
     axios("https://assessbk.afexats.com/api/categories/create-list-category")
       .then(function (response) {
+        console.log(response.data.data.results);
         setCategoryCard(response.data.data.results);
         setLoading(false);
       })

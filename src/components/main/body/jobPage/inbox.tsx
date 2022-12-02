@@ -132,12 +132,12 @@ const PostJobModal = ({ jobForm, opened, setOpened, fetchJob }: any) => {
             placeholder="job will be auto-generated"
             {...jobForm.getInputProps("title")}
           />
-          
-            <TextInput
-              label="Cohorts"
-              className="flex-1"
-              {...jobForm.getInputProps("cohort")}
-            />
+
+          <TextInput
+            label="Cohorts"
+            className="flex-1"
+            {...jobForm.getInputProps("cohort")}
+          />
         </div>
         <Select
           className="flex-1"
