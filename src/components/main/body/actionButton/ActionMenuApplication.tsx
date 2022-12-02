@@ -9,6 +9,7 @@ import { EditSubAdminModal } from "../../admin/editAdminModal";
 import { DeleteSubAdminModal } from "../../admin/deleteAdmin";
 import { ShortlistModal } from "../applicationPage/shortlistModal";
 import { RejectModal } from "../applicationPage/rejectModal";
+import ViewModal from "../applicationPage/viewModal";
 
 
 const ActionMenuApplication = ({row}) => {
@@ -40,6 +41,15 @@ const ActionMenuApplication = ({row}) => {
       });
     }
 
+    const [subAdminViewModal, setSubAdminViewModal] = useState(initialValues);
+    function handleView() {
+      setSubAdminViewModal({
+        opened: true,
+        component: <ViewModal setSubAdminViewModal={setSubAdminViewModal} rowdetail={row.original} />
+      })
+    }
+
+
     return (
       <div>
       <Menu
@@ -51,7 +61,7 @@ const ActionMenuApplication = ({row}) => {
           <button onClick={logRows} className=" ">Actions</button>
         </Menu.Target>
         <Menu.Dropdown>
-          <Menu.Item >View Details</Menu.Item>
+          <Menu.Item onClick={handleView} >View Details</Menu.Item>
           <Menu.Item onClick={handleEdit}>
             Shortlist Applicant
           </Menu.Item>
@@ -69,6 +79,12 @@ const ActionMenuApplication = ({row}) => {
       onClose={() => setSubAdminDelModal(initialValues)}
     >
       {subAdminDelModal.component}
+    </Modal>
+    <Modal
+    opened={subAdminViewModal.opened}
+    onClose={() => setSubAdminViewModal(initialValues)}
+    >
+    {subAdminViewModal.component}
     </Modal>
     </div>
     );

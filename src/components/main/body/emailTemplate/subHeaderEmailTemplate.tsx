@@ -50,6 +50,7 @@ const UploadJobModal = ({ opened, setOpened, setOopened }) => {
       type: "",
       subject: "",
       salutation: "Hello",
+      body:""
     },
   });
 
@@ -92,6 +93,7 @@ const UploadJobModal = ({ opened, setOpened, setOopened }) => {
             ["sup", "sub"],
             ["alignLeft", "alignCenter", "alignRight"],
           ]}
+          {...form.getInputProps("body")}
         />
       </Text>
       <Button

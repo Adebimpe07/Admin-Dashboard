@@ -16,6 +16,7 @@ import {
 } from "@mantine/core";
 import axios from "axios";
 import { useForm } from "@mantine/form";
+import Link from "next/link";
 
 type Props = {
   title: string;
@@ -164,12 +165,35 @@ const PostJobModal = ({ jobForm, opened, setOpened, fetchJob }: any) => {
     </Modal>
   );
 };
+const handleDelete = () => {
+  var config = {
+    method: "post",
+    url: 'https://aptbk.afexats.com/api/jobs/2/delete',
+    headers: {
+      "api-key":
+        "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
+      "request-ts": "1667549939702",
+      "hash-key":
+        "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+    },
+  };
 
-const UploadJobModal = ({ shift, setShift }: any) => (
+  axios(config)
+    .then(function (response) {
+      console.log(response.data);
+     
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+const UploadJobModal = ({ opened, setOpened }: any) => (
+  
   <Modal
     className="text-[#4A4C58] text-base"
-    opened={shift}
-    onClose={() => setShift(false)}
+    opened={opened}
+    onClose={() => setOpened(false)}
     title="Delete Job"
   >
     <p className="text-center text-sm">
@@ -177,7 +201,7 @@ const UploadJobModal = ({ shift, setShift }: any) => (
       confirm this acton.
     </p>
     <div className="flex justify-center">
-      <button className="bg-[#A83C3D] py-2 w-full text-[white] rounded mt-8 text-base font-bold">
+      <button onClick={handleDelete} className="bg-[#A83C3D] py-2 w-full text-[white] rounded mt-8 text-base font-bold">
         Delete
       </button>
     </div>
@@ -195,6 +219,8 @@ const Inbox = ({ title, time, fetchJob }: Props) => {
       created_by: "admin",
     },
   });
+
+
 
   return (
     <div className="flex justify-between p-6 bg-white my-6 mx-12 border rounded-2xl">
@@ -214,12 +240,16 @@ const Inbox = ({ title, time, fetchJob }: Props) => {
             <p>Full Time</p>
           </div>
           <div className="flex gap-4 pt-2">
+            <Link href="applications/all-applications">
             <p className="text-[#38CB89] text-xs font-normal underline">
               View Application
             </p>
+            </Link>
+            <Link href="assessments/assessment">
             <p className="text-[#38CB89] text-xs font-normal underline">
               View Assesment
             </p>
+            </Link>
           </div>
         </div>
       </div>
@@ -239,9 +269,14 @@ const Inbox = ({ title, time, fetchJob }: Props) => {
               setOpened={setOpened}
             />
           </button>
-          <button onClick={() => setShift(true)}>
+          <button
+            onClick={() => {
+              setShift(true);
+            }}
+          >
             <img src={Trash.src} alt="icon" className="w-4" />
-            <UploadJobModal />
+            <UploadJobModal opened={shift}
+              setOpened={setShift}/>
           </button>
         </div>
       </div>

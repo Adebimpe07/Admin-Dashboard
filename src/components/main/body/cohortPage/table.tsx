@@ -6,6 +6,8 @@ import ActionMenuCourses from "../actionButton/ActionMenuCourses";
 import ActionMenuEdit from "../actionButton/ActionMenuEdit";
 import ActionMenuDelete from "../actionButton/ActionMenuDelete";
 import axios from "axios";
+import ActionMenuStartDate from "../actionButton/ActionMenuStartDate";
+import ActionMenuEndDate from "../actionButton/ActionMenuEndDate";
 
 const CohortTable = () => {
   const CohortColumn = useMemo(() => cohortColumn, []);
@@ -40,6 +42,8 @@ axios({
     () =>
     CohortData.map((cohort, idx) => ({
         ...cohort,
+        application_start_date: <ActionMenuStartDate application_start_date={cohort.application_start_date} />,
+        application_end_date: <ActionMenuEndDate application_end_date={cohort.application_end_date} />,
         number_of_courses: <ActionMenuCourses number_of_courses={cohort.number_of_courses}/>,
         edit: <ActionMenuEdit />,
         delete: <ActionMenuDelete />,
