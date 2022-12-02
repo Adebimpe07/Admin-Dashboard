@@ -36,9 +36,12 @@ const HeaderMain = () => {
 
   const fetchAllAssessment = () => {
     setLoading(true);
-    axios("https://assessbk.afexats.com/api/assessment/create-list-assessment")
+    axios(
+      `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/assessment/create-list-assessment`
+    )
       .then(function (response) {
         setAssessmentCardData(response.data.data.results);
+        console.log(response.data.data.results);
         setLoading(false);
       })
       .catch(function (error) {

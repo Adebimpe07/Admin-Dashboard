@@ -1,4 +1,4 @@
-// fetch("https://assessbk.afexats.com/api/categories/", {
+// fetch("${process.env.NEXT_PUBLIC_BASE_URL_1}/api/categories/", {
 //                   method: "post",
 //                   headers: { "Content-Type": "application/json" },
 //                   body: JSON.stringify(categoryForm.values),
@@ -22,7 +22,7 @@
 
 //     const [cardData, setCardData] = usestate([])
 
-//     axios("https://assessbk.afexats.com/api/categories/")
+//     axios("${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/")
 //         .then(function (response) {
 //             setCardData(response.data)
 //         }
@@ -40,7 +40,7 @@
 
 //                 var config = {
 //                   method: "post",
-//                   url: "https://assessbk.afexats.com/api/categories/",
+//                   url: "${process.env.NEXT_PUBLIC_BASE_URL_1}/api/categories/",
 //                   headers: {
 //                     "Content-Type": "application/json",
 //                   },

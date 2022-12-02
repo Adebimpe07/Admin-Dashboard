@@ -48,13 +48,8 @@ const UploadJobModal = ({ opened, setOpened, setOopened }) => {
     initialValues: {
       type: "",
       subject: "",
-<<<<<<< HEAD
-      salutation: "Hello",
-      body: "",
-=======
       salutation: "",
       body:""
->>>>>>> 3e1e18b8a472e8b4f93c7d4182a3c7dfa88f3287
     },
   });
 
