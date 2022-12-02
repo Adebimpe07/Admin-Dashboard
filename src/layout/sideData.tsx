@@ -73,7 +73,7 @@ export const SideData = [
   {
     icon: <Icon icon="healthicons:contact-support-outline" width="19" />,
     heading: "Support",
-    href: "/support",
+    href: "/allsupport/askDeji",
   },
 ];
 export const AdminData = [

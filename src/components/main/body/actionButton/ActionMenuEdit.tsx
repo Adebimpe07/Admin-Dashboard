@@ -80,7 +80,7 @@ const ActionMenuEdit = () => {
   return (
     <div className="">
       <button
-        className=" text-sm text-[#514747]"
+        className="text-sm text-[#514747]"
         onClick={() => setOpened(true)}
       >
         <p>Edit</p>
