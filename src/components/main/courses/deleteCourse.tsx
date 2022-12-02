@@ -1,7 +1,6 @@
 import { Button } from "@mantine/core";
 import axios from "axios";
 import React, { useState } from "react";
-import CoursesCardStyle from "./coursesCardStyle";
 export const DeleteCourse = ({ uid }) => {
   const handleDelete = () => {
     var config = {

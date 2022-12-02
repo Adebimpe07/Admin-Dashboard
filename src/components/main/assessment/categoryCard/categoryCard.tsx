@@ -27,11 +27,12 @@ const CategoryCard = ({ categoryCard }) => {
         <div className="gap-4 flex-1 overflow-auto mx-4 mb-2 grid grid-cols-3">
           {categoryCard.map(
             (
-              { name, category_info, test_duration, num_of_questions },
+              { name, id, category_info, test_duration, num_of_questions },
               index
             ) => {
               return (
                 <CategoryCardStyle
+                  id={id}
                   key={index}
                   questions={num_of_questions}
                   title={name}
