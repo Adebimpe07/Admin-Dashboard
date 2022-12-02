@@ -10,6 +10,7 @@ import FormContext from "../../../context/store";
 import { useRouter } from "next/router";
 import Loading from "../../loading";
 const loginPage = () => {
+<<<<<<< HEAD
   const { setToken, setAdmin } = useContext(FormContext);
   const [visible, { toggle }] = useDisclosure(false);
   const [loading, setLoading] = useState(false);
@@ -28,6 +29,24 @@ const loginPage = () => {
       url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/account/admin/login`,
       data: form.values,
     };
+=======
+    const { setToken, setAdmin } = useContext(FormContext);
+    const [visible, { toggle }] = useDisclosure(false);
+    const router = useRouter();
+    const form = useForm({
+        initialValues: {
+            email: "",
+            password: "",
+        },
+    });
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        var config = {
+            method: "post",
+            url: "`${process.env.NEXT_PUBLIC_BASE_URL_1}`/api/v1/account/admin/login",
+            data: form.values,
+        };
+>>>>>>> 0dbc3f81e7d0cc7df6cfeeb2b0f993f1b58d5b7c
 
     // refresh token and access token
 

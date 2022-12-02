@@ -26,8 +26,8 @@ const Faqs = () => {
   const fetchFaqs = () => {
     var config = {
       method: 'get',
-      url: 'https://atsbk.afexats.com/api/v1/support/FAQ-list-create/',
-    };
+      url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/support/FAQ-list-create/`,
+    }
     axios(config)
       .then((response) => {
         console.log((response.data));
@@ -50,9 +50,11 @@ const Faqs = () => {
   const saveFaqs = () => {
     var config = {
       method: 'post',
-      url: 'https://atsbk.afexats.com/api/v1/support/FAQ-list-create/',
+      url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/support/FAQ-list-create/`,
       headers: {
-      
+        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY_1}`,
+        "hash-key": `${process.env.NEXT_PUBLIC_APP_HASH_KEY_1}`,
+        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS_1}`,
       }
     };
 

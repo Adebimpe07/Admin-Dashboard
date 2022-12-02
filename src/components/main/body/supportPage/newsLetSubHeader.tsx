@@ -35,18 +35,18 @@ const NewsLetSubHeader = () => {
     ];
 
     const [opened, setOpened] = useState(false);
-    const {token} = useContext(FormContext)
+    const { token } = useContext(FormContext)
 
     const UploadJobModal = () => {
 
         const createNewsLetter = () => {
             var config = {
                 method: 'post',
-                url: 'https://atsbk.afexats.com/api/v1/newsletter',
+                url: '`${process.env.NEXT_PUBLIC_BASE_URL_1}`/api/v1/newsletter',
                 headers: {
-                    "API-KEY": "7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ",
-                    "HASH-KEY": "091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a",
-                    "REQUEST-TS": "1669397556",
+                    "API-KEY": "`${process.env.NEXT_PUBLIC_APP_API_KEY_1}`",
+                    "HASH-KEY": "`${process.env.NEXT_PUBLIC_APP_HASH_KEY_1}`",
+                    "REQUEST-TS": "`${process.env.NEXT_PUBLIC_REQUEST_TS_1}`",
                     "Authorization": `Bearer ${token.access}`
                 }
             };
