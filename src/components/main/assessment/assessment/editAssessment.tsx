@@ -12,7 +12,11 @@ const EditAssessmentPage = ({ id }) => {
   const editAssessment = (id) =>
     axios({
       method: "put",
+<<<<<<< HEAD
       url: `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/assessment/${id}`,
+=======
+      url: `https://assessbk.afexats.com/api/assessment/${id}//`,
+>>>>>>> f6e48eebaedc93860a7848dbe03429c63261aee0
     }).then((response) => {
       console.log(response.data);
       router.push("/assessments/assessment");

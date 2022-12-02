@@ -1,20 +1,30 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\AdekunleBabatundeAde\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
+  /usr/local/bin/node /opt/homebrew/Cellar/yarn/1.22.19/libexec/bin/yarn.js
 
 PATH: 
-  C:\Program Files\WindowsApps\Microsoft.PowerShell_7.3.0.0_x64__8wekyb3d8bbwe;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\AdekunleBabatundeAde\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\AdekunleBabatundeAde\AppData\Local\Programs\Python\Python310\;C:\Users\AdekunleBabatundeAde\AppData\Local\Microsoft\WindowsApps;C:\Users\AdekunleBabatundeAde\AppData\Local\Programs\Git\cmd;C:\Users\AdekunleBabatundeAde\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\AdekunleBabatundeAde\AppData\Roaming\npm;
+  /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mac/.fig/bin:/Users/mac/.local/bin
 
 Yarn version: 
   1.22.19
 
 Node version: 
-  16.15.1
+  18.12.1
 
 Platform: 
-  win32 x64
+  darwin arm64
 
 Trace: 
-  Error: 14652:error:1408F119:SSL routines:ssl3_get_record:decryption failed or bad record mac:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:677:
+  Error: connect ENETUNREACH 104.16.25.35:443 - Local (0.0.0.0:58886)
+      at internalConnect (node:net:1053:16)
+      at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+      at emitLookup (node:net:1209:9)
+      at /opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:103587:28
+      at /opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:103496:13
+      at module.exports.RawTask.call (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:79584:19)
+      at flush (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:79666:29)
+      at processTicksAndRejections (node:internal/process/task_queues:77:11)
+      at runNextTicks (node:internal/process/task_queues:64:3)
+      at process.processImmediate (node:internal/timers:442:9)
 
 npm manifest: 
   {
@@ -64,6 +74,7 @@ npm manifest:
       "axios": "^1.2.0",
       "dayjs": "^1.11.6",
       "iconsax-react": "^0.0.8",
+      "jwt-decode": "^3.1.2",
       "next": "^13.0.2",
       "parcel": "^2.7.0",
       "react": "^18.2.0",
@@ -2362,6 +2373,11 @@ Lockfile:
     version "2.2.1"
     resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.1.tgz#655d50ed1e6f95ad1a3caababd2b0efda10b395c"
     integrity sha512-1hqLFMSrGHRHxav9q9gNjJ5EXznIxGVO09xQRrwplcS8qs28pZ8s8hupZAmqDwZUmVZ2Qb2jnyPOWcDH8m8dlA==
+  
+  jwt-decode@^3.1.2:
+    version "3.1.2"
+    resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
+    integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
   
   klona@^2.0.5:
     version "2.0.5"

@@ -1,7 +1,7 @@
 import { Menu } from "@mantine/core";
 import React from "react";
 
-const ActionMenuPass = () => {
+const ActionMenuPass = ({ }) => {
   return (
     <Menu
       classNames={{
