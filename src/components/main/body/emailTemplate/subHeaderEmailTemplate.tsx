@@ -49,7 +49,7 @@ const UploadJobModal = ({ opened, setOpened, setOopened }) => {
     initialValues: {
       type: "",
       subject: "",
-      salutation: "Hello",
+      salutation: "",
       body:""
     },
   });
@@ -82,6 +82,11 @@ const UploadJobModal = ({ opened, setOpened, setOopened }) => {
           className=""
           {...form.getInputProps("subject")}
         />
+        <TextInput
+          label="Salutation"
+          className=""
+          {...form.getInputProps("salutation")}
+        />
         <p>Content</p>
         <RichTextEditor
           value={value}
@@ -93,7 +98,7 @@ const UploadJobModal = ({ opened, setOpened, setOopened }) => {
             ["sup", "sub"],
             ["alignLeft", "alignCenter", "alignRight"],
           ]}
-          {...form.getInputProps("body")}
+          
         />
       </Text>
       <Button
