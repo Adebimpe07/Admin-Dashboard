@@ -25,7 +25,7 @@ const CreateCourses = () => {
 
     var config = {
       method: "post",
-      url: "https://aptbk.afexats.com/api/jobs/courses/create",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/courses/create`,
       headers: {
         "api-key":
           "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",

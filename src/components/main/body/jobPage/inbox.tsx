@@ -29,7 +29,7 @@ const PostJobModal = ({ jobForm, opened, setOpened, fetchJob }: any) => {
   const [courseList, setCourseList] = useState([]);
   const fetchCohorts = () => {
     axios({
-      url: "https://aptbk.afexats.com/api/jobs/cohort-options",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/cohort-options`,
       headers: {
         "api-key":
           "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
@@ -60,7 +60,7 @@ const PostJobModal = ({ jobForm, opened, setOpened, fetchJob }: any) => {
     //
     if (jobForm.values.cohort) {
       axios({
-        url: `https://aptbk.afexats.com/api/jobs/cohort/${jobForm.values.cohort}/course-options`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/cohort/${jobForm.values.cohort}/course-options`,
         headers: {
           "api-key":
             "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
@@ -90,7 +90,7 @@ const PostJobModal = ({ jobForm, opened, setOpened, fetchJob }: any) => {
 
     var config = {
       method: "post",
-      url: "https://aptbk.afexats.com/api/jobs/",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/`,
       headers: {
         "api-key":
           "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
@@ -168,7 +168,7 @@ const PostJobModal = ({ jobForm, opened, setOpened, fetchJob }: any) => {
 const handleDelete = () => {
   var config = {
     method: "post",
-    url: 'https://aptbk.afexats.com/api/jobs/2/delete',
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/2/delete`,
     headers: {
       "api-key":
         "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
@@ -181,7 +181,6 @@ const handleDelete = () => {
   axios(config)
     .then(function (response) {
       console.log(response.data);
-     
     })
     .catch(function (error) {
       console.log(error);
@@ -189,7 +188,6 @@ const handleDelete = () => {
 };
 
 const UploadJobModal = ({ opened, setOpened }: any) => (
-  
   <Modal
     className="text-[#4A4C58] text-base"
     opened={opened}
@@ -201,7 +199,10 @@ const UploadJobModal = ({ opened, setOpened }: any) => (
       confirm this acton.
     </p>
     <div className="flex justify-center">
-      <button onClick={handleDelete} className="bg-[#A83C3D] py-2 w-full text-[white] rounded mt-8 text-base font-bold">
+      <button
+        onClick={handleDelete}
+        className="bg-[#A83C3D] py-2 w-full text-[white] rounded mt-8 text-base font-bold"
+      >
         Delete
       </button>
     </div>
@@ -219,8 +220,6 @@ const Inbox = ({ title, time, fetchJob }: Props) => {
       created_by: "admin",
     },
   });
-
-
 
   return (
     <div className="flex justify-between p-6 bg-white my-6 mx-12 border rounded-2xl">
@@ -241,14 +240,14 @@ const Inbox = ({ title, time, fetchJob }: Props) => {
           </div>
           <div className="flex gap-4 pt-2">
             <Link href="applications/all-applications">
-            <p className="text-[#38CB89] text-xs font-normal underline">
-              View Application
-            </p>
+              <p className="text-[#38CB89] text-xs font-normal underline">
+                View Application
+              </p>
             </Link>
             <Link href="assessments/assessment">
-            <p className="text-[#38CB89] text-xs font-normal underline">
-              View Assesment
-            </p>
+              <p className="text-[#38CB89] text-xs font-normal underline">
+                View Assesment
+              </p>
             </Link>
           </div>
         </div>
@@ -275,8 +274,7 @@ const Inbox = ({ title, time, fetchJob }: Props) => {
             }}
           >
             <img src={Trash.src} alt="icon" className="w-4" />
-            <UploadJobModal opened={shift}
-              setOpened={setShift}/>
+            <UploadJobModal opened={shift} setOpened={setShift} />
           </button>
         </div>
       </div>

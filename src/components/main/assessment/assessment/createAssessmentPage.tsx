@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ArrowLeft2 } from "iconsax-react";
 import Link from "next/link";
 import { Button, Select, Textarea, TextInput } from "@mantine/core";
@@ -10,40 +10,51 @@ import { useRouter } from "next/router";
 const CreateAssessmentPage = () => {
   const { assessmentForm } = useContext(FormContext);
   const router = useRouter();
-  const createAssessment = async () => {
-    var config = {
-      method: "post",
-      url: "https://assessbk.afexats.com/api/assessment/",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+  const [courseList, setCourseList] = useState([]);
 
+  useEffect(() => {
     axios({
-      url: "https://assessbk.afexats.com/api/assessment/application-type/",
+      url: "https://assessbk.afexats.com/api/assessment/application-type",
+      method: "get",
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const createAssessment = () => {
+    axios({
+      url: "https://assessbk.afexats.com/api/assessment/create-list-assessment",
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
-      data: JSON.stringify({ title: assessmentForm.values.name }),
-    }).then(async function (response) {
-      console.log(response.data.data.id);
-      let new_config = await {
-        ...config,
-        data: {
-          ...assessmentForm.values,
-          application_type: response.data.data.id,
-        },
-      };
-      const res = await axios(new_config);
-      const applicationData = await res.data;
-      console.log(res);
-      console.log(applicationData);
-      if (res.statusText === "Created") {
-        router.push("/assessments/assessment/all_categories");
-        assessmentForm.reset();
-      }
-    });
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+
+    //   data: JSON.stringify({ title: assessmentForm.values.name }),
+    // }).then(async function (response) {
+    //   console.log(response.data.data);
+    //   let new_config = await {
+    //     ...config,
+    //     data: {
+    //       ...assessmentForm.values,
+    //       application_type: response.data.data.id,
+    //     },
+    //   };
+    //   const res = await axios(new_config);
+    //   const applicationData = await res.data;
+    //   // console.log(res);
+    //   console.log(applicationData);
+    //   if (res.statusText === "Created") {
+    //     router.push("/assessments/assessment/all_categories");
+    //     assessmentForm.reset();
+    //   }
+    // });
     // .catch(function (error) {
     //     console.log(error);
     // });
@@ -65,6 +76,7 @@ const CreateAssessmentPage = () => {
           <h1 className="font-semibold text-xl pb-2">Create New Assessment</h1>
           <TextInput
             {...assessmentForm.getInputProps("name")}
+            placeholder="ATS 1.0"
             label="Assessment Name"
             classNames={{
               root: "!p-0",

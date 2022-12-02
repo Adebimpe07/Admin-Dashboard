@@ -11,7 +11,11 @@ import {
   useTable,
 } from "react-table";
 import ActionMenuApplication from "../actionButton/ActionMenuApplication";
-import { allApplicationColumn, passedColumn, ShortListColumn } from "../../../../layout/tableData";
+import {
+  allApplicationColumn,
+  passedColumn,
+  ShortListColumn,
+} from "../../../../layout/tableData";
 import SubAppHeader from "./subAppHeader";
 import TableHead from "./tableHead";
 import ApplicationPage from "./applicationPage";
@@ -32,17 +36,13 @@ export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
 
 const PassedApplicationBody = () => {
   const [passAssesment, setPassAssesment] = useState([]);
-  const passed = useMemo(
-    () =>
-    passAssesment,
-    [passAssesment]
-);
+  const passed = useMemo(() => passAssesment, [passAssesment]);
 
-const PassedColumn = useMemo(() => passedColumn, []);
+  const PassedColumn = useMemo(() => passedColumn, []);
   const fetchApplicantList = (url, setter) => {
     var config = {
       method: "get",
-      url: "https://aptbk.afexats.com/api/applications" + url,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications` + url,
       headers: {
         "api-key":
           "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
@@ -65,8 +65,6 @@ const PassedColumn = useMemo(() => passedColumn, []);
   useEffect(() => {
     fetchApplicantList("/passed", setPassAssesment);
   }, []);
-
-  
 
   const {
     getTableProps,
@@ -101,7 +99,7 @@ const PassedColumn = useMemo(() => passedColumn, []);
             //     <Checkbox {...getToggleAllRowsSelectedProps()} />
             // ),
             Cell: ({ row }: any) => (
-                <ActionMenuPass row={row} />
+              <ActionMenuPass row={row} />
               // <Checkbox {...row.getToggleRowSelectedProps()} />
             ),
           },
@@ -110,7 +108,6 @@ const PassedColumn = useMemo(() => passedColumn, []);
     }
   ) as TableInstanceWithHooks<object>;
 
-  
   const { pageIndex, globalFilter }: any = state;
 
   const formData = {

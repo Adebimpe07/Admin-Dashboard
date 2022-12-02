@@ -2,204 +2,204 @@ import { ReactNode } from "react";
 import { Column } from "react-table";
 
 export const allApplicationColumn = [
-    {
-        Header: "Name",
-        accessor: "applicant_name",
-    },
-    {
-        Header: "Applicant ID",
-        accessor: "application_id",
-    },
-    {
-        Header: "Program",
-        accessor: "course",
-    },
-    {
-        Header: "Email Address",
-        accessor: "applicant_email",
-    },
-    {
-        Header: "Phone No",
-        accessor: "applicant_phone",
-    },
-    {
-        Header: "",
-        accessor: "action",
-    },
+  {
+    Header: "Name",
+    accessor: "applicant_name",
+  },
+  {
+    Header: "Applicant ID",
+    accessor: "application_id",
+  },
+  {
+    Header: "Program",
+    accessor: "course",
+  },
+  {
+    Header: "Email Address",
+    accessor: "applicant_email",
+  },
+  {
+    Header: "Phone No",
+    accessor: "applicant_phone",
+  },
+  {
+    Header: "",
+    accessor: "action",
+  },
 ];
 export const ShortListColumn = [
-    {
-        Header: "Name",
-        accessor: "applicant_name",
-    },
-    {
-        Header: "Applicant ID",
-        accessor: "application_id",
-    },
-    {
-        Header: "Program",
-        accessor: "course",
-    },
-    {
-        Header: "Email Address",
-        accessor: "applicant_email",
-    },
-    {
-        Header: "Phone No",
-        accessor: "applicant_phone",
-    },
-    {
-        Header: "",
-        accessor: "action",
-    },
+  {
+    Header: "Name",
+    accessor: "applicant_name",
+  },
+  {
+    Header: "Applicant ID",
+    accessor: "application_id",
+  },
+  {
+    Header: "Program",
+    accessor: "course",
+  },
+  {
+    Header: "Email Address",
+    accessor: "applicant_email",
+  },
+  {
+    Header: "Phone No",
+    accessor: "applicant_phone",
+  },
+  {
+    Header: "",
+    accessor: "action",
+  },
 ];
 export const passedColumn = [
-    {
-        Header: "Name",
-        accessor: "applicant_name",
-    },
-    {
-        Header: "Applicant ID",
-        accessor: "application_id",
-    },
-    {
-        Header: "Program",
-        accessor: "course",
-    },
-    {
-        Header: "Email Address",
-        accessor: "applicant_email",
-    },
-    {
-        Header: "Phone No",
-        accessor: "applicant_phone",
-    },
-    {
-        Header: "",
-        accessor: "action",
-    },
+  {
+    Header: "Name",
+    accessor: "applicant_name",
+  },
+  {
+    Header: "Applicant ID",
+    accessor: "application_id",
+  },
+  {
+    Header: "Program",
+    accessor: "course",
+  },
+  {
+    Header: "Email Address",
+    accessor: "applicant_email",
+  },
+  {
+    Header: "Phone No",
+    accessor: "applicant_phone",
+  },
+  {
+    Header: "",
+    accessor: "action",
+  },
 ];
 export const failedColumn = [
-    {
-        Header: "Name",
-        accessor: "applicant_name",
-    },
-    {
-        Header: "Applicant ID",
-        accessor: "application_id",
-    },
-    {
-        Header: "Program",
-        accessor: "course",
-    },
-    {
-        Header: "Email Address",
-        accessor: "applicant_email",
-    },
-    {
-        Header: "Phone No",
-        accessor: "applicant_phone",
-    },
-    {
-        Header: "",
-        accessor: "action",
-    },
+  {
+    Header: "Name",
+    accessor: "applicant_name",
+  },
+  {
+    Header: "Applicant ID",
+    accessor: "application_id",
+  },
+  {
+    Header: "Program",
+    accessor: "course",
+  },
+  {
+    Header: "Email Address",
+    accessor: "applicant_email",
+  },
+  {
+    Header: "Phone No",
+    accessor: "applicant_phone",
+  },
+  {
+    Header: "",
+    accessor: "action",
+  },
 ];
 export const interviewColumn = [
-    {
-        Header: "Name",
-        accessor: "applicant_name",
-    },
-    {
-        Header: "Applicant ID",
-        accessor: "application_id",
-    },
-    {
-        Header: "Program",
-        accessor: "course",
-    },
-    {
-        Header: "Email Address",
-        accessor: "applicant_email",
-    },
-    {
-        Header: "Phone No",
-        accessor: "applicant_phone",
-    },
-    {
-        Header: "",
-        accessor: "action",
-    },
+  {
+    Header: "Name",
+    accessor: "applicant_name",
+  },
+  {
+    Header: "Applicant ID",
+    accessor: "application_id",
+  },
+  {
+    Header: "Program",
+    accessor: "course",
+  },
+  {
+    Header: "Email Address",
+    accessor: "applicant_email",
+  },
+  {
+    Header: "Phone No",
+    accessor: "applicant_phone",
+  },
+  {
+    Header: "",
+    accessor: "action",
+  },
 ];
 export const hiredColumn = [
-    {
-        Header: "Name",
-        accessor: "applicant_name",
-    },
-    {
-        Header: "Applicant ID",
-        accessor: "application_id",
-    },
-    {
-        Header: "Program",
-        accessor: "course",
-    },
-    {
-        Header: "Email Address",
-        accessor: "applicant_email",
-    },
-    {
-        Header: "Phone No",
-        accessor: "applicant_phone",
-    },
+  {
+    Header: "Name",
+    accessor: "applicant_name",
+  },
+  {
+    Header: "Applicant ID",
+    accessor: "application_id",
+  },
+  {
+    Header: "Program",
+    accessor: "course",
+  },
+  {
+    Header: "Email Address",
+    accessor: "applicant_email",
+  },
+  {
+    Header: "Phone No",
+    accessor: "applicant_phone",
+  },
 ];
 export const rejectedColumn = [
-    {
-        Header: "Name",
-        accessor: "applicant_name",
-    },
-    {
-        Header: "Applicant ID",
-        accessor: "application_id",
-    },
-    {
-        Header: "Program",
-        accessor: "course",
-    },
-    {
-        Header: "Email Address",
-        accessor: "applicant_email",
-    },
-    {
-        Header: "Phone No",
-        accessor: "applicant_phone",
-    },
+  {
+    Header: "Name",
+    accessor: "applicant_name",
+  },
+  {
+    Header: "Applicant ID",
+    accessor: "application_id",
+  },
+  {
+    Header: "Program",
+    accessor: "course",
+  },
+  {
+    Header: "Email Address",
+    accessor: "applicant_email",
+  },
+  {
+    Header: "Phone No",
+    accessor: "applicant_phone",
+  },
 ];
 
 // application_end_date
-// : 
+// :
 // "2022-12-21T12:53:23+01:00"
 // application_start_date
-// : 
+// :
 // "2022-11-28T12:53:23+01:00"
 // courses
-// : 
+// :
 // (2) [{…}, {…}]
 // end_date
-// : 
+// :
 // "2023-06-30"
 // name
-// : 
+// :
 // "ATS 2.0"
 // number_of_courses
-// : 
+// :
 // 2
 // start_date
-// : 
+// :
 // "2023-01-05"
 // url
-// : 
-// "https://aptbk.afexats.com/api/jobs/cohort/1"
+// :
+//`${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/cohort/1`
 
 export const cohortColumn = [
   {
@@ -236,109 +236,111 @@ export const cohortColumn = [
   },
 ];
 export const contentColumn = [
-    {
-        Header: "Title",
-        accessor: "title",
-    },
-    {
-        Header: "Categories",
-        accessor: "categories",
-    },
-    {
-        Header: "Author",
-        accessor: "post",
-    },
-    {
-        Header: "Date posted",
-        accessor: "date",
-    },
-    {
-        Header: "",
-        accessor: "edit",
-    },
-    {
-        Header: "",
-        accessor: "delete",
-    },
+  {
+    Header: "Title",
+    accessor: "title",
+  },
+  {
+    Header: "Categories",
+    accessor: "categories",
+  },
+  {
+    Header: "Author",
+    accessor: "post",
+  },
+  {
+    Header: "Date posted",
+    accessor: "date",
+  },
+  {
+    Header: "",
+    accessor: "edit",
+  },
+  {
+    Header: "",
+    accessor: "delete",
+  },
 ];
 export const blogColumn = [
-    {
-        Header: "Title",
-        accessor: "title",
-    },
-    {
-        Header: "Author",
-        accessor: "post",
-    },
-    {
-        Header: "Comments",
-        accessor: "comment",
-    },
-    {
-        Header: "Total Views",
-        accessor: "view",
-    },
-    {
-        Header: "Total Likes",
-        accessor: "like",
-    },
-    ,
-    {
-        Header: "Date posted",
-        accessor: "date",
-    },
-    {
-        Header: "",
-        accessor: "edit",
-    },
-    {
-        Header: "",
-        accessor: "delete",
-    },
+  {
+    Header: "Title",
+    accessor: "title",
+  },
+  {
+    Header: "Author",
+    accessor: "post",
+  },
+  {
+    Header: "Comments",
+    accessor: "comment",
+  },
+  {
+    Header: "Total Views",
+    accessor: "view",
+  },
+  {
+    Header: "Total Likes",
+    accessor: "like",
+  },
+  ,
+  {
+    Header: "Date posted",
+    accessor: "date",
+  },
+  {
+    Header: "",
+    accessor: "edit",
+  },
+  {
+    Header: "",
+    accessor: "delete",
+  },
 ];
 export const atsMemberColumn = [
-    {
-        Header: "",
-        accessor: "image",
-    },
-    {
-        Header: "Name",
-        accessor: "full_name",
-    },
-    {
-        Header: "Status",
-        accessor: "status",
-    },
-    {
-        Header: "Course",
-        accessor: "course",
-    },
-    {
-        Header: "Cohorts",
-        accessor: "cohort",
-    },
-    {
-        Header: "Email",
-        accessor: "official_email",
-    },
-    {
-        Header: "Phone No",
-        accessor: "phone_number",
-    },
-    {
-        Header: "",
-        accessor: "action",
-    },
+  {
+    Header: "",
+    accessor: "image",
+  },
+  {
+    Header: "Name",
+    accessor: "full_name",
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
+  {
+    Header: "Course",
+    accessor: "course",
+  },
+  {
+    Header: "Cohorts",
+    accessor: "cohort",
+  },
+  {
+    Header: "Email",
+    accessor: "official_email",
+  },
+  {
+    Header: "Phone No",
+    accessor: "phone_number",
+  },
+  {
+    Header: "",
+    accessor: "action",
+  },
 ];
 
-export const categoryColumn: Array<Column<{
-  "name": string;
-  "question": number;
-  "time": string;
-  "id": number;
-"edit": ReactNode;
-"delete": ReactNode;
-}>> = [
+export const categoryColumn: Array<
+  Column<{
+    name: string;
+    question: number;
+    time: string;
+    id: number;
+    edit: ReactNode;
+    delete: ReactNode;
+  }>
+> = [
   {
     Header: "Category Name",
     accessor: "name",
@@ -362,98 +364,98 @@ export const categoryColumn: Array<Column<{
 ];
 
 export const atsTestimonialColumn = [
-    {
-        Header: "",
-        accessor: "image",
-    },
-    {
-        Header: "Name",
-        accessor: "name",
-    },
-    {
-        Header: "Cohorts",
-        accessor: "cohort",
-    },
-    {
-        Header: "Course",
-        accessor: "course",
-    },
-    {
-        Header: "",
-        accessor: "action",
-    },
+  {
+    Header: "",
+    accessor: "image",
+  },
+  {
+    Header: "Name",
+    accessor: "name",
+  },
+  {
+    Header: "Cohorts",
+    accessor: "cohort",
+  },
+  {
+    Header: "Course",
+    accessor: "course",
+  },
+  {
+    Header: "",
+    accessor: "action",
+  },
 ];
 
 export const atsAttendanceColumn = [
-    {
-        Header: "Name",
-        accessor: "name",
-    },
-    {
-        Header: "Email",
-        accessor: "email",
-    },
-    {
-        Header: "Check in time",
-        accessor: "intime",
-    },
-    {
-        Header: "Status",
-        accessor: "status",
-    },
-    {
-        Header: "Check out time",
-        accessor: "outtime",
-    },
-    {
-        Header: "Date",
-        accessor: "date",
-    },
+  {
+    Header: "Name",
+    accessor: "name",
+  },
+  {
+    Header: "Email",
+    accessor: "email",
+  },
+  {
+    Header: "Check in time",
+    accessor: "intime",
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
+  {
+    Header: "Check out time",
+    accessor: "outtime",
+  },
+  {
+    Header: "Date",
+    accessor: "date",
+  },
 ];
 
 export const questionList = [
-    {
-        Header: "Type",
-        accessor: "type",
-    },
-    {
-        Header: "Questions",
-        accessor: "question",
-    },
-    {
-        Header: "Time",
-        accessor: "time",
-    },
-    {
-        Header: "",
-        accessor: "edit",
-    },
-    {
-        Header: "",
-        accessor: "delete",
-    },
+  {
+    Header: "Type",
+    accessor: "type",
+  },
+  {
+    Header: "Questions",
+    accessor: "question",
+  },
+  {
+    Header: "Time",
+    accessor: "time",
+  },
+  {
+    Header: "",
+    accessor: "edit",
+  },
+  {
+    Header: "",
+    accessor: "delete",
+  },
 ];
 export const showCategoryList = [
-    {
-        Header: "Type",
-        accessor: "type",
-    },
-    {
-        Header: "Questions",
-        accessor: "question",
-    },
-    {
-        Header: "Time",
-        accessor: "time",
-    },
-    //   {
-    //     Header: "",
-    //     accessor: "edit",
-    //   },
-    //   {
-    //     Header: "",
-    //     accessor: "delete",
-    //   },
+  {
+    Header: "Type",
+    accessor: "type",
+  },
+  {
+    Header: "Questions",
+    accessor: "question",
+  },
+  {
+    Header: "Time",
+    accessor: "time",
+  },
+  //   {
+  //     Header: "",
+  //     accessor: "edit",
+  //   },
+  //   {
+  //     Header: "",
+  //     accessor: "delete",
+  //   },
 ];
 
 export const emailColumn = [
@@ -476,33 +478,33 @@ export const emailColumn = [
 ];
 
 export const viewAssessmentColumn = [
-    {
-        Header: "Name",
-        accessor: "name",
-    },
-    {
-        Header: "Applicant ID",
-        accessor: "applicant_id",
-    },
-    {
-        Header: "Program",
-        accessor: "program",
-    },
+  {
+    Header: "Name",
+    accessor: "name",
+  },
+  {
+    Header: "Applicant ID",
+    accessor: "applicant_id",
+  },
+  {
+    Header: "Program",
+    accessor: "program",
+  },
 
-    {
-        Header: "Email Address",
-        accessor: "email",
-    },
-    {
-        Header: "Applicant Result",
-        accessor: "applicant_result",
-    },
-    {
-        Header: "Status",
-        accessor: "status",
-    },
-    {
-        Header: "",
-        accessor: "action",
-    },
+  {
+    Header: "Email Address",
+    accessor: "email",
+  },
+  {
+    Header: "Applicant Result",
+    accessor: "applicant_result",
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
+  {
+    Header: "",
+    accessor: "action",
+  },
 ];

@@ -15,7 +15,7 @@ const courses = () => {
     var data = "";
     var config = {
       method: "get",
-      url: "https://aptbk.afexats.com/api/jobs/courses",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/courses`,
       headers: {
         "api-key":
           "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
