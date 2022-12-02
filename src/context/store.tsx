@@ -190,10 +190,10 @@ export const FormProvider = ({ children }: any) => {
   //         url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications` + url,
   //         headers: {
   //             "api-key":
-  //                 "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
-  //             "request-ts": "1667549939702",
+  //                 `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+  //             "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
   //             "hash-key":
-  //                 "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+  //                 `${process.env.NEXT_PUBLIC_HASH_KEY}`,
   //         },
   //     };
 

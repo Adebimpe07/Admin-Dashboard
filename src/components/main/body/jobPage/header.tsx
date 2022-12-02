@@ -23,11 +23,9 @@ const PostJobModal = ({ jobForm, opened, setOpened, fetchJob }: any) => {
     axios({
       url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/cohort-options`,
       headers: {
-        "api-key":
-          "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
-        "request-ts": "1667549939702",
-        "hash-key":
-          "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
       },
     })
       .then(function (response) {
@@ -55,11 +53,9 @@ const PostJobModal = ({ jobForm, opened, setOpened, fetchJob }: any) => {
       axios({
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/cohort/${jobForm.values.cohort}/course-options`,
         headers: {
-          "api-key":
-            "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
-          "request-ts": "1667549939702",
-          "hash-key":
-            "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+          "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+          "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+          "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
         },
       })
         .then(function (response) {
@@ -85,11 +81,9 @@ const PostJobModal = ({ jobForm, opened, setOpened, fetchJob }: any) => {
       method: "post",
       url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/`,
       headers: {
-        "api-key":
-          "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
-        "request-ts": "1667549939702",
-        "hash-key":
-          "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
       },
       data: jobForm.values,
     };
