@@ -109,14 +109,14 @@ function SubAdminCard({
                     {is_admin
                         ? "Admin"
                         : is_application_manager
-                        ? "Application Manager"
-                        : is_assessment_manager
-                        ? "Assessment Manager"
-                        : is_content_manager
-                        ? "Content Manager"
-                        : is_membership_manager
-                        ? "Membership Manager"
-                        : "Staff"}
+                            ? "Application Manager"
+                            : is_assessment_manager
+                                ? "Assessment Manager"
+                                : is_content_manager
+                                    ? "Content Manager"
+                                    : is_membership_manager
+                                        ? "Membership Manager"
+                                        : "Staff"}
                 </p>
             </div>
             <ActionIcon className="absolute right-0 top-0 m-1">
@@ -144,7 +144,7 @@ const admin = () => {
     const fetchSubAdmin = () => {
         var config = {
             method: "get",
-            url: "https://atsbk.afexats.com/api/v1/account/all",
+            url: "`${process.env.NEXT_PUBLIC_BASE_URL_1}`/api/v1/account/all",
             headers: {
                 Authorization: `Bearer ${token.access}`,
             },
@@ -217,9 +217,9 @@ const admin = () => {
                             props.first_name
                                 .toLocaleLowerCase()
                                 .includes(value.toLocaleLowerCase()) ||
-                            props.last_name
-                                .toLocaleLowerCase()
-                                .includes(value.toLocaleLowerCase()) ? (
+                                props.last_name
+                                    .toLocaleLowerCase()
+                                    .includes(value.toLocaleLowerCase()) ? (
                                 <SubAdminCard key={idx} {...props} />
                             ) : null
                         )}

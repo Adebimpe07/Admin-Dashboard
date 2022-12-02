@@ -9,11 +9,6 @@ import {
 import { dejiColumn, } from "../../../../layout/tableData";
 import Content from "../../../../layout/dejiData.json";
 import dejiData from "../../../../layout/dejiData.json";
-import ActionMenuEditContent from "../actionButton/ActionMenuEditContent";
-import ActionMenuDeleteContent from "../actionButton/ActionMenuDeleteContent";
-import ActionMenuEditBlogContent from "../actionButton/ActionMenuEditBlogContent";
-import ActionMenuDeleteBlogContent from "../actionButton/ActionMenuDeleteBlogContent";
-import ActionMenuEdit from "../actionButton/ActionMenuEdit";
 import ReadMoreContent from "../actionButton/ReadMoreContent"
 import TruncateContents from "../actionButton/TruncateContents";
 import axios from "axios";
@@ -31,11 +26,11 @@ const DejiTable = () => {
   //   console.log('helloooo')
   // var config = {
   //   method: 'get',
-  //   url: 'https://atsbk.afexats.com/api/v1/support/contact-us-list-create/',
+  //   url: '`${process.env.NEXT_PUBLIC_BASE_URL_1}`/api/v1/support/contact-us-list-create/',
   //   headers: {
-  //     "API=KEY": "7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ",
-  //     "HASH-KEY": "091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a",
-  //     "REQUEST-TS": "1669397556"
+  //     "API=KEY": "`${process.env.NEXT_PUBLIC_APP_API_KEY_1}`",
+  //     "HASH-KEY": "`${process.env.NEXT_PUBLIC_APP_HASH_KEY_1}`",
+  //     "REQUEST-TS": "`${process.env.NEXT_PUBLIC_REQUEST_TS_1}`"
   //   }
   // };
 
@@ -52,11 +47,11 @@ const DejiTable = () => {
   const fetchSupp = () => {
     var config = {
       method: 'get',
-      url: 'https://atsbk.afexats.com/api/v1/support/contact-us-list-create/',
+      url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/support/contact-us-list-create/`,
       headers: {
-        "api-key": "7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ",
-        "hash-key": "091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a",
-        "request-ts": "1669397556"
+        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY_1}`,
+        "hash-key": `${process.env.NEXT_PUBLIC_APP_HASH_KEY_1}`,
+        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS_1}`,
       }
     };
 

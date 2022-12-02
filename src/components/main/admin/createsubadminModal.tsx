@@ -27,7 +27,7 @@ const CreatesubadminModal = () => {
         console.log(subadminForm.values);
         var config = {
             method: "post",
-            url: "https://atsbk.afexats.com/api/v1/account/admin/register",
+            url: "`${process.env.NEXT_PUBLIC_BASE_URL_1}`/api/v1/account/admin/register",
             data: { ...subadminForm.values },
         };
 
@@ -116,7 +116,7 @@ const CreatesubadminModal = () => {
                             classNames={{
                                 label: "text-align:center",
                             }}
-                            // {...subadminForm.getInputProps("")}
+                        // {...subadminForm.getInputProps("")}
                         />
                     </div>
                     <Button
