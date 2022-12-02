@@ -127,11 +127,18 @@ type formDataProp = {
       type: string;
       subject: string;
       body: string;
+      salutation: string;
     },
-    (values: { type: string; subject: string; body: string }) => {
+    (values: {
       type: string;
       subject: string;
       body: string;
+      salutation: string;
+    }) => {
+      type: string;
+      subject: string;
+      body: string;
+      salutation: string;
     }
   >;
   // const form = useForm({
@@ -375,7 +382,7 @@ export const FormProvider = ({ children }: any) => {
     initialValues: {
       type: "",
       subject: "",
-      salutation: "Hello",
+      salutation: "",
       body: "",
     },
   });
