@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Group from "../../../../assets/Group 2.png";
 import Cross from "../../../../assets/Icon.png";
 import Gallery from "../../../../assets/gallery.png";
@@ -14,9 +14,13 @@ import {
 import { RichTextEditor } from "@mantine/rte";
 import Elipse from "../../../../assets/Ellipse 8.png";
 import Cloud from "../../../../assets/cloud.png";
+import FormContext from "../../../../context/store";
+import axios from 'axios'
 
 const ContentGallery = () => {
   const [opened, setOpened] = useState(false);
+  const [files, setFiles] = useState(null)
+  const {token} = useContext(FormContext)
 
   const UploadJobModal = () => (
     <Modal
@@ -41,6 +45,8 @@ const ContentGallery = () => {
             accept="image/png,image/jpeg"
             icon={<img src={Gallery.src} className="w-4" />}
             multiple
+            value={files}
+            onChange={setFiles}
           />
           <button className="bg-greenButton text-[white] py-2  rounded">
             Create Album
@@ -49,6 +55,30 @@ const ContentGallery = () => {
       </Text>
     </Modal>
   );
+
+
+  const createAlbum = () => {
+
+    const data = new FormData()
+    data.append('name', 'Customer Success Week');
+
+    var config = {
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/v1/album',
+      headers: { 
+        Authorization: `Bearer ${token.access}`
+      },
+      data : data
+    };
+
+    axios(config)
+    .then(function (response) {
+      console.log((response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   return (
     <div className="h-full">

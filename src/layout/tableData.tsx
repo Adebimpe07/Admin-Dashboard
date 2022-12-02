@@ -370,15 +370,15 @@ export const atsTestimonialColumn = [
   },
   {
     Header: "Name",
-    accessor: "name",
+    accessor: "tech_star_full_name",
   },
   {
     Header: "Cohorts",
-    accessor: "cohort",
+    accessor: "tech_star_cohort",
   },
   {
     Header: "Course",
-    accessor: "course",
+    accessor: "tech_star_course",
   },
   {
     Header: "",
@@ -389,15 +389,15 @@ export const atsTestimonialColumn = [
 export const atsAttendanceColumn = [
   {
     Header: "Name",
-    accessor: "name",
+    accessor: "full_name",
   },
   {
     Header: "Email",
-    accessor: "email",
+    accessor: "official_email",
   },
   {
     Header: "Check in time",
-    accessor: "intime",
+    accessor: "check-in",
   },
   {
     Header: "Status",
@@ -405,7 +405,7 @@ export const atsAttendanceColumn = [
   },
   {
     Header: "Check out time",
-    accessor: "outtime",
+    accessor: "check-out",
   },
   {
     Header: "Date",
@@ -506,5 +506,47 @@ export const viewAssessmentColumn = [
   {
     Header: "",
     accessor: "action",
+  },
+];
+
+export const dejiColumn = [
+  {
+    Header: "Name",
+    accessor: "full_name",
+  },
+  {
+    Header: "Email address",
+    accessor: "email",
+  },
+  {
+    Header: "Subject",
+    accessor: "subject",
+  },
+  {
+    Header: "Message",
+    accessor: "short_message",
+  },
+  {
+    Header: "",
+    accessor: "view",
+  },
+];
+
+export const newsLetterColumn = [
+  {
+    Header: "Subject",
+    accessor: "subject",
+  },
+  {
+    Header: "Message",
+    accessor: "trunc_content",
+  },
+  {
+    Header: "Action",
+    accessor: "popmodal",
+  },
+  {
+    Header: "",
+    accessor: "send",
   },
 ];

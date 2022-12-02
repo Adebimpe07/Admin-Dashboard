@@ -14,14 +14,15 @@ const AttendanceTable = () => {
 
     const fetchAllAts = () => {
         axios(
-            "http://atsbk.afexats.com/api/v1/tech-stars/tech-star-list-create/"
+            "https://atsbk.afexats.com/api/v1/tech-stars/tech-star-list-create/"
         )
             .then(function (response) {
-                console.log(response.data.data.results);
+                console.log(response.data);
             })
             .catch(function (error) {
                 console.log(error);
             });
+        console.log(setAttendance)
     };
 
     useEffect(() => {
@@ -46,7 +47,7 @@ const AttendanceTable = () => {
         pageCount,
         state,
         prepareRow,
-        selectedFlatRows,
+        // selectedFlatRows,
     } = useTable(
         {
             columns: AttendanceColumn,
