@@ -121,6 +121,27 @@ type formDataProp = {
       description: string;
     }
   >;
+
+  form: UseFormReturnType<
+  {
+    type: string;
+    subject: string;
+    body: string;
+  },
+  (values: { type: string; subject: string; body: string }) => {
+    type: string;
+    subject: string;
+    body: string;
+  }
+>;
+  // const form = useForm({
+  //   initialValues: {
+  //     type: "",
+  //     subject: "",
+  //     salutation: "",
+  //     body:""
+  //   },
+  // });
   admin: any;
   setAdmin: (val: string | ((prevState: string) => string)) => void;
   token: any;
@@ -350,6 +371,15 @@ export const FormProvider = ({ children }: any) => {
     },
   });
 
+  const form = useForm({
+    initialValues: {
+      type: "",
+      subject: "",
+      salutation: "Hello",
+      body:""
+    },
+  });
+
   const [questionType, setQuestionType] = useSessionStorage({
     key: "questionType",
     defaultValue: "",
@@ -390,6 +420,7 @@ export const FormProvider = ({ children }: any) => {
     onChange,
     assessmentForm,
     coursesForm,
+    form
   };
 
   return (

@@ -23,6 +23,7 @@ const ViewModal = ({rowdetail, setSubAdminViewModal}) => {
 
   return (
     <div className='flex flex-col gap-2'>
+                <h1 className='text-center text-lg font-semibold'>Applicant Details</h1>
         <p className='border-t-[1px] border-t-[#F5F5F5]'>First Name: {applicantDetails?.applicant.first_name}</p>
         <p className='border-t-[1px] border-t-[#F5F5F5]'>Last Name: {applicantDetails?.applicant.last_name}</p>
         <p className='border-t-[1px] border-t-[#F5F5F5]' >Country: {applicantDetails?.applicant.country_of_origin}</p>

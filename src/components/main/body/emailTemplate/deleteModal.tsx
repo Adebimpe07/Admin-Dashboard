@@ -3,15 +3,15 @@ import { IconUpload } from "@tabler/icons";
 import axios from "axios";
 import { useState } from "react";
 
-export const DeleteModal = ({rowdetail, setSubAdminDelModal}) => {
+export const DeleteModal = ({rowdetail, setSubAdminDelModal, id}) => {
  
   const [checked, setChecked] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleDelete = (e) => {
     e.preventDefault()
       var config = {
-        method: 'post',
-        url: `${rowdetail.url}/set-rejected`,
+        method: 'DELETE',
+        url: `https://aptbk.afexats.com/api/applications/email-templates/${id}/toggle-delete`,
         headers: { 
           "api-key":
           "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
@@ -23,18 +23,18 @@ export const DeleteModal = ({rowdetail, setSubAdminDelModal}) => {
       
       axios(config)
       .then(function (response) {
-        alert(response.data.data.application_status);
+        console.log(response.data);
         setSubAdminDelModal.opened = false
       })
       .catch(function (error) {
-        alert(error.response.data.error);
+        console.log(error);
       });
    
 
   }
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-8">
+    <form onSubmit={(e) => handleDelete(e)} className="flex flex-col gap-8">
         <h1 className="text-base text-[#4A4C58] pb-2 border-b border-[#DBD9D9] ">
           Delete Mail
         </h1>

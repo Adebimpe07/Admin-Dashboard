@@ -5,6 +5,8 @@ import ActionMenuInterview from "../actionButton/ActionMenuInterview";
 import emailTemplate from "../../../../layout/emailTemplateData.json";
 import ActionMenuEmail from "../actionButton/ActionMenuEmail";
 import axios from "axios";
+import ActionMenuCreated from "../actionButton/ActionMenuCreated";
+import ActionMenuModified from "../actionButton/ActionMenuModified";
 
 // const Action = ({ values }) => {
 
@@ -18,7 +20,7 @@ import axios from "axios";
 //   );
 // };
 
-const EmailTemplateTable = () => {
+const EmailTemplateTable = ({id}) => {
   const [emailData, setEmailData] = useState([]);
 
   const fetchAllCohorts = () => {
@@ -50,7 +52,12 @@ const EmailTemplateTable = () => {
 
   const Email = useMemo(
     () =>
-      emailData,
+      emailData.map((emailData, idx) => ({
+        ...emailData,
+        created_on: <ActionMenuCreated created_on={emailData.created_on} />,
+        last_modified: <ActionMenuModified last_modified={emailData.last_modified} />,
+        
+      })),
     [emailData]
   );
 
@@ -81,7 +88,7 @@ const EmailTemplateTable = () => {
         return [
           ...columns,
           {
-            Cell: ({ row }: any) => <ActionMenuEmail row={row} />,
+            Cell: ({ row}: any) => <ActionMenuEmail row={row} id={id} />,
           },
         ];
       });
