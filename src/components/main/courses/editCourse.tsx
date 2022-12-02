@@ -33,7 +33,7 @@ const editCourse = ({ uid, url }) => {
       // console.log([...data]);
       var config = {
         method: "put",
-        url: `https://aptbk.afexats.com/api/jobs/courses/${uid}/edit`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/courses/${uid}/edit`,
         headers: {
           "api-key":
             "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
@@ -62,7 +62,7 @@ const editCourse = ({ uid, url }) => {
 
       var config = {
         method: "put",
-        url: `https://aptbk.afexats.com/api/jobs/courses/${uid}/edit`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/courses/${uid}/edit`,
         headers: {
           "api-key":
             "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
@@ -103,7 +103,9 @@ const editCourse = ({ uid, url }) => {
       .then(function (response) {
         form.values.title = response.data.data.title;
         form.values.description = response.data.data.description;
-        setIncomingFile("https://aptbk.afexats.com" + response.data.data.image);
+        setIncomingFile(
+          `${process.env.NEXT_PUBLIC_BASE_URL}` + response.data.data.image
+        );
         setLoading(false);
       })
       .catch(function (error) {

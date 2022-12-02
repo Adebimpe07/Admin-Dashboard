@@ -11,7 +11,12 @@ import {
   useTable,
 } from "react-table";
 import ActionMenuApplication from "../actionButton/ActionMenuApplication";
-import { allApplicationColumn, hiredColumn, passedColumn, ShortListColumn } from "../../../../layout/tableData";
+import {
+  allApplicationColumn,
+  hiredColumn,
+  passedColumn,
+  ShortListColumn,
+} from "../../../../layout/tableData";
 import SubAppHeader from "./subAppHeader";
 import TableHead from "./tableHead";
 import ApplicationPage from "./applicationPage";
@@ -35,17 +40,13 @@ export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
 
 const HiredApplicationBody = () => {
   const [hired, setHired] = useState([]);
-  const Hired = useMemo(
-    () =>
-    hired,
-    [hired]
-);
+  const Hired = useMemo(() => hired, [hired]);
 
-const HiredColumn = useMemo(() => hiredColumn, []);
+  const HiredColumn = useMemo(() => hiredColumn, []);
   const fetchApplicantList = (url, setter) => {
     var config = {
       method: "get",
-      url: "https://aptbk.afexats.com/api/applications" + url,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications` + url,
       headers: {
         "api-key":
           "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
@@ -69,8 +70,6 @@ const HiredColumn = useMemo(() => hiredColumn, []);
     fetchApplicantList("/accepted", setHired);
   }, []);
 
-  
-
   const {
     getTableProps,
     getTableBodyProps,
@@ -93,7 +92,7 @@ const HiredColumn = useMemo(() => hiredColumn, []);
       data: Hired,
     },
     useGlobalFilter,
-    usePagination,
+    usePagination
     // useRowSelect,
     // (hooks) => {
     //   hooks.visibleColumns.push((columns): any => {
@@ -113,7 +112,6 @@ const HiredColumn = useMemo(() => hiredColumn, []);
     // }
   ) as TableInstanceWithHooks<object>;
 
-  
   const { pageIndex, globalFilter }: any = state;
 
   const formData = {

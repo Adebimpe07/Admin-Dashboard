@@ -13,31 +13,30 @@ import React, { useEffect, useState } from "react";
 import Cross from "../../../../assets/Icon.png";
 import SuccessModal from "./successModal";
 
-
 const UploadJobModal = ({ opened, setOpened, setOopened }) => {
   const [value, setValue] = useState("");
-
 
   const createEmail = () => {
     var config = {
       method: "post",
-      url: "https://aptbk.afexats.com/api/applications/email-templates",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications/email-templates`,
       headers: {
-        "api-key": "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
+        "api-key":
+          "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
         "request-ts": "1667549939702",
-        "hash-key": "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+        "hash-key":
+          "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
       },
       data: { ...form.values, body: value },
     };
 
     axios(config)
       .then(function (response) {
-        if(response.data.success){
-          form.reset()
-          setValue('')
-          setOpened(false)
-          setOopened(true)
-
+        if (response.data.success) {
+          form.reset();
+          setValue("");
+          setOpened(false);
+          setOopened(true);
         }
       })
       .catch(function (error) {
@@ -49,7 +48,13 @@ const UploadJobModal = ({ opened, setOpened, setOopened }) => {
     initialValues: {
       type: "",
       subject: "",
+<<<<<<< HEAD
       salutation: "Hello",
+      body: "",
+=======
+      salutation: "",
+      body:""
+>>>>>>> 3e1e18b8a472e8b4f93c7d4182a3c7dfa88f3287
     },
   });
 
@@ -81,6 +86,11 @@ const UploadJobModal = ({ opened, setOpened, setOopened }) => {
           className=""
           {...form.getInputProps("subject")}
         />
+        <TextInput
+          label="Salutation"
+          className=""
+          {...form.getInputProps("salutation")}
+        />
         <p>Content</p>
         <RichTextEditor
           value={value}
@@ -92,6 +102,7 @@ const UploadJobModal = ({ opened, setOpened, setOopened }) => {
             ["sup", "sub"],
             ["alignLeft", "alignCenter", "alignRight"],
           ]}
+          
         />
       </Text>
       <Button
@@ -111,14 +122,22 @@ const SubHeaderEmailTemplate = ({}) => {
 
   return (
     <div className="flex flex-col justify-end items-end my-5 mr-5">
-      <SuccessModal oopened={oopened} setOpened={setOpened} setOopened={setOopened}/>
+      <SuccessModal
+        oopened={oopened}
+        setOpened={setOpened}
+        setOopened={setOopened}
+      />
       <Button
         className="bg-greenButton hover:bg-greenButton w-[141px] h-[34px] text-[13px]"
         leftIcon={<img src={Cross.src} className="w-4" />}
         onClick={() => setOpened(true)}
       >
         <p>Create Email</p>
-        <UploadJobModal opened={opened} setOopened={setOopened} setOpened={setOpened} />
+        <UploadJobModal
+          opened={opened}
+          setOopened={setOopened}
+          setOpened={setOpened}
+        />
       </Button>
     </div>
   );

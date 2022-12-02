@@ -10,6 +10,7 @@ import { Textarea } from "@mantine/core";
 import Downloads from "../../../../assets/import.png";
 import GlobalFilter from "./globalFilter";
 import FormContext from "../../../../context/store";
+import Link from "next/link";
 
 const InterviewSubheader = ({globalFilter, setGlobalFilter}) => {
   // const { globalFilter, setGlobalFilter } = useContext(FormContext);
@@ -18,7 +19,9 @@ const InterviewSubheader = ({globalFilter, setGlobalFilter}) => {
     <div className="flex justify-between pb-7 pt-6 px-5">
       <div className="flex gap-4 place-items-center">
         <img src={Arr.src} className="w-2" />
+        <Link  href="/jobs" >
         <p className="text-[#252735] text-sm font-semibold">Back to Jobs</p>
+        </Link>
       </div>
       <div className="flex gap-8">
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />

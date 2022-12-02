@@ -29,7 +29,7 @@ const ApplicationBody = () => {
   const fetchApplicantList = (url, setter) => {
     var config = {
       method: "get",
-      url: "https://aptbk.afexats.com/api/applications" + url,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications` + url,
       headers: {
         "api-key":
           "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
@@ -97,7 +97,6 @@ const ApplicationBody = () => {
     }
   ) as TableInstanceWithHooks<object>;
 
-  
   const { pageIndex, globalFilter }: any = state;
 
   useEffect(() => {

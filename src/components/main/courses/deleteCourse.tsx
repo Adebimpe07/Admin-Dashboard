@@ -5,7 +5,7 @@ export const DeleteCourse = ({ uid }) => {
   const handleDelete = () => {
     var config = {
       method: "post",
-      url: `https://aptbk.afexats.com/api/jobs/courses/${uid}/delete`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/courses/${uid}/delete`,
       headers: {
         "api-key":
           "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",

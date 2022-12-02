@@ -6,15 +6,17 @@ import ActionMenuCourses from "../actionButton/ActionMenuCourses";
 import ActionMenuEdit from "../actionButton/ActionMenuEdit";
 import ActionMenuDelete from "../actionButton/ActionMenuDelete";
 import axios from "axios";
+import ActionMenuStartDate from "../actionButton/ActionMenuStartDate";
+import ActionMenuEndDate from "../actionButton/ActionMenuEndDate";
 
 const CohortTable = () => {
   const CohortColumn = useMemo(() => cohortColumn, []);
   const [CohortData, setCohortData] = useState([]);
 
   const fetchAllCohorts = () => {
-axios({
-  method: 'get',
-      url: "https://aptbk.afexats.com/api/jobs/cohorts",
+    axios({
+      method: "get",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/cohorts`,
       headers: {
         "api-key":
           "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
@@ -25,7 +27,7 @@ axios({
       },
     })
       .then(function (response) {
-        setCohortData(response.data.data.results)
+        setCohortData(response.data.data.results);
       })
       .catch(function (error) {
         console.log(error);
@@ -33,14 +35,26 @@ axios({
   };
 
   useEffect(() => {
-    fetchAllCohorts()
-  }, [])
+    fetchAllCohorts();
+  }, []);
 
   const cohortData = useMemo(
     () =>
-    CohortData.map((cohort, idx) => ({
+      CohortData.map((cohort, idx) => ({
         ...cohort,
-        number_of_courses: <ActionMenuCourses number_of_courses={cohort.number_of_courses}/>,
+        application_start_date: (
+          <ActionMenuStartDate
+            application_start_date={cohort.application_start_date}
+          />
+        ),
+        application_end_date: (
+          <ActionMenuEndDate
+            application_end_date={cohort.application_end_date}
+          />
+        ),
+        number_of_courses: (
+          <ActionMenuCourses number_of_courses={cohort.number_of_courses} />
+        ),
         edit: <ActionMenuEdit />,
         delete: <ActionMenuDelete />,
       })),
