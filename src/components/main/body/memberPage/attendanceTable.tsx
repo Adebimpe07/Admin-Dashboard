@@ -14,7 +14,7 @@ const AttendanceTable = () => {
 
     const fetchAllAts = () => {
         axios(
-            "https://atsbk.afexats.com/api/v1/tech-stars/tech-star-list-create/"
+            "`${process.env.NEXT_PUBLIC_BASE_URL_1}`/api/v1/tech-stars/tech-star-list-create/"
         )
             .then(function (response) {
                 console.log(response.data);

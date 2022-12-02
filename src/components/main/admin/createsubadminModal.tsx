@@ -34,8 +34,19 @@ const CreatesubadminModal = ({ fetchSubAdmin }) => {
     },
   });
 
+<<<<<<< HEAD
   const router = useRouter();
   const [profile, setProfile] = useState(null);
+=======
+    const handleAddSubadmin = (e) => {
+        e.preventDefault();
+        console.log(subadminForm.values);
+        var config = {
+            method: "post",
+            url: "`${process.env.NEXT_PUBLIC_BASE_URL_1}`/api/v1/account/admin/register",
+            data: { ...subadminForm.values },
+        };
+>>>>>>> 0dbc3f81e7d0cc7df6cfeeb2b0f993f1b58d5b7c
 
   const handleAddSubadmin = (e) => {
     if (
@@ -144,6 +155,7 @@ const CreatesubadminModal = ({ fetchSubAdmin }) => {
               className="w-[17em]"
               // {...subadminForm.getInputProps("")}
             /> */}
+<<<<<<< HEAD
             <TextInput
               placeholder="username"
               label="Username"
@@ -180,6 +192,36 @@ const CreatesubadminModal = ({ fetchSubAdmin }) => {
       </Modal>
     </>
   );
+=======
+                        <TextInput
+                            placeholder="username"
+                            label="Username"
+                            className="w-[17rem]"
+                            {...subadminForm.getInputProps("username")}
+                        />
+                    </div>
+                    <div className="flex items-center justify-center mt-8 mb-6">
+                        <FileInput
+                            label=""
+                            placeholder="Upload picture"
+                            icon={<IconUpload size={14} />}
+                            classNames={{
+                                label: "text-align:center",
+                            }}
+                        // {...subadminForm.getInputProps("")}
+                        />
+                    </div>
+                    <Button
+                        onClick={(e) => handleAddSubadmin(e)}
+                        py="sm"
+                        className="bg-greenButton hover:bg-greenButton">
+                        Add Sub admin
+                    </Button>
+                </form>
+            </Modal>
+        </>
+    );
+>>>>>>> 0dbc3f81e7d0cc7df6cfeeb2b0f993f1b58d5b7c
 };
 
 export default CreatesubadminModal;
