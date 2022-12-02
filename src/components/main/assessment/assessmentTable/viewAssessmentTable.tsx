@@ -12,25 +12,34 @@ const ViewAssessmentTable = () => {
 
   var config = {
     method: "get",
-    url: "http://localhost:8000/api/result/all",
+    url: "https://assessbk.afexats.com/api/result/all",
     headers: {
       "Content-Type": "application/json",
+      'api-key': '1F87LiFSIfulRCdxFWAPkXNoLuu8j-UkRs6QSYWm4sY',
+      'request-ts': '23445567',
+      'hash-key': '68fdd26d64f3374506ba0d2e30ed5e096cab6d4a1f4396c80713204609d3216e'
     },
   };
 
   const fetchResult = async (): Promise<[]> => {
     try {
-      const request = await axios(config)
-      return request.data
+      await axios(config).then((response) => {
+        // console.log(respons)
+        setData(response.data.data.results)
+      })
     } catch (error) {
       console.log("request_error=> ", error.response.data)
       return error.message
     }
   }
 
+  useEffect(() => {
+    fetchResult();
+  }, [])
+  console.log(data)
   const AssessmentData = useMemo(
     () =>
-      ViewAssessmentData.map((assessment, idx) => ({
+      data.map((assessment, idx) => ({
         ...assessment,
         action: <ActionMenuPass />,
       })),

@@ -15,7 +15,7 @@ const categoryInformation = ({ result }) => {
   const categor = result?.data?.category_info
   console.log(1, categor)
   return (
-    <section className="container bg-white mr-6 ml-1 w-auto p-4 my-6 h-screen ">
+    <section className="container bg-white mr-6 ml-1 w-auto p-4 my-6  ">
       <h1 className="font-bold text-lg pb-4">Category Information.</h1>
 
       <div>

@@ -16,9 +16,12 @@ const Result = () => {
         const getResult = async () => {
             const config = {
                 method: "get",
-                url: `http://localhost:8000/api/result/${id}`,
+                url: `https://assessbk.afexats.com/api/result/${id}`,
                 headers: {
                     "Content-Type": "application/json",
+                    'api-key': '1F87LiFSIfulRCdxFWAPkXNoLuu8j-UkRs6QSYWm4sY',
+                    'request-ts': '23445567',
+                    'hash-key': '68fdd26d64f3374506ba0d2e30ed5e096cab6d4a1f4396c80713204609d3216e',
                 },
             };
             try {

@@ -15,6 +15,9 @@ const openEndQuestions = ({ color, questions, result }: { color: any, questions?
       url: `http://localhost:8000/api/result/process_opa`,
       headers: {
         "Content-Type": "application/json",
+        'api-key': '1F87LiFSIfulRCdxFWAPkXNoLuu8j-UkRs6QSYWm4sY',
+        'request-ts': '23445567',
+        'hash-key': '68fdd26d64f3374506ba0d2e30ed5e096cab6d4a1f4396c80713204609d3216e',
       },
       data: {
         "opa_pk": id,
@@ -46,14 +49,15 @@ const openEndQuestions = ({ color, questions, result }: { color: any, questions?
             return <div key={index} className="items-center gap-4 w-full flex flex-col" >
               <div className="flex w-full flex-col  gap-2">
                 {'.'}
-                <div className="text-gray-500 font-semibold text-left ">Status: <span className="text-gray-700 font-base capitalize p-2">{element.is_marked ? 'marked' : 'unmarked'}</span></div>
+                <div className="text-gray-500 font-semibold text-left ">Status: <span className="text-gray-700 font-base capitalize p-2">{
+                  element.is_marked && element.is_correct ? 'marked as correct' : element.is_marked && !element.is_correct ? 'marked as incorrect' : 'unmarked'
+                }</span></div>
                 <div className="text-gray-500 font-semibold">Question: <span className="text-gray-700 font-base capitalize p-2">{element.question.question_text}</span></div>
                 <Textarea
                   value={element.answer_text}
                   className="w-full"
                   variant="filled"
                 />
-
               </div>
               <div className="flex gap-2 flex-row">
                 <Button
