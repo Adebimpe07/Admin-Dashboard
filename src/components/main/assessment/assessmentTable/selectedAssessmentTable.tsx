@@ -11,7 +11,9 @@ const AssessmentCategoryTable = ({ setSelectedCategory }) => {
   const [CategoryListData, setCategoryListData] = useState([]);
 
   const fetchAllCategories = () => {
-    axios("https://assessbk.afexats.com/api/categories/create-list-category")
+    axios(
+      `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/create-list-category`
+    )
       .then(function (response) {
         setCategoryListData(
           response.data.data.results.reduce(

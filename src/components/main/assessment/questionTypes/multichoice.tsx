@@ -32,7 +32,7 @@ const createQuestions = () => {
               onClick={() => {
                 console.log(questionsForm.values);
                 fetch(
-                  `https://assessbk.afexats.com/api/categories/${categoryID}/questions`,
+                  `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/${categoryID}/questions`,
                   {
                     method: "POST",
                     headers: {

@@ -16,7 +16,7 @@ const EditCategoryPage = ({ id }) => {
     setLoading(true);
     axios({
       method: "get",
-      url: `https://assessbk.afexats.com/api/categories/${id}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/${id}`,
     })
       .then((response) => {
         console.log(response.data.data.name);
@@ -33,7 +33,7 @@ const EditCategoryPage = ({ id }) => {
     setLoading(true);
     axios({
       method: "patch",
-      url: `https://assessbk.afexats.com/api/categories/${id}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/${id}`,
       data: form.values,
     })
       .then((response) => {

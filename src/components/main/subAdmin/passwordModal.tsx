@@ -30,7 +30,7 @@ const passwordModal = ({ opened, setOpened, setOopened, oopened }) => {
 
       var config = {
         method: "patch",
-        url: `https://atsbk.afexats.com/api/v1/account/change-password/${admin.user_id}/`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/account/change-password/${admin.user_id}/`,
         headers: {
           Authorization: `Bearer ${token.access}`,
         },

@@ -25,7 +25,7 @@ const loginPage = () => {
     e.preventDefault();
     var config = {
       method: "post",
-      url: "https://atsbk.afexats.com/api/v1/account/admin/login",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/account/admin/login`,
       data: form.values,
     };
 

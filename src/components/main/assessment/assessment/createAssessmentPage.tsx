@@ -6,26 +6,41 @@ import Header from "../categoryCreate/header";
 import axios from "axios";
 import FormContext from "../../../../context/store";
 import { useRouter } from "next/router";
+import Loading from "../../../loading";
 
 const CreateAssessmentPage = () => {
   const { assessmentForm } = useContext(FormContext);
   const router = useRouter();
   const [courseList, setCourseList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios({
-      url: "https://assessbk.afexats.com/api/assessment/application-type",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/assessment/application-type`,
       method: "get",
     })
       .then((res) => {
-        console.log(res.data);
+        setCourseList(
+          res.data.data.results.reduce((acc, item) => {
+            const value = item.id;
+            const label = item.title;
+            acc.push({ value, label });
+            return acc;
+          }, [])
+        );
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   }, []);
 
   const createAssessment = () => {
     axios({
-      url: "https://assessbk.afexats.com/api/assessment/create-list-assessment",
+      data: {
+        ...assessmentForm.values,
+        total_duration: +assessmentForm.values.total_duration,
+      },
+      url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/assessment/create-list-assessment`,
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -33,6 +48,8 @@ const CreateAssessmentPage = () => {
     })
       .then((res) => {
         console.log(res.data);
+        assessmentForm.reset();
+        router.push("/assessments/assessment");
       })
       .catch((err) => console.log(err));
 
@@ -90,27 +107,9 @@ const CreateAssessmentPage = () => {
             classNames={{
               label: "text-base text-[#000] font-normal",
             }}
-            // {...assessmentForm.getInputProps('')}
+            {...assessmentForm.getInputProps("application_type")}
             label="Course"
-            data={[
-              {
-                value: "FrontEnd Development",
-                label: "FrontEnd Development",
-              },
-              {
-                value: "Backend Development",
-                label: "Backend Development",
-              },
-              {
-                value: "Product Management",
-                label: "Product Management",
-              },
-              {
-                value: "Mobile Development",
-                label: "Mobile Development",
-              },
-              { value: "UI/UX Design", label: "UI/UX Design" },
-            ]}
+            data={courseList}
           />
           <div className="flex gap-4 py-2">
             <div className="w-[50%] flex flex-col">
@@ -160,6 +159,7 @@ const CreateAssessmentPage = () => {
           </Button>
         </div>
       </div>
+      <Loading loading={loading} />
     </main>
   );
 };
