@@ -7,13 +7,17 @@ import {
   TextInput,
 } from "@mantine/core";
 import RichTextEditor from "@mantine/rte";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cross from "../../../../assets/Icon.png";
 
-const ReadMoreContent = () => {
+const ReadMoreContent = ({row}) => {
   const [opened, setOpened] = useState(false);
 
-  const UploadJobModal = () => (
+  useEffect(() => {
+    console.log(row.original)
+  })
+
+  const UploadJobModal = ({opened, setOpened}) => (
     <Modal
       opened={opened}
       onClose={() => setOpened(false)}
@@ -35,11 +39,13 @@ const ReadMoreContent = () => {
   );
 
   return (
+    <>
       <button
         onClick={() => setOpened(true)}>
         <p>View</p>
-        <UploadJobModal />
       </button>
+      <UploadJobModal opened={opened} setOpened={setOpened} />
+    </>
   );
 };
 

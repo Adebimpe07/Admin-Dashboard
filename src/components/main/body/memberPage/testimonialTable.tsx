@@ -16,8 +16,16 @@ const TestimonialTable = () => {
     const [Testimonial, setTestimonial] = useState([]);
 
     const fetchAllTestimonial = () => {
-        axios(
-            "https://atsbk.afexats.com/api/v1/tech-stars/testimonial-list-create/"
+        axios({
+            url: "https://atsbk.afexats.com/api/v1/tech-stars/testimonial-list-create/",
+            method: "get",
+            headers: {
+                "api-key": "7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ",
+                "hash-key": "091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a",
+                "request-ts": "1669397556",
+            },
+        }
+
         )
             .then(function (response) {
                 setTestimonial(response.data.data.results);
@@ -46,7 +54,7 @@ const TestimonialTable = () => {
             })),
         [Testimonial]
     );
-22
+    22
     const {
         getTableProps,
         getTableBodyProps,

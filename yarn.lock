@@ -311,6 +311,14 @@
   dependencies:
     "@mantine/utils" "5.8.0"
 
+"@mantine/dropzone@^5.9.0":
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/@mantine/dropzone/-/dropzone-5.9.0.tgz#15e593bb83f9121a75f997227ae82343d5bc83ad"
+  integrity sha512-9/aj5MFNxtvaH4nTYX75OtpQkqwNPH74ZZ9xz43+zAb7WcjNj+jMWeify9hPypepmGD0z3o3L7O8AZ/4WS8r5Q==
+  dependencies:
+    "@mantine/utils" "5.9.0"
+    react-dropzone "14.2.3"
+
 "@mantine/form@^5.6.3":
   version "5.8.0"
   resolved "https://registry.yarnpkg.com/@mantine/form/-/form-5.8.0.tgz#a8eb9e65412f2b67f8031f5fe54833bb1ea1dacb"
@@ -367,6 +375,11 @@
   version "5.8.0"
   resolved "https://registry.yarnpkg.com/@mantine/utils/-/utils-5.8.0.tgz#daa5a0d88324fdd637971d6c3a0f7e7af4f57985"
   integrity sha512-gVE4U3apoE53MUWgKqst9H0iWgurzBccZNSSGRv3kD62vAFcI1JJhxxuW7X271bc9IMhKjgezEH14ApH1jlwCA==
+
+"@mantine/utils@5.9.0":
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/@mantine/utils/-/utils-5.9.0.tgz#f21ba4c518a6561bea079c7c909298f35f492a99"
+  integrity sha512-UU5kO1VcsntrKvznJMjZ1S/ZM6arAXFkBnBqAKfCPOPJJIcwUWOfQP8u1sxp8ounAHThp9GtkpuzzGOQy1rcPA==
 
 "@mischnic/json-sourcemap@^0.1.0":
   version "0.1.0"
@@ -1388,6 +1401,11 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
+attr-accept@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/attr-accept/-/attr-accept-2.2.2.tgz#646613809660110749e92f2c10833b70968d929b"
+  integrity sha512-7prDjvt9HmqiZ0cl5CRjtS84sEyhsHP2coDkaZKRKVfCDo9s7iw7ChVmar78Gu9pC4SoR/28wFu/G5JJhTnqEg==
+
 autoprefixer@^10.4.13:
   version "10.4.13"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.13.tgz#b5136b59930209a321e9fa3dca2e7c4d223e83a8"
@@ -2010,6 +2028,13 @@ fastq@^1.6.0:
   integrity sha512-YpkpUnK8od0o1hmeSc7UUs/eB/vIPWJYjKck2QKIzAf71Vm1AAQ3EbuZB3g2JIy+pg+ERD0vqI79KyZiB2e2Nw==
   dependencies:
     reusify "^1.0.4"
+
+file-selector@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/file-selector/-/file-selector-0.6.0.tgz#fa0a8d9007b829504db4d07dd4de0310b65287dc"
+  integrity sha512-QlZ5yJC0VxHxQQsQhXvBaC7VRJ2uaxTf+Tfpu4Z/OcVQJVpZO+DGU0rkoVW5ce2SccxugvpBJoMvUs59iILYdw==
+  dependencies:
+    tslib "^2.4.0"
 
 fill-range@^7.0.1:
   version "7.0.1"
@@ -2754,7 +2779,7 @@ process@^0.11.10:
   resolved "https://registry.yarnpkg.com/process/-/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
   integrity sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==
 
-prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -2836,6 +2861,15 @@ react-draft-wysiwyg@^1.15.0:
     html-to-draftjs "^1.5.0"
     linkify-it "^2.2.0"
     prop-types "^15.7.2"
+
+react-dropzone@14.2.3:
+  version "14.2.3"
+  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-14.2.3.tgz#0acab68308fda2d54d1273a1e626264e13d4e84b"
+  integrity sha512-O3om8I+PkFKbxCukfIR3QAGftYXDZfOE2N1mr/7qebQJHs7U+/RSL/9xomJNpRg9kM5h9soQSdf0Gc7OHF5Fug==
+  dependencies:
+    attr-accept "^2.2.2"
+    file-selector "^0.6.0"
+    prop-types "^15.8.1"
 
 react-error-overlay@6.0.9:
   version "6.0.9"

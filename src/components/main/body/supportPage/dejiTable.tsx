@@ -54,9 +54,9 @@ const DejiTable = () => {
       method: 'get',
       url: 'https://atsbk.afexats.com/api/v1/support/contact-us-list-create/',
       headers: {
-        "API-KEY": "7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ",
-        "HASH-KEY": "091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a",
-        "REQUEST-TS": "1669397556"
+        "api-key": "7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ",
+        "hash-key": "091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a",
+        "request-ts": "1669397556"
       }
     };
 
@@ -77,12 +77,7 @@ const DejiTable = () => {
   const DejiColumn = useMemo(() => dejiColumn, []);
 
   const dejiData = useMemo(
-    () =>
-      Content.map((content, idx) => ({
-        ...content,
-        message: <TruncateContents />,
-        view: <ReadMoreContent />,
-      })),
+    () => Content,
     [Content]
   );
 
@@ -108,7 +103,33 @@ const DejiTable = () => {
       data: dejiData
     },
     usePagination,
-    useRowSelect
+    useRowSelect,
+    (hooks) => {
+
+      hooks.visibleColumns.push((columns): any => {
+
+        return [
+
+          ...columns,
+
+          {
+            Header: ({ getToggleAllRowsSelectedProps }: any) => (
+              <div>Read more</div>
+            ),
+
+            Cell: ({ row }: any) => (
+
+              <ReadMoreContent row={row} />
+
+            ),
+
+          },
+
+        ];
+
+      });
+
+    }
   ) as TableInstanceWithHooks<object>;
 
   const { pageIndex } = state;
