@@ -36,15 +36,11 @@ const CreateAssessmentPage = () => {
 
   const createAssessment = () => {
     axios({
-<<<<<<< HEAD
       data: {
         ...assessmentForm.values,
         total_duration: +assessmentForm.values.total_duration,
       },
       url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/assessment/create-list-assessment`,
-=======
-      url: "https://assessbk.afexats.com/api/assessment/application-type/",
->>>>>>> f6e48eebaedc93860a7848dbe03429c63261aee0
       method: "post",
       headers: {
         "Content-Type": "application/json",

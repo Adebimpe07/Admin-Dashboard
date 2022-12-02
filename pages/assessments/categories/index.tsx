@@ -35,14 +35,10 @@ const HeaderMain = () => {
   const [loading, setLoading] = useState(false);
 
   const fetchCategories = () => {
-<<<<<<< HEAD
     setLoading(true);
     axios(
       `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/create-list-category`
     )
-=======
-    axios("https://assessbk.afexats.com/api/categories/create-list-category")
->>>>>>> f6e48eebaedc93860a7848dbe03429c63261aee0
       .then(function (response) {
         console.log(response.data.data.results);
         setCategoryCard(response.data.data.results);
