@@ -12,7 +12,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import FormContext from "../../../../context/store";
 
-export const EditModal = ({ rowdetail, setSubAdminEditModal}) => {
+export const EditModal = ({ rowdetail, setSubAdminEditModal }) => {
   const [checked, setChecked] = useState(false);
   const [value, setValue] = useState("");
   const { form } = useContext(FormContext);
@@ -26,13 +26,11 @@ export const EditModal = ({ rowdetail, setSubAdminEditModal}) => {
     data.append("body", form.values.body);
     var config = {
       method: "PUT",
-      url: "https://aptbk.afexats.com/api/applications/email-templates/edit",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications/email-templates/edit`,
       headers: {
-        "api-key":
-          "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
-        "request-ts": "1667549939702",
-        "hash-key":
-          "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
       },
       data: data,
     };
@@ -45,8 +43,6 @@ export const EditModal = ({ rowdetail, setSubAdminEditModal}) => {
         console.log(error);
       });
   };
-
-
 
   return (
     <div className="flex flex-col gap-4 ">

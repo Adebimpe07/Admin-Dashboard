@@ -36,8 +36,11 @@ const HeaderMain = () => {
 
   const fetchCategories = () => {
     setLoading(true);
-    axios("https://assessbk.afexats.com/api/categories/create-list-category")
+    axios(
+      `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/create-list-category`
+    )
       .then(function (response) {
+        console.log(response.data.data.results);
         setCategoryCard(response.data.data.results);
         setLoading(false);
       })

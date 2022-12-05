@@ -1,19 +1,49 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { useTable, useRowSelect, usePagination } from "react-table";
 import { viewAssessmentColumn } from "../../../../layout/tableData";
 import ViewAssessmentData from "../../../../layout/viewAssessmentData";
 import { Checkbox } from "../assessment/checkbox";
 import ActionMenuPass from "../../body/actionButton/actionViewAsess";
+import axios from "axios";
 
 const ViewAssessmentTable = () => {
   const AssessmentColumn = useMemo(() => viewAssessmentColumn, []);
+  const [data, setData] = useState([])
 
+  var config = {
+    method: "get",
+    url: "https://assessbk.afexats.com/api/result/all",
+    headers: {
+      "Content-Type": "application/json",
+      'api-key': '1F87LiFSIfulRCdxFWAPkXNoLuu8j-UkRs6QSYWm4sY',
+      'request-ts': '23445567',
+      'hash-key': '68fdd26d64f3374506ba0d2e30ed5e096cab6d4a1f4396c80713204609d3216e'
+    },
+  };
+
+  const fetchResult = async (): Promise<[]> => {
+    try {
+      await axios(config).then((response) => {
+        // console.log(respons)
+        setData(response.data.data.results)
+      })
+    } catch (error) {
+      console.log("request_error=> ", error.response.data)
+      return error.message
+    }
+  }
+
+  useEffect(() => {
+    fetchResult();
+  }, [])
+  console.log(data)
   const AssessmentData = useMemo(
     () =>
-      ViewAssessmentData.map((assessment, idx) => ({
+      data.map((assessment, idx) => ({
         ...assessment,
         action: <ActionMenuPass />,
       })),
+
     []
   );
 

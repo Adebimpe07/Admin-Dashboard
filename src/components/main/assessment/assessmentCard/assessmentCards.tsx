@@ -27,15 +27,21 @@ const AssessmentCards = ({ AssessmentCardData }) => {
         <div className="grid grid-cols-3 gap-4 m-4">
           {AssessmentCardData.map(
             (
-              { name, id, assessment_info, total_duration, questions },
+              {
+                name,
+                id,
+                assessment_info,
+                total_duration,
+                number_of_questions_in_assessment,
+              },
               index
             ) => {
               return (
-                <div className="overflow-auto  mx-4 mb-2">
+                <div className="overflow-auto mx-4 mb-2">
                   <AssessmentCard
                     id={id}
                     key={index}
-                    questions={"00"}
+                    questions={number_of_questions_in_assessment}
                     title={name}
                     paragraph={assessment_info
                       ?.split("")

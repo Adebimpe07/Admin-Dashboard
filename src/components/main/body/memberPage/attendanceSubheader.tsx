@@ -10,11 +10,6 @@ import {
     TextInput,
 } from "@mantine/core";
 import React, { useState } from "react";
-import Search from "../../../../assets/search.png";
-import Cross from "../../../../assets/Icon.png";
-import Elipse from "../../../../assets/Ellipse 8.png";
-import Cloud from "../../../../assets/cloud.png";
-import { RichTextEditor } from "@mantine/rte";
 import Link from "next/link";
 import { contentData } from "../../../../layout/contentData";
 

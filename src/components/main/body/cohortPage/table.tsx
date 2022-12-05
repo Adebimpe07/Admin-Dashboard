@@ -14,20 +14,18 @@ const CohortTable = () => {
   const [CohortData, setCohortData] = useState([]);
 
   const fetchAllCohorts = () => {
-axios({
-  method: 'get',
-      url: "https://aptbk.afexats.com/api/jobs/cohorts",
+    axios({
+      method: "get",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/cohorts`,
       headers: {
-        "api-key":
-          "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
-        "request-ts": "1667549939702",
-        "hash-key":
-          "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
         "Content-Type": "application/json",
       },
     })
       .then(function (response) {
-        setCohortData(response.data.data.results)
+        setCohortData(response.data.data.results);
       })
       .catch(function (error) {
         console.log(error);
@@ -35,16 +33,26 @@ axios({
   };
 
   useEffect(() => {
-    fetchAllCohorts()
-  }, [])
+    fetchAllCohorts();
+  }, []);
 
   const cohortData = useMemo(
     () =>
-    CohortData.map((cohort, idx) => ({
+      CohortData.map((cohort, idx) => ({
         ...cohort,
-        application_start_date: <ActionMenuStartDate application_start_date={cohort.application_start_date} />,
-        application_end_date: <ActionMenuEndDate application_end_date={cohort.application_end_date} />,
-        number_of_courses: <ActionMenuCourses number_of_courses={cohort.number_of_courses}/>,
+        application_start_date: (
+          <ActionMenuStartDate
+            application_start_date={cohort.application_start_date}
+          />
+        ),
+        application_end_date: (
+          <ActionMenuEndDate
+            application_end_date={cohort.application_end_date}
+          />
+        ),
+        number_of_courses: (
+          <ActionMenuCourses number_of_courses={cohort.number_of_courses} />
+        ),
         edit: <ActionMenuEdit />,
         delete: <ActionMenuDelete />,
       })),

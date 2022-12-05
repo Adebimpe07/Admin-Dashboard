@@ -139,7 +139,7 @@ const admin = () => {
     setLoading(true);
     var config = {
       method: "get",
-      url: "https://atsbk.afexats.com/api/v1/account/all",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/account/all`,
       headers: {
         Authorization: `Bearer ${token.access}`,
       },

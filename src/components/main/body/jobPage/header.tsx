@@ -13,142 +13,148 @@ import { useForm } from "@mantine/form";
 type props = {
   selected: Number;
   setSelected: Function;
-  fetchJob: Function
+  fetchJob: Function;
 };
 
-const PostJobModal = ({jobForm, opened, setOpened, fetchJob }: any) => {
-const [cohortList, setCohortList] = useState([])
-const [courseList, setCourseList] = useState([])
-  const fetchCohorts = () => { 
+const PostJobModal = ({ jobForm, opened, setOpened, fetchJob }: any) => {
+  const [cohortList, setCohortList] = useState([]);
+  const [courseList, setCourseList] = useState([]);
+  const fetchCohorts = () => {
     axios({
-      url: 'https://aptbk.afexats.com/api/jobs/cohort-options',
-      headers: { 
-      'api-key': 'qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW', 
-      'request-ts': '1667549939702', 
-      'hash-key': 'ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba'
-    }})
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/cohort-options`,
+      headers: {
+        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
+      },
+    })
       .then(function (response) {
-        setCohortList(response.data.data.results.reduce((acc, item) => {
-          const value = item.id
-          const label = item.name
-          acc.push({value, label})
-         return acc
-        }, []))
+        setCohortList(
+          response.data.data.results.reduce((acc, item) => {
+            const value = item.id;
+            const label = item.name;
+            acc.push({ value, label });
+            return acc;
+          }, [])
+        );
       })
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 
   useEffect(() => {
-    fetchCohorts()
-  }, [])
+    fetchCohorts();
+  }, []);
 
-  useEffect(() => { //
-    if(jobForm.values.cohort) {
+  useEffect(() => {
+    //
+    if (jobForm.values.cohort) {
       axios({
-        url: `https://aptbk.afexats.com/api/jobs/cohort/${jobForm.values.cohort}/course-options`,
-        headers: { 
-        'api-key': 'qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW', 
-        'request-ts': '1667549939702', 
-        'hash-key': 'ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba'
-      }})
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/cohort/${jobForm.values.cohort}/course-options`,
+        headers: {
+          "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+          "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+          "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
+        },
+      })
         .then(function (response) {
-          setCourseList(response.data.data.results.reduce((acc, item) => {
-            const value = item.id
-            const label = item.title
-            acc.push({value, label})
-           return acc
-          }, []))
+          setCourseList(
+            response.data.data.results.reduce((acc, item) => {
+              const value = item.id;
+              const label = item.title;
+              acc.push({ value, label });
+              return acc;
+            }, [])
+          );
         })
         .catch(function (error) {
           console.log(error);
         });
     }
-  }, [jobForm.values.cohort])
+  }, [jobForm.values.cohort]);
 
   const handleuploadJobForm = () => {
     console.log(jobForm.values);
 
     var config = {
       method: "post",
-      url: "https://aptbk.afexats.com/api/jobs/",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/`,
       headers: {
-        "api-key":
-          "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
-        "request-ts": "1667549939702",
-        "hash-key":
-          "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
       },
-      data: jobForm.values
+      data: jobForm.values,
     };
 
     axios(config)
       .then(function (response) {
         console.log(response.data);
-        jobForm.reset()
-        setOpened(false)
-        fetchJob()
+        jobForm.reset();
+        setOpened(false);
+        fetchJob();
       })
       .catch(function (error) {
-        alert('An error occured')
-        jobForm.reset()
-        setOpened(false)
+        alert("An error occured");
+        jobForm.reset();
+        setOpened(false);
       });
   };
 
+  return (
+    <Modal opened={opened} onClose={() => setOpened(false)} title="Upload Job">
+      <Text className="flex flex-col gap-4 " size="sm">
+        <p className="text-base text-[#948E8E] pb-2">
+          Enter the details of the job
+        </p>
+        <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
+          Job Description
+        </h1>
 
-  return <Modal opened={opened} onClose={() => setOpened(false)} title="Upload Job">
-    <Text className="flex flex-col gap-4 " size="sm">
-      <p className="text-base text-[#948E8E] pb-2">
-        Enter the details of the job
-      </p>
-      <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
-        Job Description
-      </h1>
-
-      <div className="flex gap-4 text-[#4a4c58] w-full">
-        {/* <TextInput
+        <div className="flex gap-4 text-[#4a4c58] w-full">
+          {/* <TextInput
           className="w-[50%]"
           label="Job"
           disabled
           placeholder="job will be auto-generated"
           {...jobForm.getInputProps("title")}
         /> */}
+          <Select
+            className="flex-1"
+            label="Cohort"
+            data={cohortList}
+            {...jobForm.getInputProps("cohort")}
+          />
+        </div>
         <Select
           className="flex-1"
-          label="Cohort"
-          data={cohortList}
-          {...jobForm.getInputProps("cohort")}
+          label="Course"
+          data={courseList}
+          {...jobForm.getInputProps("course")}
         />
-      </div>
-      <Select
-        className="flex-1"
-        label="Course"
-        data={courseList}
-        {...jobForm.getInputProps("course")}
-      />
-      <div></div>
+        <div></div>
 
-      <Textarea
-        className="focus:border-inherit"
-        label="Job Requirements"
-        autosize
-        minRows={4}
-        maxRows={4}
-        size="xl"
-        {...jobForm.getInputProps("requirement")}
-      />
-    </Text>
-    <Button
-      fullWidth
-      className="bg-[#38CB89] hover:bg-[#38CB89] h-10 m-auto text-lg my-4"
-      onClick={handleuploadJobForm}
-    >
-      Upload
-    </Button>
-  </Modal>
-}
+        <Textarea
+          className="focus:border-inherit"
+          label="Job Requirements"
+          autosize
+          minRows={4}
+          maxRows={4}
+          size="xl"
+          {...jobForm.getInputProps("requirement")}
+        />
+      </Text>
+      <Button
+        fullWidth
+        className="bg-[#38CB89] hover:bg-[#38CB89] h-10 m-auto text-lg my-4"
+        onClick={handleuploadJobForm}
+      >
+        Upload
+      </Button>
+    </Modal>
+  );
+};
 
 const Header = ({ selected, setSelected, fetchJob }: props) => {
   const [opened, setOpened] = useState(false);
@@ -157,7 +163,7 @@ const Header = ({ selected, setSelected, fetchJob }: props) => {
       cohort: "",
       course: "",
       requirement: "",
-      created_by: "admin"
+      created_by: "admin",
     },
   });
 
@@ -188,7 +194,12 @@ const Header = ({ selected, setSelected, fetchJob }: props) => {
           onClick={() => setOpened(true)}
         >
           <p>Upload job</p>
-          <PostJobModal jobForm={jobForm} fetchJob={fetchJob} opened={opened} setOpened={setOpened}  />
+          <PostJobModal
+            jobForm={jobForm}
+            fetchJob={fetchJob}
+            opened={opened}
+            setOpened={setOpened}
+          />
         </Button>
       </div>
     </div>

@@ -26,7 +26,7 @@ const QuestionTypeCards = () => {
 
                 var config = {
                   method: "post",
-                  url: "https://assessbk.afexats.com/api/categories/create-list-category",
+                  url: `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/create-list-category`,
                   headers: {
                     "Content-Type": "application/json",
                   },

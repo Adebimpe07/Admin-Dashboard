@@ -17,20 +17,18 @@ const Header = () => {
   const [CohortData, setCohortData] = useState([]);
 
   const fetchAllCohorts = () => {
-axios({
-  method: 'get',
-      url: "https://aptbk.afexats.com/api/jobs/cohorts",
+    axios({
+      method: "get",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/cohorts`,
       headers: {
-        "api-key":
-          "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
-        "request-ts": "1667549939702",
-        "hash-key":
-          "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
         "Content-Type": "application/json",
       },
     })
       .then(function (response) {
-        setCohortData(response.data.data.results.length)
+        setCohortData(response.data.data.results.length);
       })
       .catch(function (error) {
         console.log(error);
@@ -38,8 +36,8 @@ axios({
   };
 
   useEffect(() => {
-    fetchAllCohorts()
-  }, [])
+    fetchAllCohorts();
+  }, []);
 
   const data = [
     { value: "pm", label: "Product Mnanagement" },

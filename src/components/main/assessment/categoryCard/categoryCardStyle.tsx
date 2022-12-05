@@ -10,9 +10,11 @@ type categoryCardsprops = {
   title: string;
   paragraph: string;
   timestamp: string;
+  id: number;
 };
 
 const CategoryCardStyle = ({
+  id,
   title,
   paragraph,
   timestamp,
@@ -37,7 +39,7 @@ const CategoryCardStyle = ({
           <div className="flex justify-between">
             <h1 className="font-semibold whitespace-nowrap">{title}</h1>
             <div className="flex gap-3">
-              <Link href="/assessments/assessment/edit_assessment">
+              <Link href={`/assessments/categories/edit_category/${id}`}>
                 <Edit2 size="17" color="#38CB89" variant="Bulk" />
               </Link>
               <Trash onClick={handleDelete} size="17" color="red" />
