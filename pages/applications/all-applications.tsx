@@ -4,7 +4,6 @@ import SubAppHeader from "../../src/components/main/body/applicationPage/subAppH
 import All from "../../src/components/main/body/jobPage/job";
 import Body from "../../src/components/main/body/jobPage/body";
 import TableHead from "../../src/components/main/body/applicationPage/tableHead";
-import { ShortList } from "../../src/components/main/body/applicationPage/shortList";
 import dynamic from "next/dynamic";
 import FormContext from "../../src/context/store";
 import ApplicationBody from '../../src/components/main/body/applicationPage/ApplicationBody';

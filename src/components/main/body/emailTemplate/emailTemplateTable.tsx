@@ -20,7 +20,7 @@ import ActionMenuModified from "../actionButton/ActionMenuModified";
 //   );
 // };
 
-const EmailTemplateTable = ({ id }) => {
+const EmailTemplateTable = () => {
   const [emailData, setEmailData] = useState([]);
 
   const fetchAllCohorts = () => {
@@ -87,7 +87,7 @@ const EmailTemplateTable = ({ id }) => {
         return [
           ...columns,
           {
-            Cell: ({ row }: any) => <ActionMenuEmail row={row} id={id} />,
+            Cell: ({ row }: any) => <ActionMenuEmail row={row}/>,
           },
         ];
       });
