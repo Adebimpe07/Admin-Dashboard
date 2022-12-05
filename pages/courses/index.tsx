@@ -27,8 +27,10 @@ const courses = () => {
 
     axios(config)
       .then(function (response) {
-        setCoursesCard(response.data.data.results);
-        console.log(response.data.data.results);
+        // setCoursesCard(response.data.data.results);
+        console.log(response.data);
+
+        // console.log(response.data.data.results);
         setLoading(false);
       })
       .catch(function (error) {

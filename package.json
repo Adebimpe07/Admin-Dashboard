@@ -48,6 +48,7 @@
     "@types/react-slick": "^0.23.10",
     "@types/react-table": "^7.7.12",
     "axios": "^1.2.0",
+    "crypto-js": "^4.1.1",
     "dayjs": "^1.11.6",
     "iconsax-react": "^0.0.8",
     "jwt-decode": "^3.1.2",
