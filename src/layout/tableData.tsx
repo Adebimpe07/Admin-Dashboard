@@ -27,7 +27,17 @@ export const allApplicationColumn = [
     accessor: "action",
   },
 ];
-export const ShortListColumn = [
+
+export interface ShortListColumnType {
+  applicant_name: string;
+  application_id: number;
+  course: string;
+  applicant_email: string;
+  applicant_phone: string;
+  action: ReactNode;
+}
+
+export const ShortListColumn: Array<Column<ShortListColumnType>> = [
   {
     Header: "Name",
     accessor: "applicant_name",
