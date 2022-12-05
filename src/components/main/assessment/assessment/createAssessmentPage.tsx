@@ -79,7 +79,7 @@ const CreateAssessmentPage = () => {
 
   return (
     <main className="h-screen flex-1 py-6 flex flex-col   bg-mainBg">
-      <Header />
+      <Header name="Assessment" />
       <div className="flex flex-col">
         <div className="flex items-center pl-4 gap-1 py-4">
           <ArrowLeft2 size="17" color="#000" />

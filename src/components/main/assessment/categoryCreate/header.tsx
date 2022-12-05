@@ -1,9 +1,13 @@
+import { StaticImageData } from "next/image";
 import React from "react";
 import { NotificationDrop } from "../../../../../pages/assessments/categories";
 import Profile from "../../notification_ProfilePicture";
 
-const Header = ({ name }) => {
-  const header_tag = name ? name : "Assessments"
+type HeaderType = {
+  name: string;
+};
+const Header = ({ name }: HeaderType) => {
+  const header_tag = name ?? "Assessments";
   return (
     <header className="flex justify-between border-b border-[#DBD9D9] px-4">
       <h1 className="text-2xl font-semibold text-[#4A4C58] pb-[1.41rem]">
