@@ -4,7 +4,7 @@ import Courses from "../../src/components/main/courses/courses";
 import Courses_newPage from "../../src/components/main/courses/courses_newPage";
 import HeaderData from "../../src/components/main/notification_ProfilePicture";
 import { CoursesData } from "../../src/layout/coursesData";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import Loading from "../../src/components/loading";
 
 const courses = () => {
@@ -13,9 +13,10 @@ const courses = () => {
   const fetchCourses = () => {
     setLoading(true);
     var data = "";
-    var config = {
+    var config: AxiosRequestConfig = {
       method: "get",
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/courses`,
+      baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+      url: `/api/jobs/courses`,
       headers: {
         "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
         "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
@@ -26,8 +27,10 @@ const courses = () => {
 
     axios(config)
       .then(function (response) {
-        setCoursesCard(response.data.data.results);
-        console.log(response.data.data.results);
+        // setCoursesCard(response.data.data.results);
+        console.log(response.data);
+
+        // console.log(response.data.data.results);
         setLoading(false);
       })
       .catch(function (error) {
