@@ -4,7 +4,7 @@ import Edit from "../../../../assets/edit.png";
 import Trash from "../../../../assets/trash.png";
 import Brief from "../../../../assets/briefcase.png";
 import Vector from "../../../../assets/Vector.png";
-import Java from "../../../../assets/Java.png";
+import Java from "../../../../assets/java.png";
 import moment from "moment";
 import {
   Button,
