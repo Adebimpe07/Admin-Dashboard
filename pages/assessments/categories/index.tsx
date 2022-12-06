@@ -9,6 +9,7 @@ import ListAssessment from "../../../src/components/main/assessment/listedAssess
 import { CategoryCardData } from "../../../src/layout/assessmentCardData";
 import CategoryCard from "../../../src/components/main/assessment/categoryCard/categoryCard";
 import axios from "axios";
+import Loading from "../../../src/components/loading";
 
 export const NotificationDrop = () => {
   return (
@@ -31,14 +32,21 @@ export const NotificationDrop = () => {
 
 const HeaderMain = () => {
   const [categoryCard, setCategoryCard] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const fetchCategories = () => {
-    axios("https://assessbk.afexats.com/api/categories/create-list-category")
+    setLoading(true);
+    axios(
+      `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/create-list-category`
+    )
       .then(function (response) {
+        console.log(response.data.data.results);
         setCategoryCard(response.data.data.results);
+        setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -81,6 +89,7 @@ const HeaderMain = () => {
           link="/assessments/categories/create_category"
           text="Create Category"
         />
+        <Loading loading={loading} />
       </div>
     </div>
   );

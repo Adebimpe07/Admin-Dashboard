@@ -1,20 +1,17 @@
 import React from "react";
 import Inbox from "./inbox";
 import { jobData } from "../../../../layout/jobData";
+import Vector from "../../../../assets/Vector.png";
 
-const All = () => {
-  return (
-    <div className="bg-mainBg  overflow-auto">
-      {jobData.map((item, idx) => (
-        <Inbox
-          icon={item.icon}
-          title={item.jobTitle}
-          time={item.date}
-          key={idx}
-        />
-      ))}
-    </div>
-  );
+
+const All = ({jobData, fetchJob}) => {
+    return (
+        <div className="bg-[#E5E5E5]  overflow-auto">
+          {jobData.map((item, idx) => (
+            <Inbox  title={item.title} time={item.date_posted} key={idx} fetchJob={fetchJob} />
+          ))}
+        </div>
+      );
 };
 
 export default All;

@@ -1,6 +1,4 @@
-import { Button, Modal, PasswordInput, Stack, TextInput } from "@mantine/core";
 import React, { useState } from "react";
-import CheckEmail from "./checkEmail";
 import Emailmodal from "./emailmodal";
 
 const enterEmail = () => {

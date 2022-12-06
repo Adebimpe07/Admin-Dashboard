@@ -1,5 +1,5 @@
 import { Menu, Modal, TextInput, FileInput, Text } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Search from "../../../../assets/search.png";
 import Cross from "../../../../assets/Icon.png";
 import Elipse from "../../../../assets/Ellipse 8.png";
@@ -9,10 +9,16 @@ import { EditSubAdminModal } from "../../admin/editAdminModal";
 import { DeleteSubAdminModal } from "../../admin/deleteAdmin";
 import { ShortlistModal } from "../applicationPage/shortlistModal";
 import { RejectModal } from "../applicationPage/rejectModal";
+import ViewModal from "../applicationPage/viewModal";
 
 
-const ActionMenuApplication = () => {
+const ActionMenuApplication = ({row}) => {
 
+
+  const logRows = () => {
+    console.log(row.original)
+  }
+ 
   const [opened, setOpened] = useState(false);
 
     const initialValues: { opened: boolean; component: React.ReactNode } = {
@@ -24,16 +30,25 @@ const ActionMenuApplication = () => {
     function handleEdit() {
       setSubAdminModal({
         opened: true,
-        component: <ShortlistModal />,
+        component: <ShortlistModal setSubAdminModal={setSubAdminModal} rowdetail={row.original} />,
       });
     }
     const [subAdminDelModal, setSubAdminDelModal] = useState(initialValues);
     function handleDelete() {
       setSubAdminDelModal({
         opened: true,
-        component: <RejectModal />,
+        component: <RejectModal setSubAdminDelModal={setSubAdminDelModal} rowdetail={row.original} />,
       });
     }
+
+    const [subAdminViewModal, setSubAdminViewModal] = useState(initialValues);
+    function handleView() {
+      setSubAdminViewModal({
+        opened: true,
+        component: <ViewModal setSubAdminViewModal={setSubAdminViewModal} rowdetail={row.original} />
+      })
+    }
+
 
     return (
       <div>
@@ -43,10 +58,10 @@ const ActionMenuApplication = () => {
         }}
       >
         <Menu.Target>
-          <button className=" ">Actions</button>
+          <button onClick={logRows} className=" ">Actions</button>
         </Menu.Target>
         <Menu.Dropdown>
-          <Menu.Item >View Details</Menu.Item>
+          <Menu.Item onClick={handleView} >View Details</Menu.Item>
           <Menu.Item onClick={handleEdit}>
             Shortlist Applicant
           </Menu.Item>
@@ -64,6 +79,12 @@ const ActionMenuApplication = () => {
       onClose={() => setSubAdminDelModal(initialValues)}
     >
       {subAdminDelModal.component}
+    </Modal>
+    <Modal
+    opened={subAdminViewModal.opened}
+    onClose={() => setSubAdminViewModal(initialValues)}
+    >
+    {subAdminViewModal.component}
     </Modal>
     </div>
     );

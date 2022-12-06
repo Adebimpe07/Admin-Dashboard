@@ -30,7 +30,7 @@ const CardBar = ({ title, value, valueCount }: cardprops) => {
 
 const Cards = () => {
   return (
-    <div className="grid grid-cols-4 mx-5 gap-2">
+    <div className="grid grid-cols-3 mx-5 gap-2">
       {CardData.map(({ title, value, valueCount }, index) => {
         return (
           <CardBar

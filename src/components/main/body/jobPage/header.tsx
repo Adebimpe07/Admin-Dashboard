@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { jobhead } from "../../../../layout/jobHead";
 import Cross from "../../../../assets/Icon.png";
 import { useState } from "react";
@@ -6,16 +6,103 @@ import { Button, Text, Modal, TextInput } from "@mantine/core";
 import { Add } from "iconsax-react";
 import { Select } from "@mantine/core";
 import { Textarea } from "@mantine/core";
+import FormContext from "../../../../context/store";
+import axios from "axios";
+import { useForm } from "@mantine/form";
 
 type props = {
   selected: Number;
   setSelected: Function;
+  fetchJob: Function;
 };
 
-const Header = ({ selected, setSelected }: props) => {
-  const [opened, setOpened] = useState(false);
+const PostJobModal = ({ jobForm, opened, setOpened, fetchJob }: any) => {
+  const [cohortList, setCohortList] = useState([]);
+  const [courseList, setCourseList] = useState([]);
+  const fetchCohorts = () => {
+    axios({
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/cohort-options`,
+      headers: {
+        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
+      },
+    })
+      .then(function (response) {
+        setCohortList(
+          response.data.data.results.reduce((acc, item) => {
+            const value = item.id;
+            const label = item.name;
+            acc.push({ value, label });
+            return acc;
+          }, [])
+        );
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
-  const PostJobModal = () => (
+  useEffect(() => {
+    fetchCohorts();
+  }, []);
+
+  useEffect(() => {
+    //
+    if (jobForm.values.cohort) {
+      axios({
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/cohort/${jobForm.values.cohort}/course-options`,
+        headers: {
+          "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+          "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+          "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
+        },
+      })
+        .then(function (response) {
+          setCourseList(
+            response.data.data.results.reduce((acc, item) => {
+              const value = item.id;
+              const label = item.title;
+              acc.push({ value, label });
+              return acc;
+            }, [])
+          );
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  }, [jobForm.values.cohort]);
+
+  const handleuploadJobForm = () => {
+    console.log(jobForm.values);
+
+    var config = {
+      method: "post",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/`,
+      headers: {
+        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
+      },
+      data: jobForm.values,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        jobForm.reset();
+        setOpened(false);
+        fetchJob();
+      })
+      .catch(function (error) {
+        alert("An error occured");
+        jobForm.reset();
+        setOpened(false);
+      });
+  };
+
+  return (
     <Modal opened={opened} onClose={() => setOpened(false)} title="Upload Job">
       <Text className="flex flex-col gap-4 " size="sm">
         <p className="text-base text-[#948E8E] pb-2">
@@ -26,33 +113,25 @@ const Header = ({ selected, setSelected }: props) => {
         </h1>
 
         <div className="flex gap-4 text-[#4a4c58] w-full">
-          <TextInput
-            className="w-[50%]"
-            label="Job"
-            disabled
-            placeholder="job will be auto-generated"
-          />
+          {/* <TextInput
+          className="w-[50%]"
+          label="Job"
+          disabled
+          placeholder="job will be auto-generated"
+          {...jobForm.getInputProps("title")}
+        /> */}
           <Select
             className="flex-1"
             label="Cohort"
-            data={[
-              { value: "ATS 1.0", label: "ATS 1.0" },
-              { value: "ATS 1.1", label: "ATS 1.1" },
-              { value: "ATS 2.0", label: "ATS 2.0" },
-              { value: "ATS 2.2", label: "ATS 2.2" },
-            ]}
+            data={cohortList}
+            {...jobForm.getInputProps("cohort")}
           />
         </div>
         <Select
           className="flex-1"
           label="Course"
-          data={[
-            { value: "fulltime", label: "Front-end Management" },
-            { value: "remote", label: "Back-end Management" },
-            { value: "hybrid", label: "Project Management" },
-            { value: "mobile", label: "Mobile App Development" },
-            { value: "ui", label: "UI/UX" },
-          ]}
+          data={courseList}
+          {...jobForm.getInputProps("course")}
         />
         <div></div>
 
@@ -63,16 +142,30 @@ const Header = ({ selected, setSelected }: props) => {
           minRows={4}
           maxRows={4}
           size="xl"
+          {...jobForm.getInputProps("requirement")}
         />
       </Text>
       <Button
         fullWidth
-        className="bg-greenButton hover:bg-greenButton h-10 m-auto text-lg my-4"
+        className="bg-[#38CB89] hover:bg-[#38CB89] h-10 m-auto text-lg my-4"
+        onClick={handleuploadJobForm}
       >
         Upload
       </Button>
     </Modal>
   );
+};
+
+const Header = ({ selected, setSelected, fetchJob }: props) => {
+  const [opened, setOpened] = useState(false);
+  const jobForm = useForm({
+    initialValues: {
+      cohort: "",
+      course: "",
+      requirement: "",
+      created_by: "admin",
+    },
+  });
 
   return (
     <div className="flex justify-between pt-6  px-8 ">
@@ -101,14 +194,14 @@ const Header = ({ selected, setSelected }: props) => {
           onClick={() => setOpened(true)}
         >
           <p>Upload job</p>
-          <PostJobModal />
+          <PostJobModal
+            jobForm={jobForm}
+            fetchJob={fetchJob}
+            opened={opened}
+            setOpened={setOpened}
+          />
         </Button>
       </div>
-
-      {/* <div className="text-[#F9FAFB] bg-greenButton py-2.5 border rounded-lg flex gap-4 items-center px-7">
-            <img src={Cross.src} className="w-3 h-3"/>
-            <p className="text-[#F9FAFB]">Post a job</p>
-        </div> */}
     </div>
   );
 };

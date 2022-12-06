@@ -43,7 +43,7 @@ export const SideData = [
   {
     icon: <Note1 size="17" variant="Outline" />,
     heading: "Application",
-    href: "/allapplications",
+    href: "/applications/all-applications",
   },
   {
     icon: <FolderOpen size="17" variant="Outline" />,
@@ -66,7 +66,7 @@ export const SideData = [
     href: "/memberManagement/ats_members",
   },
   {
-    icon: <Icon icon="material-symbols:outgoing-mail-outline" width="19" />,
+    icon: <Icon icon="mdi-light:email" width="19" />,
     heading: "Email Template",
     href: "/emailTemplate",
   },

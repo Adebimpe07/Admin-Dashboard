@@ -12,11 +12,11 @@ export const CardData = [
     value: "485",
     valueCount: "14%",
   },
-  {
-    title: "JOBS VIEW",
-    value: "84,382",
-    valueCount: "36%",
-  },
+  // {
+  //   title: "JOBS VIEW",
+  //   value: "84,382",
+  //   valueCount: "36%",
+  // },
   {
     title: "SUB ADMINS CREATED",
     value: "3",
@@ -60,7 +60,7 @@ type durationprops = Array<string>;
 export const Duration: durationprops = ["1 wk", "2 wk", "3 wk", "4 wk"];
 
 type chartprops = Array<string>;
-export const Chart: chartprops = ["12 Months", "6 Months", "30 Days", "7 Days"];
+export const Chart: chartprops = ["All", "2 weeks", "7 days", "24 hours"];
 
 export const ActivitiesData = [
   {

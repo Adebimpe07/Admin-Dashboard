@@ -6,13 +6,39 @@ import {
   TextInput,
 } from "@mantine/core";
 import { IconUpload } from "@tabler/icons";
+import axios from "axios";
 import { useState } from "react";
 
-export const InterviewInvitationModal = () => {
+export const InterviewInvitationModal = ({ rowdetail, setSubAdminModal }) => {
   const [checked, setChecked] = useState(false);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (checked) {
+      var config = {
+        method: "post",
+        url: `${rowdetail.url}/set-invited`,
+        headers: {
+          "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+          "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+          "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
+        },
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log(response.data);
+
+          alert(response.data.data.application_status);
+          setSubAdminModal.opened = false;
+        })
+        .catch(function (error) {
+          console.log(error.response.data.error);
+        });
+    } else alert("Please check the box");
+  };
 
   return (
-    <form className="flex flex-col gap-6">
+    <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-6">
       <h1 className="text-base text-[#38CB89] pb-2 border-b border-[#DBD9D9] ">
         Invite Applicant for Interview
       </h1>

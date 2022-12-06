@@ -1,11 +1,12 @@
-import React, { useMemo } from "react";
-import { useTable, useRowSelect, usePagination} from "react-table";
-import {
-  emailColumn
-} from "../../../../layout/tableData";
+import React, { useEffect, useMemo, useState } from "react";
+import { useTable, useRowSelect, usePagination } from "react-table";
+import { emailColumn } from "../../../../layout/tableData";
 import ActionMenuInterview from "../actionButton/ActionMenuInterview";
-import emailTemplate from "../../../../layout/emailTemplateData.json"
+import emailTemplate from "../../../../layout/emailTemplateData.json";
 import ActionMenuEmail from "../actionButton/ActionMenuEmail";
+import axios from "axios";
+import ActionMenuCreated from "../actionButton/ActionMenuCreated";
+import ActionMenuModified from "../actionButton/ActionMenuModified";
 
 // const Action = ({ values }) => {
 
@@ -19,17 +20,44 @@ import ActionMenuEmail from "../actionButton/ActionMenuEmail";
 //   );
 // };
 
-const EmailTemplateTable = () => {
-  
+const EmailTemplateTable = ({ id }) => {
+  const [emailData, setEmailData] = useState([]);
+
+  const fetchAllCohorts = () => {
+    axios({
+      method: "get",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications/email-templates`,
+      headers: {
+        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        setEmailData(response.data.data.results);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchAllCohorts();
+  }, []);
+
   const EmailColumn = useMemo(() => emailColumn, []);
-  
+
   const Email = useMemo(
     () =>
-    emailTemplate.map((mock, idx) => ({
-        ...mock,
-        action: <ActionMenuEmail />,
+      emailData.map((emailData, idx) => ({
+        ...emailData,
+        created_on: <ActionMenuCreated created_on={emailData.created_on} />,
+        last_modified: (
+          <ActionMenuModified last_modified={emailData.last_modified} />
+        ),
       })),
-    []
+    [emailData]
   );
 
   const {
@@ -44,67 +72,74 @@ const EmailTemplateTable = () => {
     pageOptions,
     gotoPage,
     pageCount,
-    state, 
+    state,
     prepareRow,
     selectedFlatRows,
   } = useTable(
     {
-      columns:
-      EmailColumn ,
-      data:
-      Email,
+      columns: EmailColumn,
+      data: Email,
     },
-     usePagination,
-    useRowSelect
+    usePagination,
+    useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((columns): any => {
+        return [
+          ...columns,
+          {
+            Cell: ({ row }: any) => <ActionMenuEmail row={row} id={id} />,
+          },
+        ];
+      });
+    }
   );
 
-  const { pageIndex} = state;
+  const { pageIndex } = state;
 
   return (
     <div className="overflow-auto grid grid-rows-[1fr_auto]">
-
       <div className="overflow-auto">
-      <table
-        {...getTableProps()}
-        className="bg-[white] text-sm font-normal text-[#514747] ml-6 w-[96%]"
-      >
-        <thead className="sticky top-0 text-[black]  font-bold text-sm">
-          {headerGroups.map((headerGroups) => (
-            <tr {...headerGroups.getHeaderGroupProps()}>
-              {headerGroups.headers.map((columns) => (
-                <th
-                  {...columns.getHeaderProps()}
-                  className="py-4 text-[#514747] pl-6 text-left font-normal bg-[#F5F5F5]"
-                >
-                  {columns.render("Header")}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody className="flex-1 overflow-auto" {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <tr
-                {...row.getRowProps()}
-                className=" border-y-[1px] border-y-[#F5F5F5] text-left"
-              >
-                {row.cells.map((cell) => {
-                  return (
-                    <td
-                      {...cell.getCellProps()}
-                      className="py-3 text-left pl-6"
-                    >
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
+        <table
+          {...getTableProps()}
+          className="bg-[white] text-sm font-normal text-[#514747] ml-6 w-[96%]"
+        >
+          <thead className="sticky top-0 text-[black]  font-bold text-sm">
+            {headerGroups.map((headerGroups) => (
+              <tr {...headerGroups.getHeaderGroupProps()}>
+                {headerGroups.headers.map((columns) => (
+                  <th
+                    {...columns.getHeaderProps()}
+                    className="py-4 text-[#514747] pl-6 text-left font-normal bg-[#F5F5F5]"
+                  >
+                    {columns.render("Header")}
+                  </th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody className="flex-1 overflow-auto" {...getTableBodyProps()}>
+            {page.map((row) => {
+              prepareRow(row);
+              return (
+                <tr
+                  {...row.getRowProps()}
+                  className=" border-y-[1px] border-y-[#F5F5F5] text-left"
+                >
+                  {row.cells.map((cell) => {
+                    return (
+                      <td
+                        {...cell.getCellProps()}
+                        className="py-3 text-left pl-6"
+                      >
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
       <div className="bg-[white] mx-6 mt-4 py-4 px-2 flex justify-between">
         <div>

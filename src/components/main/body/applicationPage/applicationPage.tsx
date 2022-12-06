@@ -1,11 +1,8 @@
 import React, { useContext, useMemo } from "react";
-import FormContext from "../../../../context/store";
-import { TableInstanceWithHooks } from "../../../../context/store";
 
-const ApplicationPage = () => {
-  const formData = useContext(FormContext);
+const ApplicationPage = ({formData}) => {
 
-  return formData !== null ? (
+  return (
     <div className="overflow-auto grid grid-rows-[1fr_auto]">
       <div className="overflow-auto">
         <table
@@ -108,7 +105,7 @@ const ApplicationPage = () => {
         </div>
       </div>
     </div>
-  ) : null;
+  )
 };
 
 export default ApplicationPage;

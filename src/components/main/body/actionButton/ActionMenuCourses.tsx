@@ -1,7 +1,11 @@
 import { Menu } from "@mantine/core";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useForm } from "@mantine/form"
 
-const ActionMenuCourses = () => {
+const ActionMenuCourses = ({number_of_courses}) => {
+
+ 
   return (
     <Menu
       classNames={{
@@ -9,7 +13,7 @@ const ActionMenuCourses = () => {
       }}
     >
       <Menu.Target>
-        <button className=" bg-greenButton ml-10 px-2 rounded-md">4</button>
+        <button className=" bg-greenButton ml-10 px-2 rounded-md">{number_of_courses}</button>
       </Menu.Target>
       <Menu.Dropdown>
         <Menu.Item>Backend Developer</Menu.Item>

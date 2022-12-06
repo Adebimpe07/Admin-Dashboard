@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ArrowLeft2 } from "iconsax-react";
 import Link from "next/link";
 import { Button, Select, Textarea, TextInput } from "@mantine/core";
@@ -6,45 +6,72 @@ import Header from "../categoryCreate/header";
 import axios from "axios";
 import FormContext from "../../../../context/store";
 import { useRouter } from "next/router";
+import Loading from "../../../loading";
 
 const CreateAssessmentPage = () => {
   const { assessmentForm } = useContext(FormContext);
   const router = useRouter();
+  const [courseList, setCourseList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const createAssessment = async () => {
-    var config = {
-      method: "post",
-      url: "https://assessbk.afexats.com/api/assessment/",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
+  useEffect(() => {
+    setLoading(true);
     axios({
-      url: "https://assessbk.afexats.com/api/assessment/application-type/",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/assessment/application-type`,
+      method: "get",
+    })
+      .then((res) => {
+        setCourseList(
+          res.data.data.results.reduce((acc, item) => {
+            const value = item.id;
+            const label = item.title;
+            acc.push({ value, label });
+            return acc;
+          }, [])
+        );
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const createAssessment = () => {
+    axios({
+      data: {
+        ...assessmentForm.values,
+        total_duration: +assessmentForm.values.total_duration,
+      },
+      url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/assessment/create-list-assessment`,
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
-      data: JSON.stringify({ title: assessmentForm.values.name }),
-    }).then(async function (response) {
-      console.log(response.data.data.id);
-      let new_config = await {
-        ...config,
-        data: {
-          ...assessmentForm.values,
-          application_type: response.data.data.id,
-        },
-      };
-      const res = await axios(new_config);
-      const applicationData = await res.data;
-      console.log(res);
-      console.log(applicationData);
-      if (res.statusText === "Created") {
-        router.push("/assessments/assessment/all_categories");
+    })
+      .then((res) => {
+        console.log(res.data);
         assessmentForm.reset();
-      }
-    });
+        router.push("/assessments/assessment");
+      })
+      .catch((err) => console.log(err));
+
+    //   data: JSON.stringify({ title: assessmentForm.values.name }),
+    // }).then(async function (response) {
+    //   console.log(response.data.data);
+    //   let new_config = await {
+    //     ...config,
+    //     data: {
+    //       ...assessmentForm.values,
+    //       application_type: response.data.data.id,
+    //     },
+    //   };
+    //   const res = await axios(new_config);
+    //   const applicationData = await res.data;
+    //   // console.log(res);
+    //   console.log(applicationData);
+    //   if (res.statusText === "Created") {
+    //     router.push("/assessments/assessment/all_categories");
+    //     assessmentForm.reset();
+    //   }
+    // });
     // .catch(function (error) {
     //     console.log(error);
     // });
@@ -52,7 +79,7 @@ const CreateAssessmentPage = () => {
 
   return (
     <main className="h-screen flex-1 py-6 flex flex-col   bg-mainBg">
-      <Header />
+      <Header name="Assessment" />
       <div className="flex flex-col">
         <div className="flex items-center pl-4 gap-1 py-4">
           <ArrowLeft2 size="17" color="#000" />
@@ -66,6 +93,7 @@ const CreateAssessmentPage = () => {
           <h1 className="font-semibold text-xl pb-2">Create New Assessment</h1>
           <TextInput
             {...assessmentForm.getInputProps("name")}
+            placeholder="ATS 1.0"
             label="Assessment Name"
             classNames={{
               root: "!p-0",
@@ -79,27 +107,9 @@ const CreateAssessmentPage = () => {
             classNames={{
               label: "text-base text-[#000] font-normal",
             }}
-            // {...assessmentForm.getInputProps('')}
+            {...assessmentForm.getInputProps("application_type")}
             label="Course"
-            data={[
-              {
-                value: "FrontEnd Development",
-                label: "FrontEnd Development",
-              },
-              {
-                value: "Backend Development",
-                label: "Backend Development",
-              },
-              {
-                value: "Product Management",
-                label: "Product Management",
-              },
-              {
-                value: "Mobile Development",
-                label: "Mobile Development",
-              },
-              { value: "UI/UX Design", label: "UI/UX Design" },
-            ]}
+            data={courseList}
           />
           <div className="flex gap-4 py-2">
             <div className="w-[50%] flex flex-col">
@@ -149,6 +159,7 @@ const CreateAssessmentPage = () => {
           </Button>
         </div>
       </div>
+      <Loading loading={loading} />
     </main>
   );
 };

@@ -1,15 +1,17 @@
 import { Menu, Modal } from "@mantine/core";
+import axios from "axios";
 import React, { useState } from "react";
 import { HireInvitationModal } from "../applicationPage/hireInvitationModal";
 import { InterviewInvitationModal } from "../applicationPage/interviewInvitationModal";
 import { RejectModal } from "../applicationPage/rejectModal";
 import { DeleteModal } from "../emailTemplate/deleteModal";
 import { EditModal } from "../emailTemplate/editModal";
+import ViewEmailModal from "../emailTemplate/viewEmailModal";
 
-
-const ActionMenuEmail = () => {
-
-
+const ActionMenuEmail = ({ row, id }) => {
+  const logRows = () => {
+    console.log(row.original);
+  };
   const [opened, setOpened] = useState(false);
 
   const initialValues: { opened: boolean; component: React.ReactNode } = {
@@ -20,36 +22,85 @@ const ActionMenuEmail = () => {
   function handleDelete() {
     setSubAdminDelModal({
       opened: true,
-      component: <DeleteModal />,
+      component: (
+        <DeleteModal
+          setSubAdminDelModal={setSubAdminDelModal}
+          rowdetail={row.original}
+          id={id}
+        />
+      ),
     });
   }
-  const [subAdminHireModal, setSubAdminHireModal] = useState(initialValues);
-  function handleHire() {
-    setSubAdminHireModal({
+  const [subAdminEditModal, setSubAdminEditModal] = useState(initialValues);
+  function handleEdit() {
+    setSubAdminEditModal({
       opened: true,
-      component: <EditModal />,
+      component: (
+        <EditModal
+          setSubAdminEditModal={setSubAdminEditModal}
+          rowdetail={row.original}
+        />
+      ),
     });
   }
 
+  const [subAdminViewModal, setSubAdminViewModal] = useState(initialValues);
+  function handleView() {
+    setSubAdminViewModal({
+      opened: true,
+      component: (
+        <ViewEmailModal
+          setSubAdminViewModal={setSubAdminViewModal}
+          rowdetail={row.original}
+        />
+      ),
+    });
+  }
+
+  // const populateInput = () => {
+
+  //   var config = {
+  //     method: "get",
+  //     url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications/email-templates/${id}`,
+  //     headers: {
+  //       "api-key":
+  //         `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+  //       "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+  //       "hash-key":
+  //         `${process.env.NEXT_PUBLIC_HASH_KEY}`,
+  //     },
+  //   };
+  //   axios(config)
+  //     .then(function (response) {
+  //       form.values.type = response.data.data.type;
+  //       form.values.subject = response.data.data.subject;
+  //       form.values.body = response.data.data.body;
+
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+
+  //     });
+  // };
 
   return (
     <div>
-    <Menu
-      classNames={{
-        item: "!text-[black]",
-      }}
-    >
-      <Menu.Target>
-        <button className="">
-          Actions
-        </button>
-      </Menu.Target>
-      <Menu.Dropdown>
-        <Menu.Item>View Detail</Menu.Item>
-        <Menu.Item onClick={handleHire}>Edit</Menu.Item>
-        <Menu.Item onClick={handleDelete}>Delete</Menu.Item>
-      </Menu.Dropdown>
-    </Menu>
+      <Menu
+        classNames={{
+          item: "!text-[black]",
+        }}
+      >
+        <Menu.Target>
+          <button onClick={logRows} className="">
+            Actions
+          </button>
+        </Menu.Target>
+        <Menu.Dropdown>
+          <Menu.Item onClick={handleView}>View Detail</Menu.Item>
+          <Menu.Item onClick={handleEdit}>Edit</Menu.Item>
+          <Menu.Item onClick={handleDelete}>Delete</Menu.Item>
+        </Menu.Dropdown>
+      </Menu>
       <Modal
         opened={subAdminDelModal.opened}
         onClose={() => setSubAdminDelModal(initialValues)}
@@ -57,10 +108,16 @@ const ActionMenuEmail = () => {
         {subAdminDelModal.component}
       </Modal>
       <Modal
-        opened={subAdminHireModal.opened}
-        onClose={() => setSubAdminHireModal(initialValues)}
+        opened={subAdminEditModal.opened}
+        onClose={() => setSubAdminEditModal(initialValues)}
       >
-        {subAdminHireModal.component}
+        {subAdminEditModal.component}
+      </Modal>
+      <Modal
+        opened={subAdminViewModal.opened}
+        onClose={() => setSubAdminViewModal(initialValues)}
+      >
+        {subAdminViewModal.component}
       </Modal>
     </div>
   );

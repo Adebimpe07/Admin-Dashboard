@@ -4,7 +4,10 @@ import { HireInvitationModal } from "../applicationPage/hireInvitationModal";
 import { InterviewInvitationModal } from "../applicationPage/interviewInvitationModal";
 import { RejectModal } from "../applicationPage/rejectModal";
 
-const ActionMenuFail = () => {
+const ActionMenuFail = ({row}) => {
+  const logRows = () => {
+    console.log(row.original)
+  }
   const [opened, setOpened] = useState(false);
 
   const initialValues: { opened: boolean; component: React.ReactNode } = {
@@ -16,21 +19,21 @@ const ActionMenuFail = () => {
   function handleEdit() {
     setSubAdminModal({
       opened: true,
-      component: <InterviewInvitationModal />,
+      component: <InterviewInvitationModal setSubAdminModal={setSubAdminModal} rowdetail={row.original} />,
     });
   }
   const [subAdminDelModal, setSubAdminDelModal] = useState(initialValues);
   function handleDelete() {
     setSubAdminDelModal({
       opened: true,
-      component: <RejectModal />,
+      component: <RejectModal setSubAdminDelModal={setSubAdminDelModal} rowdetail={row.original} />,
     });
   }
   const [subAdminHireModal, setSubAdminHireModal] = useState(initialValues);
   function handleHire() {
     setSubAdminHireModal({
       opened: true,
-      component: <HireInvitationModal />,
+      component: <HireInvitationModal setSubAdminHireModal={setSubAdminHireModal} rowdetail={row.original} />,
     });
   }
 
