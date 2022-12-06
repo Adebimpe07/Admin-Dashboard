@@ -6,14 +6,9 @@ import {
     Button,
     FileInput,
     Modal,
-    MultiSelect,
     Text,
-    Textarea,
     TextInput,
 } from "@mantine/core";
-import { RichTextEditor } from "@mantine/rte";
-import Elipse from "../../../../assets/Ellipse 8.png";
-import Cloud from "../../../../assets/cloud.png";
 import FormContext from "../../../../context/store";
 import axios from 'axios'
 
@@ -22,73 +17,78 @@ const ContentAuthor = () => {
     const [files, setFiles] = useState(null)
     const { token } = useContext(FormContext)
 
-    const UploadJobModal = () => (
-        <Modal
-            opened={opened}
-            onClose={() => setOpened(false)}
-            title="Create Author"
-        >
-            <Text>
-                <div className="flex w-full flex-col gap-4">
-                    <h1 className="text-base text-[#948E8E] border-b border-[#DBD9D9] pb-2">
-                        Add new author
-                    </h1>
-                    <TextInput
-                        size="sm"
-                        className="focus:border-inherit"
-                        label="Name"
-                    />
-                    <TextInput
-                        size="sm"
-                        className="focus:border-inherit"
-                        label="Role/Position"
-                    />
-                    <FileInput
-                        label="Add Picture"
-                        placeholder="Select images"
-                        accept="image/png,image/jpeg"
-                        icon={<img src={Gallery.src} className="w-4" />}
-                        multiple
-                        value={files}
-                        onChange={setFiles}
-                    />
-                    <TextInput
-                        size="sm"
-                        className="focus:border-inherit"
-                        label="Facebook link"
-                    />
+    const UploadAuthorModal = () => {
 
-                    <button className="bg-greenButton text-[white] py-2  rounded">
-                        Create Author
-                    </button>
-                </div>
-            </Text>
-        </Modal>
-    );
+        // const data = new FormData()
+        // data.append('name', 'Customer Success Week');
 
+        const createAuthor = () => {
+            console.log(token.access);
 
-    const createAlbum = () => {
+            var config = {
+                method: 'post',
+                url: "https://atsbk.afexats.com/api/v1/author",
+                headers: {
+                    Authorization: `Bearer ${token.access}`
+                },
 
-        const data = new FormData()
-        data.append('name', 'Customer Success Week');
+            };
 
-        var config = {
-            method: 'post',
-            url: 'https://atsbk.afexats.com/api/v1/album',
-            headers: {
-                Authorization: `Bearer ${token.access}`
-            },
-            data: data
-        };
+            axios(config)
+                .then(function (response) {
+                    console.log((response.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+        return (
 
-        axios(config)
-            .then(function (response) {
-                console.log((response.data));
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+            <Modal
+                opened={opened}
+                onClose={() => setOpened(false)}
+                title="Create Author"
+            >
+                <Text>
+                    <div className="flex w-full flex-col gap-4">
+                        <h1 className="text-base text-[#948E8E] pb-2">
+                            Add new author
+                        </h1>
+                        <TextInput
+                            size="sm"
+                            className="focus:border-inherit"
+                            label="Name"
+                        />
+                        <TextInput
+                            size="sm"
+                            className="focus:border-inherit"
+                            label="Role/Position"
+                        />
+                        <FileInput
+                            label="Add Picture"
+                            placeholder="Select images"
+                            accept="image/png,image/jpeg"
+                            icon={<img src={Gallery.src} className="w-4" />}
+                            multiple
+                            value={files}
+                            onChange={setFiles}
+                        />
+                        <TextInput
+                            size="sm"
+                            className="focus:border-inherit"
+                            label="Facebook link"
+                        />
+
+                        <button onClick={createAuthor} className="bg-greenButton text-[white] py-2  rounded">
+                            Create Author
+                        </button>
+                    </div>
+                </Text>
+            </Modal>
+        )
+
     }
+
 
     return (
         <div className="h-full">
@@ -105,7 +105,7 @@ const ContentAuthor = () => {
                     onClick={() => setOpened(true)}
                 >
                     <p>Create Author</p>
-                    <UploadJobModal />
+                    <UploadAuthorModal />
                 </Button>
             </div>
         </div>

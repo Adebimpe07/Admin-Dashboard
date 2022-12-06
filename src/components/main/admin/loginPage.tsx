@@ -22,7 +22,7 @@ const loginPage = () => {
         e.preventDefault();
         var config = {
             method: "post",
-            url: "`${process.env.NEXT_PUBLIC_BASE_URL_1}`/api/v1/account/admin/login",
+            url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/account/admin/login`,
             data: form.values,
         };
 
