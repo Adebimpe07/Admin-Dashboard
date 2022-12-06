@@ -16,6 +16,7 @@ import axios from "axios";
 import FormContext from "../../../context/store";
 import { useRouter } from "next/router";
 import { useStore } from "../../../store";
+import CryptoJS from "crypto-js";
 
 const MenuDrop = () => {
   const initialValues: { opened: boolean; component: React.ReactNode } = {
@@ -42,9 +43,9 @@ const MenuDrop = () => {
     <>
       <Menu>
         <Menu.Target>
-          <button className="m-1">
+          <span className="m-1">
             <Icon icon="bi:three-dots-vertical" color="gray" width="15" />
-          </button>
+          </span>
         </Menu.Target>
 
         <Menu.Dropdown className="">
@@ -74,7 +75,7 @@ interface ISubAdminCard {
   first_name: string;
   last_name: string;
   username: string;
-  is_admin: boolean;
+  is_superadmin: boolean;
   is_application_manager: boolean;
   is_assessment_manager: boolean;
   is_content_manager: boolean;
@@ -86,7 +87,7 @@ function SubAdminCard({
   first_name,
   last_name,
   username,
-  is_admin,
+  is_superadmin,
   is_application_manager,
   is_assessment_manager,
   is_content_manager,
@@ -99,7 +100,7 @@ function SubAdminCard({
       <div className="text-[#4A4C58]">
         <p className="text-sm">{`${first_name} ${last_name}`}</p>
         <p className="text-xs text-center">
-          {is_admin
+          {is_superadmin
             ? "Admin"
             : is_application_manager
             ? "Application Manager"
@@ -134,6 +135,8 @@ const admin = () => {
   const [SubAdminData, setSubAdminData] = useState([]);
   const { token } = useContext(FormContext);
   const [loading, setLoading] = useState(false);
+  var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+  var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
 
   const fetchSubAdmin = () => {
     setLoading(true);
@@ -142,13 +145,16 @@ const admin = () => {
       url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/account/all`,
       headers: {
         Authorization: `Bearer ${token.access}`,
+        " api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY_1}`,
+        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS_1}`,
+        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY_1}`,
       },
     };
 
     axios(config)
       .then(function (response) {
         setSubAdminData(response.data.data.results);
-        console.log(response.data.data.results);
+        console.log(response.data);
         setLoading(false);
       })
       .catch(function (error) {
