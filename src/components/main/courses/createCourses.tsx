@@ -10,12 +10,17 @@ import { useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
 import SucessModal from "./sucessModal";
+import CryptoJS from "crypto-js";
 
 const CreateCourses = () => {
   const { coursesForm } = useContext(FormContext);
   const router = useRouter();
   const [picture, setPicture] = useState(null);
   const [opened, setOpened] = useState(false);
+  // var key = CryptoJS.enc.Utf8.parse(
+  //   "HmYOKQj7ZzF8cbeswYY9uLqbfMSUS2tI6Pz45zjylOM="
+  // );
+  // var iv = CryptoJS.enc.Utf8.parse("PL2LON7ZBLXq4a32le+FCQ==");
   const CreateCourse = (e) => {
     e.preventDefault();
     let data = new FormData();
