@@ -2,29 +2,24 @@ import React, { useState, useRef } from "react";
 import GalleryGroup from "../contentPage/assets/GalleryGroup.png";
 import {
     Button,
-    FileInput,
-    Menu,
     Modal,
-    MultiSelect,
-    Select,
     Text,
     Group,
     useMantineTheme,
-    Textarea,
-    TextInput,
 } from "@mantine/core";
 import Cross from "../../../../assets/Icon.png";
-import { IconUpload, IconPhoto, IconX } from "@tabler/icons";
+import { IconUpload,  IconX } from "@tabler/icons";
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 const albumPicviewHeader = () => {
-    const [opened, setOpened] = useState(true ? false : true);
+    const [openedOne, setOpenedOne] = useState(false);
+    const [openedTwo, setOpenedTwo] = useState(false);
     const theme = useMantineTheme();
     const openRef = useRef<() => void>(null);
     const DeleteModal = () => (
         <Modal
             className='text-[#4A4C58] text-base'
-            opened={opened}
-            onClose={() => setOpened(false)}
+            opened={openedOne}
+            onClose={() => setOpenedOne(false)}
             title='Delete News'>
             <p className='text-center text-sm'>
                 You are about to delete the selected news, kindly click the button below
@@ -39,8 +34,8 @@ const albumPicviewHeader = () => {
     );
     const UploadImageModal = (props: Partial<DropzoneProps>) => (
         <Modal
-            opened={opened}
-            onClose={() => setOpened(false)}
+            opened={openedTwo}
+            onClose={() => setOpenedTwo(false)}
             title='Add to Gallery'>
             <Dropzone
                 onDrop={(files) => console.log("accepted files", files)}
@@ -124,13 +119,13 @@ const albumPicviewHeader = () => {
                             className='w-3'
                         />
                     }
-                    onClick={() => setOpened(true)}>
+                    onClick={() => setOpenedTwo(true)}>
                     <p>Upload Image</p>
                     <UploadImageModal />
                 </Button>
                 <Button
                     className='bg-[#C81107] hover:bg-[#C81007]  h-[40px] text-[13px]'
-                    onClick={() => setOpened(true)}>
+                    onClick={() => setOpenedOne(true)}>
                     <p>Delete Album</p>
                     <DeleteModal />
                 </Button>

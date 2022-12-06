@@ -1,17 +1,11 @@
 import React from "react";
-
 import AlbumHeader from "./albumHeader";
-
 import AlbumPicturesHeader from "./albumPicturesHeader";
-
 import AlbumPicvview from "./albumPicvview";
-
-import ContentHeader from "./contentHeader";
-function AlbumPictures() {
+function AlbumPictures({ setOpened }) {
     return (
         <div>
-            <ContentHeader />
-            <AlbumPicturesHeader />
+            <AlbumPicturesHeader setOpenedPics={setOpened} />
             <AlbumPicvview />
         </div>
     );
