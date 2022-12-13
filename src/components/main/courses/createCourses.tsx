@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
 import SucessModal from "./sucessModal";
+import sha256 from "crypto-js/sha256";
 import CryptoJS from "crypto-js";
 
 const CreateCourses = () => {
@@ -18,9 +19,9 @@ const CreateCourses = () => {
   const [picture, setPicture] = useState(null);
   const [opened, setOpened] = useState(false);
   // var key = CryptoJS.enc.Utf8.parse(
-  //   "HmYOKQj7ZzF8cbeswYY9uLqbfMSUS2tI6Pz45zjylOM="
+  //   "SyJj90NqJNjeQZ/3wsEjzNh0iAgMY+RapIUH15uAutU="
   // );
-  // var iv = CryptoJS.enc.Utf8.parse("PL2LON7ZBLXq4a32le+FCQ==");
+  // var iv = CryptoJS.enc.Utf8.parse("2GIKG+j6VoymmGKo4ouTyQ==");
   const CreateCourse = (e) => {
     e.preventDefault();
     let data = new FormData();
@@ -28,13 +29,18 @@ const CreateCourses = () => {
     data.append("description", coursesForm.values.description);
     data.append("image", picture, picture?.name);
 
+    const requestTs = Date.now();
     var config = {
       method: "post",
       url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/courses/create`,
       headers: {
         "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
-        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
-        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
+        "request-ts": requestTs,
+        "hash-key": sha256(
+          process.env.NEXT_PUBLIC_APP_API_KEY +
+            process.env.NEXT_PUBLIC_SECRET_KEY +
+            requestTs
+        ).toString(CryptoJS.enc.Hex),
       },
       data: data,
     };

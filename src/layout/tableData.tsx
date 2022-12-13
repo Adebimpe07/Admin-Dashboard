@@ -236,14 +236,14 @@ export const cohortColumn = [
     Header: "Application End Date",
     accessor: "application_end_date",
   },
-  {
-    Header: "",
-    accessor: "edit",
-  },
-  {
-    Header: "",
-    accessor: "delete",
-  },
+  // {
+  //   Header: " ",
+  //   accessor: "edit",
+  // },
+  // {
+  //   Header: "",
+  //   accessor: "delete",
+  // },
 ];
 export const contentColumn = [
   {
