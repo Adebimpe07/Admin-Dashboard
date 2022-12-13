@@ -53,7 +53,7 @@ const CreatesubadminModal = ({ fetchSubAdmin }) => {
       formData.append("confirm_password", subadminForm.values.confirm_password);
       formData.append("position", subadminForm.values.position);
       formData.append("profile_picture", profile, profile?.name);
-      console.log(subadminForm.values);
+      console.log({ ...subadminForm.values, profile: profile });
       var config = {
         method: "post",
         url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/account/admin/register`,

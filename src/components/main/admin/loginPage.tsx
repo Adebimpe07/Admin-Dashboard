@@ -38,7 +38,7 @@ const loginPage = () => {
       .then(function (response) {
         setToken(response.data.data);
         console.log(response.data.data);
-        setAdmin(
+        console.log(
           jwtDecode(
             CryptoJS.AES.decrypt(response.data.data.access, key, {
               iv: iv,

@@ -83,6 +83,15 @@ interface ISubAdminCard {
   is_staff: boolean;
 }
 
+var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
+
+const decrypt = (element) => {
+  return CryptoJS.AES.decrypt(element, key, {
+    iv: iv,
+  }).toString(CryptoJS.enc.Utf8);
+};
+
 function SubAdminCard({
   first_name,
   last_name,
@@ -98,17 +107,19 @@ function SubAdminCard({
     <div className="relative min-w-max gap-1 p-4 bg-[#F9FAFB] flex flex-col justify-center items-center">
       <img className="rounded-full" width="80" src={AdminPic.src} alt="" />
       <div className="text-[#4A4C58]">
-        <p className="text-sm">{`${first_name} ${last_name}`}</p>
+        <p className="text-sm">{`${decrypt(first_name)} ${decrypt(
+          last_name
+        )}`}</p>
         <p className="text-xs text-center">
-          {is_superadmin
+          {decrypt(is_superadmin)
             ? "Admin"
-            : is_application_manager
+            : decrypt(is_application_manager)
             ? "Application Manager"
-            : is_assessment_manager
+            : decrypt(is_assessment_manager)
             ? "Assessment Manager"
-            : is_content_manager
+            : decrypt(is_content_manager)
             ? "Content Manager"
-            : is_membership_manager
+            : decrypt(is_membership_manager)
             ? "Membership Manager"
             : "Staff"}
         </p>
@@ -144,7 +155,9 @@ const admin = () => {
       method: "get",
       url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/account/all`,
       headers: {
-        Authorization: `Bearer ${token.access}`,
+        Authorization: `Bearer ${CryptoJS.AES.decrypt(token.access, key, {
+          iv: iv,
+        }).toString(CryptoJS.enc.Utf8)}`,
         " api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY_1}`,
         "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS_1}`,
         "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY_1}`,

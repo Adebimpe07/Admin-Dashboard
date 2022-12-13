@@ -4,7 +4,7 @@ import { Edit2, Trash } from "iconsax-react";
 import moment from "moment";
 import { StaticImageData } from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CoursesData } from "../../../layout/coursesData";
 import { DeleteCourse } from "./deleteCourse";
 import EditCourse from "./editCourse";
@@ -33,11 +33,12 @@ const Courses = ({
     component: null,
   };
   const [DelModal, setDelModal] = useState(initialValues);
+
   function handleDelete() {
     if (uid) {
       setDelModal({
         opened: true,
-        component: <DeleteCourse uid={uid} />,
+        component: <DeleteCourse setDelModal={setDelModal} uid={uid} />,
       });
     } else alert("Course cannot be deleted");
   }

@@ -7,6 +7,9 @@ import ActionMenuEmail from "../actionButton/ActionMenuEmail";
 import axios from "axios";
 import ActionMenuCreated from "../actionButton/ActionMenuCreated";
 import ActionMenuModified from "../actionButton/ActionMenuModified";
+import sha256 from "crypto-js/sha256";
+import CryptoJS from "crypto-js";
+import Loading from "../../../loading";
 
 // const Action = ({ values }) => {
 
@@ -22,23 +25,53 @@ import ActionMenuModified from "../actionButton/ActionMenuModified";
 
 const EmailTemplateTable = () => {
   const [emailData, setEmailData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  var key = CryptoJS.enc.Base64.parse(
+    "SyJj90NqJNjeQZ/3wsEjzNh0iAgMY+RapIUH15uAutU="
+  );
+  var iv = CryptoJS.enc.Base64.parse("2GIKG+j6VoymmGKo4ouTyQ==");
 
   const fetchAllCohorts = () => {
-    axios({
+    setLoading(true);
+    const requestTs = String(Date.now());
+    var config = {
       method: "get",
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications/email-templates`,
+      baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+      url: `/api/applications/email-templates`,
       headers: {
-        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
-        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
-        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
-        "Content-Type": "application/json",
+        "api-key": process.env.NEXT_PUBLIC_APP_API_KEY,
+        "request-ts": requestTs,
+        "hash-key": sha256(
+          process.env.NEXT_PUBLIC_APP_API_KEY +
+            process.env.NEXT_PUBLIC_SECRET_KEY +
+            requestTs
+        ).toString(CryptoJS.enc.Hex),
       },
-    })
+    };
+    // axios({
+    //   method: "get",
+    //   url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications/email-templates`,
+    //   headers: {
+    //     "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+    //     "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+    //     "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    axios(config)
       .then(function (response) {
-        setEmailData(response.data.data.results);
+        setEmailData(
+          JSON.parse(
+            CryptoJS.AES.decrypt(response.data.data, key, {
+              iv: iv,
+            }).toString(CryptoJS.enc.Utf8)
+          ).results
+        );
+        setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -195,6 +228,7 @@ const EmailTemplateTable = () => {
           </button>
         </div>
       </div>
+      <Loading loading={loading} />
     </div>
   );
 };
