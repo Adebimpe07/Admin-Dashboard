@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Filter, Notification } from "iconsax-react";
 import { StaticImageData } from "next/image";
 import ProfilePicture from "../../../assets/PM_Tosin.png";
@@ -64,6 +64,10 @@ const HeaderMain = () => {
             </Menu>
         );
     };
+
+    useEffect(() => {
+        console.log(admin);
+    }, [admin]);
 
     return (
         <div className="px-6 pt-6 pb-4">
