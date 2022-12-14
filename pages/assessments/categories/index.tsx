@@ -10,6 +10,12 @@ import { CategoryCardData } from "../../../src/layout/assessmentCardData";
 import CategoryCard from "../../../src/components/main/assessment/categoryCard/categoryCard";
 import axios from "axios";
 import Loading from "../../../src/components/loading";
+import CryptoJS, {SHA256} from "crypto-js";
+
+const key = CryptoJS.enc.Base64.parse(
+  "wjqy62fB+dwz2gyz4sMePe9u2RsMVIyuaA6wPgUeXjw="
+);
+const iv = CryptoJS.enc.Base64.parse("gNyBAsNdWQEwHvbAm8g5Jg==");
 
 export const NotificationDrop = () => {
   return (
@@ -35,13 +41,28 @@ const HeaderMain = () => {
   const [loading, setLoading] = useState(false);
 
   const fetchCategories = () => {
+    let requestTs = String(Date.now());
     setLoading(true);
-    axios(
-      `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/create-list-category`
-    )
+    axios({
+      url: process.env.NEXT_PUBLIC_BASE_URL_2 + `/api/categories/create-list-category`,
+      headers: {
+        "api-key": process.env.NEXT_PUBLIC_API_KEY_2,
+        "request-ts": requestTs,
+        "hash-key": SHA256(
+            process.env.NEXT_PUBLIC_API_KEY_2 +
+                process.env.NEXT_PUBLIC_SECRET_KEY_2 +
+                requestTs
+        ).toString(CryptoJS.enc.Hex),
+    }
+    })
       .then(function (response) {
-        console.log(response.data.data.results);
-        setCategoryCard(response.data.data.results);
+        let decrypted_data = JSON.parse(
+          CryptoJS.AES.decrypt(response.data.data, key, {
+              iv: iv,
+          }).toString(CryptoJS.enc.Utf8)
+      );
+        // console.log(decrypted_data);
+        setCategoryCard(decrypted_data.results);
         setLoading(false);
       })
       .catch(function (error) {
