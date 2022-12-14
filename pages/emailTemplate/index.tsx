@@ -19,7 +19,7 @@ const SubHeaderEmailTemplate = dynamic(
   }
 );
 
-const Index = () => {
+const Index = ({ id }) => {
   const [selected, setSelected] = useState(0);
 
   return (
