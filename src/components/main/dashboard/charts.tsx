@@ -45,31 +45,6 @@ const data = [
     applied: 3490,
     assessment: 1300,
   },
-  // {
-  //   name: "Aug",
-  //   applied: 3490,
-  //   assessment: 300,
-  // },
-  // {
-  //   name: "Sep",
-  //   applied: 3490,
-  //   assessment: 1300,
-  // },
-  // {
-  //   name: "Oct",
-  //   applied: 3490,
-  //   assessment: 300,
-  // },
-  // {
-  //   name: "Nov",
-  //   applied: 3490,
-  //   assessment: 4300,
-  // },
-  // {
-  //   name: "Dec",
-  //   applied: 3490,
-  //   assessment: 300,
-  // },
 ];
 
 const charts = () => {
