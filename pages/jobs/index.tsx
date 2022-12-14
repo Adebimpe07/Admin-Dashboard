@@ -13,9 +13,9 @@ const index = ({ fetchJob }) => {
   const [jobData, setJobData] = useState([]);
   const [loading, setLoading] = useState(false);
   var key = CryptoJS.enc.Base64.parse(
-    "SyJj90NqJNjeQZ/3wsEjzNh0iAgMY+RapIUH15uAutU="
+    'HmYOKQj7ZzF8cbeswYY9uLqbfMSUS2tI6Pz45zjylOM='
   );
-  var iv = CryptoJS.enc.Base64.parse("2GIKG+j6VoymmGKo4ouTyQ==");
+  var iv = CryptoJS.enc.Base64.parse('PL2LON7ZBLXq4a32le+FCQ==');
 
   const jobList = () => {
     setLoading(true);

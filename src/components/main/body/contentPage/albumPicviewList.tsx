@@ -22,7 +22,7 @@ function AlbumPicviewList({ images }) {
                 {images.map((item) => (
 
                     <img
-                        className='w-48 h-48'
+                        className='w-48 h-48 object-cover'
                         src={CryptoJS.AES.decrypt(item.image, key, { iv: iv }).toString(CryptoJS.enc.Utf8)}
                     />
                 ))}
