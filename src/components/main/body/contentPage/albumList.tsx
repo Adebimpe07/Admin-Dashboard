@@ -28,6 +28,7 @@ import Link from "next/link";
 type Props = {
   name: string;
   description: string;
+  url: string
 };
 
 const AlbumPicturesList = [
@@ -36,10 +37,10 @@ const AlbumPicturesList = [
   },
 ];
 
-const AlbumList = ({ name, description }: Props) => {
+const AlbumList = ({ name, description, url }: Props) => {
   return (
     <>
-      {AlbumPicturesList.map((item, idx) => (
+      <Link href={`/content/gallery/${url[url.length-1]}`}>
         <div className='flex flex-col gap-3 justify-center items-center py-4 border-[#F0F0F1] border-[1px] rounded-lg'>
           <img
             src={Group.src}
@@ -49,7 +50,7 @@ const AlbumList = ({ name, description }: Props) => {
           <p className='text-[#252735] text-xs font-normal'>{description}</p>
           {/* <p className='text-[#8F9198] text-[10px] font-medium'>{date}</p> */}
         </div>
-      ))}
+      </Link>
     </>
   );
 };

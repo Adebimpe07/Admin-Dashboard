@@ -1,37 +1,31 @@
-import React from "react";
-import AlbumPic from "../contentPage/assets/albumPic.png";
-function AlbumPicviewList() {
+import React, { useEffect } from "react";
+import CryptoJS from "crypto-js";
+import { ArrowLeft2 } from "iconsax-react";
+import router, { useRouter } from "next/router";
+
+
+function AlbumPicviewList({ images }) {
+    const router = useRouter()
+
+    var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+    var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
     return (
-        <div>
-            <div className='grid grid-cols-5 grid-flow-row gap-4'>
-                <img
-                    className='w-48 h-48'
-                    src={AlbumPic.src}
+        <div className="px-6 flex flex-col gap-4">
+            <button onClick={() => router.push('/content/gallery')} className="self-start flex items-center justify-center gap-2 text-white bg-[#38cb89] rounded-md p-3">
+                <ArrowLeft2
+                    size="24"
+                    color="#FFF"
                 />
-                <img
-                    className='w-48 h-48'
-                    src={AlbumPic.src}
-                />
-                <img
-                    className='w-48 h-48'
-                    src={AlbumPic.src}
-                />
-                <img
-                    className='w-48 h-48'
-                    src={AlbumPic.src}
-                />
-                <img
-                    className='w-48 h-48'
-                    src={AlbumPic.src}
-                />
-                <img
-                    className='w-48 h-48'
-                    src={AlbumPic.src}
-                />
-                <img
-                    className='w-48 h-48'
-                    src={AlbumPic.src}
-                />
+                Go back to the album
+            </button>
+            <div className='grid grid-cols-5 object-cover grid-flow-row gap-4'>
+                {images.map((item) => (
+
+                    <img
+                        className='w-48 h-48'
+                        src={CryptoJS.AES.decrypt(item.image, key, { iv: iv }).toString(CryptoJS.enc.Utf8)}
+                    />
+                ))}
             </div>
         </div>
     );

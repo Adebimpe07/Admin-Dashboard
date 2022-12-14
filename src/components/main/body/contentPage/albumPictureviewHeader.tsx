@@ -8,7 +8,7 @@ import {
     useMantineTheme,
 } from "@mantine/core";
 import Cross from "../../../../assets/Icon.png";
-import { IconUpload,  IconX } from "@tabler/icons";
+import { IconUpload, IconX } from "@tabler/icons";
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 const albumPicviewHeader = () => {
     const [openedOne, setOpenedOne] = useState(false);
