@@ -21,6 +21,41 @@ const createQuestions = () => {
     const { categoryID, questionsForm, onChange, questionType } =
         useContext(FormContext);
 
+    const addNewQuestion = () => {
+        console.log(questionsForm.values);
+        let requestTs = String(Date.now());
+        axios({
+            url: `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/${categoryID}/questions`,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "api-key": process.env.NEXT_PUBLIC_API_KEY_2,
+                "request-ts": requestTs,
+                "hash-key": SHA256(
+                    process.env.NEXT_PUBLIC_API_KEY_2 +
+                        process.env.NEXT_PUBLIC_SECRET_KEY_2 +
+                        requestTs
+                ).toString(CryptoJS.enc.Hex),
+            },
+            data: {
+                data: CryptoJS.AES.encrypt(
+                    JSON.stringify({
+                        ...questionsForm.values,
+                        question_type: questionType,
+                    }),
+                    key,
+                    {
+                        iv: iv,
+                    }
+                ).toString(),
+            },
+        }).then(({ data }) => {
+            console.log(data);
+            questionsForm.reset();
+            onChange("");
+        });
+    };
+
     return (
         <div className="h-screen flex-1 py-6 flex flex-col  bg-mainBg">
             <Header />
@@ -34,42 +69,7 @@ const createQuestions = () => {
                     </div>
                     <div className="self-end flex gap-3">
                         <Button
-                            onClick={() => {
-                                console.log(questionsForm.values);
-                                let requestTs = String(Date.now());
-                                axios({
-                                    url: `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/${categoryID}/questions`,
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                        "api-key":
-                                            process.env.NEXT_PUBLIC_API_KEY_2,
-                                        "request-ts": requestTs,
-                                        "hash-key": SHA256(
-                                            process.env.NEXT_PUBLIC_API_KEY_2 +
-                                                process.env
-                                                    .NEXT_PUBLIC_SECRET_KEY_2 +
-                                                requestTs
-                                        ).toString(CryptoJS.enc.Hex),
-                                    },
-                                    data: {
-                                        data: CryptoJS.AES.encrypt(
-                                            JSON.stringify({
-                                                ...questionsForm.values,
-                                                question_type: questionType,
-                                            }),
-                                            key,
-                                            {
-                                                iv: iv,
-                                            }
-                                        ).toString(),
-                                    },
-                                }).then(({ data }) => {
-                                    console.log(data);
-                                    questionsForm.reset();
-                                    onChange("");
-                                });
-                            }}
+                            onClick={addNewQuestion}
                             className="hover:bg-white w-[10rem] text-base bg-white text-[#000]">
                             Add question
                         </Button>
@@ -84,7 +84,7 @@ const createQuestions = () => {
                 <div className="flex mx-[5rem] h-full my-4 p-6 gap-9 bg-white">
                     <div className="flex flex-col gap-6 flex-1">
                         <p>Question</p>
-                        <Editor />
+                        <Editor form={questionsForm} />
                     </div>
                     <Options />
                 </div>
