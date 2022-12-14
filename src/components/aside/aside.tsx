@@ -107,7 +107,9 @@ const Sidebar = () => {
               // item.heading !== "Content Management" && ( TODO:
               <div
                 key={index}
-                className={collapse && item.sub_menu && "flex flex-col gap-2"}
+                className={
+                  collapse && item.sub_menu ? "flex flex-col gap-2" : ""
+                }
               >
                 <Link href={item.href}>
                   <div

@@ -9,10 +9,13 @@ import jwtDecode from "jwt-decode";
 import FormContext from "../../../context/store";
 import { useRouter } from "next/router";
 import Loading from "../../loading";
+import CryptoJS from "crypto-js";
 const loginPage = () => {
   const { setToken, setAdmin } = useContext(FormContext);
   const [visible, { toggle }] = useDisclosure(false);
   const [loading, setLoading] = useState(false);
+  var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+  var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
   const router = useRouter();
   const form = useForm({
     initialValues: {
@@ -34,8 +37,14 @@ const loginPage = () => {
     axios(config)
       .then(function (response) {
         setToken(response.data.data);
-        console.log(jwtDecode(response.data.data.access));
-        setAdmin(jwtDecode(response.data.data.access));
+        console.log(response.data.data);
+        setAdmin(
+          jwtDecode(
+            CryptoJS.AES.decrypt(response.data.data.access, key, {
+              iv: iv,
+            }).toString(CryptoJS.enc.Utf8)
+          )
+        );
         setLoading(false);
         router.push("/");
       })

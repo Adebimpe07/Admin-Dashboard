@@ -6,10 +6,15 @@ import HeaderData from "../../src/components/main/notification_ProfilePicture";
 import { CoursesData } from "../../src/layout/coursesData";
 import axios, { AxiosRequestConfig } from "axios";
 import Loading from "../../src/components/loading";
+import CryptoJS from "crypto-js";
 
 const courses = () => {
   const [coursesCard, setCoursesCard] = useState(null);
   const [loading, setLoading] = useState(false);
+  var key = CryptoJS.enc.Utf8.parse(
+    "HmYOKQj7ZzF8cbeswYY9uLqbfMSUS2tI6Pz45zjylOM="
+  );
+  var iv = CryptoJS.enc.Utf8.parse("PL2LON7ZBLXq4a32le+FCQ==");
   const fetchCourses = () => {
     setLoading(true);
     var data = "";
@@ -22,13 +27,17 @@ const courses = () => {
         "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
         "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
       },
+      // data: CryptoJS.AES.encrypt(JSON.stringify({data:data}, key, {iv:iv}).ciphertext.toString(CryptoJS.enc.Hex))
+
       data: data,
     };
 
     axios(config)
       .then(function (response) {
         setCoursesCard(response.data.data.results);
-        console.log(response.data.data.results);
+        // console.log(response.data);
+
+        // console.log(response.data.data.results);
         setLoading(false);
       })
       .catch(function (error) {

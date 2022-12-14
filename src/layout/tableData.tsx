@@ -63,6 +63,7 @@ export const ShortListColumn: Array<Column<ShortListColumnType>> = [
     accessor: "action",
   },
 ];
+
 export const passedColumn = [
   {
     Header: "Name",
@@ -89,6 +90,7 @@ export const passedColumn = [
     accessor: "action",
   },
 ];
+
 export const failedColumn = [
   {
     Header: "Name",
@@ -115,6 +117,7 @@ export const failedColumn = [
     accessor: "action",
   },
 ];
+
 export const interviewColumn = [
   {
     Header: "Name",
@@ -141,6 +144,7 @@ export const interviewColumn = [
     accessor: "action",
   },
 ];
+
 export const hiredColumn = [
   {
     Header: "Name",
@@ -163,6 +167,7 @@ export const hiredColumn = [
     accessor: "applicant_phone",
   },
 ];
+
 export const rejectedColumn = [
   {
     Header: "Name",
@@ -245,6 +250,7 @@ export const cohortColumn = [
     accessor: "delete",
   },
 ];
+
 export const contentColumn = [
   {
     Header: "Title",
@@ -271,6 +277,7 @@ export const contentColumn = [
     accessor: "delete",
   },
 ];
+
 export const blogColumn = [
   {
     Header: "Title",
@@ -306,6 +313,7 @@ export const blogColumn = [
     accessor: "delete",
   },
 ];
+
 export const atsMemberColumn = [
   {
     Header: "",
