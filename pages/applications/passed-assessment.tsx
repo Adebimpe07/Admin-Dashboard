@@ -1,12 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import SubAppHeader from "../../src/components/main/body/applicationPage/subAppHeader";
-import All from "../../src/components/main/body/jobPage/job";
-import Body from "../../src/components/main/body/jobPage/body";
-import TableHead from "../../src/components/main/body/applicationPage/tableHead";
-import dynamic from "next/dynamic";
-import FormContext from "../../src/context/store";
-import ApplicationBody from "../../src/components/main/body/applicationPage/ApplicationBody";
-import ShortlistApplicationBody from "../../src/components/main/body/applicationPage/shortlistApplicationBody";
+import React from "react";
 import PassedApplicationBody from "../../src/components/main/body/applicationPage/passedApplicationBody";
 import Header from "../../src/components/header";
 
