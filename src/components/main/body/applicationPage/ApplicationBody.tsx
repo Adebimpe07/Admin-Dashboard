@@ -1,133 +1,156 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  TableInstance,
-  useGlobalFilter,
-  usePagination,
-  UsePaginationInstanceProps,
-  UsePaginationState,
-  useRowSelect,
-  UseSortByInstanceProps,
-  useTable,
+    TableInstance,
+    useGlobalFilter,
+    usePagination,
+    UsePaginationInstanceProps,
+    UsePaginationState,
+    useRowSelect,
+    UseSortByInstanceProps,
+    useTable,
 } from "react-table";
 import ActionMenuApplication from "../actionButton/ActionMenuApplication";
 import { allApplicationColumn } from "../../../../layout/tableData";
 import SubAppHeader from "./subAppHeader";
 import TableHead from "./tableHead";
 import ApplicationPage from "./applicationPage";
+import CryptoJS, { SHA256 } from "crypto-js";
+import Loading from "../../../loading";
 
 export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
-  UsePaginationInstanceProps<T> &
-  UseSortByInstanceProps<T> & {
-    state: UsePaginationState<T>;
-  };
-
-const ApplicationBody = () => {
-  const [MOCK_DATA, setMOCK_DATA] = useState([]);
-  const AllapplicationColumns = useMemo(() => allApplicationColumn, []);
-
-  const fetchApplicantList = (url, setter) => {
-    var config = {
-      method: "get",
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications` + url,
-      headers: {
-        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
-        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
-        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
-      },
+    UsePaginationInstanceProps<T> &
+    UseSortByInstanceProps<T> & {
+        state: UsePaginationState<T>;
     };
 
-    axios(config)
-      .then(function (response) {
-        console.log(response.data);
-        setter(response.data.data.results);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+const ApplicationBody = () => {
+    const [MOCK_DATA, setMOCK_DATA] = useState([]);
+    const AllapplicationColumns = useMemo(() => allApplicationColumn, []);
+    const [loading, setLoading] = useState(false);
+    var key = CryptoJS.enc.Base64.parse(
+        "HmYOKQj7ZzF8cbeswYY9uLqbfMSUS2tI6Pz45zjylOM="
+    );
+    var iv = CryptoJS.enc.Base64.parse("PL2LON7ZBLXq4a32le+FCQ==");
 
-  useEffect(() => {
-    fetchApplicantList(" ", setMOCK_DATA);
-  }, []);
+    const fetchApplicantList = (url, setter) => {
+        const requestTs = String(Date.now());
+        setLoading(true);
 
-  const data = useMemo(() => MOCK_DATA, [MOCK_DATA]);
+        var config: AxiosRequestConfig = {
+            method: "get",
+            baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+            url: `/api/applications` + url,
+            headers: {
+                "api-key": process.env.NEXT_PUBLIC_APP_API_KEY,
+                "request-ts": requestTs,
+                "hash-key": SHA256(
+                    process.env.NEXT_PUBLIC_APP_API_KEY +
+                        process.env.NEXT_PUBLIC_SECRET_KEY +
+                        requestTs
+                ).toString(CryptoJS.enc.Hex),
+            },
+        };
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    pageOptions,
-    gotoPage,
-    pageCount,
-    state,
-    setGlobalFilter,
-    prepareRow,
-    selectedFlatRows,
-  } = useTable(
-    {
-      columns: AllapplicationColumns,
-      data: data,
-    },
-    useGlobalFilter,
-    usePagination,
-    useRowSelect,
-    (hooks) => {
-      hooks.visibleColumns.push((columns): any => {
-        return [
-          ...columns,
-          {
-            // Header: ({ getToggleAllRowsSelectedProps }: any) => (
-            //     <Checkbox {...getToggleAllRowsSelectedProps()} />
-            // ),
-            Cell: ({ row }: any) => (
-              <ActionMenuApplication row={row} />
-              // <Checkbox {...row.getToggleRowSelectedProps()} />
-            ),
-          },
-        ];
-      });
-    }
-  ) as TableInstanceWithHooks<object>;
+        axios(config)
+            .then(function (response) {
+                console.log(response.data);
+                let decrypted_data = JSON.parse(
+                    CryptoJS.AES.decrypt(response.data.data, key, {
+                        iv: iv,
+                    }).toString(CryptoJS.enc.Utf8)
+                );
+                setter(decrypted_data.results);
+                setLoading(false);
+            })
+            .catch(function (error) {
+                console.log(error);
+                setLoading(false);
+            });
+    };
 
-  const { pageIndex, globalFilter }: any = state;
+    useEffect(() => {
+        fetchApplicantList(" ", setMOCK_DATA);
+    }, []);
 
-  useEffect(() => {
-    console.log(selectedFlatRows.map((row) => row.original));
-  }, [selectedFlatRows]);
+    const data = useMemo(() => MOCK_DATA, [MOCK_DATA]);
 
-  const formData = {
-    pageIndex,
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    pageOptions,
-    gotoPage,
-    pageCount,
-    prepareRow,
-    selectedFlatRows,
-  };
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        page,
+        nextPage,
+        previousPage,
+        canNextPage,
+        canPreviousPage,
+        pageOptions,
+        gotoPage,
+        pageCount,
+        state,
+        setGlobalFilter,
+        prepareRow,
+        selectedFlatRows,
+    } = useTable(
+        {
+            columns: AllapplicationColumns,
+            data: data,
+        },
+        useGlobalFilter,
+        usePagination,
+        useRowSelect,
+        (hooks) => {
+            hooks.visibleColumns.push((columns): any => {
+                return [
+                    ...columns,
+                    {
+                        // Header: ({ getToggleAllRowsSelectedProps }: any) => (
+                        //     <Checkbox {...getToggleAllRowsSelectedProps()} />
+                        // ),
+                        Cell: ({ row }: any) => (
+                            <ActionMenuApplication row={row} />
+                            // <Checkbox {...row.getToggleRowSelectedProps()} />
+                        ),
+                    },
+                ];
+            });
+        }
+    ) as TableInstanceWithHooks<object>;
 
-  return (
-    <>
-      <SubAppHeader
-        globalFilter={globalFilter}
-        setGlobalFilter={setGlobalFilter}
-      />
-      <TableHead />
-      <ApplicationPage formData={formData} />
-    </>
-  );
+    const { pageIndex, globalFilter }: any = state;
+
+    useEffect(() => {
+        console.log(selectedFlatRows.map((row) => row.original));
+    }, [selectedFlatRows]);
+
+    const formData = {
+        pageIndex,
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        page,
+        nextPage,
+        previousPage,
+        canNextPage,
+        canPreviousPage,
+        pageOptions,
+        gotoPage,
+        pageCount,
+        prepareRow,
+        selectedFlatRows,
+    };
+
+    return (
+        <>
+            <SubAppHeader
+                globalFilter={globalFilter}
+                setGlobalFilter={setGlobalFilter}
+            />
+            <TableHead />
+            <ApplicationPage formData={formData} />
+            <Loading loading={loading} />
+        </>
+    );
 };
 
 export default ApplicationBody;
