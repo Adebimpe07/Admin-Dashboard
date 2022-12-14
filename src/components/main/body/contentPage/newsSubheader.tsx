@@ -31,6 +31,10 @@ const NewsSubheader = () => {
             name: "Gallery",
             href: "/content/gallery",
         },
+        {
+            name: "Author",
+            href: "/content/author",
+        },
     ];
 
     const [opened, setOpened] = useState(false);

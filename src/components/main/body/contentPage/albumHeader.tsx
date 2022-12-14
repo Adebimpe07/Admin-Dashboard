@@ -58,7 +58,7 @@ const AlbumHeader = () => {
   return (
     <div className="flex justify-between px-5">
       <div className="place-items-center">
-        <p className="text-[#252735] text-base font-semibold">All Albums ()</p>
+        <p className="text-[#252735] text-base font-semibold">All Albums ( )</p>
       </div>
       <div className="flex gap-8">
         <Button

@@ -5,7 +5,7 @@ function AlbumPicvview() {
     return (
         <div className='overflow-auto bg-[#FFFFFF] mx-6 px-6 mb-4 h-full flex flex-col gap-11 pt-7'>
             <AlbumPicviewHeader/>
-            <AlbumPicviewList />
+            <AlbumPicviewList images={undefined} />
         </div>
     );
 }
