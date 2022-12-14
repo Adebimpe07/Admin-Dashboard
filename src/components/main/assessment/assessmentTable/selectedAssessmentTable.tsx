@@ -15,6 +15,7 @@ const AssessmentCategoryTable = ({ setSelectedCategory }) => {
       `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/create-list-category`
     )
       .then(function (response) {
+        // console.log(response);
         setCategoryListData(
           response.data.data.results.reduce(
             (acc, { name, test_duration: time, questions: question, id }) => {

@@ -5,7 +5,7 @@ import CreatedAssessBody from "./createdAssessBody";
 const createdAssessmentList = () => {
   return (
     <div className="h-screen flex-1 py-6 flex flex-col  bg-mainBg">
-      <Header />
+      <Header name= "Assessment"/>
       <CreatedAssessBody />
     </div>
   );

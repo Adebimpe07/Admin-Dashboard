@@ -16,8 +16,7 @@ const ShortlistTableHead = () => {
       method: "get",
       url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications`,
       headers: {
-        API_KEY:
-          "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
+        API_KEY: `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
         "REQUEST-TS": "1669397556",
         "HASH-KEY": "",
       },

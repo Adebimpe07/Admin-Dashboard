@@ -17,9 +17,15 @@ const MemberTable = () => {
     const [ATSMember, setATSMember] = useState([]);
 
     const fetchAllAts = () => {
-        axios(
-            "http://atsbk.afexats.com/api/v1/tech-stars/tech-star-list-create/"
-        )
+        axios({
+            url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/tech-stars/tech-star-list-create/`,
+            headers: {
+                "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY_1}`,
+                "hash-key": `${process.env.NEXT_PUBLIC_APP_HASH_KEY_1}`,
+                "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS_1}`,
+            },
+            method: 'get'
+        })
             .then(function (response) {
                 setATSMember(response.data.data.results);
             })

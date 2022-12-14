@@ -1,39 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NotificationDrop } from "../assessments/categories";
 import Courses from "../../src/components/main/courses/courses";
 import Courses_newPage from "../../src/components/main/courses/courses_newPage";
 import HeaderData from "../../src/components/main/notification_ProfilePicture";
 import { CoursesData } from "../../src/layout/coursesData";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import Loading from "../../src/components/loading";
+import sha256 from "crypto-js/sha256";
+import CryptoJS from "crypto-js";
+import FormContext from "../../src/context/store";
 
 const courses = () => {
-  const [coursesCard, setCoursesCard] = useState(null);
+  const { coursesCard, setCoursesCard } = useContext(FormContext);
   const [loading, setLoading] = useState(false);
+  var key = CryptoJS.enc.Base64.parse(
+    "HmYOKQj7ZzF8cbeswYY9uLqbfMSUS2tI6Pz45zjylOM="
+  );
+  var iv = CryptoJS.enc.Base64.parse("PL2LON7ZBLXq4a32le+FCQ==");
   const fetchCourses = () => {
+    const requestTs = String(Date.now());
     setLoading(true);
-    var data = "";
-    var config = {
+    var config: AxiosRequestConfig = {
       method: "get",
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/courses`,
+      baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+      url: `/api/jobs/courses`,
       headers: {
-        "api-key":
-          "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
-        "request-ts": "1667549939702",
-        "hash-key":
-          "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+        "api-key": process.env.NEXT_PUBLIC_APP_API_KEY,
+        "request-ts": requestTs,
+        "hash-key": sha256(
+          process.env.NEXT_PUBLIC_APP_API_KEY +
+            process.env.NEXT_PUBLIC_SECRET_KEY +
+            requestTs
+        ).toString(CryptoJS.enc.Hex),
       },
-      data: data,
     };
 
     axios(config)
       .then(function (response) {
-        setCoursesCard(response.data.data.results);
-        console.log(response.data.data.results);
+        // setCoursesCard;
+        setCoursesCard(
+          JSON.parse(
+            CryptoJS.AES.decrypt(response.data.data, key, {
+              iv: iv,
+            }).toString(CryptoJS.enc.Utf8)
+          ).results
+        );
         setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
+        console.log("error");
         setLoading(false);
       });
   };

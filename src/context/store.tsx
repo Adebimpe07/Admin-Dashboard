@@ -155,6 +155,8 @@ type formDataProp = {
   setToken: (val: string | ((prevState: string) => string)) => void;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
+  coursesCard: any[];
+  setCoursesCard: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
 export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
@@ -190,10 +192,10 @@ export const FormProvider = ({ children }: any) => {
   //         url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications` + url,
   //         headers: {
   //             "api-key":
-  //                 "qsMNjvnWL4aqOATjtjLoaoaRPw2Fec0jf43J5oB02Sv7hMELvfcwnOdzS9FQHOvW",
-  //             "request-ts": "1667549939702",
+  //                 `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+  //             "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
   //             "hash-key":
-  //                 "ffefa32cfa2df9944ce9ad0212cc80169b1f7574fe09631a46756600d33238ba",
+  //                 `${process.env.NEXT_PUBLIC_HASH_KEY}`,
   //         },
   //     };
 
@@ -407,6 +409,7 @@ export const FormProvider = ({ children }: any) => {
 
   const [value, onChange] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [coursesCard, setCoursesCard] = useState([]);
 
   let formData = {
     isLoading,
@@ -428,6 +431,8 @@ export const FormProvider = ({ children }: any) => {
     assessmentForm,
     coursesForm,
     form,
+    coursesCard,
+    setCoursesCard,
   };
 
   return (

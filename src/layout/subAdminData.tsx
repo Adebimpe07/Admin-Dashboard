@@ -1,4 +1,4 @@
-import ProfilePicture from "../assets/avatar.png";
+import ProfilePicture from "../assets/Avatar.png";
 export const SubAdminData = {
   profile_picture: ProfilePicture,
   admin_name: "Avatar Cheese",
