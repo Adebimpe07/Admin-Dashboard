@@ -1,14 +1,12 @@
-import React, { useContext, useEffect, useState }  from 'react'
+import React, { useContext, useEffect, useState } from "react";
 import HeaderApp from "../../src/components/main/body/applicationPage/headerApp";
 import SubAppHeader from "../../src/components/main/body/applicationPage/subAppHeader";
 import All from "../../src/components/main/body/jobPage/job";
 import Body from "../../src/components/main/body/jobPage/body";
 import TableHead from "../../src/components/main/body/applicationPage/tableHead";
-import { ShortList } from "../../src/components/main/body/applicationPage/shortList";
 import dynamic from "next/dynamic";
 import FormContext from "../../src/context/store";
-import ApplicationBody from '../../src/components/main/body/applicationPage/ApplicationBody';
-
+import ApplicationBody from "../../src/components/main/body/applicationPage/ApplicationBody";
 
 const Index = () => {
   return (
@@ -19,5 +17,4 @@ const Index = () => {
   );
 };
 
-
-export default Index
+export default Index;

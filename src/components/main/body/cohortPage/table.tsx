@@ -67,7 +67,6 @@ const CohortTable = ({ CohortData }) => {
         return [
           ...columns,
           {
-            Header: "",
             Cell: ({ row }: any) => <ActionMenu />,
           },
           // {
