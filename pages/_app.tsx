@@ -20,36 +20,39 @@ import { useStore } from "../src/store";
 // axios.defaults.headers.common["REQUEST-TS"] = process.env.REQUEST_TS;
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-  // const [admin, setAdmin] = useStore.admin();
-  // useEffect(() => {
-  //   if (admin) {
-  //     router.push("/");
-  //   } else {
-  //     router.replace("/login");
-  //   }
-  // }, [admin]);
-  return (
-    <QueryClientProvider client={queryClient}>
-      <div className="flex overflow-auto h-screen">
-        <FormProvider>
-          <MantineProvider>
-            <ModalsProvider>
-              {/* <HeaderMain /> */}
-              {router.pathname === "/login" ? (
-                <Component {...pageProps} />
-              ) : (
-                <>
-                  <Aside />
-                  <Component {...pageProps} />
-                </>
-              )}
-            </ModalsProvider>
-          </MantineProvider>
-        </FormProvider>
-      </div>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  );
+    const router = useRouter();
+    // const [admin, setAdmin] = useStore.admin();
+    // useEffect(() => {
+    //   if (admin) {
+    //     router.push("/");
+    //   } else {
+    //     router.replace("/login");
+    //   }
+    // }, [admin]);
+    return (
+        <QueryClientProvider client={queryClient}>
+            <div className="flex overflow-auto h-screen">
+                <FormProvider>
+                    <MantineProvider>
+                        <ModalsProvider>
+                            {/* <HeaderMain /> */}
+                            {router.pathname === "/login" ||
+                            router.pathname.includes(
+                                "/assessments/categories/category/questions"
+                            ) ? (
+                                <Component {...pageProps} />
+                            ) : (
+                                <>
+                                    <Aside />
+                                    <Component {...pageProps} />
+                                </>
+                            )}
+                        </ModalsProvider>
+                    </MantineProvider>
+                </FormProvider>
+            </div>
+            <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+    );
 }
 export default MyApp;

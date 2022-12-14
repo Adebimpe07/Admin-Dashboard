@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import { Button, Modal } from "@mantine/core";
 import { Edit2, Eye, Timer1, Trash } from "iconsax-react";
 import Link from "next/link";
+import { Router, useRouter } from "next/router";
 import React, { useState } from "react";
 import { DeleteCategory } from "./deleteCategory";
 
@@ -31,6 +32,8 @@ const CategoryCardStyle = ({
             component: <DeleteCategory id={id} setDelModal={setDelModal} />,
         });
     }
+
+    const router = useRouter();
 
     return (
         <div>
@@ -71,7 +74,13 @@ const CategoryCardStyle = ({
                         <span>.</span>
                         <p className="text-[12px]">{questions} Questions</p>
                     </div>
-                    <Button className="bg-[#4A4C58] hover:bg-[#4A4C58] text-[fff] items-center justify-center">
+                    <Button
+                        onClick={() =>
+                            router.push(
+                                `/assessments/categories/category/questions/${id}?title=${title}`
+                            )
+                        }
+                        className="bg-[#4A4C58] hover:bg-[#4A4C58] text-[fff] items-center justify-center">
                         <span className="flex items-center gap-2 ">
                             <Eye size="17" color="#fff" />
                             <p className=" text-[12px]">View Questions</p>
