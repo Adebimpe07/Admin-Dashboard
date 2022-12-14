@@ -58,7 +58,7 @@ const courses = () => {
   }, []);
 
   return (
-    <div className="flex flex-col flex-1 bg-[#F9FAFB]">
+    <div className="flex flex-col flex-1 bg-[#E5E5E5]">
       <header className="flex justify-between border-b border-[#DBD9D9] px-5 py-[1.21rem]">
         <h1 className="text-2xl font-semibold text-[#4A4C58]">
           Course Management
