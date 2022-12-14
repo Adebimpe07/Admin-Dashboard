@@ -155,6 +155,8 @@ type formDataProp = {
   setToken: (val: string | ((prevState: string) => string)) => void;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
+  coursesCard: any[];
+  setCoursesCard: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
 export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
@@ -407,6 +409,7 @@ export const FormProvider = ({ children }: any) => {
 
   const [value, onChange] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [coursesCard, setCoursesCard] = useState([]);
 
   let formData = {
     isLoading,
@@ -428,6 +431,8 @@ export const FormProvider = ({ children }: any) => {
     assessmentForm,
     coursesForm,
     form,
+    coursesCard,
+    setCoursesCard,
   };
 
   return (

@@ -1,28 +1,87 @@
-import { Button } from "@mantine/core";
-import axios from "axios";
-import React, { useState } from "react";
-export const DeleteCourse = ({ uid }) => {
+import { Button, Modal } from "@mantine/core";
+import axios, { AxiosRequestConfig } from "axios";
+import React, { useContext, useState } from "react";
+import SuccessModal from "../body/emailTemplate/successModal";
+import { useRouter } from "next/router";
+import CryptoJS, { SHA256 } from "crypto-js";
+import FormContext from "../../../context/store";
+import Loading from "../../loading";
+
+export const DeleteCourse = ({ uid, setDelModal }) => {
+  var key = CryptoJS.enc.Base64.parse(
+    "HmYOKQj7ZzF8cbeswYY9uLqbfMSUS2tI6Pz45zjylOM="
+  );
+  var iv = CryptoJS.enc.Base64.parse("PL2LON7ZBLXq4a32le+FCQ==");
+
   const handleDelete = () => {
-    var config = {
+    const requestTs = String(Date.now());
+
+    var config: AxiosRequestConfig = {
       method: "post",
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/courses/${uid}/delete`,
+      baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+      url: `/api/jobs/courses/${uid}/delete`,
       headers: {
-        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
-        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
-        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
+        "api-key": process.env.NEXT_PUBLIC_APP_API_KEY,
+        "request-ts": requestTs,
+        "hash-key": SHA256(
+          process.env.NEXT_PUBLIC_APP_API_KEY +
+            process.env.NEXT_PUBLIC_SECRET_KEY +
+            requestTs
+        ).toString(CryptoJS.enc.Hex),
       },
     };
 
     axios(config)
       .then(function (response) {
         console.log(response.data);
-        // setOpened(true);
-        // router.push('/courses')
+        setOpened(true);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
+
+  const { setCoursesCard } = useContext(FormContext);
+  const [loading, setLoading] = useState(false);
+
+  const fetchCourses = () => {
+    const requestTs = String(Date.now());
+    setLoading(true);
+    var config: AxiosRequestConfig = {
+      method: "get",
+      baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+      url: `/api/jobs/courses`,
+      headers: {
+        "api-key": process.env.NEXT_PUBLIC_APP_API_KEY,
+        "request-ts": requestTs,
+        "hash-key": SHA256(
+          process.env.NEXT_PUBLIC_APP_API_KEY +
+            process.env.NEXT_PUBLIC_SECRET_KEY +
+            requestTs
+        ).toString(CryptoJS.enc.Hex),
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        // setCoursesCard;
+        setCoursesCard(
+          JSON.parse(
+            CryptoJS.AES.decrypt(response.data.data, key, {
+              iv: iv,
+            }).toString(CryptoJS.enc.Utf8)
+          ).results
+        );
+        setLoading(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+        console.log("error");
+        setLoading(false);
+      });
+  };
+
+  const [opened, setOpened] = useState(false);
 
   return (
     <div className="flex flex-col">
@@ -41,6 +100,34 @@ export const DeleteCourse = ({ uid }) => {
           Delete
         </Button>
       </div>
+      <Modal
+        opened={opened}
+        withCloseButton={false}
+        onClose={() => setOpened(false)}
+        classNames={{
+          root: "m-auto",
+          header: "!mb-0",
+        }}
+        centered
+      >
+        <div className="flex flex-col">
+          <p>Course deleted sucessfully.</p>
+          <Button
+            className="bg-greenButton hover:bg-greenButton w-[10rem] text-sm mx-auto my-4 self-center"
+            onClick={() => {
+              setOpened(false);
+              setDelModal({
+                opened: false,
+                component: null,
+              });
+              fetchCourses();
+            }}
+          >
+            Close
+          </Button>
+        </div>
+      </Modal>
+      <Loading loading={loading} />
     </div>
   );
 };
