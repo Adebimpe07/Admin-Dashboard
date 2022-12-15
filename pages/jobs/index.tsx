@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Body from "../../src/components/main/body/jobPage/body";
 import Header from "../../src/components/main/body/jobPage/header";
-import HeaderJob from "../../src/components/main/body/jobPage/headerJob";
+import HeaderJob from "../../src/components/header/index";
 import All from "../../src/components/main/body/jobPage/job";
 import sha256 from "crypto-js/sha256";
 import CryptoJS from "crypto-js";
@@ -65,7 +65,7 @@ const index = ({ fetchJob }) => {
 
   return (
     <div className="flex-1 bg-mainBg flex flex-col overflow-auto pb-4 h-full">
-      <HeaderJob />
+      <HeaderJob name="Jobs" />
       <Header
         fetchJob={jobList}
         selected={selected}
