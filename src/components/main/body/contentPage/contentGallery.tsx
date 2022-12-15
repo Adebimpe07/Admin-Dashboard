@@ -6,21 +6,17 @@ import {
   Button,
   FileInput,
   Modal,
-  MultiSelect,
   Text,
   Textarea,
   TextInput,
 } from "@mantine/core";
-import { RichTextEditor } from "@mantine/rte";
-import Elipse from "../../../../assets/Ellipse 8.png";
-import Cloud from "../../../../assets/cloud.png";
 import FormContext from "../../../../context/store";
 import axios from 'axios'
 
 const ContentGallery = () => {
   const [opened, setOpened] = useState(false);
   const [files, setFiles] = useState(null)
-  const {token} = useContext(FormContext)
+  const { token } = useContext(FormContext)
 
   const UploadJobModal = () => (
     <Modal
@@ -64,20 +60,20 @@ const ContentGallery = () => {
 
     var config = {
       method: 'post',
-      url: 'http://127.0.0.1:8000/api/v1/album',
-      headers: { 
+      url: 'https://atsbk.afexats.com/api/v1/album',
+      headers: {
         Authorization: `Bearer ${token.access}`
       },
-      data : data
+      data: data
     };
 
     axios(config)
-    .then(function (response) {
-      console.log((response.data));
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      .then(function (response) {
+        console.log((response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (

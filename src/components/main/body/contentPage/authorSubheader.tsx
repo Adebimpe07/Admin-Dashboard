@@ -1,23 +1,7 @@
-import {
-    Button,
-    FileInput,
-    Modal,
-    MultiSelect,
-    Select,
-    Text,
-    Textarea,
-    TextInput,
-} from "@mantine/core";
-import React, { useContext, useState } from "react";
-import Search from "../../../../assets/search.png";
-import Cross from "../../../../assets/Icon.png";
-import Elipse from "../../../../assets/Ellipse 8.png";
-import Cloud from "../../../../assets/cloud.png";
-import { RichTextEditor } from "@mantine/rte";
-import Link from "next/link";
-import FormContext from "../../../../context/store";
 
-const GallerySubheader = () => {
+import React, { useContext, useState } from "react";
+import Link from "next/link";
+const AuthorSubHeader = () => {
     const contentData = [
         {
             name: "News",
@@ -41,10 +25,11 @@ const GallerySubheader = () => {
         <div className="flex justify-between pt-6 mb-6 px-5">
             <div className="flex gap-9">
                 {contentData.map((item, idx) => (
-                    <Link key={idx} href={item.href}>
+                    <Link href={item.href}>
                         <div
+                            key={idx}
                             className={
-                                item.name === "gallery"
+                                item.name === "author"
                                     ? " text-[#4A4C58] cursor-pointer"
                                     : "text-[#948E8E] cursor-pointer"
                             }>
@@ -52,7 +37,7 @@ const GallerySubheader = () => {
 
                             <div
                                 className={
-                                    item.name.toLocaleLowerCase() === "gallery"
+                                    item.name.toLocaleLowerCase() === "author"
                                         ? "bg-[#30AD74] text-[#4A4C58] w-7 h-1 mx-auto border rounded-md mt-2"
                                         : "w-7 h-1 mx-auto border rounded-md mt-2.5"
                                 }></div>
@@ -64,4 +49,4 @@ const GallerySubheader = () => {
     );
 };
 
-export default GallerySubheader;
+export default AuthorSubHeader;
