@@ -10,6 +10,7 @@ import FormContext from "../../../../context/store";
 import { useEffect } from "react";
 import CryptoJS, { SHA256 } from "crypto-js";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const Editor = dynamic(() => import("../editor"), { ssr: false });
 const key = CryptoJS.enc.Base64.parse(
@@ -20,6 +21,7 @@ const iv = CryptoJS.enc.Base64.parse("gNyBAsNdWQEwHvbAm8g5Jg==");
 const createQuestions = () => {
     const { categoryID, questionsForm, onChange, questionType } =
         useContext(FormContext);
+    const router = useRouter();
 
     const addNewQuestion = () => {
         console.log(questionsForm.values);
@@ -61,11 +63,11 @@ const createQuestions = () => {
             <Header />
             <div className="flex-1 flex flex-col">
                 <div className="flex justify-between items-center px-4">
-                    <div className="flex items-center gap-1 py-4">
+                    <div
+                        onClick={() => router.back()}
+                        className="flex cursor-pointer items-center gap-1 py-4">
                         <ArrowLeft2 size="17" color="#000" />
-                        <Link href="/assessments/categories/create_category">
-                            <h1 className="cursor-pointer">Back</h1>
-                        </Link>
+                        <h1>Back</h1>
                     </div>
                     <div className="self-end flex gap-3">
                         <Button

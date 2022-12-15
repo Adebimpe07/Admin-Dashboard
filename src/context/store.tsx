@@ -373,7 +373,7 @@ export const FormProvider = ({ children }: any) => {
         initialValues: {
             question_text: "",
             question_type: "",
-            question_category: "Real",
+            question_category: "",
             question_hint: "face your book",
             choices: Array(4).fill({
                 choice_text: "",
@@ -385,7 +385,7 @@ export const FormProvider = ({ children }: any) => {
         initialValues: {
             question_text: "",
             question_type: "",
-            question_category: "Real",
+            question_category: "",
             question_hint: "face your book",
         },
     });

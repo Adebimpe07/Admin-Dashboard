@@ -1,12 +1,13 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MockQuestionFooter from "../../../../../src/components/main/assessment/category/QuestionFooter";
 import MockQuestionHeader from "../../../../../src/components/main/assessment/category/QuestionHeader";
 import MockQuestionInfoBar from "../../../../../src/components/main/assessment/category/QuestionInfobar";
 import QuestionNumbers from "../../../../../src/components/main/assessment/category/QuestionNumbers";
 import axios from "axios";
 import CryptoJS, { SHA256 } from "crypto-js";
+import FormContext from "../../../../../src/context/store";
 
 const MockTestQuestions = dynamic(
     () =>
@@ -26,6 +27,8 @@ const index = () => {
     const [totalQuestions, setTotalQuestions] = useState(0);
     const [questionNumber, setQuestionNumber] = useState(0);
     const [categoryQuestions, setCategoryQuestions] = useState([]);
+
+    const { setCategoryID } = useContext(FormContext);
 
     useEffect(() => {
         console.log(router.query.title);
@@ -62,6 +65,7 @@ const index = () => {
                     console.log(err);
                 });
         }
+        setCategoryID(String(router.query.categoryID));
     }, [router.query.categoryID]);
 
     return (
