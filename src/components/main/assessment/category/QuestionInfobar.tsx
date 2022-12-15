@@ -29,7 +29,7 @@ const AddQuestionModal = ({ opened, setOpened }) => {
                     label="Select Question Category"
                     data={[
                         { label: "Real", value: "Real" },
-                        { label: "Dummy", value: "Dummy" },
+                        { label: "Practice", value: "Practice" },
                     ]}
                 />
                 <div className="grid grid-cols-4 gap-2 items-center">
