@@ -7,8 +7,13 @@ import { SelectQuestionData } from "../../../../layout/assessmentData";
 import QuestionTypeCards from "./questionTypeCards";
 
 const AddQuestionModal = ({ opened, setOpened }) => {
-    const { questionsForm, categoryID, essayForm, setQuestionType } =
-        useContext(FormContext);
+    const {
+        questionsForm,
+        categoryID,
+        essayForm,
+        setQuestionType,
+        setQuestionCategory,
+    } = useContext(FormContext);
     const router = useRouter();
 
     useEffect(() => {
@@ -52,6 +57,10 @@ const AddQuestionModal = ({ opened, setOpened }) => {
                                                 "You need to select a category to continue"
                                             );
                                         } else {
+                                            setQuestionCategory(
+                                                questionsForm.values
+                                                    .question_category
+                                            );
                                             router.push(href);
                                             console.log(essayForm.values);
                                         }

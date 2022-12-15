@@ -178,6 +178,8 @@ type formDataProp = {
     >;
     categoryCard: any[];
     setCategoryCard: React.Dispatch<React.SetStateAction<any[]>>;
+    questionCategory: string;
+    setQuestionCategory: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
@@ -375,7 +377,7 @@ export const FormProvider = ({ children }: any) => {
         initialValues: {
             question_text: "",
             question_type: "",
-            question_category: "",
+            question_category: "Real",
             question_hint: "face your book",
             choices: Array(4).fill({
                 choice_text: "",
@@ -422,6 +424,10 @@ export const FormProvider = ({ children }: any) => {
         key: "questionType",
         defaultValue: "",
     });
+    const [questionCategory, setQuestionCategory] = useSessionStorage({
+        key: "questionCategory",
+        defaultValue: "",
+    });
 
     const [categoryID, setCategoryID] = useSessionStorage({
         key: "categoryID",
@@ -466,6 +472,8 @@ export const FormProvider = ({ children }: any) => {
         essayForm,
         categoryCard,
         setCategoryCard,
+        questionCategory,
+        setQuestionCategory,
     };
 
     return (

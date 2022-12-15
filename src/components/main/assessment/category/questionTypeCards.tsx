@@ -14,6 +14,7 @@ const QuestionTypeCards = () => {
         questionsForm,
         setCategoryID,
         setQuestionType,
+        setQuestionCategory,
         essayForm,
         questionType,
         categoryForm,
@@ -64,8 +65,10 @@ const QuestionTypeCards = () => {
                     essayForm.values.question_type = "Open-ended";
                     // TODO: ADD QUESTION CATEGORY DROPDOWN
                     // TODO: ADD QUESTION CATEGORY DROPDOWN
+                    setQuestionCategory("Real");
                 } else if (title === "Multiple Choice") {
                     setQuestionType("Multi-choice");
+                    setQuestionCategory("Real");
                     questionsForm.values.question_type = "Multi-choice";
                 }
                 setLoading(false);

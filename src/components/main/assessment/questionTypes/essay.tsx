@@ -16,7 +16,7 @@ const key = CryptoJS.enc.Base64.parse(
 const iv = CryptoJS.enc.Base64.parse("gNyBAsNdWQEwHvbAm8g5Jg==");
 
 const createQuestions = () => {
-    const { categoryID, essayForm, onChange, questionType } =
+    const { categoryID, essayForm, onChange, questionType, questionCategory } =
         useContext(FormContext);
 
     const router = useRouter();
@@ -42,6 +42,7 @@ const createQuestions = () => {
                     JSON.stringify({
                         ...essayForm.values,
                         question_type: questionType,
+                        question_category: questionCategory,
                     }),
                     key,
                     {
