@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import CryptoJS, { SHA256 } from "crypto-js";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Success from "../../../success";
 
 const Editor = dynamic(() => import("../editor"), { ssr: false });
 const key = CryptoJS.enc.Base64.parse(
@@ -27,15 +28,10 @@ const createQuestions = () => {
         questionCategory,
     } = useContext(FormContext);
     const router = useRouter();
+    const [opened, setOpened] = useState(false);
+    const [message, setMessage] = useState("");
 
     const addNewQuestion = () => {
-        console.log(questionCategory);
-        console.log(questionType);
-        console.log({
-            ...questionsForm.values,
-            question_type: questionType,
-            question_category: String(questionCategory),
-        });
         let requestTs = String(Date.now());
         axios({
             url: `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/${categoryID}/questions`,
@@ -65,11 +61,23 @@ const createQuestions = () => {
             },
         })
             .then(({ data }) => {
+                setMessage("Success");
+                setOpened(true);
+                setTimeout(() => {
+                    setOpened(false);
+                }, 1000);
                 console.log(data);
                 questionsForm.reset();
                 onChange("");
             })
-            .catch((e) => console.log(e));
+            .catch((e) => {
+                console.log(e);
+                setMessage("Failed!!!, Please try again");
+                setOpened(true);
+                setTimeout(() => {
+                    setOpened(false);
+                }, 1000);
+            });
     };
 
     return (
@@ -105,6 +113,7 @@ const createQuestions = () => {
                     <Options />
                 </div>
             </div>
+            <Success opened={opened} message={message} />
         </div>
     );
 };

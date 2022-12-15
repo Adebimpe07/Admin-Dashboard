@@ -3,7 +3,7 @@ import React from "react";
 
 const Success = ({ message, opened }) => {
     return (
-        <Modal opened={opened} onClose={() => {}}>
+        <Modal opened={opened} withCloseButton={false} onClose={() => {}}>
             {message}
         </Modal>
     );

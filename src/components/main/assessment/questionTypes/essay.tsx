@@ -8,6 +8,7 @@ import FormContext from "../../../../context/store";
 import axios from "axios";
 import CryptoJS, { SHA256 } from "crypto-js";
 import { useRouter } from "next/router";
+import Success from "../../../success";
 
 const Editor = dynamic(() => import("../editor"), { ssr: false });
 const key = CryptoJS.enc.Base64.parse(
@@ -20,6 +21,8 @@ const createQuestions = () => {
         useContext(FormContext);
 
     const router = useRouter();
+    const [opened, setOpened] = useState(false);
+    const [message, setMessage] = useState("");
 
     const addNewQuestion = () => {
         console.log(essayForm.values);
@@ -50,11 +53,25 @@ const createQuestions = () => {
                     }
                 ).toString(),
             },
-        }).then(({ data }) => {
-            console.log(data);
-            essayForm.reset();
-            onChange("");
-        });
+        })
+            .then(({ data }) => {
+                setMessage("Success");
+                setOpened(true);
+                setTimeout(() => {
+                    setOpened(false);
+                }, 1000);
+                console.log(data);
+                essayForm.reset();
+                onChange("");
+            })
+            .catch((e) => {
+                console.log(e);
+                setMessage("Failed!!!, Please try again");
+                setOpened(true);
+                setTimeout(() => {
+                    setOpened(false);
+                }, 1000);
+            });
     };
 
     return (
@@ -86,6 +103,7 @@ const createQuestions = () => {
                     <Editor form={essayForm} />
                 </div>
             </div>
+            <Success opened={opened} message={message} />
         </div>
     );
 };
