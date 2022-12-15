@@ -27,7 +27,7 @@ export const AssesmentInvitationModal = ({ rowdetail, setSubAdminModal }) => {
             const requestTs = String(Date.now());
             var config: AxiosRequestConfig = {
                 method: "post",
-                url: rowdetail.url + `/set-invited`,
+                url: rowdetail.url + `/set-invited-for-assessment`,
                 headers: {
                     "api-key": process.env.NEXT_PUBLIC_APP_API_KEY,
                     "request-ts": requestTs,
