@@ -19,12 +19,23 @@ const key = CryptoJS.enc.Base64.parse(
 const iv = CryptoJS.enc.Base64.parse("gNyBAsNdWQEwHvbAm8g5Jg==");
 
 const createQuestions = () => {
-    const { categoryID, questionsForm, onChange, questionType } =
-        useContext(FormContext);
+    const {
+        categoryID,
+        questionsForm,
+        onChange,
+        questionType,
+        questionCategory,
+    } = useContext(FormContext);
     const router = useRouter();
 
     const addNewQuestion = () => {
-        console.log(questionsForm.values);
+        console.log(questionCategory);
+        console.log(questionType);
+        console.log({
+            ...questionsForm.values,
+            question_type: questionType,
+            question_category: String(questionCategory),
+        });
         let requestTs = String(Date.now());
         axios({
             url: `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/${categoryID}/questions`,
@@ -44,6 +55,7 @@ const createQuestions = () => {
                     JSON.stringify({
                         ...questionsForm.values,
                         question_type: questionType,
+                        question_category: questionCategory,
                     }),
                     key,
                     {
@@ -51,11 +63,13 @@ const createQuestions = () => {
                     }
                 ).toString(),
             },
-        }).then(({ data }) => {
-            console.log(data);
-            questionsForm.reset();
-            onChange("");
-        });
+        })
+            .then(({ data }) => {
+                console.log(data);
+                questionsForm.reset();
+                onChange("");
+            })
+            .catch((e) => console.log(e));
     };
 
     return (
