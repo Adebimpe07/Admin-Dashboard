@@ -52,7 +52,7 @@ const AddQuestionModal = ({ opened, setOpened }) => {
                                                 "You need to select a category to continue"
                                             );
                                         } else {
-                                            // router.push(href);
+                                            router.push(href);
                                             console.log(essayForm.values);
                                         }
                                     }}
