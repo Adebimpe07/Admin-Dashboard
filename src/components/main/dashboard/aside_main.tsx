@@ -1,10 +1,15 @@
 import { ArrowRight2, Eye } from "iconsax-react";
 import { Icon } from "@iconify/react";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
-import { AsideMainData } from "../../../layout/main";
+// import { AsideMainData } from "../../../layout/main";
 import { Duration } from "../../../layout/main";
 import index from "../../../../pages";
+import Link from "next/link";
+import sha256 from "crypto-js/sha256";
+import axios, { AxiosRequestConfig } from "axios";
+import CryptoJS from "crypto-js";
+import FormContext from "../../../context/store";
 
 type asideprops = {
   title: string;
@@ -38,6 +43,8 @@ export const Durationtime = () => {
 };
 
 const AsideBar = ({ title, subtitle, views, timestamp }: asideprops) => {
+  // const { jobDetails, setJobDetails } = useContext(FormContext);
+
   return (
     <div className="flex flex-col border-b border-[#DADADD] overflow-auto">
       <div className="flex flex-col gap-1 py-2">
@@ -62,6 +69,56 @@ const AsideBar = ({ title, subtitle, views, timestamp }: asideprops) => {
 };
 
 export const Aside_main = () => {
+  const [AsideMainData, setAsideMainData] = useState([]);
+
+  var key = CryptoJS.enc.Base64.parse(
+    "HmYOKQj7ZzF8cbeswYY9uLqbfMSUS2tI6Pz45zjylOM="
+  );
+  var iv = CryptoJS.enc.Base64.parse("PL2LON7ZBLXq4a32le+FCQ==");
+  const fetchJobs = () => {
+    const requestTs = String(Date.now());
+    var config: AxiosRequestConfig = {
+      method: "get",
+      baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+      url: `/api/jobs/today`,
+      headers: {
+        "api-key": process.env.NEXT_PUBLIC_APP_API_KEY,
+        "request-ts": requestTs,
+        "hash-key": sha256(
+          process.env.NEXT_PUBLIC_APP_API_KEY +
+            process.env.NEXT_PUBLIC_SECRET_KEY +
+            requestTs
+        ).toString(CryptoJS.enc.Hex),
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(
+          response.data
+          // JSON.parse(
+          //   CryptoJS.AES.decrypt(response.data.data, key, {
+          //     iv: iv,
+          //   }).toString(CryptoJS.enc.Utf8)
+          // )
+        );
+        // setJobDetails(
+        //   JSON.parse(
+        //     CryptoJS.AES.decrypt(response.data.data, key, {
+        //       iv: iv,
+        //     }).toString(CryptoJS.enc.Utf8)
+        //   ).results
+        // );
+      })
+      .catch(function (error) {
+        console.log(error);
+        console.log("error");
+      });
+  };
+  useEffect(() => {
+    fetchJobs();
+  }, []);
+
   return (
     <div className="relative overflow-auto px-6 my-2 rounded-lg w-[376px] mx-5  bg-white">
       <div className="sticky top-0 bg-white">
@@ -83,7 +140,9 @@ export const Aside_main = () => {
         );
       })}
       <div className="flex justify-between py-2">
-        <p className="text-[#A1A1AA] text-sm font-medium">SEE ALL JOBS</p>
+        <Link href="/jobs">
+          <p className="text-[#A1A1AA] text-sm font-medium">SEE ALL JOBS</p>
+        </Link>
         <ArrowRight2 size="17" color="#A1A1AA" variant="TwoTone" />
       </div>
     </div>
