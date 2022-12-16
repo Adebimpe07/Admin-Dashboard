@@ -21,7 +21,7 @@ export const Durationtime = () => {
   const [tab, setTab] = useState(0);
   return (
     <div>
-      <div className="flex gap-6 text-[#18181B] text-xs my-4">
+      <div className="flex justify-between gap-6 text-[#18181B] text-xs my-4">
         {Duration.map((item, index) => {
           return (
             <div
@@ -94,21 +94,7 @@ export const Aside_main = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(
-          response.data
-          // JSON.parse(
-          //   CryptoJS.AES.decrypt(response.data.data, key, {
-          //     iv: iv,
-          //   }).toString(CryptoJS.enc.Utf8)
-          // )
-        );
-        // setJobDetails(
-        //   JSON.parse(
-        //     CryptoJS.AES.decrypt(response.data.data, key, {
-        //       iv: iv,
-        //     }).toString(CryptoJS.enc.Utf8)
-        //   ).results
-        // );
+        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -120,7 +106,7 @@ export const Aside_main = () => {
   }, []);
 
   return (
-    <div className="relative overflow-auto px-6 my-2 rounded-lg w-[376px] mx-5  bg-white">
+    <div className="relative overflow-auto px-6 my-2 rounded-lg mx-5  bg-white">
       <div className="sticky top-0 bg-white">
         <h1 className="text-[#18181B] text-base font-semibold pt-2">Jobs</h1>
         <p className="text-[#71717A] font-medium text-sm py-2">
