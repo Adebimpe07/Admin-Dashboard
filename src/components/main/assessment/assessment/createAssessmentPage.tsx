@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ArrowLeft2 } from "iconsax-react";
 import Link from "next/link";
 import { Button, Select, Textarea, TextInput } from "@mantine/core";
-import Header from "../categoryCreate/header";
+import Header from "../../../header/index";
 import axios from "axios";
 import FormContext from "../../../../context/store";
 import { useRouter } from "next/router";

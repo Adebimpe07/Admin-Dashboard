@@ -7,16 +7,15 @@ import { StaticImageData } from "next/image";
 import Admin from "../admin/adminActivities";
 import { ActionIcon, Menu, Modal, TextInput } from "@mantine/core";
 import { Edit2, SearchNormal1 } from "iconsax-react";
-import { SubAdminData } from "../../../layout/adminData";
 import { Icon } from "@iconify/react";
 import { EditSubAdminModal } from "./editAdminModal";
 import { DeleteSubAdminModal } from "./deleteAdmin";
-import profile from "../notification_ProfilePicture";
 import axios from "axios";
 import FormContext from "../../../context/store";
 import { useRouter } from "next/router";
 import { useStore } from "../../../store";
 import CryptoJS from "crypto-js";
+import Header from "../../header/index";
 
 const MenuDrop = () => {
   const initialValues: { opened: boolean; component: React.ReactNode } = {
@@ -130,18 +129,7 @@ function SubAdminCard({
     </div>
   );
 }
-
 const admin = () => {
-  type headerprops = {
-    notificationCount: string;
-    adminProfilePicture: StaticImageData;
-  };
-
-  const HeaderData: headerprops = {
-    notificationCount: "2",
-    adminProfilePicture: ProfilePicture,
-  };
-
   const [value, setValue] = useState("");
   const [SubAdminData, setSubAdminData] = useState([]);
   const { token } = useContext(FormContext);
@@ -181,16 +169,8 @@ const admin = () => {
   }, []);
 
   return (
-    <div className="pt-6 h-screen flex flex-col flex-1 bg-[#e5e5e5]">
-      <header className="flex justify-between border-b border-[#DBD9D9] px-4">
-        <h1 className="text-2xl font-semibold text-[#4A4C58] pb-[1.41rem]">
-          Admin
-        </h1>
-        <div className="flex gap-2 items-center">
-          <NotificationDrop />
-          <img width="40" src={AdminPic.src} alt="" />
-        </div>
-      </header>
+    <div className="h-screen flex flex-col flex-1 bg-[#e5e5e5]">
+      <Header name="Admin" />
       <main className="bg-[#fff] mx-10 my-4 rounded-lg px-6 pt-6 grid grid-cols-2 gap-8 overflow-auto">
         <div className="px-6 flex flex-col overflow-auto">
           <div className="flex flex-col items-center bg-[#fff]">

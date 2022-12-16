@@ -9,7 +9,7 @@ import {
 import RichTextEditor from "@mantine/rte";
 import { IconUpload } from "@tabler/icons";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import FormContext from "../../../../context/store";
 
 export const EditModal = ({ rowdetail, setSubAdminEditModal }) => {
@@ -17,6 +17,39 @@ export const EditModal = ({ rowdetail, setSubAdminEditModal }) => {
   const [value, setValue] = useState("");
   const { form } = useContext(FormContext);
   const [opened, setOpened] = useState(false);
+
+  useEffect(() => {
+    populateInput()
+  }, [])
+
+
+  const populateInput = () => {
+    
+    const { form } = useContext(FormContext);
+
+    var config = {
+      method: "get",
+      url: rowdetail.url,
+      headers: {
+        "api-key":
+          `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
+        "hash-key":
+          `${process.env.NEXT_PUBLIC_HASH_KEY}`,
+      },
+    };
+    axios(config)
+      .then(function (response) {
+        form.values.type = response.data.data.type;
+        form.values.subject = response.data.data.subject;
+        form.values.body = response.data.data.body;
+
+      })
+      .catch(function (error) {
+        console.log(error);
+
+      });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -3,7 +3,7 @@ import { useForm } from "@mantine/form";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
-import SupportHeader from "../../src/components/main/body/supportPage/supportHeader";
+import Header from "../../src/components/header";
 
 const FaqsSubHeader = dynamic(
     () => import("../../src/components/main/body/supportPage/faqsSubHeader"),
@@ -29,6 +29,7 @@ const Faqs = () => {
         };
         axios(config)
             .then((response) => {
+                console.log(response.data);
                 // setQuestions(response.data.data.results)
                 for (let i = 0; i < response.data.data.results.length; i++) {
                     form.values.faqs[i].question =
@@ -37,7 +38,9 @@ const Faqs = () => {
                         response.data.data.results[i].answer;
                 }
             })
-            .catch((error) => error);
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     useEffect(() => {
@@ -57,15 +60,15 @@ const Faqs = () => {
 
         axios(config)
             .then(function (response) {
-                return response.data;
+                console.log(response.data);
             })
             .catch(function (error) {
-                return error;
+                console.log(error);
             });
     };
     return (
         <div className="flex-1 bg-mainBg flex flex-col overflow-auto  gap-8 h-full">
-            <SupportHeader />
+            <Header name="Support" />
             <FaqsSubHeader />
             <section className="px-12 flex flex-col py-8 gap-4 mx-6 bg-white">
                 <h1 className="text-[#4A4C58] text-[1.5rem] leading-8">

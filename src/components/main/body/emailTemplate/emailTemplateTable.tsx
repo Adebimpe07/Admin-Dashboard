@@ -96,41 +96,39 @@ const EmailTemplateTable = ({ id }) => {
         [emailData]
     );
 
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        page,
-        nextPage,
-        previousPage,
-        canNextPage,
-        canPreviousPage,
-        pageOptions,
-        gotoPage,
-        pageCount,
-        state,
-        prepareRow,
-        selectedFlatRows,
-    } = useTable(
-        {
-            columns: EmailColumn,
-            data: Email,
-        },
-        usePagination,
-        useRowSelect,
-        (hooks) => {
-            hooks.visibleColumns.push((columns): any => {
-                return [
-                    ...columns,
-                    {
-                        Cell: ({ row }: any) => (
-                            <ActionMenuEmail row={row} id={id} />
-                        ),
-                    },
-                ];
-            });
-        }
-    );
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    gotoPage,
+    pageCount,
+    state,
+    prepareRow,
+    selectedFlatRows,
+  } = useTable(
+    {
+      columns: EmailColumn,
+      data: Email,
+    },
+    usePagination,
+    useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((columns): any => {
+        return [
+          ...columns,
+          {
+            Cell: ({ row }: any) => <ActionMenuEmail row={row}/>,
+          },
+        ];
+      });
+    }
+  );
 
     const { pageIndex } = state;
 

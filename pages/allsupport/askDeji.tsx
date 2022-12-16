@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import React from "react";
-import SupportHeader from "../../src/components/main/body/supportPage/supportHeader";
+import Header from "../../src/components/header/index";
 
 const DejiTable = dynamic(
   () => import("../../src/components/main/body/supportPage/dejiTable"),
@@ -14,7 +14,7 @@ const DejiSubHeader = dynamic(
 const AskDeji = () => {
   return (
     <div className="flex-1 bg-mainBg flex flex-col overflow-auto  h-full">
-      <SupportHeader />
+      <Header name="Support" />
       <DejiSubHeader />
       <DejiTable />
     </div>

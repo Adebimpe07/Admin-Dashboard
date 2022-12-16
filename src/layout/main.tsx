@@ -57,7 +57,7 @@ export const AsideMainData = [
   },
 ];
 type durationprops = Array<string>;
-export const Duration: durationprops = ["1 wk", "2 wk", "3 wk", "4 wk"];
+export const Duration: durationprops = ["All", "2 weeks", "7 days", "24 hours"];
 
 type chartprops = Array<string>;
 export const Chart: chartprops = ["All", "2 weeks", "7 days", "24 hours"];

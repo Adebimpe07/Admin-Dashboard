@@ -9,14 +9,14 @@ import { IconUpload } from "@tabler/icons";
 import axios from "axios";
 import { useState } from "react";
 
-export const DeleteModal = ({ rowdetail, setSubAdminDelModal, id }) => {
+export const DeleteModal = ({ rowdetail, setSubAdminDelModal }) => {
   const [checked, setChecked] = useState(false);
 
   const handleDelete = (e) => {
     e.preventDefault();
     var config = {
       method: "DELETE",
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications/email-templates/${id}/toggle-delete`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications/email-templates/${rowdetail.id}/toggle-delete`,
       headers: {
         "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
         "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
