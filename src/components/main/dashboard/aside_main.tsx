@@ -21,7 +21,7 @@ export const Durationtime = () => {
   const [tab, setTab] = useState(0);
   return (
     <div>
-      <div className="flex justify-between gap-6 text-[#18181B] text-xs my-4">
+      <div className="flex gap-6 text-[#18181B] text-xs my-4">
         {Duration.map((item, index) => {
           return (
             <div
