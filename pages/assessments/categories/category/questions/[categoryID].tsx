@@ -31,8 +31,6 @@ const index = () => {
     const { setCategoryID } = useContext(FormContext);
 
     useEffect(() => {
-        console.log(router.query.title);
-        console.log(router.query.categoryID);
         if (router.query.categoryID) {
             let requestTs = String(Date.now());
             setLoading(true);
@@ -57,12 +55,11 @@ const index = () => {
                             iv: iv,
                         }).toString(CryptoJS.enc.Utf8)
                     );
-                    console.log(decrypted_data.results);
                     setCategoryQuestions(decrypted_data.results);
                     setTotalQuestions(decrypted_data.results.length);
                 })
                 .catch((err) => {
-                    console.log(err);
+                    return err;
                 });
         }
         setCategoryID(String(router.query.categoryID));

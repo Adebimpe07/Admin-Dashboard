@@ -65,12 +65,10 @@ const HeaderMain = () => {
                         iv: iv,
                     }).toString(CryptoJS.enc.Utf8)
                 );
-                // console.log(decrypted_data);
                 setCategoryCard(decrypted_data.results);
                 setLoading(false);
             })
             .catch(function (error) {
-                console.log(error);
                 setLoading(false);
             });
     };
