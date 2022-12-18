@@ -11,6 +11,14 @@ const Album = () => {
   var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
   var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
 
+  const decrypt = (element: any) => {
+    return CryptoJS.AES.decrypt(element, key, { iv: iv }).toString(
+      CryptoJS.enc.Utf8
+    )
+      ;
+  };
+
+
   const setAlbum = () => {
     axios({
       baseURL: "https://atsbk.afexats.com/api/v1/album",
@@ -37,9 +45,9 @@ const Album = () => {
       <div className='grid grid-cols-4 gap-x-2 gap-y-4'>
         {albumData.map(({ name, description, url }: any, idx: number) => (
           <AlbumList
-            url={CryptoJS.AES.decrypt(url, key, { iv: iv }).toString(CryptoJS.enc.Utf8)}
-            name={CryptoJS.AES.decrypt(name, key, { iv: iv }).toString(CryptoJS.enc.Utf8)}
-            description={CryptoJS.AES.decrypt(description, key, { iv: iv }).toString(CryptoJS.enc.Utf8)}
+            url={decrypt(url)}
+            name={decrypt(name)}
+            description={decrypt(description)}
             key={idx}
           />
         ))}

@@ -1,9 +1,7 @@
-import { ClassNames } from "@emotion/react";
 import React from "react";
 import { Notification } from "iconsax-react";
 import { StaticImageData } from "next/image";
 import ProfilePicture from "../../../../assets/PM_Tosin.png";
-import {SideData} from "../../../../layout/sideData";
 //  notification: <Notification size="32" color="#FF8A65" variant="Outline" />,
 type headerprops = {
   adminName: string;

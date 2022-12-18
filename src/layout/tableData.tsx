@@ -359,27 +359,27 @@ export const categoryColumn: Array<
     delete: ReactNode;
   }>
 > = [
-  {
-    Header: "Category Name",
-    accessor: "name",
-  },
-  {
-    Header: "Questions",
-    accessor: "question",
-  },
-  {
-    Header: "Time",
-    accessor: "time",
-  },
-  {
-    Header: "",
-    accessor: "edit",
-  },
-  {
-    Header: "",
-    accessor: "delete",
-  },
-];
+    {
+      Header: "Category Name",
+      accessor: "name",
+    },
+    {
+      Header: "Questions",
+      accessor: "question",
+    },
+    {
+      Header: "Time",
+      accessor: "time",
+    },
+    {
+      Header: "",
+      accessor: "edit",
+    },
+    {
+      Header: "",
+      accessor: "delete",
+    },
+  ];
 
 export const atsTestimonialColumn = [
   {
@@ -556,15 +556,11 @@ export const newsLetterColumn = [
     accessor: "subject",
   },
   {
+    Header: "Title",
+    accessor: "title",
+  },
+  {
     Header: "Message",
     accessor: "trunc_content",
-  },
-  {
-    Header: "Action",
-    accessor: "popmodal",
-  },
-  {
-    Header: "",
-    accessor: "send",
   },
 ];

@@ -4,6 +4,28 @@ import axios from "axios";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import SupportHeader from "../../src/components/main/body/supportPage/supportHeader";
+import CryptoJS from "crypto-js";
+
+var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
+
+const encrypt = (element: any) => {
+  return CryptoJS.AES.encrypt(
+    (element),
+    key,
+    {
+      iv: iv,
+    }
+  ).toString()
+}
+
+const decrypt = (element: any) => {
+  return CryptoJS.AES.decrypt(element, key, { iv: iv }).toString(
+    CryptoJS.enc.Utf8
+  )
+    ;
+};
+
 
 
 const FaqsSubHeader = dynamic(
@@ -31,7 +53,7 @@ const Faqs = () => {
     axios(config)
       .then((response) => {
         console.log((response.data));
-        // setQuestions(response.data.data.results)
+        setQuestions(response.data.data.results)
         for (let i = 0; i < response.data.data.results.length; i++) {
           form.values.faqs[i].question = response.data.data.results[i].question
           form.values.faqs[i].answer = response.data.data.results[i].answer
