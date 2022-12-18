@@ -28,7 +28,7 @@ const ReadMoreContent = ({row}) => {
           View and reply customer’s message
         </h1>
         <Textarea label="Message" minRows={5} className="" />
-         <Textarea label="Reply Message" minRows={5} className="" />
+        <Textarea label="Reply Message" minRows={5} className="" />
       </Text>
       <Button
         fullWidth
