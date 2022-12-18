@@ -151,8 +151,19 @@ type formDataProp = {
     // });
     admin: any;
     setAdmin: (val: string | ((prevState: string) => string)) => void;
-    token: any;
-    setToken: (val: string | ((prevState: string) => string)) => void;
+    token: { access: string; refresh: string };
+    setToken: (
+        val:
+            | {
+                  access: string;
+                  refresh: string;
+              }
+            | ((prevState: { access: string; refresh: string }) => {
+                  access: string;
+                  refresh: string;
+              })
+    ) => void;
+
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
     isLoading: boolean;
     coursesCard: any[];
@@ -447,7 +458,7 @@ export const FormProvider = ({ children }: any) => {
     });
     const [token, setToken] = useSessionStorage({
         key: "token",
-        defaultValue: "",
+        defaultValue: { access: "", refresh: "" },
     });
 
     const [value, onChange] = useState("");
