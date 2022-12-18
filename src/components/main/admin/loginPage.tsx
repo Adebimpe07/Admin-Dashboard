@@ -61,7 +61,7 @@ const loginPage = () => {
                     )
                 );
                 setLoading(false);
-                router.push("/");
+                router.back();
             })
             .catch(function (error) {
                 console.log(error);
