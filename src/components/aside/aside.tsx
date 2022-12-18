@@ -123,7 +123,7 @@ const Sidebar = () => {
                                     <div
                                         key={index}
                                         className={
-                                            item.href === pathname
+                                            item.href === pathname && selected === item.heading
                                                 ? "menuItem active flex items-center gap-2"
                                                 : "menuItem flex items-center gap-2"
                                         }
@@ -148,7 +148,7 @@ const Sidebar = () => {
                                                   <div
                                                       key={id}
                                                       className={
-                                                          pathname === el.href
+                                                          pathname === el.href && selected === item.heading
                                                               ? "menuItem active flex items-center gap-2 ml-4"
                                                               : "menuItem flex items-center gap-2 ml-4"
                                                       }
@@ -178,7 +178,7 @@ const Sidebar = () => {
                                 <div
                                     key={index}
                                     className={
-                                        selected === item.heading
+                                        pathname === item.href && selected === item.heading
                                             ? "menuItem flex active items-center gap-2"
                                             : "menuItem flex items-center gap-2"
                                     }

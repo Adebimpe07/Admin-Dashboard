@@ -42,7 +42,6 @@ const Faqs = () => {
     });
     const [questions, setQuestions] = useState([]);
     const access = JSON.parse(sessionStorage.getItem("token")).access;
-    console.log(access)
 
     const fetchFaqs = () => {
         var config = {
@@ -88,7 +87,7 @@ const Faqs = () => {
             url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/support/FAQ-list-create/`,
             headers: {
                 "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY_1}`,
-                "hash-key": `${process.env.NEXT_PUBLIC_APP_HASH_KEY_1}`,
+                "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY_1}`,
                 "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS_1}`,
                 Authorization: `Bearer ${access}`
             },
