@@ -75,17 +75,23 @@ const Faqs = () => {
         fetchFaqs();
     }, []);
 
-    const saveFaqs = () => {
+    const loopAndSend = () => {
+        form.values.faqs.map(item => {
+            saveFaqs({question: encrypt(item.question), answer: encrypt(item.answer)})
+        })
+    }
+
+    const saveFaqs = (data: {question: string, answer: string}) => {
         var config = {
             method: "post",
             url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/support/FAQ-list-create/`,
             headers: {
                 "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY_1}`,
-                "hash-key": `${process.env.NEXT_PUBLIC_APP_HASH_KEY_1}`,
+                "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY_1}`,
                 "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS_1}`,
                 Authorization: `Bearer ${access}`
             },
-            // data: {}
+            data: data
         };
 
         axios(config)
@@ -171,7 +177,7 @@ const Faqs = () => {
                     </div>
                 </article>
                 <button
-                    onClick={saveFaqs}
+                    onClick={loopAndSend}
                     className="w-full align-middle bg-green-400 border rounded-xl text-white py-3">
                     save
                 </button>
