@@ -1,40 +1,19 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useTable, useRowSelect, usePagination } from "react-table";
 import { cohortColumn } from "../../../../layout/tableData";
-// import Cohort from "../../../../layout/cohortData.json";
 import ActionMenuCourses from "../actionButton/ActionMenuCourses";
 import ActionMenuEdit from "../actionButton/ActionMenuEdit";
 import ActionMenuDelete from "../actionButton/ActionMenuDelete";
 import axios from "axios";
 import ActionMenuStartDate from "../actionButton/ActionMenuStartDate";
 import ActionMenuEndDate from "../actionButton/ActionMenuEndDate";
+import sha256 from "crypto-js/sha256";
+import CryptoJS from "crypto-js";
+import Loading from "../../../loading";
+import ActionMenu from "./ActionMenu";
 
-const CohortTable = () => {
+const CohortTable = ({ CohortData }) => {
   const CohortColumn = useMemo(() => cohortColumn, []);
-  const [CohortData, setCohortData] = useState([]);
-
-  const fetchAllCohorts = () => {
-    axios({
-      method: "get",
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/cohorts`,
-      headers: {
-        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
-        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
-        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then(function (response) {
-        setCohortData(response.data.data.results);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  useEffect(() => {
-    fetchAllCohorts();
-  }, []);
 
   const cohortData = useMemo(
     () =>
@@ -51,10 +30,13 @@ const CohortTable = () => {
           />
         ),
         number_of_courses: (
-          <ActionMenuCourses number_of_courses={cohort.number_of_courses} />
+          <ActionMenuCourses
+            courses={cohort.courses}
+            number_of_courses={cohort.number_of_courses}
+          />
         ),
-        edit: <ActionMenuEdit />,
-        delete: <ActionMenuDelete />,
+        // edit: <ActionMenuEdit />,
+        // delete: <ActionMenuDelete />,
       })),
     [CohortData]
   );
@@ -79,7 +61,20 @@ const CohortTable = () => {
       data: cohortData,
     },
     usePagination,
-    useRowSelect
+    useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((columns): any => {
+        return [
+          ...columns,
+          {
+            Cell: ({ row }: any) => <ActionMenu />,
+          },
+          // {
+          //   Cell: ({ row }: any) => "Delete",
+          // },
+        ];
+      });
+    }
   );
 
   const { pageIndex } = state;

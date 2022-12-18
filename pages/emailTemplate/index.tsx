@@ -19,14 +19,14 @@ const SubHeaderEmailTemplate = dynamic(
   }
 );
 
-const Index = () => {
+const Index = ({ id }) => {
   const [selected, setSelected] = useState(0);
 
   return (
     <div className="flex-1 bg-mainBg flex flex-col overflow-auto pb-4 h-full">
       <EmailTemplateHeader />
       <SubHeaderEmailTemplate />
-      <EmailTemplateTable />
+      <EmailTemplateTable/>
     </div>
   );
 };

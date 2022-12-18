@@ -4,7 +4,7 @@ import { NotificationDrop } from "../../../../../pages/assessments/categories";
 import Profile from "../../notification_ProfilePicture";
 
 type HeaderType = {
-  name: string;
+  name?: string;
 };
 const Header = ({ name }: HeaderType) => {
   const header_tag = name ?? "Assessments";
