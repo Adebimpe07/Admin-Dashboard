@@ -4,7 +4,27 @@ import axios from "axios";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import Header from "../../src/components/header";
+import CryptoJS from "crypto-js";
 
+var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
+
+const encrypt = (element: any) => {
+  return CryptoJS.AES.encrypt(
+    (element),
+    key,
+    {
+      iv: iv,
+    }
+  ).toString()
+}
+
+const decrypt = (element: any) => {
+  return CryptoJS.AES.decrypt(element, key, { iv: iv }).toString(
+    CryptoJS.enc.Utf8
+  )
+    ;
+};
 const FaqsSubHeader = dynamic(
     () => import("../../src/components/main/body/supportPage/faqsSubHeader"),
     { ssr: false }

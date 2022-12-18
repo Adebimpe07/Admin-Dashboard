@@ -17,6 +17,11 @@ import { RichTextEditor } from "@mantine/rte";
 import Link from "next/link";
 import FormContext from "../../../../context/store";
 import axios from "axios";
+import { useForm } from "@mantine/form";
+import CryptoJS from "crypto-js";
+
+var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
 
 const NewsLetSubHeader = () => {
     const newsLetterData = [
@@ -35,20 +40,38 @@ const NewsLetSubHeader = () => {
     ];
 
     const [opened, setOpened] = useState(false);
-    const { token } = useContext(FormContext)
 
     const UploadJobModal = () => {
+        const { token } = useContext(FormContext)
+        const form = useForm({
+            initialValues: {
+                title: "",
+                subject: ""
+            }
+        })
+        const [content, setContent] = useState("")
+        const encrypt = (element: any) => {
+            return CryptoJS.AES.encrypt(
+                (element),
+                key,
+                {
+                    iv: iv,
+                }
+            ).toString()
+        }
 
         const createNewsLetter = () => {
             var config = {
                 method: 'post',
-                url: '`${process.env.NEXT_PUBLIC_BASE_URL_1}`/api/v1/newsletter',
+                url: 'https://atsbk.afexats.com' + `/api/v1/newsletter`,
                 headers: {
-                    "API-KEY": "`${process.env.NEXT_PUBLIC_APP_API_KEY_1}`",
-                    "HASH-KEY": "`${process.env.NEXT_PUBLIC_APP_HASH_KEY_1}`",
-                    "REQUEST-TS": "`${process.env.NEXT_PUBLIC_REQUEST_TS_1}`",
+                    'api-key': '7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ',
+                    'hash-key': '091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a',
+                    'request-ts': '1669397556',
                     "Authorization": `Bearer ${token.access}`
-                }
+                    // TODO:process.env
+                },
+                data: { title: encrypt(form.values.title), subject: encrypt(form.values.subject), content: encrypt(content) }
             };
 
             axios(config)
@@ -74,12 +97,21 @@ const NewsLetSubHeader = () => {
                             Create newsletter to send to subscribers
                         </h1>
                         <TextInput
+                            {...form.getInputProps('title')}
+                            size="sm"
+                            className="focus:border-inherit placeholder:text-[#4A4C58]"
+                            label="Title"
+                        />
+                        <TextInput
+                            {...form.getInputProps('subject')}
                             size="sm"
                             className="focus:border-inherit placeholder:text-[#4A4C58]"
                             label="Subject"
                         />
                         <p >Message</p>
                         <RichTextEditor
+                            value={content}
+                            onChange={setContent}
                             id="rte"
                             className="h-[20rem]"
                             controls={[
@@ -128,8 +160,8 @@ const NewsLetSubHeader = () => {
                     leftIcon={<img src={Cross.src} className="w-4" />}
                     onClick={() => setOpened(true)}>
                     <p>Create NewsLetter</p>
-                    <UploadJobModal />
                 </Button>
+                <UploadJobModal />
             </div>
         </div>
     );

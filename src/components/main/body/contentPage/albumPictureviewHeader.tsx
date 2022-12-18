@@ -107,9 +107,9 @@ const albumPicviewHeader = () => {
     );
     return (
         <div className='flex justify-between'>
-            <div className='place-items-center'>
+            {/* <div className='place-items-center'>
                 <p className='text-[#252735] text-base font-semibold'>Induction (20)</p>
-            </div>
+            </div> */}
             <div className='flex gap-8'>
                 <Button
                     className='bg-greenButton hover:bg-greenButton  h-[40px] text-[13px]'
