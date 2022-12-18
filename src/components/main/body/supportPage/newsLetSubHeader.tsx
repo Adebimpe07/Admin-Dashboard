@@ -42,7 +42,7 @@ const NewsLetSubHeader = () => {
     const [opened, setOpened] = useState(false);
 
     const UploadJobModal = () => {
-        const { token } = useContext(FormContext)
+        const access = JSON.parse(sessionStorage.getItem("token")).access;
         const form = useForm({
             initialValues: {
                 title: "",
@@ -68,7 +68,7 @@ const NewsLetSubHeader = () => {
                     'api-key': '7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ',
                     'hash-key': '091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a',
                     'request-ts': '1669397556',
-                    "Authorization": `Bearer ${token.access}`
+                    "Authorization": `Bearer ${access}`
                     // TODO:process.env
                 },
                 data: { title: encrypt(form.values.title), subject: encrypt(form.values.subject), content: encrypt(content) }

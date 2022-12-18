@@ -73,11 +73,7 @@ const NewsLetterTable = () => {
 
 
   const newsLetterData = useMemo(
-    ()  =>
-      Content.map((content, idx) => ({
-        ...content,
-        popmodal: '',
-      })),
+    ()  => Content,
     [Content]
   );
 
@@ -164,12 +160,17 @@ const NewsLetterTable = () => {
                   className=" border-y-[1px] border-y-[#F5F5F5] text-left"
                 >
                   {row.cells.map((cell) => {
-                    return (
+                    return ( cell.column.Header !== "Message" ?
                       <td
                         {...cell.getCellProps()}
                         className="py-3 text-left pl-8"
                       >
                         {cell.render("Cell")}
+                      </td>
+                      : <td {...cell.getCellProps()} className="py-3 text-left pl-8" dangerouslySetInnerHTML={{
+                        __html: cell.value
+                      }}>
+
                       </td>
                     );
                   })}
