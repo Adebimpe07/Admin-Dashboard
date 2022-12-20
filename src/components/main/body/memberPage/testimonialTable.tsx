@@ -42,11 +42,14 @@ const TestimonialTable = () => {
         setTestimonial(response.data.data.results.reduce((acc, item) => {
             acc.push({
               id: decrypt(item.id),
-              Name: decrypt(item.tech_star_full_name),
-              Cohorts: decrypt(item.tech_star_cohort),
-              Course: decrypt(item.tech_star_course),
+              tech_star_full_name: decrypt(item.tech_star_full_name),
+              tech_star_cohort: decrypt(item.tech_star_cohort),
+              tech_star_course: decrypt(item.tech_star_course),
               testimonial: decrypt(item.testimonial),
-              image: decrypt(item.tech_star_profile_picture) });
+              tech_star_profile_picture: decrypt(
+                item.tech_star_profile_picture
+              ),
+            });
               return acc
             }, []))
 

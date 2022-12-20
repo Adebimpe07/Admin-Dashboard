@@ -47,27 +47,35 @@ const NewsTable = () => {
         "hash-key":
           "091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a",
         "request-ts": "1669397556",
-  
       },
     };
     axios(config)
       .then(function (response) {
-        setContent(response.data.results.reduce((acc, item) => {
-          acc.push({
-            title: decrypt(item.title), category: decrypt(item.category), url: decrypt(item.url), author: decrypt(item.author), id: decrypt(item.id), author_name: decrypt(item.author_name),
-            category_name: decrypt(item.category_name), author_image: decrypt(item.author_image),
-          })
-          return acc
-        }, []));
+        console.log(response.data.data.results);
+        setContent(
+          response.data.data.results.reduce((acc, item) => {
+            acc.push({
+              title: decrypt(item.title),
+              category: decrypt(item.category),
+              url: decrypt(item.url),
+              author: decrypt(item.author),
+              id: decrypt(item.id),
+              author_name: decrypt(item.author_name),
+              category_name: decrypt(item.category_name),
+              author_image: decrypt(item.author_image),
+            });
+            return acc;
+          }, [])
+        );
       })
       .catch(function (error) {
         console.log(error);
       });
-
-    useEffect(() => {
-      fetchNews();
-    }, []);
   };
+  useEffect(() => {
+    fetchNews();
+  }, []);
+  
   const ContentColumn = useMemo(() => contentColumn, []);
 
   const contentData = useMemo(

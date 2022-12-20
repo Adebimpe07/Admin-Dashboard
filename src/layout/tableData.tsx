@@ -327,10 +327,7 @@ export const atsMemberColumn = [
     Header: "Email",
     accessor: "official_email",
   },
-  {
-    Header: "Phone No",
-    accessor: "phone_number",
-  },
+  
   {
     Header: "",
     accessor: "action",
@@ -372,14 +369,14 @@ export const categoryColumn: Array<
 export const atsTestimonialColumn = [
   {
     Header: "",
-    accessor: "image",
+    accessor: "tech_star_profile_picture",
   },
   {
-    Header: "Full Name",
+    Header: "Name",
     accessor: "tech_star_full_name",
   },
   {
-    Header: "Cohort",
+    Header: "Cohorts",
     accessor: "tech_star_cohort",
   },
   {
@@ -401,20 +398,21 @@ export const atsAttendanceColumn = [
     Header: "Name",
     accessor: "tech_star",
   },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
   // {
   //   Header: "Email",
   //   accessor: "official_email",
   // },
   {
-    Header: "Check_in",
+    Header: "Check in Time",
     accessor: "check_in",
   },
+
   {
-    Header: "Status",
-    accessor: "status",
-  },
-  {
-    Header: "Check_out",
+    Header: "Check out Time",
     accessor: "check_out",
   },
   // {
