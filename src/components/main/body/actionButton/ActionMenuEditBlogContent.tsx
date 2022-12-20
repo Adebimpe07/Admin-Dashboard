@@ -1,31 +1,59 @@
-import React from "react";
-import { jobhead } from "../../../../layout/jobHead";
-import Edit from "../../../../assets/edit_icon.png";
-import Arr from "../../../../assets/La.png";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { Button, Text, Modal, TextInput, FileInput } from "@mantine/core";
-import { Add, Logout } from "iconsax-react";
+import {  Text, Modal, TextInput, FileInput } from "@mantine/core";
 import { Select } from "@mantine/core";
-import { Textarea } from "@mantine/core";
-import Downloads from "../../../../assets/import.png";
-import { MultiSelect } from "@mantine/core";
-import Elipse from "../../../../assets/Ellipse 8.png";
 import { RichTextEditor } from "@mantine/rte";
 import Cloud from "../../../../assets/cloud.png";
+import axios from "axios";
+import CryptoJS from "crypto-js";
+import Edit from "../../../../assets/edit_icon.png";
 
-const ActionMenuEditBlogContent = () => {
+
+
+var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
+
+const decrypt = (element: any) => {
+  return CryptoJS.AES.decrypt(element, key, { iv: iv }).toString(
+    CryptoJS.enc.Utf8
+  );
+};
+
+
+const ActionMenuEditBlogContent = ({ rowDetail}) => {
   const [opened, setOpened] = useState(false);
 
-  const data = [
-    { value: "pm", label: "Product Mnanagement" },
-    { value: "ft", label: "Frontemd Development" },
-    { value: "be", label: "Backend Development" },
-    { value: "md", label: "Mobile App Development" },
-    { value: "ud", label: "UI/UX Design" },
-  ];
+  const UploadBlogEditedModal = () => {
+    useEffect(() => {
+      fetchBlogDetail()
+    }, [])
+  
 
-  const UploadJobModal = () => (
-    <Modal
+    const [data, setData] = useState({ title: "", description: "", id: null })
+    const [editorVal, setEditorVal] = useState("");
+
+    const fetchBlogDetail = () => {
+      var config = {
+        method: 'get',
+        url: 'https://atsbk.afexats.com' + `/api/v1/blogs/${rowDetail.id}`,
+        headers: {
+          'api-key': '7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ',
+          'hash-key': '091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a',
+          'request-ts': '1669397556',
+        }
+      };
+
+      axios(config)
+        .then(function (response) {
+          setData({ description: decrypt(response.data.data.description), id: decrypt(response.data.data.id), title: decrypt(response.data.data.title) })
+          setEditorVal(decrypt(response.data.data.description))
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+     return <Modal
       opened={opened}
       onClose={() => setOpened(false)}
       title="Edit Blog"
@@ -36,10 +64,10 @@ const ActionMenuEditBlogContent = () => {
     >
       <Text className="flex gap-6 ">
         <div className="flex w-[100%] flex-col gap-4">
-          <h1 className="text-base text-[#38CB89] border-b border-[#DBD9D9] pb-2">
+          <h1 className="text-base border-b border-[#DBD9D9] pb-2">
             Blog Details
           </h1>
-          <TextInput size="sm" className="focus:border-inherit" label="Title" />
+          <TextInput size="sm" className="focus:border-inherit" label="Title" defaultValue={data.title} placeholder='' />
           <p>Content</p>
           <RichTextEditor
             id="rte"
@@ -49,6 +77,7 @@ const ActionMenuEditBlogContent = () => {
               ["sup", "sub"],
               ["alignLeft", "alignCenter", "alignRight"],
             ]}
+             value={data.description}
           />
         </div>
         <div className="flex flex-col  gap-4">
@@ -74,7 +103,7 @@ const ActionMenuEditBlogContent = () => {
         </div>
       </Text>
     </Modal>
-  );
+  }
 
   return (
     <div className="">
@@ -83,7 +112,7 @@ const ActionMenuEditBlogContent = () => {
         onClick={() => setOpened(true)}
       >
         <img src={Edit.src} className="w-[17px]" />
-        <UploadJobModal />
+        <UploadBlogEditedModal />
       </button>
     </div>
   );

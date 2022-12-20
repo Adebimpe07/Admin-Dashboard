@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button, Text, Modal, TextInput, FileInput } from "@mantine/core";
+import { Button, Text, Modal, TextInput, FileInput, Textarea } from "@mantine/core";
 import { useState } from "react";
 import { RichTextEditor } from "@mantine/rte";
 import Edit from "../../../../assets/edit_icon.png";
@@ -65,7 +65,9 @@ const ViewMoreNewsMessage = ({ rowDetail }) => {
           <h1 className="text-base text-[#948E8E] pb-2">
             Edit newsletter to send to subscribers
           </h1>
-          <TextInput size="sm" className="focus:border-inherit" defaultValue={data.subject} label="Subject" placeholder='' />
+          <Textarea size="sm" className="focus:border-inherit" defaultValue={data.subject} label="Subject" placeholder='' />
+          <Textarea size="sm" className="focus:border-inherit" defaultValue={data.title} label="Title" placeholder='' />
+
           <p className='text-[#252735]'>Message</p>
           <RichTextEditor
             classNames={{

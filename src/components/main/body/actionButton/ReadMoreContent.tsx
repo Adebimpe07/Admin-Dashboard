@@ -9,6 +9,18 @@ import {
 import RichTextEditor from "@mantine/rte";
 import React, { useState, useEffect } from "react";
 import Cross from "../../../../assets/Icon.png";
+import CryptoJS from "crypto-js";
+import axios from 'axios';
+
+var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
+
+const decrypt = (element: any) => {
+  return CryptoJS.AES.decrypt(element, key, { iv: iv }).toString(
+    CryptoJS.enc.Utf8
+  )
+    ;
+};
 
 const ReadMoreContent = ({row}) => {
   const [opened, setOpened] = useState(false);
