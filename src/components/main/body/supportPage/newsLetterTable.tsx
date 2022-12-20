@@ -38,18 +38,18 @@ const NewsLetterTable = () => {
     var config = {
       method: 'get',
       url: 'https://atsbk.afexats.com' + `/api/v1/newsletter`,
-      // headers: {
-      //   "api-key": process.env.NEXT_PUBLIC_APP_API_KEY_1,
-      //   "hash-key": process.env.NEXT_PUBLIC_HASH_KEY_1,
-      //   "request-ts": process.env.NEXT_PUBLIC_REQUEST_TS_1,
-      // }
       headers: {
-        'api-key': '7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ',
-        'hash-key': '091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a',
-        'request-ts': '1669397556',
+        "api-key": process.env.NEXT_PUBLIC_APP_API_KEY_1,
+        "hash-key": process.env.NEXT_PUBLIC_HASH_KEY_1,
+        "request-ts": process.env.NEXT_PUBLIC_REQUEST_TS_1,
+      }
+      // headers: {
+      //   'api-key': '7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ',
+      //   'hash-key': '091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a',
+      //   'request-ts': '1669397556',
         // ...data.getHeaders()
         // TODO:process.env
-      },
+      
     };
 
     axios(config)

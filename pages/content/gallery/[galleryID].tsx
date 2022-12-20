@@ -30,7 +30,6 @@ const gallery = () => {
             }
         })
             .then((response) => {
-                console.log(response.data.data.active_images)
                 setImages(response.data.data.active_images)
             })
             .catch((e) => console.log(e))

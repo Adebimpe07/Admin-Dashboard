@@ -25,7 +25,7 @@ function AlbumPicviewList({ images }) {
                 <div className='grid grid-cols-5 object-cover bg-white p-3 flex-1 h-full w-full grid-flow-row gap-4'>
                     {images.map((item) => (
                         <img
-                            className='w-48 h-48'
+                            className='w-48 h-48 object-cover'
                             src={CryptoJS.AES.decrypt(item.image, key, { iv: iv }).toString(CryptoJS.enc.Utf8)}
                         />
                     ))}

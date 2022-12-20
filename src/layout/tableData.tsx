@@ -191,30 +191,8 @@ export const rejectedColumn = [
   },
 ];
 
-// application_end_date
-// :
-// "2022-12-21T12:53:23+01:00"
-// application_start_date
-// :
-// "2022-11-28T12:53:23+01:00"
-// courses
-// :
-// (2) [{…}, {…}]
-// end_date
-// :
-// "2023-06-30"
-// name
-// :
-// "ATS 2.0"
-// number_of_courses
-// :
-// 2
-// start_date
-// :
-// "2023-01-05"
-// url
-// :
-//`${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/cohort/1`
+
+
 
 export const cohortColumn = [
   {
@@ -280,13 +258,18 @@ export const contentColumn = [
 
 export const blogColumn = [
   {
+    Header: "Author",
+    accessor: "author_fullname",
+  },
+  {
+    Header: "Author's Image",
+    accessor: "author_image"
+  },
+  {
     Header: "Title",
     accessor: "title",
   },
-  {
-    Header: "Author",
-    accessor: "post",
-  },
+
   {
     Header: "Comments",
     accessor: "comment",
@@ -299,10 +282,14 @@ export const blogColumn = [
     Header: "Total Likes",
     accessor: "like",
   },
-  ,
+  
   {
-    Header: "Date posted",
-    accessor: "date",
+    Header: "Created at",
+    accessor: "created_at",
+  },
+  {
+    Header: "Blog Details",
+    accessor: "description"
   },
   {
     Header: "",
@@ -323,17 +310,18 @@ export const atsMemberColumn = [
     Header: "Name",
     accessor: "full_name",
   },
-  {
-    Header: "Status",
-    accessor: "status",
-  },
+
   {
     Header: "Course",
     accessor: "course",
   },
   {
-    Header: "Cohorts",
+    Header: "Cohort",
     accessor: "cohort",
+  },
+  {
+    Header: "Tech Start Id",
+    accessor: "tech_star_id"
   },
   {
     Header: "Email",
@@ -387,16 +375,20 @@ export const atsTestimonialColumn = [
     accessor: "image",
   },
   {
-    Header: "Name",
+    Header: "Full Name",
     accessor: "tech_star_full_name",
   },
   {
-    Header: "Cohorts",
+    Header: "Cohort",
     accessor: "tech_star_cohort",
   },
   {
     Header: "Course",
     accessor: "tech_star_course",
+  },
+  {
+    Header: "Testimonies",
+    accessor: "testimonial",
   },
   {
     Header: "",
@@ -407,28 +399,28 @@ export const atsTestimonialColumn = [
 export const atsAttendanceColumn = [
   {
     Header: "Name",
-    accessor: "full_name",
+    accessor: "tech_star",
   },
+  // {
+  //   Header: "Email",
+  //   accessor: "official_email",
+  // },
   {
-    Header: "Email",
-    accessor: "official_email",
-  },
-  {
-    Header: "Check in time",
-    accessor: "check-in",
+    Header: "Check_in",
+    accessor: "check_in",
   },
   {
     Header: "Status",
     accessor: "status",
   },
   {
-    Header: "Check out time",
-    accessor: "check-out",
+    Header: "Check_out",
+    accessor: "check_out",
   },
-  {
-    Header: "Date",
-    accessor: "date",
-  },
+  // {
+  //   Header: "Date",
+  //   accessor: "date",
+  // },
 ];
 
 export const questionList = [

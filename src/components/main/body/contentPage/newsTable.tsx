@@ -1,9 +1,14 @@
-import React, { useMemo } from "react";
-import { useTable, useRowSelect, usePagination,TableInstance,
+import React, { useEffect, useMemo, useState } from "react";
+import {
+  useTable,
+  useRowSelect,
+  usePagination,
+  TableInstance,
   UsePaginationInstanceProps,
   UsePaginationState,
   UseSortByInstanceProps,
-  Column, } from "react-table";
+  Column,
+} from "react-table";
 import { contentColumn, blogColumn } from "../../../../layout/tableData";
 import Content from "../../../../layout/contentData.json";
 import ContentBlog from "../../../../layout/contentBlogData.json";
@@ -11,15 +16,58 @@ import ActionMenuEditContent from "../actionButton/ActionMenuEditContent";
 import ActionMenuDeleteContent from "../actionButton/ActionMenuDeleteContent";
 import ActionMenuEditBlogContent from "../actionButton/ActionMenuEditBlogContent";
 import ActionMenuDeleteBlogContent from "../actionButton/ActionMenuDeleteBlogContent";
+import axios from "axios";
+import CryptoJS from "crypto-js";
 
+var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
 
-export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
-UsePaginationInstanceProps<T> &
-UseSortByInstanceProps<T> & {
-  state: UsePaginationState<T>;
+const decrypt = (element: any) => {
+  return CryptoJS.AES.decrypt(element, key, { iv: iv }).toString(
+    CryptoJS.enc.Utf8
+  );
 };
 
+export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
+  UsePaginationInstanceProps<T> &
+  UseSortByInstanceProps<T> & {
+    state: UsePaginationState<T>;
+  };
+
 const NewsTable = () => {
+  const [Content, setContent] = useState([]);
+
+  const fetchNews = () => {
+    var config = {
+      method: "get",
+      url: "https://atsbk.afexats.com/api/v1/news",
+      headers: {
+        "api-key":
+          "7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ",
+        "hash-key":
+          "091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a",
+        "request-ts": "1669397556",
+  
+      },
+    };
+    axios(config)
+      .then(function (response) {
+        setContent(response.data.results.reduce((acc, item) => {
+          acc.push({
+            title: decrypt(item.title), category: decrypt(item.category), url: decrypt(item.url), author: decrypt(item.author), id: decrypt(item.id), author_name: decrypt(item.author_name),
+            category_name: decrypt(item.category_name), author_image: decrypt(item.author_image),
+          })
+          return acc
+        }, []));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    useEffect(() => {
+      fetchNews();
+    }, []);
+  };
   const ContentColumn = useMemo(() => contentColumn, []);
 
   const contentData = useMemo(
@@ -31,7 +79,6 @@ const NewsTable = () => {
       })),
     []
   );
-
 
   const {
     getTableProps,
@@ -50,59 +97,59 @@ const NewsTable = () => {
   } = useTable(
     {
       columns: ContentColumn as any,
-          
-      data: contentData 
+
+      data: contentData,
     },
     usePagination,
     useRowSelect
-  )as TableInstanceWithHooks<object>;
+  ) as TableInstanceWithHooks<object>;
 
   const { pageIndex } = state;
 
   return (
     <div className="overflow-auto grid  grid-rows-[1fr_auto]">
       <div className="overflow-auto">
-      <table
-        {...getTableProps()}
-        className="bg-[white] text-sm font-normal text-[#514747] ml-6 w-[96%]"
-      >
-        <thead className=" text-[#514747] sticky top-0  font-normal">
-          {headerGroups.map((headerGroups) => (
-            <tr {...headerGroups.getHeaderGroupProps()}>
-              {headerGroups.headers.map((columns) => (
-                <th
-                  {...columns.getHeaderProps()}
-                  className="py-4 text-[#514747] pl-6 text-left font-normal bg-[#F5F5F5]"
-                >
-                  {columns.render("Header")}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody className="flex-1 overflow-auto" {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <tr
-                {...row.getRowProps()}
-                className=" border-y-[1px] border-y-[#F5F5F5] text-left"
-              >
-                {row.cells.map((cell) => {
-                  return (
-                    <td
-                      {...cell.getCellProps()}
-                      className="py-3 text-left pl-8"
-                    >
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
+        <table
+          {...getTableProps()}
+          className="bg-[white] text-sm font-normal text-[#514747] ml-6 w-[96%]"
+        >
+          <thead className=" text-[#514747] sticky top-0  font-normal">
+            {headerGroups.map((headerGroups) => (
+              <tr {...headerGroups.getHeaderGroupProps()}>
+                {headerGroups.headers.map((columns) => (
+                  <th
+                    {...columns.getHeaderProps()}
+                    className="py-4 text-[#514747] pl-6 text-left font-normal bg-[#F5F5F5]"
+                  >
+                    {columns.render("Header")}
+                  </th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody className="flex-1 overflow-auto" {...getTableBodyProps()}>
+            {page.map((row) => {
+              prepareRow(row);
+              return (
+                <tr
+                  {...row.getRowProps()}
+                  className=" border-y-[1px] border-y-[#F5F5F5] text-left"
+                >
+                  {row.cells.map((cell) => {
+                    return (
+                      <td
+                        {...cell.getCellProps()}
+                        className="py-3 text-left pl-8"
+                      >
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
       <div className="bg-[white] mx-6 mt-4 py-4 px-2 flex justify-between">
         <div>
