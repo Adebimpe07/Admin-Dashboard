@@ -231,20 +231,21 @@ export const cohortColumn = [
 
 export const contentColumn = [
   {
-    Header: "Title",
-    accessor: "title",
+    Header: "Author",
+    accessor: "author_name",
   },
   {
     Header: "Categories",
     accessor: "categories",
   },
   {
-    Header: "Author",
-    accessor: "post",
+    Header: "Title",
+    accessor: "title",
   },
+
   {
     Header: "Date posted",
-    accessor: "date",
+    accessor: "created_at",
   },
   {
     Header: "",
@@ -258,13 +259,14 @@ export const contentColumn = [
 
 export const blogColumn = [
   {
+    Header: "Author's Image",
+    accessor: "author_image",
+  },
+  {
     Header: "Author",
     accessor: "author_fullname",
   },
-  {
-    Header: "Author's Image",
-    accessor: "author_image"
-  },
+
   {
     Header: "Title",
     accessor: "title",
@@ -282,21 +284,21 @@ export const blogColumn = [
     Header: "Total Likes",
     accessor: "like",
   },
-  
+
   {
     Header: "Created at",
     accessor: "created_at",
   },
   {
     Header: "Blog Details",
-    accessor: "description"
+    accessor: "description",
   },
   {
-    Header: "",
+    Header: " ",
     accessor: "edit",
   },
   {
-    Header: "",
+    Header: " ",
     accessor: "delete",
   },
 ];
@@ -388,7 +390,7 @@ export const atsTestimonialColumn = [
     accessor: "testimonial",
   },
   {
-    Header: "",
+    Header: " ",
     accessor: "action",
   },
 ];

@@ -38,7 +38,7 @@ const author = () => {
         <div className="flex-1 bg-mainBg flex flex-col overflow-auto  h-full">
             <ContentHeader />
             <AuthorSubheader />
-            {authorData.length > 0 ? <Author authorData={authorData} /> : <ContentAuthor />}
+            {authorData.length > 0 ? <Author /> : <ContentAuthor />}
         </div>
     );
 };

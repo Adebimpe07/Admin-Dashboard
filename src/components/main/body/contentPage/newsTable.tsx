@@ -9,7 +9,7 @@ import {
   UseSortByInstanceProps,
   Column,
 } from "react-table";
-import { contentColumn, blogColumn } from "../../../../layout/tableData";
+import { contentColumn } from "../../../../layout/tableData";
 import Content from "../../../../layout/contentData.json";
 import ContentBlog from "../../../../layout/contentBlogData.json";
 import ActionMenuEditContent from "../actionButton/ActionMenuEditContent";
@@ -18,6 +18,7 @@ import ActionMenuEditBlogContent from "../actionButton/ActionMenuEditBlogContent
 import ActionMenuDeleteBlogContent from "../actionButton/ActionMenuDeleteBlogContent";
 import axios from "axios";
 import CryptoJS from "crypto-js";
+import moment from "moment";
 
 var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
 var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
@@ -56,12 +57,13 @@ const NewsTable = () => {
           response.data.data.results.reduce((acc, item) => {
             acc.push({
               title: decrypt(item.title),
-              category: decrypt(item.category),
+
               url: decrypt(item.url),
               author: decrypt(item.author),
               id: decrypt(item.id),
+              created_at: moment(decrypt(item.created_at)).format("LLL"),
               author_name: decrypt(item.author_name),
-              category_name: decrypt(item.category_name),
+              categories: decrypt(item.category_name),
               author_image: decrypt(item.author_image),
             });
             return acc;
@@ -72,10 +74,11 @@ const NewsTable = () => {
         console.log(error);
       });
   };
+
   useEffect(() => {
     fetchNews();
   }, []);
-  
+
   const ContentColumn = useMemo(() => contentColumn, []);
 
   const contentData = useMemo(

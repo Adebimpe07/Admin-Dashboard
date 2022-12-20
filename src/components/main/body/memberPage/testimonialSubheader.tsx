@@ -17,6 +17,10 @@ import Cloud from "../../../../assets/cloud.png";
 import { RichTextEditor } from "@mantine/rte";
 import Link from "next/link";
 import { contentData } from "../../../../layout/contentData";
+import CryptoJS from "crypto-js";
+
+var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
 
 const TestimonialSubHeader = ({ route }) => {
     const [opened, setOpened] = useState(false);

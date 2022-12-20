@@ -9,6 +9,7 @@ import {
 } from "../../../../layout/tableData";
 import axios from "axios";
 import CryptoJS from "crypto-js";
+import moment from "moment";
 
 var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
 var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
@@ -27,22 +28,24 @@ const AttendanceTable = () => {
       method: "get",
       url: "https://atsbk.afexats.com/api/v1/tech-stars/attendance-list/",
       headers: {
-        "api-key": "7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ",
-        "hash-key": "091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a",
+        "api-key":
+          "7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ",
+        "hash-key":
+          "091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a",
         "request-ts": "1669397556",
       },
-    
     };
     axios(config)
       .then(function (response) {
         console.log(response.data.data.results);
-        setAttendance(response.data.data.results.reduce((acc, item) => {
+        setAttendance(
+          response.data.data.results.reduce((acc, item) => {
             acc.push({
               id: decrypt(item.id),
               tech_star: decrypt(item.tech_star),
               status: decrypt(item.status),
-              check_in: decrypt(item.check_in),
-              check_out: decrypt(item.Check_out),
+              check_in: moment(decrypt(item.check_in)).format("LTS"),
+              check_out: moment(decrypt(item.check_out)).format("LTS"),
             });
             return acc;
           }, [])

@@ -44,7 +44,7 @@ interface FormValues {
     profilePicture: StaticImageData;
 }
 
-const AuthorHeader = () => {
+const AuthorHeader = ({ authorData}) => {
 
     // const [value, setValue] = useState("");
 
@@ -176,7 +176,7 @@ const AuthorHeader = () => {
     return (
         <div className="flex justify-between px-5">
             <div className="place-items-center">
-                <p className="text-[#252735] text-base font-semibold">All Albums ( )</p>
+                <p className="text-[#252735] text-base font-semibold">All Authors ( {authorData?.length} )</p>
             </div>
             <div className="flex gap-8">
                 <Button

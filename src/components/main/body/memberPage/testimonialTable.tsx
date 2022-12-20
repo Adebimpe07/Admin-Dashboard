@@ -39,20 +39,21 @@ const TestimonialTable = () => {
     axios(config)
       .then(function (response) {
         console.log(response.data.data.results);
-        setTestimonial(response.data.data.results.reduce((acc, item) => {
+        setTestimonial(
+          response.data.data.results.reduce((acc, item) => {
             acc.push({
               id: decrypt(item.id),
               tech_star_full_name: decrypt(item.tech_star_full_name),
               tech_star_cohort: decrypt(item.tech_star_cohort),
               tech_star_course: decrypt(item.tech_star_course),
               testimonial: decrypt(item.testimonial),
-              tech_star_profile_picture: decrypt(
-                item.tech_star_profile_picture
-              ),
+              tech_star_profile_picture:
+                process.env.NEXT_PUBLIC_BASE_URL_1 +
+                decrypt(item.tech_star_profile_picture),
             });
-              return acc
-            }, []))
-
+            return acc;
+          }, [])
+        );
       })
       .catch(function (error) {
         console.log(error);
@@ -131,13 +132,20 @@ const TestimonialTable = () => {
                   className=" border-y-[1px] border-y-[#F5F5F5] text-left"
                 >
                   {row.cells.map((cell) => {
-                    return (
+                    return cell.column.Header !== "" ? (
                       <td
                         {...cell.getCellProps()}
-                        className="py-3 text-left pl-6"
+                        className="py-3 text-left pl-8"
                       >
                         {cell.render("Cell")}
                       </td>
+                    ) : (
+                      <img
+                        {...cell.getCellProps()}
+                        className=" rounded-full w-[40px] h-[40px] ml-2"
+                        src={cell.value}
+                        
+                      />
                     );
                   })}
                 </tr>
