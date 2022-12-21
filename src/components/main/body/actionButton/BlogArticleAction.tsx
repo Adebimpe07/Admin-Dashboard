@@ -9,7 +9,7 @@ const BlogArticleAction = ({row}) => {
     <div className="flex gap-3 items-center">
       <ActionMenuEditBlogContent  rowDetail={row.original} />
       {/* <ConfirmSendNewsLetterMessage /> */}
-      <ActionMenuDeleteBlogContent />
+      <ActionMenuDeleteBlogContent id={undefined} setDelModal={undefined} />
     </div>
   );
 };
