@@ -6,9 +6,11 @@ import { Checkbox } from "../assessment/checkbox";
 import ActionMenuPass from "../../body/actionButton/actionViewAsess";
 import axios from "axios";
 import CryptoJS, { SHA256 } from "crypto-js";
+import Loading from "@/src/components/loading";
 
 const ViewAssessmentTable = () => {
     const AssessmentColumn = useMemo(() => viewAssessmentColumn, []);
+    const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const key = CryptoJS.enc.Base64.parse(
         "wjqy62fB+dwz2gyz4sMePe9u2RsMVIyuaA6wPgUeXjw="
@@ -30,13 +32,21 @@ const ViewAssessmentTable = () => {
     };
 
     const fetchResult = async (): Promise<[]> => {
+        setLoading(true);
         try {
             await axios(config).then((response) => {
-                console.log(response.data);
-                // setData(response.data.data.results);
+                let decrypted_data = JSON.parse(
+                    CryptoJS.AES.decrypt(response.data.data, key, {
+                        iv: iv,
+                    }).toString(CryptoJS.enc.Utf8)
+                );
+                // console.log(decrypted_data.results);
+                setData(decrypted_data.results);
+                setLoading(false);
             });
         } catch (error) {
             console.log("request_error=> ", error.response.data);
+            setLoading(false);
             return error.message;
         }
     };
@@ -45,13 +55,9 @@ const ViewAssessmentTable = () => {
         fetchResult();
     }, []);
     const AssessmentData = useMemo(
-        () =>
-            data.map((assessment, idx) => ({
-                ...assessment,
-                action: <ActionMenuPass />,
-            })),
+        () => data,
 
-        []
+        [data]
     );
 
     const {
@@ -120,16 +126,21 @@ const ViewAssessmentTable = () => {
                         {page.map((row) => {
                             prepareRow(row);
                             return (
+                                //
                                 <tr
                                     {...row.getRowProps()}
                                     className=" border-y-[1px] border-y-[#F5F5F5] text-left ">
                                     {row.cells.map((cell) => {
-                                        return (
+                                        return cell.column.Header !== "" ? (
                                             <td
                                                 {...cell.getCellProps()}
                                                 className="py-3 text-left pl-4">
                                                 {cell.render("Cell")}
                                             </td>
+                                        ) : (
+                                            <ActionMenuPass
+                                                rowdetail={row.original}
+                                            />
                                         );
                                     })}
                                 </tr>
@@ -188,6 +199,7 @@ const ViewAssessmentTable = () => {
                     </button>
                 </div>
             </div>
+            <Loading loading={loading} />
         </div>
     );
 };
