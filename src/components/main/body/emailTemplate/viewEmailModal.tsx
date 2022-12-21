@@ -1,21 +1,37 @@
 import React, { useEffect, useState } from "react";
+import sha256 from "crypto-js/sha256";
+import CryptoJS from "crypto-js";
 
 const ViewEmailModal = ({ rowdetail, setSubAdminViewModal }) => {
   const [checked, setChecked] = useState(false);
   const [applicantDetails, setApplicantDetails] = useState(null);
+  var key = CryptoJS.enc.Base64.parse(
+    "HmYOKQj7ZzF8cbeswYY9uLqbfMSUS2tI6Pz45zjylOM="
+  );
+  var iv = CryptoJS.enc.Base64.parse("PL2LON7ZBLXq4a32le+FCQ==");
 
   const getApplicant = () => {
+    const requestTs = String(Date.now());
     fetch(rowdetail.url, {
       headers: {
-        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
-        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
-        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
+        "api-key": process.env.NEXT_PUBLIC_APP_API_KEY,
+        "request-ts": requestTs,
+        "hash-key": sha256(
+          process.env.NEXT_PUBLIC_APP_API_KEY +
+            process.env.NEXT_PUBLIC_SECRET_KEY +
+            requestTs
+        ).toString(CryptoJS.enc.Hex),
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data);
-        setApplicantDetails(data.data);
+        setApplicantDetails(
+          JSON.parse(
+            CryptoJS.AES.decrypt(data.data, key, {
+              iv: iv,
+            }).toString(CryptoJS.enc.Utf8)
+          )
+        );
       });
   };
 
@@ -29,9 +45,15 @@ const ViewEmailModal = ({ rowdetail, setSubAdminViewModal }) => {
       <p className="border-t-[1px] border-t-[#F5F5F5]">
         {applicantDetails?.subject}
       </p>
-      <p className="border-t-[1px] border-t-[#F5F5F5]">
+      <p
+        className="border-t-[1px] border-t-[#F5F5F5]"
+        dangerouslySetInnerHTML={{
+          __html: applicantDetails?.body,
+        }}
+      ></p>
+      {/* <p className="border-t-[1px] border-t-[#F5F5F5]">
         {applicantDetails?.body}
-      </p>
+      </p> */}
     </div>
   );
 };
