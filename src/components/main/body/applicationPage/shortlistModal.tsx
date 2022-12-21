@@ -42,7 +42,7 @@ export const ShortlistModal = ({ rowdetail, setSubAdminModal }) => {
             axios(config)
                 .then(function (response) {
                     if (response.data.success === true) {
-                        setMessage("Assessment invite successfully sent");
+                        setMessage("Candidate shortlisted successfully");
                         setOpened(true);
                         setTimeout(() => {
                             setOpened(false);

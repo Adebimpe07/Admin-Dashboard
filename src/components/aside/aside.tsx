@@ -16,7 +16,10 @@ const Sidebar = () => {
         key: "selected_sidebar",
         defaultValue: "Dashboard",
     });
-    const [selectedSub, setSelectedSub] = useState(null);
+    const [selectedSub, setSelectedSub] = useSessionStorage({
+        key: "selected_submenu",
+        defaultValue: null,
+    });
     const [opened, setOpened] = useState(false);
     const [collapse, setCollapse] = useSessionStorage({
         key: "collapse",
