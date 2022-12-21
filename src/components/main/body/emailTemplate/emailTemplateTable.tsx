@@ -22,7 +22,7 @@ import Loading from "../../../loading";
 //   );
 // };
 
-const EmailTemplateTable = ({ id }) => {
+const EmailTemplateTable = () => {
     const [emailData, setEmailData] = useState([]);
     const [loading, setLoading] = useState(false);
     var key = CryptoJS.enc.Base64.parse(
