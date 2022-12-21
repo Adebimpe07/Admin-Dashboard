@@ -14,9 +14,12 @@ import { useSessionStorage } from "@mantine/hooks";
 const Sidebar = () => {
     const [selected, setSelected] = useSessionStorage({
         key: "selected_sidebar",
-        defaultValue: "Dashboard"
+        defaultValue: "Dashboard",
     });
-    const [selectedSub, setSelectedSub] = useState(null);
+    const [selectedSub, setSelectedSub] = useSessionStorage({
+        key: "selected_submenu",
+        defaultValue: null,
+    });
     const [opened, setOpened] = useState(false);
     const [collapse, setCollapse] = useSessionStorage({
         key: "collapse",
@@ -126,7 +129,8 @@ const Sidebar = () => {
                                     <div
                                         key={index}
                                         className={
-                                            item.href === pathname || selected === item.heading
+                                            item.href === pathname ||
+                                            selected === item.heading
                                                 ? "menuItem active flex items-center gap-2"
                                                 : "menuItem flex items-center gap-2"
                                         }
@@ -151,7 +155,10 @@ const Sidebar = () => {
                                                   <div
                                                       key={id}
                                                       className={
-                                                          pathname === el.href || selected === item.heading
+                                                          pathname ===
+                                                              el.href ||
+                                                          selectedSub ===
+                                                              el.heading
                                                               ? "menuItem active flex items-center gap-2 ml-4"
                                                               : "menuItem flex items-center gap-2 ml-4"
                                                       }
@@ -181,7 +188,8 @@ const Sidebar = () => {
                                 <div
                                     key={index}
                                     className={
-                                        pathname === item.href || selected === item.heading
+                                        pathname === item.href ||
+                                        selected === item.heading
                                             ? "menuItem flex active items-center gap-2"
                                             : "menuItem flex items-center gap-2"
                                     }
