@@ -231,6 +231,10 @@ export const cohortColumn = [
 
 export const contentColumn = [
   {
+    Header: "Profile Picture",
+    accessor: "author_image",
+  },
+  {
     Header: "Author",
     accessor: "author_name",
   },
@@ -259,7 +263,7 @@ export const contentColumn = [
 
 export const blogColumn = [
   {
-    Header: "Author's Image",
+    Header: "Profile Picture",
     accessor: "author_image",
   },
   {

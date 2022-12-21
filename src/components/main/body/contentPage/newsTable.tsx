@@ -53,8 +53,7 @@ const NewsTable = () => {
     axios(config)
       .then(function (response) {
         console.log(response.data.data.results);
-        setContent(
-          response.data.data.results.reduce((acc, item) => {
+        console.log( response.data.data.results.reduce((acc, item) => {
             acc.push({
               title: decrypt(item.title),
 
@@ -64,7 +63,7 @@ const NewsTable = () => {
               created_at: moment(decrypt(item.created_at)).format("LLL"),
               author_name: decrypt(item.author_name),
               categories: decrypt(item.category_name),
-              author_image: decrypt(item.author_image),
+              author_image: process.env.NEXT_PUBLIC_BASE_URL_1 + decrypt(item.author_image),
             });
             return acc;
           }, [])
@@ -147,13 +146,19 @@ const NewsTable = () => {
                   className=" border-y-[1px] border-y-[#F5F5F5] text-left"
                 >
                   {row.cells.map((cell) => {
-                    return (
+                    return cell.column.Header !== "Profile Picture" ? (
                       <td
                         {...cell.getCellProps()}
                         className="py-3 text-left pl-8"
                       >
                         {cell.render("Cell")}
                       </td>
+                    ) : (
+                      <img
+                        {...cell.getCellProps()}
+                        className="ml-3 mt-12 rounded-full w-[40px] h-[40px]"
+                        src={cell.value}
+                      />
                     );
                   })}
                 </tr>

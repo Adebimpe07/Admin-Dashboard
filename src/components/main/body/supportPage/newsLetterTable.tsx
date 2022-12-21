@@ -30,9 +30,8 @@ const decrypt = (element: any) => {
   )
     ;
 };
-const NewsLetterTable = () => {
+const NewsLetterTable = ({Content, setContent}) => {
 
-  const [Content, setContent] = useState([])
 
   const fetchNewsLetter = () => {
     var config = {

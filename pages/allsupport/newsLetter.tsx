@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../src/components/header";
 
 const NewsLetterTable = dynamic(
@@ -12,11 +12,12 @@ const NewsLetterSubHeader = dynamic(
 );
 
 const NewsLetter = () => {
+    const [Content, setContent] = useState([])
   return (
     <div className="flex-1 bg-mainBg flex flex-col overflow-auto  h-full">
       <Header name="Support" />
-      <NewsLetterSubHeader />
-      <NewsLetterTable />
+      <NewsLetterSubHeader setContent={setContent} />
+      <NewsLetterTable Content={Content} setContent={setContent} />
     </div>
   );
 };

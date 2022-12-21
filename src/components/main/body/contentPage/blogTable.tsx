@@ -73,7 +73,6 @@ const BlogTable = () => {
     // [Content]
     ContentBlog.map((item, idx) => ({
       ...item,
-      Author: <ActionMenuBlogImg authorImage={item.author_image} />,
       edit: <ActionMenuEditBlogContent rowDetail={undefined} />,
       delete: <ActionMenuDeleteBlogContent />,
     }))
@@ -148,7 +147,7 @@ const BlogTable = () => {
                   className=" border-y-[1px] border-y-[#F5F5F5] text-left"
                 >
                   {row.cells.map((cell) => {
-                    return cell.column.Header !== "Message" ? (
+                    return cell.column.Header !== "Profile Picture" ? (
                       <td
                         {...cell.getCellProps()}
                         className="py-3 text-left pl-8"
@@ -158,7 +157,7 @@ const BlogTable = () => {
                     ) : (
                       <img
                         {...cell.getCellProps()}
-                        className=" rounded-full w-[40px] h-[40px]"
+                        className=" rounded-full ml-3 mt-12 w-[40px] h-[40px]"
                         src={cell.value}
                       />
                     );
