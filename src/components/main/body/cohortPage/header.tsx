@@ -190,9 +190,9 @@ const Header = ({ CohortData }) => {
           onClick={() => setOpened(true)}
         >
           <p>Create Cohorts</p>
-          <UploadJobModal />
         </Button>
       </div>
+      <UploadJobModal />
     </div>
   );
 };

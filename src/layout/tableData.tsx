@@ -30,7 +30,7 @@ export const allApplicationColumn = [
 
 export interface ShortListColumnType {
   applicant_name: string;
-  application_id: number;
+  application__id: number;
   course: string;
   applicant_email: string;
   applicant_phone: string;
@@ -44,7 +44,7 @@ export const ShortListColumn: Array<Column<ShortListColumnType>> = [
   },
   {
     Header: "Applicant ID",
-    accessor: "application_id",
+    accessor: "application__id",
   },
   {
     Header: "Program",
@@ -191,9 +191,6 @@ export const rejectedColumn = [
   },
 ];
 
-
-
-
 export const cohortColumn = [
   {
     Header: "Cohort Name",
@@ -263,7 +260,7 @@ export const blogColumn = [
   },
   {
     Header: "Author's Image",
-    accessor: "author_image"
+    accessor: "author_image",
   },
   {
     Header: "Title",
@@ -282,14 +279,14 @@ export const blogColumn = [
     Header: "Total Likes",
     accessor: "like",
   },
-  
+
   {
     Header: "Created at",
     accessor: "created_at",
   },
   {
     Header: "Blog Details",
-    accessor: "description"
+    accessor: "description",
   },
   {
     Header: "",
@@ -321,7 +318,7 @@ export const atsMemberColumn = [
   },
   {
     Header: "Tech Start Id",
-    accessor: "tech_star_id"
+    accessor: "tech_star_id",
   },
   {
     Header: "Email",
@@ -347,27 +344,27 @@ export const categoryColumn: Array<
     delete: ReactNode;
   }>
 > = [
-    {
-      Header: "Category Name",
-      accessor: "name",
-    },
-    {
-      Header: "Questions",
-      accessor: "question",
-    },
-    {
-      Header: "Time",
-      accessor: "time",
-    },
-    {
-      Header: "",
-      accessor: "edit",
-    },
-    {
-      Header: "",
-      accessor: "delete",
-    },
-  ];
+  {
+    Header: "Category Name",
+    accessor: "name",
+  },
+  {
+    Header: "Questions",
+    accessor: "question",
+  },
+  {
+    Header: "Time",
+    accessor: "time",
+  },
+  {
+    Header: "",
+    accessor: "edit",
+  },
+  {
+    Header: "",
+    accessor: "delete",
+  },
+];
 
 export const atsTestimonialColumn = [
   {
