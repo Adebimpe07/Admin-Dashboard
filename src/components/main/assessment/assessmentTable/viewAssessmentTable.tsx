@@ -138,9 +138,13 @@ const ViewAssessmentTable = () => {
                                                 {cell.render("Cell")}
                                             </td>
                                         ) : (
-                                            <ActionMenuPass
-                                                rowdetail={row.original}
-                                            />
+                                            <td
+                                                {...cell.getCellProps()}
+                                                className="py-3 text-left pl-4">
+                                                <ActionMenuPass
+                                                    rowdetail={row.original}
+                                                />
+                                            </td>
                                         );
                                     })}
                                 </tr>
