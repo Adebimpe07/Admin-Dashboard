@@ -231,20 +231,21 @@ export const cohortColumn = [
 
 export const contentColumn = [
   {
-    Header: "Profile Picture",
+    Header: "",
     accessor: "author_image",
   },
   {
-    Header: "Author",
-    accessor: "author_name",
+    Header: "Title",
+    accessor: "title",
   },
+
   {
     Header: "Categories",
     accessor: "categories",
   },
   {
-    Header: "Title",
-    accessor: "title",
+    Header: "Author",
+    accessor: "author_name",
   },
 
   {
@@ -252,28 +253,28 @@ export const contentColumn = [
     accessor: "created_at",
   },
   {
-    Header: "",
+    Header: " ",
     accessor: "edit",
   },
   {
-    Header: "",
+    Header: " ",
     accessor: "delete",
   },
 ];
 
 export const blogColumn = [
   {
-    Header: "Profile Picture",
+    Header: "",
     accessor: "author_image",
   },
   {
-    Header: "Author",
-    accessor: "author_fullname",
+    Header: "Title",
+    accessor: "title",
   },
 
   {
-    Header: "Title",
-    accessor: "title",
+    Header: "Author",
+    accessor: "author_fullname",
   },
 
   {
@@ -290,21 +291,21 @@ export const blogColumn = [
   },
 
   {
-    Header: "Created at",
+    Header: "Date posted",
     accessor: "created_at",
   },
-  {
-    Header: "Blog Details",
-    accessor: "description",
-  },
-  {
-    Header: " ",
-    accessor: "edit",
-  },
-  {
-    Header: " ",
-    accessor: "delete",
-  },
+  // {
+  //   Header: "Blog Details",
+  //   accessor: "description",
+  // },
+  // {
+  //   Header: " ",
+  //   accessor: "edit",
+  // },
+  // {
+  //   Header: " ",
+  //   accessor: "delete",
+  // },
 ];
 
 export const atsMemberColumn = [

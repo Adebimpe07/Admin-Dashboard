@@ -108,8 +108,7 @@ const ContentAuthor = () => {
             <Modal overflow="inside"
                 opened={opened}
                 onClose={() => setOpened(false)}
-                title="Create Author"
-            >
+                title="Create Author">
                 <Text className="overflow-auto">
                     <div className="flex w-full overflow-auto flex-col gap-4">
                         <h1 className="text-base overflow-hidden text-[#948E8E] pb-2">

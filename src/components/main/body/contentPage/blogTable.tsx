@@ -15,6 +15,7 @@ import BlogArticleAction from "../actionButton/BlogArticleAction";
 import moment from "moment";
 import { contentData } from "@/src/layout/contentData";
 import ActionMenuBlogImg from "../actionButton/ActionMenuBlogImage";
+import Loading from "@/src/components/loading";
 
 var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
 var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
@@ -26,6 +27,7 @@ const decrypt = (element: any) => {
 };
 
 const BlogTable = () => {
+    const [loading, setLoading] = useState(false);
   const [Content, setContent] = useState([]);
   const fetchBlogArticle = () => {
     var config = {
@@ -39,7 +41,6 @@ const BlogTable = () => {
     };
     axios(config)
       .then(function (response) {
-        console.log(response.data.data.results);
         setContent(
           response.data.data.results.reduce((acc, item) => {
             acc.push({
@@ -48,7 +49,10 @@ const BlogTable = () => {
               url: decrypt(item.url),
               author_image:
                 process.env.NEXT_PUBLIC_BASE_URL_1 + decrypt(item.author_image),
-              created_at: moment(decrypt(item.created_at)).format("LLL"),
+              created_at: moment(decrypt(item.created_at))
+                .subtract(1, "days")
+                .calendar()
+                .split(",")[0],
               description:
                 decrypt(item.description).split("").splice(0, 50).join("") +
                 "...",
@@ -70,13 +74,14 @@ const BlogTable = () => {
 
   const blogData = useMemo(
     () => Content,
-    // [Content]
-    ContentBlog.map((item, idx) => ({
-      ...item,
-      edit: <ActionMenuEditBlogContent rowDetail={undefined} />,
-      delete: <ActionMenuDeleteBlogContent />,
-    }))
+    [Content]
+    // ContentBlog.map((item, idx) => ({
+    //   ...item,
+    //   edit: <ActionMenuEditBlogContent rowDetail={undefined} />,
+    //   delete: <ActionMenuDeleteBlogContent />,
+    // }))
   );
+
 
   const {
     getTableProps,
@@ -98,22 +103,25 @@ const BlogTable = () => {
       data: blogData,
     },
     usePagination,
-    useRowSelect
-  );
-  //   (hooks) => {
-  //     hooks.visibleColumns.push((columns): any => {
-  //       return [
-  //         ...columns,
+    useRowSelect,
+  
+    (hooks) => {
+      hooks.visibleColumns.push((columns): any => {
+        return [
 
-  //         {
-  //           Header: ({ getToggleAllRowsSelectedProps }: any) => "Action",
+          ...columns,
 
-  //           Cell: ({ row }: any) => <BlogArticleAction row={row} />,
-  //         },
-  //       ];
-  //     });
-  //   }
-  // ) as TableInstanceWithHooks<object>;
+          {
+            Header: ({ getToggleAllRowsSelectedProps }: any) => (
+              "Action"
+            ),
+
+            Cell: ({ row }: any) => <BlogArticleAction row={row} />,
+          },
+        ];
+      });
+    }
+  ) as TableInstanceWithHooks<object>;
 
   const { pageIndex } = state;
 
@@ -147,7 +155,7 @@ const BlogTable = () => {
                   className=" border-y-[1px] border-y-[#F5F5F5] text-left"
                 >
                   {row.cells.map((cell) => {
-                    return cell.column.Header !== "Profile Picture" ? (
+                    return cell.column.Header !== "" ? (
                       <td
                         {...cell.getCellProps()}
                         className="py-3 text-left pl-8"
@@ -157,7 +165,7 @@ const BlogTable = () => {
                     ) : (
                       <img
                         {...cell.getCellProps()}
-                        className=" rounded-full ml-3 mt-12 w-[40px] h-[40px]"
+                        className=" rounded-full ml-3 mt-6 mb-3 w-[40px] h-[40px]"
                         src={cell.value}
                       />
                     );
@@ -167,6 +175,7 @@ const BlogTable = () => {
             })}
           </tbody>
         </table>
+        <Loading loading={loading} />
       </div>
       <div className="bg-[white] mx-6 mt-4 py-4 px-2 flex justify-between">
         <div>

@@ -43,20 +43,16 @@ const NewsTable = () => {
       method: "get",
       url: "https://atsbk.afexats.com/api/v1/news",
       headers: {
-        "api-key":
-          "7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ",
-        "hash-key":
-          "091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a",
-        "request-ts": "1669397556",
+        "api-key": process.env.NEXT_PUBLIC_APP_API_KEY_1,
+        "hash-key": process.env.NEXT_PUBLIC_HASH_KEY_1,
+        "request-ts": process.env.NEXT_PUBLIC_REQUEST_TS_1,
       },
     };
     axios(config)
       .then(function (response) {
-        console.log(response.data.data.results);
-        console.log( response.data.data.results.reduce((acc, item) => {
+        setContent( response.data.data.results.reduce((acc, item) => {
             acc.push({
               title: decrypt(item.title),
-
               url: decrypt(item.url),
               author: decrypt(item.author),
               id: decrypt(item.id),
@@ -81,7 +77,7 @@ const NewsTable = () => {
   const ContentColumn = useMemo(() => contentColumn, []);
 
   const contentData = useMemo(
-    () =>
+    () => 
       Content.map((content, idx) => ({
         ...content,
         edit: <ActionMenuEditContent />,
@@ -146,7 +142,7 @@ const NewsTable = () => {
                   className=" border-y-[1px] border-y-[#F5F5F5] text-left"
                 >
                   {row.cells.map((cell) => {
-                    return cell.column.Header !== "Profile Picture" ? (
+                    return cell.column.Header !== "" ? (
                       <td
                         {...cell.getCellProps()}
                         className="py-3 text-left pl-8"

@@ -9,12 +9,20 @@ import { Select } from "@mantine/core";
 import { Textarea } from "@mantine/core";
 import Downloads from "../../../../assets/import.png";
 import Trash from "../../../../assets/trash.png";
+import CryptoJS from "crypto-js";
+import Loading from "@/src/components/loading";
 
 
-const ActionMenuDeleteBlogContent = () => {
+const ActionMenuDeleteBlogContent = ({ id, setDelModal }) => {
+  var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+  var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
+
   const [opened, setOpened] = useState(false);
+    const [loading, setLoading] = useState(false);
 
   const UploadJobModal = () => (
+  
+    
     <Modal className="text-[#4A4C58] text-base"
       opened={opened}
       onClose={() => setOpened(false)}
@@ -32,10 +40,14 @@ const ActionMenuDeleteBlogContent = () => {
 
   return (
     <div className="">
-      <button className=" text-sm text-[#514747] mr-6" onClick={() => setOpened(true)}>
+      <button
+        className=" text-sm text-[#514747] mr-6"
+        onClick={() => setOpened(true)}
+      >
         <img src={Trash.src} className="w-[17px]" />
         <UploadJobModal />
       </button>
+      <Loading loading={loading} />
     </div>
   );
 };
