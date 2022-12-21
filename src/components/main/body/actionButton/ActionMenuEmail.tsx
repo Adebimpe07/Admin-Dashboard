@@ -1,14 +1,17 @@
 import { Menu, Modal } from "@mantine/core";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { HireInvitationModal } from "../applicationPage/hireInvitationModal";
 import { InterviewInvitationModal } from "../applicationPage/interviewInvitationModal";
 import { RejectModal } from "../applicationPage/rejectModal";
 import { DeleteModal } from "../emailTemplate/deleteModal";
 import { EditModal } from "../emailTemplate/editModal";
 import ViewEmailModal from "../emailTemplate/viewEmailModal";
+import FormContext from "../../../../context/store";
+import { UseForm } from "@mantine/form/lib/types";
 
-const ActionMenuEmail = ({ row, id }) => {
+
+const ActionMenuEmail = ({ row}) => {
   const logRows = () => {
     console.log(row.original);
   };
@@ -26,7 +29,6 @@ const ActionMenuEmail = ({ row, id }) => {
         <DeleteModal
           setSubAdminDelModal={setSubAdminDelModal}
           rowdetail={row.original}
-          id={id}
         />
       ),
     });
@@ -57,31 +59,7 @@ const ActionMenuEmail = ({ row, id }) => {
     });
   }
 
-  // const populateInput = () => {
-
-  //   var config = {
-  //     method: "get",
-  //     url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/applications/email-templates/${id}`,
-  //     headers: {
-  //       "api-key":
-  //         `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
-  //       "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
-  //       "hash-key":
-  //         `${process.env.NEXT_PUBLIC_HASH_KEY}`,
-  //     },
-  //   };
-  //   axios(config)
-  //     .then(function (response) {
-  //       form.values.type = response.data.data.type;
-  //       form.values.subject = response.data.data.subject;
-  //       form.values.body = response.data.data.body;
-
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-
-  //     });
-  // };
+  
 
   return (
     <div>

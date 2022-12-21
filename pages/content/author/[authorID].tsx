@@ -2,26 +2,25 @@ import axios from "axios";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import Album from "../../../src/components/main/body/contentPage/album";
-import AlbumPicviewList from "../../../src/components/main/body/contentPage/albumPicviewList";
+import AuthorViewList from "../../../src/components/main/body/contentPage/authorViewList";
+import AuthorSubheader from "../../../src/components/main/body/contentPage/authorSubheader";
 import ContentHeader from "../../../src/components/main/body/contentPage/contentHeader";
-import GallerySubheader from "../../../src/components/main/body/contentPage/gallerySubheader";
 import { albumData } from "../../../src/layout/albumData";
 
-const ContentGallery = dynamic(
-    () => import("../../../src/components/main/body/contentPage/contentGallery"),
+const ContentAuthor = dynamic(
+    () => import("../../../src/components/main/body/contentPage/contentAuthor"),
     { ssr: false }
 );
 
 
-const gallery = () => {
+const author = () => {
 
     const router = useRouter()
-    const [images, setImages] = useState([])
+    const [author, setAuthor] = useState([])
 
-    const getphotos = (id) => {
+    const getauthor = (id) => {
         axios({
-            baseURL: `https://atsbk.afexats.com/api/v1/album/${id}`,
+            baseURL: `https://atsbk.afexats.com/api/v1/author/${id}`,
             method: "get",
             headers: {
                 "api-key": "7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ",
@@ -30,23 +29,24 @@ const gallery = () => {
             }
         })
             .then((response) => {
-                setImages(response.data.data.active_images)
+                console.log(response.data)
+                setAuthor(response.data)
             })
             .catch((e) => console.log(e))
     }
 
     useEffect(() => {
-        if (router.query.galleryID) {
-            getphotos(router.query.galleryID)
+        if (router.query.authorID) {
+            getauthor(router.query.authorID)
         }
-    }, [router.query.galleryID])
+    }, [router.query.authorID])
     return (
         <div className="flex-1 bg-mainBg flex flex-col overflow-auto  h-full">
             <ContentHeader />
-            <GallerySubheader />
-            <AlbumPicviewList images={images} />
+            <AuthorSubheader />
+            <AuthorViewList authors={author} />
         </div>
     );
 };
 
-export default gallery;
+export default author;

@@ -9,7 +9,9 @@ import {
 import { newsLetterColumn, } from "../../../../layout/tableData";
 import ViewMoreNewsMessage from "../actionButton/ViewMoreNewsMessage";
 import axios from "axios";
+import CryptoJS from "crypto-js";
 import ConfirmSendNewsLetterMessage from "../actionButton/ConfirmSendNewsLetterMessage";
+import NewsletterAction from "../actionButton/NewsletterAction";
 
 
 export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
@@ -18,26 +20,45 @@ export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
     state: UsePaginationState<T>;
   };
 
+var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
+
+
+const decrypt = (element: any) => {
+  return CryptoJS.AES.decrypt(element, key, { iv: iv }).toString(
+    CryptoJS.enc.Utf8
+  )
+    ;
+};
 const NewsLetterTable = () => {
-  const NewsLetterColumn = useMemo(() => newsLetterColumn, []);
 
   const [Content, setContent] = useState([])
 
   const fetchNewsLetter = () => {
     var config = {
       method: 'get',
-      url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/newsletter`,
+      url: 'https://atsbk.afexats.com' + `/api/v1/newsletter`,
       headers: {
-        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY_1}`,
-        "hash-key": `${process.env.NEXT_PUBLIC_APP_HASH_KEY_1}`,
-        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS_1}`,
+        "api-key": process.env.NEXT_PUBLIC_APP_API_KEY_1,
+        "hash-key": process.env.NEXT_PUBLIC_HASH_KEY_1,
+        "request-ts": process.env.NEXT_PUBLIC_REQUEST_TS_1,
       }
+      // headers: {
+      //   'api-key': '7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ',
+      //   'hash-key': '091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a',
+      //   'request-ts': '1669397556',
+        // ...data.getHeaders()
+        // TODO:process.env
+      
     };
 
     axios(config)
       .then(function (response) {
-        console.log(response.data)
-        setContent(response.data.data.results);
+        console.log(response.data.data.results)
+        setContent(response.data.data.results.reduce((acc, item) => {
+          acc.push({ subject: decrypt(item.subject), trunc_content: decrypt(item.trunc_content), url: decrypt(item.url), title: decrypt(item.title), id: decrypt(item.id) })
+          return acc
+        }, []));
       })
       .catch(function (error) {
         console.log(error);
@@ -48,13 +69,11 @@ const NewsLetterTable = () => {
     fetchNewsLetter()
   }, [])
 
+  const NewsLetterColumn = useMemo(() => newsLetterColumn, []);
+
+
   const newsLetterData = useMemo(
-    () =>
-      Content.map((content, idx) => ({
-        ...content,
-        popmodal: <ViewMoreNewsMessage />,
-        send: <ConfirmSendNewsLetterMessage />
-      })),
+    ()  => Content,
     [Content]
   );
 
@@ -80,7 +99,33 @@ const NewsLetterTable = () => {
       data: newsLetterData
     },
     usePagination,
-    useRowSelect
+    useRowSelect,
+    (hooks) => {
+
+      hooks.visibleColumns.push((columns): any => {
+
+        return [
+
+          ...columns,
+
+          {
+            Header: ({ getToggleAllRowsSelectedProps }: any) => (
+              "Action"
+            ),
+
+            Cell: ({ row }: any) => (
+
+              <NewsletterAction row={row} />
+
+            ),
+
+          },
+
+        ];
+
+      });
+
+    }
   ) as TableInstanceWithHooks<object>;
 
   const { pageIndex } = state;
@@ -115,12 +160,17 @@ const NewsLetterTable = () => {
                   className=" border-y-[1px] border-y-[#F5F5F5] text-left"
                 >
                   {row.cells.map((cell) => {
-                    return (
+                    return ( cell.column.Header !== "Message" ?
                       <td
                         {...cell.getCellProps()}
                         className="py-3 text-left pl-8"
                       >
                         {cell.render("Cell")}
+                      </td>
+                      : <td {...cell.getCellProps()} className="py-3 text-left pl-8" dangerouslySetInnerHTML={{
+                        __html: cell.value
+                      }}>
+
                       </td>
                     );
                   })}

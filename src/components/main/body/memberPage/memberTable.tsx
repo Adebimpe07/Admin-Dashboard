@@ -12,31 +12,54 @@ import ActionMenuEditAtsMember from "../actionButton/ActionMenuEditAtsmember";
 import ActionMenuDeleteAtsMember from "../actionButton/ActionMenuDeleteAtsMember";
 import ActionMenuMember from "../actionButton/ActionMenuMember";
 import axios from "axios";
+import CryptoJS from "crypto-js";
+
+var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
+
+const decrypt = (element: any) => {
+  return CryptoJS.AES.decrypt(element, key, { iv: iv }).toString(
+    CryptoJS.enc.Utf8
+  );
+};
 
 const MemberTable = () => {
     const [ATSMember, setATSMember] = useState([]);
 
     const fetchAllAts = () => {
-        axios({
-            url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/tech-stars/tech-star-list-create/`,
-            headers: {
-                "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY_1}`,
-                "hash-key": `${process.env.NEXT_PUBLIC_APP_HASH_KEY_1}`,
-                "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS_1}`,
+        var config = {
+            method: 'get',
+            url: 'https://atsbk.afexats.com/api/v1/tech-stars/tech-star-list-create/',
+            headers: { 
+                'api-key': '7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZ', 
+                'hash-key': '091fdc6ac81fde9d5bccc8aa0e52f504a2a5a71ad51624b094c26f6e51502b5a', 
+                'request-ts': '1669397556', 
+
             },
-            method: 'get'
-        })
+
+        };
+        axios(config)
             .then(function (response) {
-                setATSMember(response.data.data.results);
-            })
-            .catch(function (error) {
+                console.log(response.data)
+                setATSMember(response.data.data.results.reduce((acc, item) => {
+                    acc.push({
+                      full_name: decrypt(item.full_name),
+                      official_email: decrypt(item.official_email),
+                      profile_picture: decrypt(item.official_email),
+                      cohort: decrypt(item.cohort),
+                      tech_star_id: decrypt(item.tech_star_id)
+                    });
+                    return acc
+                    
+                }, []));
+                })
+                .catch(function (error) {
                 console.log(error);
             });
+        useEffect(() => {
+            fetchAllAts();
+        }, []);
     };
-
-    useEffect(() => {
-        fetchAllAts();
-    }, []);
 
     const ATSColumn = useMemo(() => atsMemberColumn, [atsMemberColumn]);
 

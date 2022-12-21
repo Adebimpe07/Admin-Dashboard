@@ -151,8 +151,19 @@ type formDataProp = {
     // });
     admin: any;
     setAdmin: (val: string | ((prevState: string) => string)) => void;
-    token: any;
-    setToken: (val: string | ((prevState: string) => string)) => void;
+    token: { access: string; refresh: string };
+    setToken: (
+        val:
+            | {
+                  access: string;
+                  refresh: string;
+              }
+            | ((prevState: { access: string; refresh: string }) => {
+                  access: string;
+                  refresh: string;
+              })
+    ) => void;
+
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
     isLoading: boolean;
     coursesCard: any[];
@@ -176,6 +187,18 @@ type formDataProp = {
             question_hint: string;
         }
     >;
+    categoryCard: any[];
+    setCategoryCard: React.Dispatch<React.SetStateAction<any[]>>;
+    questionCategory: string;
+    setQuestionCategory: React.Dispatch<React.SetStateAction<string>>;
+    selectedJobTitle: string;
+    setSelectedJobTitle: React.Dispatch<React.SetStateAction<string>>;
+    selectedCohortNo: string;
+    setSelectedCohortNo: React.Dispatch<React.SetStateAction<string>>;
+    requirement: string;
+    setRequirement: React.Dispatch<React.SetStateAction<string>>;
+    selctedJobId: number;
+    setSelectedJobId: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
 export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
@@ -385,7 +408,7 @@ export const FormProvider = ({ children }: any) => {
         initialValues: {
             question_text: "",
             question_type: "",
-            question_category: "Real",
+            question_category: "",
             question_hint: "face your book",
         },
     });
@@ -420,6 +443,10 @@ export const FormProvider = ({ children }: any) => {
         key: "questionType",
         defaultValue: "",
     });
+    const [questionCategory, setQuestionCategory] = useSessionStorage({
+        key: "questionCategory",
+        defaultValue: "",
+    });
 
     const [categoryID, setCategoryID] = useSessionStorage({
         key: "categoryID",
@@ -431,12 +458,17 @@ export const FormProvider = ({ children }: any) => {
     });
     const [token, setToken] = useSessionStorage({
         key: "token",
-        defaultValue: "",
+        defaultValue: { access: "", refresh: "" },
     });
 
     const [value, onChange] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [coursesCard, setCoursesCard] = useState([]);
+    const [categoryCard, setCategoryCard] = useState(null);
+    const [selectedJobTitle, setSelectedJobTitle] = useState("");
+    const [selectedCohortNo, setSelectedCohortNo] = useState("");
+    const [requirement, setRequirement] = useState("");
+    const [selctedJobId, setSelectedJobId] = useState(null);
 
     let formData = {
         isLoading,
@@ -461,6 +493,18 @@ export const FormProvider = ({ children }: any) => {
         coursesCard,
         setCoursesCard,
         essayForm,
+        categoryCard,
+        setCategoryCard,
+        questionCategory,
+        setQuestionCategory,
+        selectedJobTitle,
+        setSelectedJobTitle,
+        selectedCohortNo,
+        setSelectedCohortNo,
+        requirement,
+        setRequirement,
+        selctedJobId,
+        setSelectedJobId,
     };
 
     return (

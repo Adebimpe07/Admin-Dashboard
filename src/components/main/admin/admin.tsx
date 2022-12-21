@@ -102,23 +102,39 @@ function SubAdminCard({
   is_membership_manager,
   is_staff,
 }: ISubAdminCard) {
+  first_name = decrypt(first_name);
+  last_name = decrypt(last_name);
+  // is_application_manager = Boolean(decrypt(is_application_manager));
+  // is_assessment_manager = Boolean(decrypt(is_assessment_manager));
+  // is_content_manager = Boolean(decrypt(is_content_manager));
+  // is_membership_manager = Boolean(decrypt(is_membership_manager));
+  // is_staff = Boolean(decrypt(is_staff));
+  // is_superadmin = Boolean(decrypt(is_superadmin));
+  // console.log({
+  //     first_name,
+  //     last_name,
+  //     is_application_manager: eval(decrypt(is_application_manager)),
+  //     is_assessment_manager: eval(decrypt(is_assessment_manager)),
+  //     is_content_manager: eval(decrypt(is_content_manager)),
+  //     is_membership_manager: eval(decrypt(is_membership_manager)),
+  //     is_staff: eval(decrypt(is_staff)),
+  //     is_superadmin: eval(decrypt(is_superadmin)),
+  // });
   return (
     <div className="relative min-w-max gap-1 p-4 bg-[#F9FAFB] flex flex-col justify-center items-center">
       <img className="rounded-full" width="80" src={AdminPic.src} alt="" />
       <div className="text-[#4A4C58]">
-        <p className="text-sm">{`${decrypt(first_name)} ${decrypt(
-          last_name
-        )}`}</p>
+        <p className="text-sm">{`${first_name} ${last_name}`}</p>
         <p className="text-xs text-center">
-          {decrypt(is_superadmin)
+          {is_superadmin
             ? "Admin"
-            : decrypt(is_application_manager)
+            : is_application_manager
             ? "Application Manager"
-            : decrypt(is_assessment_manager)
+            : is_assessment_manager
             ? "Assessment Manager"
-            : decrypt(is_content_manager)
+            : is_content_manager
             ? "Content Manager"
-            : decrypt(is_membership_manager)
+            : is_membership_manager
             ? "Membership Manager"
             : "Staff"}
         </p>
@@ -138,14 +154,13 @@ const admin = () => {
   var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
 
   const fetchSubAdmin = () => {
+    const access = JSON.parse(sessionStorage.getItem("token")).access;
     setLoading(true);
     var config = {
       method: "get",
       url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/account/all`,
       headers: {
-        Authorization: `Bearer ${CryptoJS.AES.decrypt(token.access, key, {
-          iv: iv,
-        }).toString(CryptoJS.enc.Utf8)}`,
+        Authorization: `Bearer ${access}`,
         " api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY_1}`,
         "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS_1}`,
         "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY_1}`,
@@ -155,7 +170,6 @@ const admin = () => {
     axios(config)
       .then(function (response) {
         setSubAdminData(response.data.data.results);
-        console.log(response.data);
         setLoading(false);
       })
       .catch(function (error) {

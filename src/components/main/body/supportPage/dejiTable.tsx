@@ -12,6 +12,17 @@ import dejiData from "../../../../layout/dejiData.json";
 import ReadMoreContent from "../actionButton/ReadMoreContent"
 import TruncateContents from "../actionButton/TruncateContents";
 import axios from "axios";
+import CryptoJS from "crypto-js";
+
+var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
+
+const decrypt = (element: any) => {
+  return CryptoJS.AES.decrypt(element, key, { iv: iv }).toString(
+    CryptoJS.enc.Utf8
+  )
+    ;
+};
 
 export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
   UsePaginationInstanceProps<T> &
@@ -22,51 +33,52 @@ export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
 const DejiTable = () => {
   const [Content, setContent] = useState([])
 
-  // const fetchDejiSupport = () => {
-  //   console.log('helloooo')
-  // var config = {
-  //   method: 'get',
-  //   url: '`${process.env.NEXT_PUBLIC_BASE_URL_1}`/api/v1/support/contact-us-list-create/',
-  //   headers: {
-  //     "API=KEY": "`${process.env.NEXT_PUBLIC_APP_API_KEY_1}`",
-  //     "HASH-KEY": "`${process.env.NEXT_PUBLIC_APP_HASH_KEY_1}`",
-  //     "REQUEST-TS": "`${process.env.NEXT_PUBLIC_REQUEST_TS_1}`"
-  //   }
-  // };
-
-  // axios(config)
-  //   .then(function (response) {
-  //     console.log(response.data)
-  //     setContent(response.data.data.results);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-  // }
-
-  const fetchSupp = () => {
+  const fetchDejiSupport = () => {
     var config = {
       method: 'get',
-      url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/support/contact-us-list-create/`,
+      url: 'https://atsbk.afexats.com' + `/api/v1/support/contact-us-list-create`,
       headers: {
-        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY_1}`,
-        "hash-key": `${process.env.NEXT_PUBLIC_APP_HASH_KEY_1}`,
-        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS_1}`,
+        "API-KEY": process.env.NEXT_PUBLIC_APP_API_KEY_1,
+        "HASH-KEY": process.env.NEXT_PUBLIC_HASH_KEY_1,
+        "REQUEST-TS": process.env.NEXT_PUBLIC_REQUEST_TS_1,
       }
     };
 
     axios(config)
       .then(function (response) {
-        console.log(response.data)
-        setContent(response.data.data.results);
+        setContent(response.data.data.results.reduce((acc, item) => {
+          acc.push({ full_name: decrypt(item.full_name), email: decrypt(item.email), subject: decrypt(item.subject), short_message: decrypt(item.short_message), url: decrypt(item.url), id: decrypt(item.id) })
+          return acc
+        }, []));
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
+  // const fetchSupp = () => {
+  //   var config = {
+  //     method: 'get',
+  //     url: `${process.env.NEXT_PUBLIC_BASE_URL_1}/api/v1/support/contact-us-list-create/`,
+  //     headers: {
+  //       "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY_1}`,
+  //       "hash-key": `${process.env.NEXT_PUBLIC_APP_HASH_KEY_1}`,
+  //       "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS_1}`,
+  //     }
+  //   };
+
+  //   axios(config)
+  //     .then(function (response) {
+  //       console.log(response.data)
+  //       setContent(response.data.data.results);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }
+
   useEffect(() => {
-    fetchSupp()
+    fetchDejiSupport()
   }, [])
 
   const DejiColumn = useMemo(() => dejiColumn, []);
@@ -231,5 +243,5 @@ const DejiTable = () => {
     </div>
   );
 };
+export default DejiTable
 
-export default DejiTable;

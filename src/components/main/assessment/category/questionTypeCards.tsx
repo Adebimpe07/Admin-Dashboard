@@ -14,6 +14,8 @@ const QuestionTypeCards = () => {
         questionsForm,
         setCategoryID,
         setQuestionType,
+        setQuestionCategory,
+        essayForm,
         questionType,
         categoryForm,
     } = useContext(FormContext);
@@ -60,9 +62,13 @@ const QuestionTypeCards = () => {
                 setCategoryID(decrypted_data.id);
                 if (title === "Essay") {
                     setQuestionType("Open-ended");
-                    questionsForm.values.question_type = "Open-ended";
+                    essayForm.values.question_type = "Open-ended";
+                    // TODO: ADD QUESTION CATEGORY DROPDOWN
+                    // TODO: ADD QUESTION CATEGORY DROPDOWN
+                    setQuestionCategory("Real");
                 } else if (title === "Multiple Choice") {
                     setQuestionType("Multi-choice");
+                    setQuestionCategory("Real");
                     questionsForm.values.question_type = "Multi-choice";
                 }
                 setLoading(false);
@@ -92,7 +98,9 @@ const QuestionTypeCards = () => {
                                 onClick={() => handleSubmit(title, href)}
                                 className="bg-[#38CB891A] rounded-lg p-2 flex flex-col items-center">
                                 <span>{icon}</span>
-                                <span className="text-[#4A4C58]">{title}</span>
+                                <span className="text-[#4A4C58] whitespace-nowrap">
+                                    {title}
+                                </span>
                             </div>
                         </div>
                     );

@@ -26,7 +26,7 @@ const Index = ({ id }) => {
     <div className="flex-1 bg-mainBg flex flex-col overflow-auto pb-4 h-full">
       <EmailTemplateHeader />
       <SubHeaderEmailTemplate />
-      <EmailTemplateTable id={id} />
+      <EmailTemplateTable/>
     </div>
   );
 };

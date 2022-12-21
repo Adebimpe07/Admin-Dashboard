@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTable, useRowSelect, usePagination, Column } from "react-table";
 import { contentColumn, blogColumn } from "../../../../layout/tableData";
 import Content from "../../../../layout/contentData.json";
@@ -8,21 +8,72 @@ import ActionMenuDeleteContent from "../actionButton/ActionMenuDeleteContent";
 import ActionMenuEditBlogContent from "../actionButton/ActionMenuEditBlogContent";
 import ActionMenuDeleteBlogContent from "../actionButton/ActionMenuDeleteBlogContent";
 import { TableInstanceWithHooks } from "./newsTable";
+// 
+import axios from "axios";
+import CryptoJS from "crypto-js";
+import BlogArticleAction from "../actionButton/BlogArticleAction";
+import moment from "moment";
 
 
+var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
 
+
+const decrypt = (element: any) => {
+  return CryptoJS.AES.decrypt(element, key, { iv: iv }).toString(
+    CryptoJS.enc.Utf8
+  )
+    ;
+};
 
 const BlogTable = () => {
+  const [Content, setContent] = useState([])
+  const fetchBlogArticle = () => {
+    var config = {
+      method: 'get',
+      url: `https://atsbk.afexats.com` + `/api/v1/blogs`,
+      headers: {
+        "api-key": process.env.NEXT_PUBLIC_APP_API_KEY_1,
+        "hash-key": process.env.NEXT_PUBLIC_HASH_KEY_1,
+        "request-ts": process.env.NEXT_PUBLIC_REQUEST_TS_1,
+      }
+  }
+    axios(config)
+      .then(function (response) {
+        console.log(response.data.data.results)
+        setContent(response.data.data.results.reduce((acc, item) => {
+          acc.push({
+            author_fullname: decrypt(item.author_fullname),
+            title: decrypt(item.title),
+            url: decrypt(item.url),
+            author_image: decrypt(item.author_image),
+            created_at: moment(decrypt(item.created_at)).format("LLL"),
+            description: decrypt(item.description),
+            id: decrypt(item.id),
+          });
+          return acc
+        }, []));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+  useEffect(() => {
+    fetchBlogArticle()
+  }, [])
+
+
   const BlogColumn = useMemo(() => blogColumn, []);
 
   const blogData = useMemo(
-    () =>
-      ContentBlog.map((blog, idx) => ({
-        ...blog,
-        edit: <ActionMenuEditBlogContent />,
-        delete: <ActionMenuDeleteBlogContent />,
-      })),
-    []
+    () => Content,
+    [Content]
+      // ContentBlog.map((blog, idx) => ({
+      //   ...blog,
+      //   edit: <ActionMenuEditBlogContent />,
+      //   delete: <ActionMenuDeleteBlogContent />,
+      // })),
+   
   );
 
   const {
@@ -42,10 +93,34 @@ const BlogTable = () => {
   } = useTable(
     {
       columns: BlogColumn as any,
-      data:  blogData as any
+      data:  blogData
     },
     usePagination,
-    useRowSelect
+    useRowSelect,
+    (hooks) => {
+
+      hooks.visibleColumns.push((columns): any => {
+        return [
+
+          ...columns,
+
+          {
+            Header: ({ getToggleAllRowsSelectedProps }: any) => (
+              "Action"
+            ),
+
+            Cell: ({ row }: any) => (
+
+              <BlogArticleAction row={row} />
+
+            ),
+
+          },
+        ];
+
+    });
+  }
+  
   ) as TableInstanceWithHooks<object>;
 
   const { pageIndex } = state;

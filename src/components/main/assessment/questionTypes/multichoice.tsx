@@ -10,6 +10,8 @@ import FormContext from "../../../../context/store";
 import { useEffect } from "react";
 import CryptoJS, { SHA256 } from "crypto-js";
 import axios from "axios";
+import { useRouter } from "next/router";
+import Success from "../../../success";
 
 const Editor = dynamic(() => import("../editor"), { ssr: false });
 const key = CryptoJS.enc.Base64.parse(
@@ -18,11 +20,18 @@ const key = CryptoJS.enc.Base64.parse(
 const iv = CryptoJS.enc.Base64.parse("gNyBAsNdWQEwHvbAm8g5Jg==");
 
 const createQuestions = () => {
-    const { categoryID, questionsForm, onChange, questionType } =
-        useContext(FormContext);
+    const {
+        categoryID,
+        questionsForm,
+        onChange,
+        questionType,
+        questionCategory,
+    } = useContext(FormContext);
+    const router = useRouter();
+    const [opened, setOpened] = useState(false);
+    const [message, setMessage] = useState("");
 
     const addNewQuestion = () => {
-        console.log(questionsForm.values);
         let requestTs = String(Date.now());
         axios({
             url: `${process.env.NEXT_PUBLIC_BASE_URL_2}/api/categories/${categoryID}/questions`,
@@ -42,6 +51,7 @@ const createQuestions = () => {
                     JSON.stringify({
                         ...questionsForm.values,
                         question_type: questionType,
+                        question_category: questionCategory,
                     }),
                     key,
                     {
@@ -49,11 +59,25 @@ const createQuestions = () => {
                     }
                 ).toString(),
             },
-        }).then(({ data }) => {
-            console.log(data);
-            questionsForm.reset();
-            onChange("");
-        });
+        })
+            .then(({ data }) => {
+                setMessage("Success");
+                setOpened(true);
+                setTimeout(() => {
+                    setOpened(false);
+                }, 1000);
+                console.log(data);
+                questionsForm.reset();
+                onChange("");
+            })
+            .catch((e) => {
+                console.log(e);
+                setMessage("Failed!!!, Please try again");
+                setOpened(true);
+                setTimeout(() => {
+                    setOpened(false);
+                }, 1000);
+            });
     };
 
     return (
@@ -61,11 +85,11 @@ const createQuestions = () => {
             <Header />
             <div className="flex-1 flex flex-col">
                 <div className="flex justify-between items-center px-4">
-                    <div className="flex items-center gap-1 py-4">
+                    <div
+                        onClick={() => router.back()}
+                        className="flex cursor-pointer items-center gap-1 py-4">
                         <ArrowLeft2 size="17" color="#000" />
-                        <Link href="/assessments/categories/create_category">
-                            <h1 className="cursor-pointer">Back</h1>
-                        </Link>
+                        <h1>Back</h1>
                     </div>
                     <div className="self-end flex gap-3">
                         <Button
@@ -89,6 +113,7 @@ const createQuestions = () => {
                     <Options />
                 </div>
             </div>
+            <Success opened={opened} message={message} />
         </div>
     );
 };

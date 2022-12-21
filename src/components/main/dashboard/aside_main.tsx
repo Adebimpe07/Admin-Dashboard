@@ -17,15 +17,55 @@ type asideprops = {
   views: string;
   timestamp: string;
 };
-export const Durationtime = () => {
+
+var key = CryptoJS.enc.Base64.parse(
+  "HmYOKQj7ZzF8cbeswYY9uLqbfMSUS2tI6Pz45zjylOM="
+);
+var iv = CryptoJS.enc.Base64.parse("PL2LON7ZBLXq4a32le+FCQ==");
+
+export const Durationtime = ({ setAsideMainData }) => {
   const [tab, setTab] = useState(0);
+
+  const fetchJobs = (url) => {
+    const requestTs = String(Date.now());
+    var config: AxiosRequestConfig = {
+      method: "get",
+      baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+      url: url,
+      headers: {
+        "api-key": process.env.NEXT_PUBLIC_APP_API_KEY,
+        "request-ts": requestTs,
+        "hash-key": sha256(
+          process.env.NEXT_PUBLIC_APP_API_KEY +
+            process.env.NEXT_PUBLIC_SECRET_KEY +
+            requestTs
+        ).toString(CryptoJS.enc.Hex),
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        let decrypted_data = JSON.parse(
+          CryptoJS.AES.decrypt(response.data.data, key, {
+            iv: iv,
+          }).toString(CryptoJS.enc.Utf8)
+        );
+        console.log(decrypted_data);
+        setAsideMainData(decrypted_data.results);
+      })
+      .catch(function (error) {});
+  };
+
   return (
     <div>
       <div className="flex gap-6 text-[#18181B] text-xs my-4">
         {Duration.map((item, index) => {
           return (
             <div
-              onClick={() => setTab(index)}
+              onClick={() => {
+                setTab(index);
+                fetchJobs(item.endPoint);
+              }}
               key={index}
               className={
                 tab === index
@@ -33,7 +73,7 @@ export const Durationtime = () => {
                   : "p-1 px-2 cursor-pointer rounded border border-transparent"
               }
             >
-              {item}
+              {item.name}
             </div>
           );
         })}
@@ -43,8 +83,6 @@ export const Durationtime = () => {
 };
 
 const AsideBar = ({ title, subtitle, views, timestamp }: asideprops) => {
-  // const { jobDetails, setJobDetails } = useContext(FormContext);
-
   return (
     <div className="flex flex-col border-b border-[#DADADD] overflow-auto">
       <div className="flex flex-col gap-1 py-2">
@@ -71,16 +109,12 @@ const AsideBar = ({ title, subtitle, views, timestamp }: asideprops) => {
 export const Aside_main = () => {
   const [AsideMainData, setAsideMainData] = useState([]);
 
-  var key = CryptoJS.enc.Base64.parse(
-    "HmYOKQj7ZzF8cbeswYY9uLqbfMSUS2tI6Pz45zjylOM="
-  );
-  var iv = CryptoJS.enc.Base64.parse("PL2LON7ZBLXq4a32le+FCQ==");
   const fetchJobs = () => {
     const requestTs = String(Date.now());
     var config: AxiosRequestConfig = {
       method: "get",
       baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-      url: `/api/jobs/today`,
+      url: `/api/jobs/all-time`,
       headers: {
         "api-key": process.env.NEXT_PUBLIC_APP_API_KEY,
         "request-ts": requestTs,
@@ -94,26 +128,28 @@ export const Aside_main = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        let decrypted_data = JSON.parse(
+          CryptoJS.AES.decrypt(response.data.data, key, {
+            iv: iv,
+          }).toString(CryptoJS.enc.Utf8)
+        );
+        setAsideMainData(decrypted_data.results);
       })
-      .catch(function (error) {
-        console.log(error);
-        console.log("error");
-      });
+      .catch(function (error) {});
   };
   useEffect(() => {
     fetchJobs();
   }, []);
 
   return (
-    <div className="relative overflow-auto px-6 my-2 rounded-lg mx-5  bg-white">
+    <div className="relative overflow-auto px-6 my-2 rounded-lg w-[376px] mx-5  bg-white">
       <div className="sticky top-0 bg-white">
         <h1 className="text-[#18181B] text-base font-semibold pt-2">Jobs</h1>
         <p className="text-[#71717A] font-medium text-sm py-2">
           List of all job entries in the past days
         </p>
       </div>
-      <Durationtime />
+      <Durationtime setAsideMainData={setAsideMainData} />
       {AsideMainData.map(({ title, subtitle, views, timestamp }, index) => {
         return (
           <AsideBar

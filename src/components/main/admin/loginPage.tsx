@@ -36,7 +36,22 @@ const loginPage = () => {
 
         axios(config)
             .then(function (response) {
-                setToken(response.data.data);
+                setToken({
+                    access: CryptoJS.AES.decrypt(
+                        response.data.data.access,
+                        key,
+                        {
+                            iv: iv,
+                        }
+                    ).toString(CryptoJS.enc.Utf8),
+                    refresh: CryptoJS.AES.decrypt(
+                        response.data.data.refresh,
+                        key,
+                        {
+                            iv: iv,
+                        }
+                    ).toString(CryptoJS.enc.Utf8),
+                });
                 // console.log(response.data.data);
                 setAdmin(
                     jwtDecode(
@@ -46,7 +61,7 @@ const loginPage = () => {
                     )
                 );
                 setLoading(false);
-                router.push("/");
+                router.back();
             })
             .catch(function (error) {
                 console.log(error);

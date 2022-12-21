@@ -56,8 +56,13 @@ export const AsideMainData = [
     timestamp: "2d ago",
   },
 ];
-type durationprops = Array<string>;
-export const Duration: durationprops = ["All", "2 weeks", "7 days", "24 hours"];
+type durationprops = Array<{ name: string; endPoint: string }>;
+export const Duration: durationprops = [
+  { name: "All", endPoint: "/api/jobs/all-time" },
+  { name: "2 weeks", endPoint: "/api/jobs/two-weeks-ago" },
+  { name: "7 days", endPoint: "/api/jobs/a-week-ago" },
+  { name: "24 hours", endPoint: "/api/jobs/today" },
+];
 
 type chartprops = Array<string>;
 export const Chart: chartprops = ["All", "2 weeks", "7 days", "24 hours"];
