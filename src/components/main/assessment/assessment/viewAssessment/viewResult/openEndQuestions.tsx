@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Success from "@/src/components/success";
+import CryptoJS, { SHA256 } from "crypto-js";
 
 const openEndQuestions = ({
     open_ended,
@@ -24,21 +25,34 @@ const openEndQuestions = ({
         id: Number,
         cat_id: Number
     ) => {
+        let requestTs = String(Date.now());
+        const key = CryptoJS.enc.Base64.parse(
+            "wjqy62fB+dwz2gyz4sMePe9u2RsMVIyuaA6wPgUeXjw="
+        );
+        const iv = CryptoJS.enc.Base64.parse("gNyBAsNdWQEwHvbAm8g5Jg==");
         const config = {
             method: "post",
-            url: `http://localhost:8000/api/result/process_opa`,
+            url: process.env.NEXT_PUBLIC_BASE_URL_2 + `/api/result/process_opa`,
             headers: {
-                "Content-Type": "application/json",
-                "api-key": "1F87LiFSIfulRCdxFWAPkXNoLuu8j-UkRs6QSYWm4sY",
-                "request-ts": "23445567",
-                "hash-key":
-                    "68fdd26d64f3374506ba0d2e30ed5e096cab6d4a1f4396c80713204609d3216e",
+                "api-key": process.env.NEXT_PUBLIC_API_KEY_2,
+                "request-ts": requestTs,
+                "hash-key": SHA256(
+                    process.env.NEXT_PUBLIC_API_KEY_2 +
+                        process.env.NEXT_PUBLIC_SECRET_KEY_2 +
+                        requestTs
+                ).toString(CryptoJS.enc.Hex),
             },
             data: {
-                opa_pk: id,
-                is_correct: is_correct,
-                result_id: result,
-                category: cat_id,
+                data: CryptoJS.AES.encrypt(
+                    JSON.stringify({
+                        opa_pk: id,
+                        is_correct: is_correct,
+                        result_id: result,
+                        category: cat_id,
+                    }),
+                    key,
+                    { iv: iv }
+                ).toString(),
             },
         };
         try {
