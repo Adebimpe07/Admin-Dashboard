@@ -17,19 +17,13 @@ import Loading from "../../../loading";
 
 const Header = ({ CohortData }) => {
   const [opened, setOpened] = useState(false);
-
-  const data = [
-    { value: { title: "Product Management" }, label: "Product Management" },
-    { value: "Frontend Development", label: "Frontend Development" },
-    { value: "Backend Development", label: "Backend Development" },
-    {
-      value: "Mobile App Development",
-      label: "Mobile App Development",
-    },
-    { value: "UI/UX Design", label: "UI/UX Design" },
-  ];
+  var key = CryptoJS.enc.Base64.parse(
+    "HmYOKQj7ZzF8cbeswYY9uLqbfMSUS2tI6Pz45zjylOM="
+  );
+  var iv = CryptoJS.enc.Base64.parse("PL2LON7ZBLXq4a32le+FCQ==");
 
   const UploadJobModal = () => {
+    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const Form = useForm({
       initialValues: {
@@ -41,6 +35,42 @@ const Header = ({ CohortData }) => {
         courses: null,
       },
     });
+    const getCourses = () => {
+      const requestTs = String(Date.now());
+
+      var config = {
+        method: "get",
+        baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+        url: `/api/jobs/all-courses`,
+        headers: {
+          "api-key": process.env.NEXT_PUBLIC_APP_API_KEY,
+          "request-ts": requestTs,
+          "hash-key": SHA256(
+            process.env.NEXT_PUBLIC_APP_API_KEY +
+              process.env.NEXT_PUBLIC_SECRET_KEY +
+              requestTs
+          ).toString(CryptoJS.enc.Hex),
+        },
+        data: data,
+      };
+      axios(config)
+        .then((response) => {
+          let decrypted_data = JSON.parse(
+            CryptoJS.AES.decrypt(response.data.data, key, {
+              iv: iv,
+            }).toString(CryptoJS.enc.Utf8)
+          ).results;
+          setData(
+            decrypted_data.reduce((acc, item) => {
+              acc.push({ value: item.title, label: item.title });
+              return acc;
+            }, [])
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
     const getCohort = () => {
       setLoading(true);
       const data = {
@@ -48,6 +78,10 @@ const Header = ({ CohortData }) => {
         application_start_date:
           Form.values.application_start_date.toISOString(),
         application_end_date: Form.values.application_end_date.toISOString(),
+        courses: Form.values.courses.reduce((acc, item) => {
+          acc.push({ title: item });
+          return acc;
+        }, []),
       };
       const requestTs = String(Date.now());
       var config = {
@@ -63,7 +97,15 @@ const Header = ({ CohortData }) => {
               requestTs
           ).toString(CryptoJS.enc.Hex),
         },
-        data: data,
+        data: {
+          data: CryptoJS.AES.encrypt(
+            JSON.stringify(data),
+
+            key,
+
+            { iv: iv }
+          ).toString(),
+        },
       };
 
       axios(config)
@@ -82,6 +124,9 @@ const Header = ({ CohortData }) => {
 
     const [opened2, setOpened2] = useState(false);
     const [message, setMessage] = useState("");
+    useEffect(() => {
+      getCourses();
+    }, []);
 
     return (
       <>
@@ -192,7 +237,7 @@ const Header = ({ CohortData }) => {
           <p>Create Cohorts</p>
         </Button>
       </div>
-      <UploadJobModal />
+      {opened ? <UploadJobModal /> : null}
     </div>
   );
 };

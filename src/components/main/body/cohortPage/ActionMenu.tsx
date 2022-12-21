@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ActionMenuDelete from "../actionButton/ActionMenuDelete";
 import ActionMenuEdit from "../actionButton/ActionMenuEdit";
 
-const ActionMenu = () => {
+const ActionMenu = ({ rowDetails }) => {
   const [opened, setOpened] = useState(false);
 
   const initialValues: { opened: boolean; component: React.ReactNode } = {
@@ -15,14 +15,14 @@ const ActionMenu = () => {
   function handleEdit() {
     setSubAdminModal({
       opened: true,
-      component: <ActionMenuEdit />,
+      component: <ActionMenuEdit rowDetails={rowDetails} />,
     });
   }
   const [subAdminDelModal, setSubAdminDelModal] = useState(initialValues);
   function handleDelete() {
     setSubAdminDelModal({
       opened: true,
-      component: <ActionMenuDelete />,
+      component: <ActionMenuDelete rowDetails={rowDetails} />,
     });
   }
 
