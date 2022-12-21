@@ -9,7 +9,7 @@ import { Select } from "@mantine/core";
 import { Textarea } from "@mantine/core";
 import Downloads from "../../../../assets/import.png";
 
-const ActionMenuDelete = () => {
+const ActionMenuDelete = ({ rowDetails }) => {
   return (
     <div className="text-[#4A4C58] text-base">
       <p className="text-center text-sm">
