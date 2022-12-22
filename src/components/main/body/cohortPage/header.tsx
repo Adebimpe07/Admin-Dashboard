@@ -41,7 +41,7 @@ const Header = ({ CohortData }) => {
       var config = {
         method: "get",
         baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-        url: `/api/jobs/all-courses`,
+        url: `/api/jobs/courses`,
         headers: {
           "api-key": process.env.NEXT_PUBLIC_APP_API_KEY,
           "request-ts": requestTs,

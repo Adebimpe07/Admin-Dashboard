@@ -22,7 +22,7 @@ const body = () => {
       <div className="grid grid-cols-[2fr_1fr] overflow-auto">
         <div className="overflow-auto flex flex-col flex-1">
           {shouldAnimate && <Charts />}
-          <div className="flex overflow-auto">
+          <div className="grid grid-cols-[1fr_1fr] overflow-auto">
             <Activities />
             <Article />
           </div>
