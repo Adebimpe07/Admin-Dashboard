@@ -130,13 +130,11 @@ const PostJobModal = ({ opened, setOpened, fetchJob }: any) => {
         },
       })
         .then(function (response) {
-          console.log(response.data);
           let decrypted_data = JSON.parse(
             CryptoJS.AES.decrypt(response.data.data, key, {
               iv: iv,
             }).toString(CryptoJS.enc.Utf8)
           ).results;
-          console.log(decrypted_data);
           setCourseList(
             decrypted_data.reduce((acc, item) => {
               const value = item.id;
@@ -154,28 +152,45 @@ const PostJobModal = ({ opened, setOpened, fetchJob }: any) => {
 
   const handleuploadJobForm = () => {
     console.log(jobForm.values);
-
+    const requestTs = String(Date.now());
     var config = {
       method: "post",
       url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs/`,
       headers: {
-        "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
-        "request-ts": `${process.env.NEXT_PUBLIC_REQUEST_TS}`,
-        "hash-key": `${process.env.NEXT_PUBLIC_HASH_KEY}`,
+        "api-key": process.env.NEXT_PUBLIC_APP_API_KEY,
+        "request-ts": requestTs,
+        "hash-key": SHA256(
+          process.env.NEXT_PUBLIC_APP_API_KEY +
+            process.env.NEXT_PUBLIC_SECRET_KEY +
+            requestTs
+        ).toString(CryptoJS.enc.Hex),
       },
-      data: jobForm.values,
+      data: {
+        data: CryptoJS.AES.encrypt(
+          JSON.stringify(jobForm.values),
+
+          key,
+
+          { iv: iv }
+        ).toString(),
+      }, // jobForm.values,
     };
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        let decrypted_data = JSON.parse(
+          CryptoJS.AES.decrypt(response.data.data, key, {
+            iv: iv,
+          }).toString(CryptoJS.enc.Utf8)
+        );
+        console.log(decrypted_data);
         jobForm.reset();
         setOpened(false);
         fetchJob();
       })
       .catch(function (error) {
         alert("An error occured");
-        jobForm.reset();
+        console.log(error);
         setOpened(false);
       });
   };
