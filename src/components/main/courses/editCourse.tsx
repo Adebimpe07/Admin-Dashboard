@@ -21,38 +21,38 @@ const editCourse = ({ uid, url }) => {
   // data.append("type", form.values.type);
   // data.append("subject", form.values.subject);
   // data.append("body", form.values.body);
-  var config = {
-    method: "PUT",
-    url: rowdetail.url + "/edit",
-    headers: {
-      "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
-      "request-ts": requestTs,
-      "hash-key": sha256(
-        process.env.NEXT_PUBLIC_APP_API_KEY +
-          process.env.NEXT_PUBLIC_SECRET_KEY +
-          requestTs
-      ).toString(CryptoJS.enc.Hex),
-    },
-    data: {
-      data: CryptoJS.AES.encrypt(JSON.stringify(form.values), key, {
-        iv: iv,
-      }).toString(),
-    },
-  };
+  // var config = {
+  //   method: "PUT",
+  //   url: rowdetail.url + "/edit",
+  //   headers: {
+  //     "api-key": `${process.env.NEXT_PUBLIC_APP_API_KEY}`,
+  //     "request-ts": requestTs,
+  //     "hash-key": sha256(
+  //       process.env.NEXT_PUBLIC_APP_API_KEY +
+  //         process.env.NEXT_PUBLIC_SECRET_KEY +
+  //         requestTs
+  //     ).toString(CryptoJS.enc.Hex),
+  //   },
+  //   data: {
+  //     data: CryptoJS.AES.encrypt(JSON.stringify(form.values), key, {
+  //       iv: iv,
+  //     }).toString(),
+  //   },
+  // };
 
-  axios(config)
-    .then(function (response) {
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  // axios(config)
+  //   .then(function (response) {
+  //     console.log(response.data);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
   const form = useForm({
     initialValues: {
       title: "",
       description: "",
     },
-  }); //
+  });
 
   const handleSubmit = () => {
     let data = new FormData();
