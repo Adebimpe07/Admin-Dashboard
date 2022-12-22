@@ -36,7 +36,7 @@ export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
   };
 
 const NewsTable = () => {
-  const [Content, setContent] = useState([]);
+  const [content, setContent] = useState([]);
 
   const fetchNews = () => {
     var config = {
@@ -50,7 +50,8 @@ const NewsTable = () => {
     };
     axios(config)
       .then(function (response) {
-        setContent( response.data.data.results.reduce((acc, item) => {
+        setContent(
+          response.data.data.results.reduce((acc, item) => {
             acc.push({
               title: decrypt(item.title),
               url: decrypt(item.url),
@@ -59,7 +60,8 @@ const NewsTable = () => {
               created_at: moment(decrypt(item.created_at)).format("LLL"),
               author_name: decrypt(item.author_name),
               categories: decrypt(item.category_name),
-              author_image: process.env.NEXT_PUBLIC_BASE_URL_1 + decrypt(item.author_image),
+              author_image:
+                process.env.NEXT_PUBLIC_BASE_URL_1 + decrypt(item.author_image),
             });
             return acc;
           }, [])
@@ -77,14 +79,16 @@ const NewsTable = () => {
   const ContentColumn = useMemo(() => contentColumn, []);
 
   const contentData = useMemo(
-    () => 
-      Content.map((content, idx) => ({
+    () =>
+      content.map((content, idx) => ({
         ...content,
         edit: <ActionMenuEditContent />,
         delete: <ActionMenuDeleteContent />,
       })),
-    []
+    [content]
   );
+
+  console.log(contentData);
 
   const {
     getTableProps,
@@ -103,7 +107,6 @@ const NewsTable = () => {
   } = useTable(
     {
       columns: ContentColumn as any,
-
       data: contentData,
     },
     usePagination,

@@ -9,10 +9,11 @@ import {
 import { dejiColumn, } from "../../../../layout/tableData";
 import Content from "../../../../layout/dejiData.json";
 import dejiData from "../../../../layout/dejiData.json";
-import ReadMoreContent from "../actionButton/ReadMoreContent"
+import ReadMoreContent from "../actionButton/ViewMoreAskDejiMessage.tsx"
 import TruncateContents from "../actionButton/TruncateContents";
 import axios from "axios";
 import CryptoJS from "crypto-js";
+import AskDejiAction from "../actionButton/AskDejiAction";
 
 var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
 var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
@@ -126,7 +127,7 @@ const DejiTable = () => {
 
             Cell: ({ row }: any) => (
 
-              <ReadMoreContent row={row} />
+              <AskDejiAction row={row} />
 
             ),
 

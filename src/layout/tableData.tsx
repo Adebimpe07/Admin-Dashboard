@@ -310,8 +310,8 @@ export const blogColumn = [
 
 export const atsMemberColumn = [
   {
-    Header: "",
-    accessor: "image",
+    Header: " ",
+    accessor: "tech_star_profile_picture",
   },
   {
     Header: "Name",
@@ -327,14 +327,14 @@ export const atsMemberColumn = [
     accessor: "cohort",
   },
   {
-    Header: "Tech Start Id",
-    accessor: "tech_star_id"
+    Header: "Tech Star Id",
+    accessor: "tech_star_id",
   },
   {
     Header: "Email",
     accessor: "official_email",
   },
-  
+
   {
     Header: "",
     accessor: "action",
@@ -390,10 +390,10 @@ export const atsTestimonialColumn = [
     Header: "Course",
     accessor: "tech_star_course",
   },
-  {
-    Header: "Testimonies",
-    accessor: "testimonial",
-  },
+  // {
+  //   Header: "Testimonies",
+  //   accessor: "testimonial",
+  // },
   {
     Header: " ",
     accessor: "action",
@@ -403,7 +403,7 @@ export const atsTestimonialColumn = [
 export const atsAttendanceColumn = [
   {
     Header: "Name",
-    accessor: "tech_star",
+    accessor: "tech_star_full_name",
   },
   {
     Header: "Status",

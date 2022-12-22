@@ -42,7 +42,7 @@ const AttendanceTable = () => {
           response.data.data.results.reduce((acc, item) => {
             acc.push({
               id: decrypt(item.id),
-              tech_star: decrypt(item.tech_star),
+              tech_star_full_name: decrypt(item.tech_star_full_name),
               status: decrypt(item.status),
               check_in: moment(decrypt(item.check_in)).format("LTS"),
               check_out: moment(decrypt(item.check_out)).format("LTS"),

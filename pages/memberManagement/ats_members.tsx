@@ -19,7 +19,7 @@ const Index = () => {
   return (
     <div className="flex-1 bg-[#E5E5E5] flex flex-col overflow-auto  gap-8 pb-4 h-full">
       <Header name=" Member Management" />
-      <MemberSubHeader route={0} />
+      <MemberSubHeader route={0} setATSMember={undefined} />
       <MemberTable />
     </div>
   );

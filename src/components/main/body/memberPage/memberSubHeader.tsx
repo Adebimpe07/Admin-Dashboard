@@ -42,6 +42,7 @@ const MemberSubHeader = ({ route, setATSMember }) => {
     const [opened, setOpened] = useState(false);
 
     const UploadJobModal = ({ setATSMember }) => {
+      const [loading, setLoading] = useState(false);
     const form = useForm({
       initialValues: {
        course : "",
@@ -57,7 +58,17 @@ const MemberSubHeader = ({ route, setATSMember }) => {
 
     const createAtsMember = () => {
       const access = JSON.parse(sessionStorage.getItem("token")).access;
-
+      setLoading(true);
+      const data = {
+        ...form.values,
+        fullName: encrypt(form.values.fullName),
+        course: encrypt(form.values.course),
+        cohort: encrypt(form.values.cohort),
+        email: encrypt(form.values.email),
+        phoneNumber: encrypt(form.values.phoneNumber),
+        techStarId: encrypt(form.values.id),
+        profilePicture: encrypt(form.values.profilePicture),
+      };
       var config = {
         method: "post",
         url:
@@ -72,25 +83,20 @@ const MemberSubHeader = ({ route, setATSMember }) => {
           Authorization: `Bearer ${access}`,
           // TODO:process.env
         },
-        data: {
-          fullName: encrypt(form.values.fullName),
-          course: encrypt(form.values.course),
-          cohort: encrypt(form.values.cohort),
-          email: encrypt(form.values.email),
-          phoneNumber: encrypt(form.values.phoneNumber),
-          techStarId: encrypt(form.values.id),
-          profilePicture: encrypt(form.values.profilePicture),
-        },
+        data: data,
       };
 
       axios(config)
         .then(function (response) {
-          console.log(response.data);
-          fetchAllAts();
+          console.log(JSON.stringify(response.data.data.results));
+          setLoading(false);
+          // fetchAllAts();
           setOpened(false);
         })
         .catch(function (error) {
           console.log(error);
+          setLoading(false);
+          
         });
     };
 
@@ -129,91 +135,93 @@ const MemberSubHeader = ({ route, setATSMember }) => {
        });
    };
 
-     return (   
-        <Modal
-            opened={opened}
-            onClose={() => setOpened(false)}
-            title="Create New Tech Star"
-            size="xl">
-            <Text className="flex flex-col gap-4">
-                <div className="flex flex-col gap-4">
-                    <h1 className="text-base pb-2">
-                        Member Details
-                    </h1>
+     return (
+       <Modal
+         opened={opened}
+         onClose={() => setOpened(false)}
+         title="Create New Tech Star"
+         size="xl"
+       >
+         <Text className="flex flex-col gap-4">
+           <div className="flex flex-col gap-4">
+             <h1 className="text-base pb-2">Member Details</h1>
 
-                    <div className="flex gap-4">
-                        <Select
-                            className="flex-1"
-                            label="Cohort"
-                            data={[
-                                { value: "ATS 1.0", label: "ATS 1.0" },
-                                { value: "ATS 1.1", label: "ATS 1.1" },
-                                { value: "ATS 2.0", label: "ATS 2.0" },
-                                { value: "ATS 2.2", label: "ATS 2.2" },
-                            ]}
-                        />
-                        <Select
-                            className="flex-1"
-                            label="Course"
-                            data={[
-                                {
-                                    value: "fulltime",
-                                    label: "Front-end Management",
-                                },
-                                {
-                                    value: "remote",
-                                    label: "Back-end Management",
-                                },
-                                {
-                                    value: "hybrid",
-                                    label: "Project Management",
-                                },
-                                {
-                                    value: "mobile",
-                                    label: "Mobile App Development",
-                                },
-                                { value: "ui", label: "UI/UX" },
-                            ]}
-                        />
-                    </div>
-                    <TextInput
-                        size="sm"
-                        className="focus:border-inherit"
-                        label="Name"
-                        {...form.getInputProps("fullName")}
-                    />
-                    <div className="flex gap-4">
-                        <TextInput
-                            text="email"
-                            size="sm"
-                            className="focus:border-inherit flex-1"
-                            label="Email"
-                            {...form.getInputProps("email")}
-                        />
-                        <TextInput
-                            size="sm"
-                            className="focus:border-inherit flex-1"
-                            label="Phone No"
-                            {...form.getInputProps("phoneNumber")}
-                        />
-                    </div>
-                </div>
-                <div className="flex flex-col  gap-4">
-                    <p>Featured image</p>
-                    <FileInput
-                        placeholder="Browse and chose the files you want to upload from your computer"
-                        icon={<img src={Cloud.src} className="w-6" />}
-                        accept="image/png,image/jpeg"
-                        className="bg-[#EBFAF3]"
-                        {...form.getInputProps("profilePicture")}
-                    />
-                    <button className="bg-[#38CB89] text-[white] w-full py-2 rounded">
-                        Add
-                    </button>
-                </div>
-            </Text>
-        </Modal>
-    );
+             <div className="flex gap-4">
+               <Select
+                 className="flex-1"
+                 label="Cohort"
+                 data={[
+                   { value: "ATS 1.0", label: "ATS 1.0" },
+                   { value: "ATS 1.1", label: "ATS 1.1" },
+                   { value: "ATS 2.0", label: "ATS 2.0" },
+                   { value: "ATS 2.2", label: "ATS 2.2" },
+                 ]}
+               />
+               <Select
+                 className="flex-1"
+                 label="Course"
+                 data={[
+                   {
+                     value: "fulltime",
+                     label: "Front-end Management",
+                   },
+                   {
+                     value: "remote",
+                     label: "Back-end Management",
+                   },
+                   {
+                     value: "hybrid",
+                     label: "Project Management",
+                   },
+                   {
+                     value: "mobile",
+                     label: "Mobile App Development",
+                   },
+                   { value: "ui", label: "UI/UX" },
+                 ]}
+               />
+             </div>
+             <TextInput
+               size="sm"
+               className="focus:border-inherit"
+               label="Name"
+               {...form.getInputProps("fullName")}
+             />
+             <div className="flex gap-4">
+               <TextInput
+                 text="email"
+                 size="sm"
+                 className="focus:border-inherit flex-1"
+                 label="Email"
+                 {...form.getInputProps("email")}
+               />
+               <TextInput
+                 size="sm"
+                 className="focus:border-inherit flex-1"
+                 label="Phone No"
+                 {...form.getInputProps("phoneNumber")}
+               />
+             </div>
+           </div>
+           <div className="flex flex-col  gap-4">
+             <p>Featured image</p>
+             <FileInput
+               placeholder="Browse and chose the files you want to upload from your computer"
+               icon={<img src={Cloud.src} className="w-6" />}
+               accept="image/png,image/jpeg"
+               className="bg-[#EBFAF3]"
+               {...form.getInputProps("profilePicture")}
+             />
+             <button
+               onClick={() => setOpened(true)}
+               className="bg-[#38CB89] text-[white] w-full py-2 rounded"
+             >
+               Add
+             </button>
+           </div>
+         </Text>
+       </Modal>
+     );
 }
     return (
         <div className="flex justify-between  px-5">

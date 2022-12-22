@@ -15,7 +15,22 @@ import Gallery from "@/src/assets/gallery.png";
 import axios from "axios";
 import CryptoJS from "crypto-js";
 import { useForm } from "@mantine/form";
-import Crypto from "@/library/crypto";
+
+
+var key = CryptoJS.enc.Utf8.parse("bQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r");
+var iv = CryptoJS.enc.Utf8.parse("s6v9y$B&E)H@McQf");
+
+const encrypt = (element: any) => {
+  return CryptoJS.AES.encrypt(element, key, {
+    iv: iv,
+  }).toString();
+};
+
+const decrypt = (element: any) => {
+  return CryptoJS.AES.decrypt(element, key, { iv: iv }).toString(
+    CryptoJS.enc.Utf8
+  );
+};
 
 interface FormValues {
   name: string;
@@ -23,19 +38,19 @@ interface FormValues {
   images: Array<File>;
 }
 
-const website = new Crypto(
-  "process.env.NEXT_PUBLIC_WEBSITE_KEY",
-  "process.env.NEXT_PUBLIC_WEBSITE_IV"
-);
-const assessment = new Crypto(
- "process.env.NEXT_PUBLIC_ASSESSMENTS_KEY",
-  "process.env.NEXT_PUBLIC_ASSESSMENTS_IV"
-);
+// const website = new Crypto(
+//   "process.env.NEXT_PUBLIC_WEBSITE_KEY",
+//   "process.env.NEXT_PUBLIC_WEBSITE_IV"
+// );
+// const assessment = new Crypto(
+//  "process.env.NEXT_PUBLIC_ASSESSMENTS_KEY",
+//   "process.env.NEXT_PUBLIC_ASSESSMENTS_IV"
+// );
 
-const application = new Crypto(
-  "process.env.NEXT_PUBLIC_APPLICATION_KEY",
-  "process.env.NEXT_PUBLIC_APPLICATION_IV"
-)
+// const application = new Crypto(
+//   "process.env.NEXT_PUBLIC_APPLICATION_KEY",
+//   "process.env.NEXT_PUBLIC_APPLICATION_IV"
+// )
 
 const AlbumHeader = ({ albumData }) => {
   const [opened, setOpened] = useState(false);
@@ -51,14 +66,14 @@ const AlbumHeader = ({ albumData }) => {
 
     const createAlbum = () => {
       const data = {
-        name: form.values.name,
-        description: form.values.description,
+        name: encrypt(form.values.name),
+        description: encrypt(form.values.description),
       };
       form.values.images.forEach((item, idx) => {
-        data["image_" + idx] = item;
+        data[encrypt("image_") + idx] = item;
       });
 
-      console.log(data, website.encrypt(data));
+      // console.log(data, website.encrypt(data));
 
       var config = {
         method: "post",

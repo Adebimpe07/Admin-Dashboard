@@ -75,7 +75,6 @@ const TestimonialTable = () => {
       })),
     [Testimonial]
   );
-  22;
   const {
     getTableProps,
     getTableBodyProps,

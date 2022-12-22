@@ -1,21 +1,19 @@
 import CryptoJS from "crypto-js";
 
-type SYSTEM = "WEBSITE" | "ASSESSMENTS" | "APPLICATION";
-type KEY = `process.env.NEXT_PUBLIC_${SYSTEM}_KEY`;
-type IV = `process.env.NEXT_PUBLIC_${SYSTEM}_IV`;
-
-export default class Encrypt {
+export default class Crypto {
   private key;
   private iv;
 
-  constructor(key: KEY, iv: IV) {
+  constructor(key: any, iv: any) {
     this.key = key;
     this.iv = iv;
+    this.encrypt = this.encrypt.bind(this);
+    this.decrypt = this.decrypt.bind(this);
   }
 
-  encrypt(val) {
+  public encrypt(val) {
     try {
-      if (typeof val === "object") {
+      if (typeof val === "object" && val) {
         if (Array.isArray(val)) {
           return val.map((item) => this.encrypt(item));
         } else {
@@ -26,15 +24,17 @@ export default class Encrypt {
         }
       }
 
-      return CryptoJS.AES.encrypt(val, this.key, { iv: this.iv }).toString();
+      return CryptoJS.AES.encrypt(JSON.stringify(val), this.key, {
+        iv: this.iv,
+      }).toString();
     } catch (e) {
       console.log(e?.message ?? e);
     }
   }
 
-  decrypt(val) {
+  public decrypt(val) {
     try {
-      if (typeof val === "object") {
+      if (typeof val === "object" && val) {
         if (Array.isArray(val)) {
           return val.map((item) => this.decrypt(item));
         } else {
@@ -44,9 +44,9 @@ export default class Encrypt {
           }, {});
         }
       } else {
-        return JSON.parse(
-          CryptoJS.AES.decrypt(val, this.key, { iv: this.iv }).toString()
-        );
+        return CryptoJS.AES.decrypt(val, this.key, {
+          iv: this.iv,
+        }).toString(CryptoJS.enc.Utf8);
       }
     } catch (e) {
       console.log(e?.message ?? e);

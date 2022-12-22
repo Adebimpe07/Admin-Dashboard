@@ -60,7 +60,6 @@ export const EditModal = () => {
             ]}
           />
         </div>
-
         <div className="mt-4">
           <button className="bg-greenButton text-[white] py-2 w-full rounded">
             Save Changes
