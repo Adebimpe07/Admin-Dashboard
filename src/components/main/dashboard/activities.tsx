@@ -48,7 +48,7 @@ const Activity = ({
 
 const Activities = () => {
   return (
-    <div className="relative overflow-auto px-6 my-2  rounded-lg w-[50%] ml-6  bg-white">
+    <div className="relative overflow-auto px-6 my-2  rounded-lg ml-6  bg-white">
       <h1 className="text-[#18181B] font-semibold text-base sticky top-0 bg-white pt-3 p-2 overflow-auto">
         Activities
       </h1>

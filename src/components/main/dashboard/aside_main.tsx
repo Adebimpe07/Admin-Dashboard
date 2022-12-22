@@ -142,7 +142,7 @@ export const Aside_main = () => {
   }, []);
 
   return (
-    <div className="relative overflow-auto px-6 my-2 rounded-lg w-[376px] mx-5  bg-white">
+    <div className="relative overflow-auto px-6 my-2 rounded-lg mx-5  bg-white">
       <div className="sticky top-0 bg-white">
         <h1 className="text-[#18181B] text-base font-semibold pt-2">Jobs</h1>
         <p className="text-[#71717A] font-medium text-sm py-2">
