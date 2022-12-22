@@ -14,6 +14,11 @@ import sha256 from "crypto-js/sha256";
 import CryptoJS from "crypto-js";
 
 const CreateCourses = () => {
+  var key = CryptoJS.enc.Base64.parse(
+    "HmYOKQj7ZzF8cbeswYY9uLqbfMSUS2tI6Pz45zjylOM="
+  );
+  var iv = CryptoJS.enc.Base64.parse("PL2LON7ZBLXq4a32le+FCQ==");
+
   const { coursesForm } = useContext(FormContext);
   const router = useRouter();
   const [picture, setPicture] = useState(null);
@@ -42,7 +47,16 @@ const CreateCourses = () => {
             requestTs
         ).toString(CryptoJS.enc.Hex),
       },
-      data: data,
+      data: {
+        data: CryptoJS.AES.encrypt(
+          JSON.stringify(data),
+
+          key,
+
+          { iv: iv }
+        ).toString(),
+      },
+      // data: data,
     };
 
     axios(config)
