@@ -1,20 +1,18 @@
 import {
-    Button,
-    FileInput,
-    Menu,
-    Modal,
-    MultiSelect,
-    Select,
-    Text,
-    Textarea,
-    TextInput,
+  Button,
+  FileInput,
+  Menu,
+  Modal,
+  MultiSelect,
+  Select,
+  Text,
+  Textarea,
+  TextInput,
 } from "@mantine/core";
 import React, { useState } from "react";
 import Search from "../../../../assets/search.png";
 import Cross from "../../../../assets/Icon.png";
-import Elipse from "../../../../assets/Ellipse 8.png";
 import Cloud from "../../../../assets/cloud.png";
-import { RichTextEditor } from "@mantine/rte";
 import Link from "next/link";
 import { contentData } from "../../../../layout/contentData";
 import CryptoJS from "crypto-js";
@@ -39,13 +37,13 @@ const encrypt = (element: any) => {
   }).toString();
 };
 const MemberSubHeader = ({ route, setATSMember }) => {
-    const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = useState(false);
 
-    const UploadJobModal = ({ setATSMember }) => {
-      const [loading, setLoading] = useState(false);
+  const UploadJobModal = ({ setATSMember }) => {
+    const [loading, setLoading] = useState(false);
     const form = useForm({
       initialValues: {
-       course : "",
+        course: "",
         cohort: "",
         fullName: "",
         email: "",
@@ -88,183 +86,186 @@ const MemberSubHeader = ({ route, setATSMember }) => {
 
       axios(config)
         .then(function (response) {
-          console.log(JSON.stringify(response.data.data.results));
+          console.log(response.data.data.results);
           setLoading(false);
-          // fetchAllAts();
+          fetchAllAts();
           setOpened(false);
         })
         .catch(function (error) {
           console.log(error);
           setLoading(false);
-          
         });
     };
 
-   const fetchAllAts = () => {
-     var config = {
-       method: "get",
-       url: "https://atsbk.afexats.com/api/v1/tech-stars/tech-star-list-create/",
-       headers: {
-         "api-key": process.env.NEXT_PUBLIC_APP_API_KEY_1,
-         "hash-key": process.env.NEXT_PUBLIC_HASH_KEY_1,
-         "request-ts": process.env.NEXT_PUBLIC_REQUEST_TS_1,
-       },
-     };
+    const fetchAllAts = () => {
+      var config = {
+        method: "get",
+        url: "https://atsbk.afexats.com/api/v1/tech-stars/tech-star-list-create/",
+        headers: {
+          "api-key": process.env.NEXT_PUBLIC_APP_API_KEY_1,
+          "hash-key": process.env.NEXT_PUBLIC_HASH_KEY_1,
+          "request-ts": process.env.NEXT_PUBLIC_REQUEST_TS_1,
+        },
+      };
 
+      axios(config)
+        .then(function (response) {
+          console.log(response.data.data.results);
+          setATSMember(
+            response.data.data.results.reduce((acc, item) => {
+              acc.push({
+                full_name: decrypt(item.full_name),
+                official_email: decrypt(item.official_email),
+                profile_picture: decrypt(item.profile_picture),
+                cohort: decrypt(item.cohort),
+                course: decrypt(item.course),
+                phone_number: decrypt(item.phone_number),
+                tech_star_id: decrypt(item.tech_star_id),
+              });
+              return acc;
+            }, [])
+          );
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
 
-     axios(config)
-       .then(function (response) {
-         console.log(response.data.data.results);
-         setATSMember(
-           response.data.data.results.reduce((acc, item) => {
-             acc.push({
-               full_name: decrypt(item.full_name),
-               official_email: decrypt(item.official_email),
-               profile_picture: decrypt(item.official_email),
-               cohort: decrypt(item.cohort),
-               course: decrypt(item.course),
-               phone_number: decrypt(item.phone_number),
-               tech_star_id: decrypt(item.tech_star_id),
-             });
-             return acc;
-           }, [])
-         );
-       })
-       .catch(function (error) {
-         console.log(error);
-       });
-   };
-
-     return (
-       <Modal
-         opened={opened}
-         onClose={() => setOpened(false)}
-         title="Create New Tech Star"
-         size="xl"
-       >
-         <Text className="flex flex-col gap-4">
-           <div className="flex flex-col gap-4">
-             <h1 className="text-base pb-2">Member Details</h1>
-
-             <div className="flex gap-4">
-               <Select
-                 className="flex-1"
-                 label="Cohort"
-                 data={[
-                   { value: "ATS 1.0", label: "ATS 1.0" },
-                   { value: "ATS 1.1", label: "ATS 1.1" },
-                   { value: "ATS 2.0", label: "ATS 2.0" },
-                   { value: "ATS 2.2", label: "ATS 2.2" },
-                 ]}
-               />
-               <Select
-                 className="flex-1"
-                 label="Course"
-                 data={[
-                   {
-                     value: "fulltime",
-                     label: "Front-end Management",
-                   },
-                   {
-                     value: "remote",
-                     label: "Back-end Management",
-                   },
-                   {
-                     value: "hybrid",
-                     label: "Project Management",
-                   },
-                   {
-                     value: "mobile",
-                     label: "Mobile App Development",
-                   },
-                   { value: "ui", label: "UI/UX" },
-                 ]}
-               />
-             </div>
-             <TextInput
-               size="sm"
-               className="focus:border-inherit"
-               label="Name"
-               {...form.getInputProps("fullName")}
-             />
-             <div className="flex gap-4">
-               <TextInput
-                 text="email"
-                 size="sm"
-                 className="focus:border-inherit flex-1"
-                 label="Email"
-                 {...form.getInputProps("email")}
-               />
-               <TextInput
-                 size="sm"
-                 className="focus:border-inherit flex-1"
-                 label="Phone No"
-                 {...form.getInputProps("phoneNumber")}
-               />
-             </div>
-           </div>
-           <div className="flex flex-col  gap-4">
-             <p>Featured image</p>
-             <FileInput
-               placeholder="Browse and chose the files you want to upload from your computer"
-               icon={<img src={Cloud.src} className="w-6" />}
-               accept="image/png,image/jpeg"
-               className="bg-[#EBFAF3]"
-               {...form.getInputProps("profilePicture")}
-             />
-             <button
-               onClick={() => setOpened(true)}
-               className="bg-[#38CB89] text-[white] w-full py-2 rounded"
-             >
-               Add
-             </button>
-           </div>
-         </Text>
-       </Modal>
-     );
-}
     return (
-        <div className="flex justify-between  px-5">
-            <div className="flex gap-9">
-                {contentData.map((item, idx) => (
-                    <Link href={item.href}>
-                        <div
-                            key={idx}
-                            className={
-                                route === idx
-                                    ? " text-[#4A4C58] cursor-pointer"
-                                    : "text-[#948E8E] cursor-pointer"
-                            }>
-                            {item.name}
+      <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        title="Create New Tech Star"
+        size="xl"
+      >
+        <Text className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
+            <h1 className="text-base pb-2">Member Details</h1>
 
-                            <div
-                                className={
-                                    route === idx
-                                        ? "bg-[#30AD74] text-[#4A4C58] w-7 h-1 mx-auto border rounded-md mt-2"
-                                        : "w-7 h-1 mx-auto border rounded-md mt-2.5"
-                                }></div>
-                        </div>
-                    </Link>
-                ))}
-            </div>
             <div className="flex gap-4">
-                <TextInput
-                    className="w-[180px]"
-                    placeholder="Search with Name"
-                    radius="md"
-                    rightSection={<img src={Search.src} className="w-[14px]" />}
-                />
-
-                <Button
-                    className="bg-[#38CB89] hover:bg-[#38CB89] w-[141px] h-[34px] text-[13px]"
-                    leftIcon={<img src={Cross.src} className="w-4" />}
-                    onClick={() => setOpened(true)}>
-                    <p>New ATS</p>
-                    <UploadJobModal setATSMember={setATSMember} />
-                </Button>
+              <Select
+                className="flex-1"
+                label="Cohort"
+                data={[
+                  { value: "ATS 1.0", label: "ATS 1.0" },
+                  { value: "ATS 1.1", label: "ATS 1.1" },
+                  { value: "ATS 2.0", label: "ATS 2.0" },
+                  { value: "ATS 2.2", label: "ATS 2.2" },
+                ]}
+                {...form.getInputProps("cohort")}
+              />
+              <Select
+                className="flex-1"
+                label="Course"
+                data={[
+                  {
+                    value: "fulltime",
+                    label: "Front-end Management",
+                  },
+                  {
+                    value: "remote",
+                    label: "Back-end Management",
+                  },
+                  {
+                    value: "hybrid",
+                    label: "Project Management",
+                  },
+                  {
+                    value: "mobile",
+                    label: "Mobile App Development",
+                  },
+                  { value: "ui", label: "UI/UX" },
+                ]}
+                {...form.getInputProps("course")}
+              />
             </div>
-        </div>
+            <TextInput
+              size="sm"
+              className="focus:border-inherit"
+              label="Name"
+              {...form.getInputProps("fullName")}
+            />
+            <div className="flex gap-4">
+              <TextInput
+                text="email"
+                size="sm"
+                className="focus:border-inherit flex-1"
+                label="Email"
+                {...form.getInputProps("email")}
+              />
+              <TextInput
+                size="sm"
+                className="focus:border-inherit flex-1"
+                label="Phone No"
+                {...form.getInputProps("phoneNumber")}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col  gap-4">
+            <p>Featured image</p>
+            <FileInput
+              placeholder="Browse and chose the files you want to upload from your computer"
+              icon={<img src={Cloud.src} className="w-6" />}
+              accept="image/png,image/jpeg"
+              className="bg-[#EBFAF3]"
+              {...form.getInputProps("profilePicture")}
+            />
+            <button
+              onClick={() => setOpened(true)}
+              className="bg-[#38CB89] text-[white] w-full py-2 rounded"
+            >
+              Add
+            </button>
+          </div>
+        </Text>
+      </Modal>
     );
+  };
+  return (
+    <div className="flex justify-between  px-5">
+      <div className="flex gap-9">
+        {contentData.map((item, idx) => (
+          <Link href={item.href}>
+            <div
+              key={idx}
+              className={
+                route === idx
+                  ? " text-[#4A4C58] cursor-pointer"
+                  : "text-[#948E8E] cursor-pointer"
+              }
+            >
+              {item.name}
+
+              <div
+                className={
+                  route === idx
+                    ? "bg-[#30AD74] text-[#4A4C58] w-7 h-1 mx-auto border rounded-md mt-2"
+                    : "w-7 h-1 mx-auto border rounded-md mt-2.5"
+                }
+              ></div>
+            </div>
+          </Link>
+        ))}
+      </div>
+      <div className="flex gap-4">
+        <TextInput
+          className="w-[180px]"
+          placeholder="Search with Name"
+          radius="md"
+          rightSection={<img src={Search.src} className="w-[14px]" />}
+        />
+
+        <Button
+          className="bg-[#38CB89] hover:bg-[#38CB89] w-[141px] h-[34px] text-[13px]"
+          leftIcon={<img src={Cross.src} className="w-4" />}
+          onClick={() => setOpened(true)}
+        >
+          <p>New ATS</p>
+          <UploadJobModal setATSMember={setATSMember} />
+        </Button>
+      </div>
+    </div>
+  );
 };
 
 export default MemberSubHeader;
